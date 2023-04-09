@@ -5,6 +5,9 @@
   "description": "A simplified bare-bones starter for Gatsby",
   "version": "0.1.0",
   "license": "0BSD",
+  "engines": {
+    "node": "18.15.0"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -37,9 +40,6 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "sass": "^1.60.0"
-  },
-  "engines": {
-    "node": "18.15.0"
   },
   "repository": {
     "type": "git",
