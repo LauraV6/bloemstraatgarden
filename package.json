@@ -38,9 +38,12 @@
     "react-helmet": "^6.1.0",
     "sass": "^1.60.0"
   },
+  "engines": {
+    "node": "18.15.0"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/gatsbyjs/bloemstraatgarden"
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
