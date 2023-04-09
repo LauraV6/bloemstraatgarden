@@ -1,0 +1,33 @@
+@use '../abstracts' as *;
+
+.title-line {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+
+    @include breakpoint-up(md) {
+        margin-bottom: 3rem;
+
+        span {
+            position: relative;
+    
+            &::before, &::after {
+                content: "";
+                border-top: 1px solid #eeeeee;
+                height: 1px;
+                position: absolute;
+                right: -620px;
+                bottom: 5px;
+                width: 600px;
+            }
+    
+            &::before {
+                left: -620px;
+                right: auto;
+            }
+        }
+    }
+}

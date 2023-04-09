@@ -1,0 +1,118 @@
+@use '../abstracts' as *;
+
+.post {
+    &-items {
+        position: relative;
+        display: grid;
+        gap: 2rem;
+        margin-top: 1.2rem;
+
+        @include breakpoint-up(md) {
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        @include breakpoint-up(lg) {
+            gap: 3rem;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &:empty {
+            display: flex;
+            justify-content: center;
+            border: 1px solid hsl(0, 0%, 80%);
+            border-radius: 5px;
+            padding: 1rem;
+
+            &::after {
+                content: "Sorry... Ik heb geen artikel geschreven met deze titel 🥀";
+            }
+        }
+    }
+
+    &-item {
+        display: block;
+
+        @include breakpoint-down(sm) {
+            flex: 0 0 50vw;
+        }
+
+        @media only screen and (max-width: 991px) and (min-width: 767px)  {
+            &:nth-child(3) {
+                display: none;
+            }
+        }
+
+        a {
+            text-decoration: none;
+
+            img {
+                height: 200px;
+                width: 100%;
+                object-fit: cover;
+                margin-bottom: .5rem;
+
+                @include breakpoint-up(lg) {
+                    height: 250px;
+                }
+            }
+    
+            h2 {
+                color: var(--color-cta);
+                text-decoration: none;
+
+                @include breakpoint-down(sm) {
+                    font-size: 1.2em;
+                }
+            }
+
+            p {
+                font-size: .8em;
+                margin-top: .5rem;
+                margin-bottom: 0;
+
+                @include breakpoint-up(md) {
+                    font-size: .9em;
+                }
+            }
+        }
+    }
+}
+
+.more-posts {
+    margin-top: 1.5rem;
+
+    @include breakpoint-up(md) {
+        margin-top: 3rem;
+    }
+
+    &__container {
+        position: relative; 
+
+        @include breakpoint-down(sm) {
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 40%;
+                height: 100%;
+                background-image: linear-gradient(to left, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0));
+                pointer-events: none;
+                z-index: 1;
+            }
+        }
+
+        .post {
+            &-items {
+                @include breakpoint-down(sm) {
+                    display: flex;
+                    overflow: hidden;
+                    overflow-x: scroll;
+                }
+            }
+        }
+    }
+}
