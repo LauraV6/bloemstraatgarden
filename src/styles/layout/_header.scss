@@ -1,0 +1,119 @@
+@use '../abstracts' as *;
+
+header {
+    background-color: var(--color-menu);
+    border-bottom: 1px solid hsl(232.62deg 18.24% 83.63%);
+
+    nav {
+        position: relative;
+        overflow: hidden;
+        max-width: 1200px;
+        text-align: center;
+        padding: 1rem;
+        margin: 0 auto;
+
+        @include breakpoint-up(md) {
+            display: grid;
+            grid-template-columns: 162px auto 162px;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            order: 0;
+
+            @include breakpoint-down(sm) {
+                order: -1;
+
+                &::before {
+                    left: 0;
+                }
+
+                &::before, &::after {
+                    content: "";
+                    border-top: 1px solid hsl(0, 0%, 80%);
+                    height: 39%;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: calc(50% - 70px);
+                }
+            }
+
+            img {
+                max-height: 120px;
+            }
+        }
+
+        .header {
+
+            &-socials {
+                display: flex;
+                gap: 10px;
+            }
+
+            &-link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                flex-shrink: 0;           
+                border: 1px solid var(--color-cta);
+                background-color: transparent;
+                border-radius: 5px;
+                text-decoration: none;
+                width: max-content;
+                color: hsl(0, 0%, 0%);
+                font-size: .9rem;
+                padding: .3rem .5rem;   
+                
+                svg {
+                    color: var(--color-cta);
+                }
+    
+                &.share {
+                    &-contact {
+                        @include breakpoint-down(sm) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .share-icon {
+            position: absolute;
+
+            @include breakpoint-up(md) {
+                position: relative;
+                height: 35px;
+                width: 35px;
+                border-radius: 50%;
+                font-size: 1.1em;
+                padding: 0;
+            }
+            
+            @include breakpoint-down(sm) {
+                right: 1rem;
+                top: 1rem;
+
+                &.insta, &.pinterest {
+                    display: none;
+                }
+            }
+
+            span {
+                font-size: .8rem;
+
+                @include breakpoint-up(md) {
+                    display: none;
+                }
+            }
+        }      
+    }
+}

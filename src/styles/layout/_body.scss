@@ -1,0 +1,65 @@
+@use '../abstracts' as *;
+@use '../base' as *;
+
+body {
+    word-break: break-word;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    max-width: 1200px;
+    min-height: calc(100vh - 270px);
+    padding: 0 1rem;
+    margin: 2rem 0;
+
+    @include breakpoint-up(md) {
+        min-height: calc(100vh - 288px);
+        padding: 0 2rem;
+        margin: 3rem auto;
+    }
+
+    @include breakpoint-up(lg) {
+        min-height: calc(100vh - 352px);
+        margin: 5rem auto;
+    }
+}
+
+:focus {
+    outline: none;
+}
+
+*, *::before, *::after {
+    box-sizing: content-box;
+}
+
+h1 {
+    font-size: 2rem;
+
+    @include breakpoint-up(md) {
+        font-size: 4rem;
+
+    }
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+* {
+    font-family: var(--font-regular);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-bold);
+    margin: 0;
+}

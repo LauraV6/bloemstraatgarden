@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'regular';
+    src: url('../fonts/Quicksand-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'bold';
+    src: url('../fonts/Panefresco250wtRegular.ttf') format('truetype');
+}
+
+:root {
+    --font-regular: 'regular';
+    --font-bold: 'bold';
+}
