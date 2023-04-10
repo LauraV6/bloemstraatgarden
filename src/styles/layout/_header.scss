@@ -71,6 +71,7 @@ header {
                 color: hsl(0, 0%, 0%);
                 font-size: .9rem;
                 padding: .3rem .5rem;   
+                z-index: 2;
                 
                 svg {
                     color: var(--color-cta);
