@@ -26,7 +26,7 @@ const Header = () => {
         <header>
             <nav>
                 <div className='header-socials'>
-                    <a className='header-link share-icon whapp' href="https://api.whatsapp.com/send?text=http://localhost:8000/" data-action="share/whatsapp/share" target="_blank"><FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span></a>
+                    <a className='header-link share-icon whapp' href="https://api.whatsapp.com/send?text=https://bloemstraatgarden.netlify.app/" data-action="share/whatsapp/share" target="_blank"><FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span></a>
                     <a className='header-link share-icon pinterest' href="https://pin.it/4a6ptov" target="_blank"><FontAwesomeIcon icon={faPinterestP}/><span>Delen</span></a>
                     <a className='header-link share-icon insta' href="www.instagram.com/lauravlasma" target="_blank"><FontAwesomeIcon icon={faInstagram}/><span>Delen</span></a>
                 </div>
