@@ -4,7 +4,7 @@
     &-items {
         position: relative;
         display: grid;
-        gap: 2rem;
+        gap: 1.3rem;
         margin-top: 1.2rem;
 
         @include breakpoint-up(md) {
@@ -33,9 +33,22 @@
 
     &-item {
         display: block;
+        
 
         @include breakpoint-down(sm) {
             flex: 0 0 50vw;
+            box-shadow: 0px 0px 15px 10px #f2f4f6;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+
+            h2 {
+                padding: 0 1rem;
+            }
+
+            p {
+                padding: 0 1rem 1rem 1rem;
+            }
         }
 
         @media only screen and (max-width: 991px) and (min-width: 767px)  {
