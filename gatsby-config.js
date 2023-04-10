@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: 'Onze tuin planten',
+    title: 'Bloemstraat Garden',
     author: 'Laura Vlasma',
     description: 'Graag neem ik jullie mee in onze voortgang van de tuin. Dit zal voornamelijk om bloemen gaan, maar ook de tuin renovatie.',
     keywords: ['planten', 'bloemstraat', 'tuinrenovatie']

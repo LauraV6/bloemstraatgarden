@@ -28,11 +28,11 @@ export const query = graphql`
     }
 `
 
-const Blog = (props) => {
+const Blog = (props) => {   
     return (
         <Layout>
              <Helmet>
-                <title>{props.data.contentfulBlogPost.title}</title>
+                <title>Bloemstraat Garden - {props.data.contentfulBlogPost.title}</title>
             </Helmet>           
             <section className="post-hero" style={{ backgroundImage: `url(${props.data.contentfulBlogPost.featuredimage.url})` }}>
                 <div className="post-hero__content">
