@@ -23,13 +23,18 @@ const BlogPage = () => {
                   }
                 }
             }
+            site {
+                siteMetadata {
+                    title
+                }
+            }
         }
     `);
     const [searchTerm, setSearchTerm] = useState('');
     return (
         <Layout>
             <Helmet>
-                <title>Bloemstraat Garden</title>
+                <title>{data.site.siteMetadata.title}</title>
             </Helmet>
             <main>
                 <div className='searchbar'>
