@@ -26,6 +26,10 @@
         align-items: center;
         gap: 10px;
 
+        svg {
+            width: 20px;
+        }
+
         span::first-letter {
             text-transform:capitalize;
         }
