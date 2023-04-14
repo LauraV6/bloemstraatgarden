@@ -30,36 +30,24 @@ main {
     outline: none;
 }
 
-*, *::before, *::after {
-    box-sizing: content-box;
-}
-
-h1 {
-    font-size: 2rem;
-
-    @include breakpoint-up(md) {
-        font-size: 4rem;
-
-    }
-}
-
-h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
-    font-size: 1.2rem;
-}
-
-h4 {
-    font-size: 1rem;
-}
-
 * {
     font-family: var(--font-regular);
 }
 
-h1, h2, h3, h4 {
-    font-family: var(--font-bold);
-    margin: 0;
+*, *::before, *::after {
+    box-sizing: content-box;
+}
+
+::-webkit-scrollbar {
+    height: 4px;
+    width: 6px;
+    background: hsl(225, 15%, 95%);
+
+    &-thumb, &-thumb:horizontal {
+        background-color: var(--color-cta);
+    }
+
+    &-thumb:horizontal {
+        border-radius: 50px;
+    }
 }
