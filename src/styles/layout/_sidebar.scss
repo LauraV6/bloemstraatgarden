@@ -1,17 +1,21 @@
 .aside {
     &__intro {
-        display: grid;
-        gap: 20px;
         border: 1px solid lightgray;
         border-radius: 5px;
-        padding: 1.5rem;
 
         img {
+            object-fit: cover;
+            object-position: top;
             width: 100%;
-            object-fit: contain;
-            border-radius: 5px;
+            max-height: 250px;
+            border-radius: 5px 5px 0 0;
             filter: brightness(1.1);
-            margin-bottom: 1rem;
+        }
+
+        > div {
+            display: grid;
+            gap: 20px;
+            padding: 1.5rem;
         }
 
         p {

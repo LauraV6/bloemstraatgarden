@@ -1,14 +1,15 @@
 .todo {
     display: grid;
     gap: 5px;
-    padding: 0 1.1rem;
+    padding: 0 .8rem;
     margin-bottom: 0;
 
     li {
         padding-left: .3rem;
 
         &::marker {
-            content: "🌷";
+            content: "✤";
+            color: var(--color-cta);
         }
     }
 }
