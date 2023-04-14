@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet'
-import '../styles/index.scss'
 
 const BlogPage = () => {
     const data = useStaticQuery(graphql`
