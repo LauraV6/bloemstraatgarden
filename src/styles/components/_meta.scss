@@ -30,8 +30,12 @@
             width: 20px;
         }
 
-        span::first-letter {
-            text-transform:capitalize;
+        span {
+            flex-shrink: 0;
+
+            &::first-letter {
+                text-transform: capitalize;
+            }
         }
     }
 }
