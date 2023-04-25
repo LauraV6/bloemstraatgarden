@@ -2,6 +2,7 @@ import React from "react";
 import Layout from '../components/layout'
 import MorePosts from '../components/morePosts'
 import Aside from '../components/aside'
+import { shuffle } from '../utils/helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faCloudSun, faCloud, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { graphql, Link } from 'gatsby'
@@ -24,10 +25,28 @@ export const query = graphql`
                 raw                         
             }
         }
+
+        allContentfulBlogPost(sort: {contentful_id: ASC}) {
+            edges {
+                node {
+                    slug
+                    id
+                    title
+                    publishedDate(formatString: "Do MMM, YYYY")
+                    featuredimage {
+                        id
+                        url
+                    }
+                }
+            }
+        } 
     }
 `
 
 const Blog = (props) => {   
+    const title = props.data.contentfulBlogPost.title;
+    const filteredPosts = props.data.allContentfulBlogPost.edges.filter(post => post.node.title !== title);
+    const shuffledPosts = shuffle(filteredPosts).slice(0, 3);
     return (
         <Layout>
              <Helmet>
@@ -68,10 +87,19 @@ const Blog = (props) => {
             <main className="post-content">
                 <div>
                     <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{props.data.contentfulBlogPost.title}</span></div>
-                    <div className={`content ${props.data.contentfulBlogPost.slug}`} >
+                    <div id={props.data.contentfulBlogPost.slug} className="content">
                         {renderRichText (props.data.contentfulBlogPost.body)}
                     </div>
-                    <MorePosts />
+                    <div className='more-posts'>
+                        <h3>Bekijk meer posts over onze tuin</h3>
+                        <div className='more-posts__container'>
+                            <div className='post-items'>
+                            {shuffledPosts.map(post => {
+                                return <MorePosts title={post.node.title} slug={post.node.slug} featuredimage={post.node.featuredimage.url} publishedDate={post.node.publishedDate} />;
+                            })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <Aside />
             </main>
