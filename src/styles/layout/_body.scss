@@ -10,20 +10,23 @@ body {
 
 main {
     max-width: 1200px;
-    min-height: calc(100vh - 270px);
     padding: 0 1rem;
     margin: 2rem 0;
 
     @include breakpoint-up(md) {
-        min-height: calc(100vh - 288px);
         padding: 0 2rem;
         margin: 3rem auto;
     }
 
     @include breakpoint-up(lg) {
-        min-height: calc(100vh - 352px);
         margin: 5rem auto;
     }
+}
+
+.gatsby-focus-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 :focus {

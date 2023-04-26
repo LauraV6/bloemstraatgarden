@@ -4,6 +4,7 @@ footer {
     background-color: var(--color-footer);
     color: hsl(0, 0%, 100%);
     padding: 1rem;
+    margin-top: auto;
 
     @include breakpoint-up(md) {
         padding: 1.5rem 2rem;

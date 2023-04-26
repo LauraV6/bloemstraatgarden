@@ -13,12 +13,16 @@ const BlogPage = () => {
                 edges {
                   node {
                     title
+                    contentfulinternal
                     slug
                     publishedDate(formatString: "Do MMM, YYYY")
                     featuredimage {
                       id
                       url
                     }
+                    body {
+                        raw                         
+                    }                   
                   }
                 }
             }
@@ -47,11 +51,12 @@ const BlogPage = () => {
                 </h1>
                 <div className='post-items'>
                     {data.allContentfulBlogPost.edges.filter((edge) => {
-                        if(searchTerm == "") {
+                        if(searchTerm === "") {
                             return edge
                         } else if (edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())) {
                             return edge
                         }
+                        return null;
                         }).map((edge, key) => {
                         return (
                             <div className='post-item' key={key}>
