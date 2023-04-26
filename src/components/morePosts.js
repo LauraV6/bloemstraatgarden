@@ -9,7 +9,7 @@ const MorePosts = ( {
 } ) => {
     return (
         <div className='post-item'>
-            <Link to={`/blog/${slug}`}>
+            <Link to={`${slug}`}>
                 <img src={featuredimage} alt={title} />
                 <h2>{title}</h2>
                 <p>{publishedDate}</p>                                   

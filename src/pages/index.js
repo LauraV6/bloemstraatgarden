@@ -60,7 +60,7 @@ const BlogPage = () => {
                         }).map((edge, key) => {
                         return (
                             <div className='post-item' key={key}>
-                                <Link to={`/blog/${edge.node.slug}`}>
+                                <Link to={`${edge.node.slug}`}>
                                     <img src={edge.node.featuredimage.url} alt={edge.node.featuredimage.title} />
                                     <h2>{edge.node.title}</h2>
                                     <p>{edge.node.publishedDate}</p>                                   
