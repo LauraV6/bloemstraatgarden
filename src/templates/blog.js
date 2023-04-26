@@ -2,6 +2,7 @@ import React from "react";
 import Layout from '../components/layout'
 import MorePosts from '../components/morePosts'
 import Aside from '../components/aside'
+import { BLOCKS } from '@contentful/rich-text-types';
 import { shuffle } from '../utils/helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faCloudSun, faCloud, faAngleRight } from '@fortawesome/free-solid-svg-icons'
@@ -22,7 +23,17 @@ export const query = graphql`
                 url
             }
             body {
-                raw                         
+                raw 
+                references {
+                    ... on ContentfulAsset {
+                      __typename
+                      contentful_id
+                      title
+                      file {
+                        url
+                      }
+                    }
+                }
             }
         }
 
@@ -42,6 +53,16 @@ export const query = graphql`
         } 
     }
 `
+
+const options = {
+    renderNode: {
+        [BLOCKS.EMBEDDED_ASSET]: node => {
+            const url = node.data.target.file.url
+            const alt = node.data.target.title
+            return <img alt={alt} src={url} />
+          },
+    }
+}
 
 const Blog = (props) => {   
     const title = props.data.contentfulBlogPost.title;
@@ -88,7 +109,7 @@ const Blog = (props) => {
                 <div>
                     <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{props.data.contentfulBlogPost.title}</span></div>
                     <div id={props.data.contentfulBlogPost.slug} className="content">
-                        {renderRichText (props.data.contentfulBlogPost.body)}
+                        {renderRichText (props.data.contentfulBlogPost.body, options)}
                     </div>
                     <div className='more-posts'>
                         <h3>Bekijk meer posts over onze tuin</h3>
