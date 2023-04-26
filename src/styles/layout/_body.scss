@@ -14,16 +14,18 @@ main {
     margin: 2rem 0;
 
     @include breakpoint-up(md) {
+        width: calc(100% - 4rem);
         padding: 0 2rem;
         margin: 3rem auto;
     }
 
     @include breakpoint-up(lg) {
+        width: calc(100% - 10rem);
         margin: 5rem auto;
     }
 }
 
-.gatsby-focus-wrapper {
+#gatsby-focus-wrapper {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
