@@ -11,10 +11,12 @@ const Footer = () => {
             }
         }
     `)   
+    const siteMeta = data.site.siteMetadata;
+    const author = siteMeta.author;
     return (
         <footer>
             <div className='copyright-bar'>
-                <label>Created by {data.site.siteMetadata.author} © 2023</label>
+                <label>Created by {author} © 2023</label>
             </div>
         </footer>
     )
