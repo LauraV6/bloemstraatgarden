@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby'
 import profile from "../images/profile.jpg";
 
-const Aside = () => {  
+const Sidebar = () => {  
     const data = useStaticQuery(graphql`
         query {
             site {
@@ -12,7 +12,7 @@ const Aside = () => {
                 }
             }
         }
-    `) 
+    `)
     return (
         <aside className='aside'>
             <div className='aside__intro'>
@@ -37,4 +37,4 @@ const Aside = () => {
     )
 }
 
-export default Aside
+export default Sidebar

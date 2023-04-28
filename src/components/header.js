@@ -17,11 +17,14 @@ const Header = () => {
             }
         }
     `)     
+    const siteMeta = data.site.siteMetadata;
+    const author = siteMeta.author;
+    const description = siteMeta.description;
     return (
         <>
         <Helmet>
-            <meta name="author" content={data.site.siteMetadata.author}></meta>
-            <meta name="description" content={data.site.siteMetadata.description} />
+            <meta name="author" content={author}></meta>
+            <meta name="description" content={description} />
         </Helmet>
         <header>
             <nav>

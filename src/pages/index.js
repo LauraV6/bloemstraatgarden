@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import Layout from '../components/layout'
+import PostCard from '../components/postCard'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -12,9 +13,11 @@ const BlogPage = () => {
             allContentfulBlogPost(sort: {publishedDate: DESC}) {
                 edges {
                   node {
+                    id
+                    slug
                     title
                     contentfulinternal
-                    slug
+                    id
                     publishedDate(formatString: "Do MMM, YYYY")
                     featuredimage {
                       id
@@ -34,6 +37,7 @@ const BlogPage = () => {
         }
     `);
     const [searchTerm, setSearchTerm] = useState('');
+    const allPosts = data.allContentfulBlogPost.edges;
     return (
         <Layout>
             <Helmet>
@@ -45,12 +49,10 @@ const BlogPage = () => {
                     <FontAwesomeIcon icon={faSearch} className='searchbar__icon'/>
                 </div>               
                 <h1 className='title-line'>
-                    <span>
-                        Bloemstraat Garden
-                    </span>
+                    <span>Bloemstraat Garden</span>
                 </h1>
                 <div className='post-items'>
-                    {data.allContentfulBlogPost.edges.filter((edge) => {
+                    {allPosts.filter((edge) => {
                         if(searchTerm === "") {
                             return edge
                         } else if (edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -58,14 +60,16 @@ const BlogPage = () => {
                         }
                         return null;
                         }).map((edge, key) => {
+                        const post = edge.node;
                         return (
-                            <div className='post-item' key={key}>
-                                <Link to={`/${edge.node.slug}`}>
-                                    <img src={edge.node.featuredimage.url} alt={edge.node.featuredimage.title} />
-                                    <h2>{edge.node.title}</h2>
-                                    <p>{edge.node.publishedDate}</p>                                   
-                                </Link>
-                            </div>
+                            <PostCard 
+                                key={key}
+                                slug={post.slug}
+                                img={post.featuredimage.url} 
+                                alt={post.featuredimage.title} 
+                                title={post.title} 
+                                publishedDate={post.publishedDate}
+                            />
                         )
                     })}
                 </div>
