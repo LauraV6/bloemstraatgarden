@@ -84,6 +84,10 @@
                     margin: 0 auto;
                 }
             }
+
+            @include breakpoint-up(lg) {
+                height: auto;
+            }
         }
 
         @include breakpoint-down(sm) {
@@ -159,6 +163,7 @@
 
                 &__content {
                     text-align: left;
+                    height: 100%;
                     padding: 1rem;
 
                     h2 {
