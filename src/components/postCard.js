@@ -9,13 +9,14 @@ const PostCard = ({
     publishedDate
 }) => {
     return (
-            <div className='post-item'>
-                <Link to={`/${slug}`}>
+                <Link className='post-item' to={`/${slug}`}>
                     <img src={img} alt={alt} />
-                    <h2>{title}</h2>
-                    <p>{publishedDate}</p>                                   
+                    <div className='post-item__content'>
+                        <h2>{title}</h2>
+                        <span>{publishedDate}</span>        
+                        <button className='button button--cta'>Lees meer</button>      
+                    </div>                       
                 </Link>
-            </div>
     )
 }
 

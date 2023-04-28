@@ -69,7 +69,7 @@ header {
                 text-decoration: none;
                 width: max-content;
                 color: hsl(0, 0%, 0%);
-                font-size: .9rem;
+                font-size: .9em;
                 padding: .3rem .5rem;   
                 z-index: 2;
                 
@@ -110,7 +110,7 @@ header {
             }
 
             span {
-                font-size: .8rem;
+                font-size: .8em;
 
                 @include breakpoint-up(md) {
                     display: none;
