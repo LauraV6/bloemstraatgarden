@@ -1,0 +1,25 @@
+@use '../abstracts' as *;
+
+.button {
+    width: auto;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: .5rem 1.5rem;
+
+    @include breakpoint-up(lg) {
+        width: fit-content;
+    }
+
+    &--cta {
+        border: 1px solid var(--color-cta);
+
+        &:hover, &:active {
+            background-color: var(--color-cta);
+            color: hsl(0, 0%, 100%);
+        }
+    }
+
+    &:hover, &:active {
+        cursor: pointer;
+    }
+}
