@@ -12,7 +12,7 @@ const PostCard = ({
 }) => {
     return (
                 <Link className='post-item' to={`/${slug}`}>
-                    <LazyLoadImage src={img} alt={alt} PlaceholderSrc={lazyLoadPlaceholder} />
+                    <LazyLoadImage src={img} alt={alt} style={{backgroundImage: `url(${lazyLoadPlaceholder})`}} />
                     <div className='post-item__content'>
                         <h2>{title}</h2>
                         <span>{publishedDate}</span>        
