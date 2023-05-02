@@ -55,6 +55,47 @@ header {
             &-socials {
                 display: flex;
                 gap: 10px;
+
+                .share-icon {
+                    position: absolute;
+
+                    &:hover, &:active {
+                        svg {
+                            transform: scale(1.1);
+                            color: hsl(0, 0%, 0%);
+                        }
+                    }
+        
+                    @include breakpoint-up(md) {
+                        position: relative;
+                        height: 35px;
+                        width: 35px;
+                        border-radius: 50%;
+                        font-size: 1.1em;
+                        padding: 0;
+                    }
+                    
+                    @include breakpoint-down(sm) {
+                        right: 1rem;
+                        top: 1rem;
+        
+                        &.insta, &.pinterest {
+                            display: none;
+                        }
+                    }
+        
+                    span {
+                        font-size: .8em;
+        
+                        @include breakpoint-up(md) {
+                            display: none;
+                        }
+                    }
+
+                    svg {
+                        transition: all  .1s ease-in-out; 
+                    }
+                }    
             }
 
             &-link {
@@ -80,42 +121,21 @@ header {
     
                 &.share {
                     &-contact {
+                        &:hover, &:active {
+                            svg {
+                                transform: scale(1.1);
+                                color: hsl(0, 0%, 0%);
+                            }
+                        }
+                        svg {
+                            transition: all  .1s ease-in-out; 
+                        }                       
                         @include breakpoint-down(sm) {
                             display: none;
                         }
                     }
                 }
             }
-        }
-
-        .share-icon {
-            position: absolute;
-
-            @include breakpoint-up(md) {
-                position: relative;
-                height: 35px;
-                width: 35px;
-                border-radius: 50%;
-                font-size: 1.1em;
-                padding: 0;
-            }
-            
-            @include breakpoint-down(sm) {
-                right: 1rem;
-                top: 1rem;
-
-                &.insta, &.pinterest {
-                    display: none;
-                }
-            }
-
-            span {
-                font-size: .8em;
-
-                @include breakpoint-up(md) {
-                    display: none;
-                }
-            }
-        }      
+        }  
     }
 }

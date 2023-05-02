@@ -8,6 +8,10 @@
     text-transform: uppercase;
     margin-bottom: 1rem;
 
+    span {
+        animation: load_in 1s forwards;
+    }
+
     @include breakpoint-up(md) {
         margin-bottom: 3rem;
 
