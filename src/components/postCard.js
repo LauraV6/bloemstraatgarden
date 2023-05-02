@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import LazyLoadPlaceholder from "../images/LazyLoadPlaceholder.jpg";
+import lazyLoadPlaceholder from "../images/lazyLoadPlaceholder.jpg";
 
 const PostCard = ({
     slug,
@@ -12,7 +12,7 @@ const PostCard = ({
 }) => {
     return (
                 <Link className='post-item' to={`/${slug}`}>
-                    <LazyLoadImage src={img} alt={alt} PlaceholderSrc={LazyLoadPlaceholder} />
+                    <LazyLoadImage src={img} alt={alt} PlaceholderSrc={lazyLoadPlaceholder} />
                     <div className='post-item__content'>
                         <h2>{title}</h2>
                         <span>{publishedDate}</span>        
