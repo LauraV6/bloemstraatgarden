@@ -203,6 +203,16 @@
                         display: none;
                     }
                 }
+
+                &:hover, &:active {
+        
+                    @include breakpoint-up(md) {
+        
+                        img {
+                            box-shadow: none;
+                        }
+                    }            
+                }
             }
         }
     }
