@@ -41,6 +41,7 @@
         text-decoration: none;
 
         &__img {
+            flex-shrink: 0;
             object-fit: cover;
             background-position: center;
             background-size: cover;
@@ -53,7 +54,6 @@
             }
 
             img {
-                flex-shrink: 0;
                 display: block;
                 object-fit: cover;
                 height: 200px;
