@@ -55,6 +55,7 @@
             img {
                 flex-shrink: 0;
                 display: block;
+                object-fit: cover;
                 height: 200px;
                 width: 100%;
                 text-indent: 10px;
@@ -171,6 +172,7 @@
                 border: 1px solid hsl(231, 23%, 94%);
                 background-color: hsl(0, 0%, 100%);
                 border-radius: 5px;
+                overflow: hidden;
     
                 img {
                     border-radius: 5px 5px 0 0;
