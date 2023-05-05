@@ -16,7 +16,7 @@ const Weather = ({weatherType}) => {
                                     case ['veel zon']:
                                         return <FontAwesomeIcon icon={faSun} />;
                                     case 'halfschaduw':
-                                        return f;
+                                        return <FontAwesomeIcon icon={faCloudSun} />;
                                     case 'schaduw':
                                         return <FontAwesomeIcon icon={faCloud} />;                                   
                                     default:
