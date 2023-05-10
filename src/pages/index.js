@@ -52,8 +52,8 @@ const BlogPage = () => {
                     <div className='hero__container'>
                         <div className='hero__text'>
                             <div>
-                                <h1>Flowers don't tell, they show.</h1>
-                                <p>And when they show, they've grown.</p>                  
+                                <h1>Flowers don't tell, they show</h1>
+                                <p>And when they show, they've grown</p>                  
                             </div>
                         </div>
                         <div className='hero__images'>
