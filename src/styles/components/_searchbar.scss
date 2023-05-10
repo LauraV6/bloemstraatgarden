@@ -10,12 +10,13 @@
 
     @include breakpoint-up(md) {
         width: 200px;
-        margin: -70px auto 7rem auto;
+        margin: -70px auto 5rem auto;
         z-index: 20;
     }
 
     @include breakpoint-up(lg) {
         width: 300px;
+        margin: -70px auto 7rem auto;
     }
 
     &__input {
