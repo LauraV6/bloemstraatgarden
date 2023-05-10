@@ -1,3 +1,5 @@
+@use '_mixins' as *;
+
 @keyframes load_in {
     from {
         opacity:0;
@@ -5,4 +7,76 @@
     to {
         opacity:1;
     }  
+}
+
+@keyframes leave-one { 
+    0% { 
+        opacity: 0;
+        transform: rotate(40deg); 
+        top: -50%;
+    } 
+
+    50% {
+        transform: rotate(50deg);
+    }
+
+    100% { 
+        opacity: 1;
+        top: -30%;
+        transform: rotate(45deg); 
+    } 
+}
+
+@keyframes leave-two { 
+    0% { 
+        opacity: 0;
+        transform: rotate(0deg); 
+        top: -50%;
+    } 
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% { 
+        opacity: 1;
+        top: -20%;
+        transform: rotate(5deg); 
+    } 
+}
+
+@keyframes leave-three { 
+    0% { 
+        opacity: 0;
+        transform: rotate(0deg); 
+        bottom: -50%;
+    } 
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% { 
+        opacity: 1;
+        bottom: -30%;
+        transform: rotate(5deg); 
+    } 
+}
+
+@keyframes leave-four { 
+    0% { 
+        opacity: 0;
+        transform: rotate(0deg); 
+        bottom: -50%;
+    } 
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% { 
+        opacity: 1;
+        bottom: -30%;
+        transform: rotate(5deg); 
+    } 
 }

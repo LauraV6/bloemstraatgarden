@@ -82,7 +82,7 @@ const Blog = (props) => {
              <Helmet>
                 <title>Bloemstraat Garden - {title}</title>
             </Helmet>           
-            <section className="post-hero" style={{ backgroundImage: `url(${headerImg})` }}>
+            <section className="hero post-hero" style={{ backgroundImage: `url(${headerImg})` }}>
                 <div className="post-hero__content">
                     <div>
                         <h1>{title}</h1>
@@ -91,7 +91,7 @@ const Blog = (props) => {
                     <Weather weatherType={weatherType} />
                 </div>
             </section>
-            <main className="post-content">
+            <section className="post-content">
                 <div>
                     <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{title}</span></div>
                     <div className="content">
@@ -117,7 +117,7 @@ const Blog = (props) => {
                     </div>
                 </div>
                 <Sidebar />
-            </main>
+            </section>
         </Layout>
     )
 }
