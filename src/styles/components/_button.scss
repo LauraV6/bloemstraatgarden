@@ -12,6 +12,7 @@
 
     &--cta {
         border: 1px solid var(--color-cta);
+        color: hsl(0, 0%, 0%);
 
         &:hover, &:active {
             background-color: var(--color-cta);
