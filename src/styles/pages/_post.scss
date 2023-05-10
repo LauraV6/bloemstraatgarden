@@ -47,6 +47,10 @@
                 margin: 3rem auto;
             }
 
+            @include breakpoint-up(lg) {
+                padding: 0 5rem;
+            }
+            
             > div {
                 margin-top: auto;
 
