@@ -1,0 +1,109 @@
+@use '../abstracts' as *;
+
+.hero {
+    position: relative;
+    height: 280px;
+    max-height: 400px;
+
+    @include breakpoint-up(md) {
+        height: 380px;
+    }
+
+    &__container {
+        position: relative;
+    }
+
+    &__text {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+        text-align: center;
+        padding: 1rem;
+        z-index: 10;
+
+        h1 {
+            color: hsl(0, 0%, 20%);
+        }
+    }
+
+    &__images {
+        position: relative;
+        overflow: hidden;
+
+        .leave {
+            position: absolute;
+            max-width: 150px;
+
+            @include breakpoint-up(md) {
+                max-width: 220px;
+            }
+
+            @include breakpoint-up(xlg) {
+                max-width: 300px;
+            }
+
+            &--one {
+                left: 0px;
+                rotate: 55deg;
+                animation: leave-one 2s forwards;
+
+                @include breakpoint-up(xlg) {
+                    left: 20px;
+                }
+            }
+
+            &--two {
+                right: -50px;
+                rotate: 90deg;
+                animation: leave-two 1s forwards;
+
+                @include breakpoint-up(md) {
+                    right: 0;
+                }
+            }
+
+            &--three {
+                right: 0;
+                rotate: 310deg;
+                animation: leave-three 2s forwards;
+
+                @include breakpoint-up(md) {
+                    right: 20px;
+                }
+
+                @include breakpoint-up(lg) {
+                    right: 50px;
+                }
+            }
+
+            &--four {
+                left: -10px;
+                rotate: 280deg;
+                animation: leave-four 1s forwards;
+
+                @include breakpoint-up(md) {
+                    left: 20px;
+                }
+
+                @include breakpoint-up(xlg) {
+                    left: 70px;
+                }
+            }
+        }
+
+        .bg-leaves {
+            display: block;
+            width: 100vw;
+            height: 280px;
+            max-height: 400px;
+            object-fit: cover;
+
+            @include breakpoint-up(md) {
+                height: 380px;
+            }
+        }
+    }
+}

@@ -5,23 +5,26 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 100%;
-    margin-left: auto;
-    margin-bottom: 2rem;
+    width: calc(100% - 2rem);
+    margin: 1.5rem 1rem;
 
     @include breakpoint-up(md) {
         width: 200px;
-        margin-bottom: 3rem;
-        margin-top: -30px;
+        margin: -70px auto 7rem auto;
+        z-index: 20;
+    }
+
+    @include breakpoint-up(lg) {
+        width: 300px;
     }
 
     &__input {
         border: none;
-        background-color: transparent;
+        background-color: hsla(0, 0%, 100%, .6);
         border-bottom: 1px solid var(--color-cta);
         width: 100%;
         min-width: 150px;
-        padding: .5rem 1.2rem .5rem 0;
+        padding: .5rem 1.2rem .5rem .5rem;
 
         @include breakpoint-down(sm) {
             text-align: center;

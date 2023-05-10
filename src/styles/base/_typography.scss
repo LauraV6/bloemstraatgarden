@@ -19,8 +19,11 @@ h1 {
     font-size: 2em;
 
     @include breakpoint-up(md) {
-        font-size: 4em;
+        font-size: 3em;
+    }
 
+    @include breakpoint-up(lg) {
+        font-size: 4em;
     }
 }
 
