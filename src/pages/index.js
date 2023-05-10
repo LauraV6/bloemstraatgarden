@@ -83,7 +83,6 @@ const BlogPage = () => {
                             return null;
                             }).map((edge, key) => {
                             const post = edge.node;
-                            console.log(post.featuredimage.title)
                             return (
                                 <PostCard 
                                     key={key}
