@@ -4,15 +4,15 @@
     font-family: 'regular';
     src: url('../fonts/Quicksand-Regular.woff') format('woff');
     src: url('../fonts/Quicksand-Regular.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: revert;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'bold';
-    src: url('../fonts/Panefresco250wtRegular.woff') format('woff');
-    src: url('../fonts/Panefresco250wtRegular.ttf') format('truetype');
-    font-weight: normal;
+    src: url('../fonts/Panefresco600wtRegular.woff') format('woff');
+    src: url('../fonts/Panefresco600wtRegular.ttf') format('truetype');
+    font-weight: 600;
     font-style: normal;
 }
 
