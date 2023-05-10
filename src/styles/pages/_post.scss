@@ -48,6 +48,7 @@
             }
 
             @include breakpoint-up(lg) {
+                width: calc(100% - 10rem);
                 padding: 0 5rem;
             }
             
