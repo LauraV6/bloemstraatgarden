@@ -45,13 +45,22 @@
                 align-items: center;
                 flex-shrink: 0;
                 background-color: var(--color-cta);
-                height: 50px;
-                width: 50px;
+                height: 40px;
+                width: 40px;
                 border-radius: 50%;
                 box-shadow: 2px 2px 6px hsla(83, 71%, 28%, .3);
 
+                @include breakpoint-up(md) {
+                    height: 50px;
+                    width: 50px;
+                }
+
                 img {
-                    max-width: 25px;
+                    max-width: 18px;
+                    
+                    @include breakpoint-up(md) {
+                        max-width: 22px;
+                    }
                 }
             }
 
@@ -62,9 +71,13 @@
                 padding: 0 1.5rem 0 1rem;
 
                 p {
-                    font-size: 1em;
+                    font-size: .8em;
                     line-height: 1;
                     margin: 0;
+
+                    @include breakpoint-up(md) {
+                        font-size: .9em;
+                    }
                 }
             }
         }
