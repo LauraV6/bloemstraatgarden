@@ -1,18 +1,101 @@
 @use '../abstracts' as *;
 
-footer {
-    background-color: var(--color-footer);
+.footer {
+    overflow-x: clip;
     color: hsl(0, 0%, 100%);
-    padding: 1rem;
     margin-top: auto;
 
-    @include breakpoint-up(md) {
-        padding: 1.5rem 2rem;
+    &__steps {
+        position: relative;
+        display: flex;
+        gap: 25px;
+        background-color: var(--color-light);
+
+        .container {
+            display: grid;
+            gap: 15px;
+            max-width: 1200px;
+            padding: 0 1rem;
+            margin: 2rem 0;
+            z-index: 1;
+        
+            @include breakpoint-up(md) {
+                display: flex;
+                gap: 25px;
+                width: calc(100% - 4rem);
+                padding: 0 2rem;
+                margin: 3rem auto;
+            }
+        
+            @include breakpoint-up(lg) {
+                width: calc(100% - 10rem);
+                margin: 5rem auto;
+            }
+        }
+
+        .step {
+            display: flex;
+            background-color: var(--color-transparent);
+            width: fit-content;
+            border-radius: 50px;
+
+            &__icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+                background-color: var(--color-cta);
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                box-shadow: 2px 2px 6px hsla(83, 71%, 28%, .3);
+
+                img {
+                    max-width: 25px;
+                }
+            }
+
+            &__text {
+                display: flex;
+                align-items: center;
+                color: hsl(0, 0%, 0%);
+                padding: 0 1.5rem 0 1rem;
+
+                p {
+                    font-size: 1em;
+                    line-height: 1;
+                    margin: 0;
+                }
+            }
+        }
     }
 
-    .copyright-bar {
+    &__leave {
+        position: absolute;
+        max-width: 150px;
+        right: -50px;
+        bottom: -35px;
+
+        @include breakpoint-up(md) {
+            max-width: 190px;
+            right: -15px;
+        }
+
+        @include breakpoint-up(lg) {
+            max-width: 240px;
+        }
+    }
+
+    &__copyright {
+        position: relative;
         display: flex;
         justify-content: center;
         font-size: .9em;
+        background-color: var(--color-footer);
+        padding: 1rem;
+
+        @include breakpoint-up(md) {
+            padding: 1.5rem 2rem;
+        }
     }
 }
