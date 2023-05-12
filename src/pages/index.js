@@ -53,7 +53,7 @@ const BlogPage = () => {
                         <div className='hero__text'>
                             <div>
                                 <h1>Flowers don't tell, they show</h1>
-                                <p>And when they show, they've grown</p>                  
+                                <p>If you tend to a flower, it will bloom</p>                  
                             </div>
                         </div>
                         <div className='hero__images'>
