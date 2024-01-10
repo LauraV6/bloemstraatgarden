@@ -6,8 +6,8 @@ module.exports = {
   siteMetadata: {
     title: 'Bloemstraat Garden',
     author: 'Laura Vlasma',
-    description: 'Graag neem ik jullie mee in onze voortgang van de tuin. Dit zal voornamelijk om bloemen gaan, maar ook de tuin renovatie.',
-    keywords: ['planten', 'bloemstraat', 'tuinrenovatie']
+    description: 'Graag neem ik jullie mee in onze voortgang van de tuin. Dit zal voornamelijk om de moestuin gaan, maar ook de tuin renovatie.',
+    keywords: ['moestuin', 'bloemstraat', 'tuinrenovatie']
   },
   plugins: [
     'gatsby-plugin-react-helmet',
