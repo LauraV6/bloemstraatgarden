@@ -1,0 +1,38 @@
+@use '../abstracts' as *;
+
+table {
+    display: block;
+    border-collapse: collapse;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    overflow-x: auto;
+    max-width: fit-content;
+    white-space: nowrap;
+    width: 100%;
+
+    @include breakpoint-down(sm) {
+        width: calc(100vw - 2rem);
+    }
+
+    th {
+        background-color: var(--color-transparent);
+        font-size: .9em;
+    }
+
+    td {
+        vertical-align: top;
+        line-height: 2;
+
+        &:nth-child(even) {
+            background-color: var(--color-light);
+        }
+    }
+
+    th, td {
+        padding: 10px;
+
+        p {
+            margin: 0;
+        }
+    }
+}
