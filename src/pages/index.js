@@ -7,8 +7,9 @@ import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from 'react-helmet'
+import Loader from '../components/loader'
 
 const BlogPage = () => {
     const data = useStaticQuery(graphql`
@@ -97,10 +98,10 @@ const BlogPage = () => {
                 </div>  
                 <section className='blogs'>             
                     <h2 className='title-line'>
-                        <span>Bloemstraat Garden</span>
+                        <span>Blog Updates</span>
                     </h2>
-                    <div className='post-items'>
-                        {filteredBlogs.map((edge, key) => {
+                    {allPosts.lenght === 0 ? <Loader /> :
+                        (<div className='post-items'> {filteredBlogs.map((edge, key) => {
                             const post = edge.node;
                             return (
                                 <PostCard 
@@ -112,11 +113,11 @@ const BlogPage = () => {
                                     publishedDate={post.publishedDate}
                                 />
                             )
-                        })}
-                    </div>
+                        })}</div>)
+                    }
                     <section className='center p-0'>
                         {(() => {
-                            if (index <= 1 && searchTerm === '') {
+                            if (index <= 1 && searchTerm === '' && allPosts.lenght === 0) {
                                 return (
                                     <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
                                         {
