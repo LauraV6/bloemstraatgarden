@@ -4,6 +4,7 @@
     width: auto;
     border-radius: 40px;
     background-color: transparent;
+    font-size: .9rem;
     transition: all 0.3s ease;
     text-align: center;
     padding: .5rem 1.5rem;
@@ -82,14 +83,14 @@
       
             &:before {             
                 background-color: hsl(210, 54%, 64%);
-                right: -23%;
+                right: -24%;
                 top: 42px;
               }
               
               &:after {
                 background-color: hsl(0, 0%, 100%);
-                left: -27%;
-                top: -2px;
+                left: -26%;
+                top: -1.4px;
               }
 
               &:nth-child(2) {
