@@ -14,7 +14,7 @@
         }
 
         @include breakpoint-up(lg) {
-            gap: 3rem;
+            gap: 2rem 3rem;
             grid-template-columns: 1fr 1fr 1fr;
         }
 
@@ -43,6 +43,18 @@
         background-color: hsl(0, 0%, 100%);
         border-radius: 5px;
         overflow: hidden;
+
+        @include breakpoint-up(lg) {
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: none;
+            border: none;
+            background-color: transparent;
+            transition: ease-in-out .2s;
+            color: hsl(0, 0%, 0%);
+            text-decoration: none;
+            overflow: unset;
+        }
 
         &__img {
             position: relative;
@@ -87,6 +99,10 @@
             height: 100%;
             padding: 1rem;
 
+            @include breakpoint-up(lg) {
+                padding: 0 0 1rem 0;
+            }
+
             h2 {
                 color: var(--color-cta);
                 text-decoration: none;
@@ -107,27 +123,11 @@
                 z-index: 5;
             }
 
-            button {
+            .button {
                 @include breakpoint-up(lg) {
                     margin: 0 auto;
                 }
             }
-
-            @include breakpoint-up(lg) {
-                padding: 0;
-            }
-        }
-
-        @include breakpoint-up(lg) {
-            flex-direction: column;
-            gap: 10px;
-            box-shadow: none;
-            border: none;
-            background-color: transparent;
-            transition: ease-in-out .2s;
-            color: hsl(0, 0%, 0%);
-            text-decoration: none;
-            overflow: unset;
         }
 
         &:hover, &:active {
@@ -141,7 +141,7 @@
                 }
             }
 
-            button {
+            .button {
                 background-color: var(--color-cta);
                 color: hsl(0, 0%, 100%);
             }              
@@ -198,7 +198,7 @@
                         font-size: 1.1em;
                     }
 
-                    button {
+                    .button {
                         width: auto;
                         margin: 0;
                     }

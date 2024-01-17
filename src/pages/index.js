@@ -5,7 +5,7 @@ import PostCard from '../components/postCard'
 import HeaderImg from '../images/headerBg.png'
 import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet'
@@ -42,6 +42,31 @@ const BlogPage = () => {
     `);
     const [searchTerm, setSearchTerm] = useState('');
     const allPosts = data.allContentfulBlogPost.edges;
+
+    const PAGE_SIZE = 9;
+    const [index , setIndex] = useState(0);
+    const [visibleData , setVisibleData] = useState ([]);
+
+    const waveAmount = 9;
+
+    const filteredBlogs = useMemo(() => {
+        if (searchTerm === "") {
+            return visibleData;
+        } else {
+            return (allPosts.filter(edge => edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())))};
+    });
+    
+    useEffect(() => {
+        const numberOfItems = PAGE_SIZE * ( index + 1 ); 
+        const newArray = []; 
+            
+        for(let i= 0 ;i < allPosts.length ; i++ ){
+            if(i < numberOfItems) 
+                newArray.push(allPosts[i])
+        }
+        setVisibleData(newArray);    
+    } , [index, allPosts])
+
     return (
         <Layout>
             <Helmet>
@@ -57,11 +82,11 @@ const BlogPage = () => {
                             </div>
                         </div>
                         <div className='hero__images'>
-                            <img src={HeaderLeaveBig} className='leave leave--one'></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--two'></img>
-                            <img src={HeaderLeaveBig} className='leave leave--three'></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--four'></img>
-                            <img src={HeaderImg} className='bg-leaves'></img>
+                            <img src={HeaderLeaveBig} className='leave leave--one' alt="leaves"></img>
+                            <img src={HeaderLeaveSmall} className='leave leave--two' alt="leaves"></img>
+                            <img src={HeaderLeaveBig} className='leave leave--three' alt="leaves"></img>
+                            <img src={HeaderLeaveSmall} className='leave leave--four' alt="leaves"></img>
+                            <img src={HeaderImg} className='bg-leaves' alt="header-img"></img>
                         </div>
                     </div>
                 </section>
@@ -74,14 +99,7 @@ const BlogPage = () => {
                         <span>Bloemstraat Garden</span>
                     </h2>
                     <div className='post-items'>
-                        {allPosts.filter((edge) => {
-                            if(searchTerm === "") {
-                                return edge
-                            } else if (edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-                                return edge
-                            }
-                            return null;
-                            }).map((edge, key) => {
+                        {filteredBlogs.map((edge, key) => {
                             const post = edge.node;
                             return (
                                 <PostCard 
@@ -95,6 +113,20 @@ const BlogPage = () => {
                             )
                         })}
                     </div>
+                    <section className='center p-0'>
+                        {(() => {
+                            if (index <= 1 && searchTerm === '') {
+                                return (
+                                    <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
+                                        {
+                                            [...Array(waveAmount)].map((e, i) => <div className='wave' key={i}></div>)
+                                        }
+                                    </button>
+                                )
+                            }
+                            return undefined;
+                        })()}
+                    </section>
                 </section>
             </main>
         </Layout>

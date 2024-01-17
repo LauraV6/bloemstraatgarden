@@ -2,8 +2,10 @@
 
 .button {
     width: auto;
-    border-radius: 5px;
+    border-radius: 40px;
     background-color: transparent;
+    transition: all 0.3s ease;
+    text-align: center;
     padding: .5rem 1.5rem;
 
     @include breakpoint-up(lg) {
@@ -14,13 +16,121 @@
         border: 1px solid var(--color-cta);
         color: hsl(0, 0%, 0%);
 
-        &:hover, &:active {
+        &:hover, &:active, &:focus {
             background-color: var(--color-cta);
             color: hsl(0, 0%, 100%);
         }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 5px var(--color-transparent);
+        }
+
+        &:active {
+            background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+        }
     }
 
-    &:hover, &:active {
+    &:hover {
         cursor: pointer;
     }
+
+    &--water {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        width: fit-content;
+        height: 30px;
+        background-color: hsl(210, 54%, 64%);
+        overflow: hidden;
+        border: 1px solid hsl(210, 54%, 64%);
+
+        &:hover {
+            span {
+                color: hsl(0, 0%, 100%);
+            }
+
+            .wave {
+                top: -120px;
+              }
+        }
+
+        span {
+            position: relative;
+            color: hsl(0, 0%, 0%);
+            z-index: 1;
+          }
+      
+          .wave {
+            width: 12.5%;
+            height: 100%;
+            background: hsl(0, 0%, 100%);
+            position: absolute;
+            left: 0;
+            top: -7px;
+            transition: 0.4s;
+            animation: move-wave 3s linear infinite;
+
+            &:before, &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                border-radius: 100%;
+                width: 100%;
+                height: 50px;         
+            }
+      
+            &:before {             
+                background-color: hsl(210, 54%, 64%);
+                right: -23%;
+                top: 42px;
+              }
+              
+              &:after {
+                background-color: hsl(0, 0%, 100%);
+                left: -27%;
+                top: -2px;
+              }
+
+              &:nth-child(2) {
+                left: 0%;
+              }
+
+              &:nth-child(3) {
+                left: 12.5%;
+              }
+
+              &:nth-child(4) {
+                left: 25%;
+              }
+
+              &:nth-child(5) {
+                left: 37.5%;
+              }
+
+              &:nth-child(6) {
+                left: 50%;
+              }
+
+              &:nth-child(7) {
+                left: 62.5%;
+              }
+
+              &:nth-child(8) {
+                left: 75%;
+              }
+
+              &:nth-child(9) {
+                left: 87.5%;
+              }
+
+              &:nth-child(10) {
+                left: 100%;
+              }
+          }
+    }
 }
+
+@keyframes move-wave {
+    100% { transform: translateX(-100%) }
+  }

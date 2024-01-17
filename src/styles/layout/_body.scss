@@ -33,6 +33,7 @@ section:not(.hero) {
 
 :focus {
     outline: none;
+    box-shadow: 0 0 0 5px var(--color-transparent);
 }
 
 * {
@@ -55,4 +56,13 @@ section:not(.hero) {
     &-thumb:horizontal {
         border-radius: 50px;
     }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.p-0 {
+    padding: 0;
 }
