@@ -18,7 +18,7 @@ const PostCard = ({
                     <div className='post-item__content'>
                         <h2>{title}</h2>
                         <span>{publishedDate}</span>        
-                        <button className='button button--cta'>Lees meer</button>      
+                        <div className='button button--cta'>Lees meer</div>      
                     </div>                       
                 </Link>
     )
