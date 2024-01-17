@@ -6,6 +6,7 @@
     src: url('../fonts/Quicksand-Regular.ttf') format('truetype');
     font-weight: revert;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -14,6 +15,7 @@
     src: url('../fonts/PatrickHand-Regular.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
 :root {
