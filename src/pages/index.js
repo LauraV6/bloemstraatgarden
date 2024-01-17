@@ -50,10 +50,11 @@ const BlogPage = () => {
     const waveAmount = 9;
 
     const filteredBlogs = useMemo(() => {
-        if (searchTerm === "") {
-            return visibleData;
+        if (searchTerm !== "") {
+            return (allPosts.filter(edge => edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())));
         } else {
-            return (allPosts.filter(edge => edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())))};
+            return visibleData;
+        }
     });
     
     useEffect(() => {
@@ -77,8 +78,8 @@ const BlogPage = () => {
                     <div className='hero__container'>
                         <div className='hero__text'>
                             <div>
-                                <h1>Flowers don't tell, they show</h1>
-                                <p>If you tend to a flower, it will bloom</p>                  
+                                <h1>Bloemstraat Garden</h1>
+                                <p>Flowers don't tell, they show</p>                  
                             </div>
                         </div>
                         <div className='hero__images'>
