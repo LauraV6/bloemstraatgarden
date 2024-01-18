@@ -48,8 +48,6 @@ const BlogPage = () => {
     const [index , setIndex] = useState(0);
     const [visibleData , setVisibleData] = useState ([]);
 
-    const waveAmount = 9;
-
     const filteredBlogs = useMemo(() => {
         if (searchTerm !== "") {
             return (allPosts.filter(edge => edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())));
@@ -101,7 +99,7 @@ const BlogPage = () => {
                         <span>Blog Updates</span>
                     </h2>
                     {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> :
-                        (<div className='post-items'> {filteredBlogs.map((edge, key) => {
+                        (<div className='post-items'>{filteredBlogs.map((edge, key) => {
                             const post = edge.node;
                             return (
                                 <PostCard 
@@ -117,7 +115,8 @@ const BlogPage = () => {
                     }
                     <section className='center p-0'>
                         {(() => {
-                            if (index <= 1 && filteredBlogs.length === 0 && searchTerm === "") {
+                            if (index <= 1 && filteredBlogs.length !== 0 && searchTerm === "") {
+                                const waveAmount = 9;
                                 return (
                                     <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
                                         {
