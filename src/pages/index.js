@@ -100,7 +100,7 @@ const BlogPage = () => {
                     <h2 className='title-line'>
                         <span>Blog Updates</span>
                     </h2>
-                    {allPosts.lenght === 0 ? <Loader /> :
+                    {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> :
                         (<div className='post-items'> {filteredBlogs.map((edge, key) => {
                             const post = edge.node;
                             return (
@@ -117,7 +117,7 @@ const BlogPage = () => {
                     }
                     <section className='center p-0'>
                         {(() => {
-                            if (index <= 1 && searchTerm === '' && allPosts.lenght === 0) {
+                            if (index <= 1 && filteredBlogs.length === 0 && searchTerm === "") {
                                 return (
                                     <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
                                         {
