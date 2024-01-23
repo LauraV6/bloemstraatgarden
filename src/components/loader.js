@@ -6,9 +6,9 @@ const Loader = () => {
             <div>
                 <p>Blog aan het groeien...</p>
                 <div className='load-flower-container'>
-                    <span class="load-flower"></span>
-                    <span class="load-flower"></span>
-                    <span class="load-flower"></span>
+                    <span className="load-flower"></span>
+                    <span className="load-flower"></span>
+                    <span className="load-flower"></span>
                 </div>
             </div>
         </div>

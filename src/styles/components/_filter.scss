@@ -1,0 +1,38 @@
+@use '../abstracts' as *;
+
+.filter {
+    &-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin: 1rem 0 2rem 0;
+    }
+
+    &-item {
+        display: inherit;
+
+        input {
+            display: none;
+
+            &:checked {
+                + label {
+                    background-color: var(--color-footer);  
+                    color: hsl(0, 0%, 100%);
+                }
+            }
+        }
+
+        label {
+            background-color: hsl(0, 0%, 95%);
+            color: var(--color-cta);  
+            border-radius: 30px;
+            padding: 10px 18px;
+
+            &:hover {
+                background-color: var(--color-transparent);
+                color: var(--color-footer);  
+                cursor: pointer;
+            }
+        }
+    }
+}
