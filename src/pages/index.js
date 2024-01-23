@@ -21,6 +21,7 @@ const BlogPage = () => {
                     slug
                     title
                     contentfulinternal
+                    subject
                     id
                     publishedDate(formatString: "Do MMM, YYYY")
                     featuredimage {
@@ -44,20 +45,48 @@ const BlogPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const allPosts = data.allContentfulBlogPost.edges;
 
-    const PAGE_SIZE = 9;
+    const pageSize = 9;
     const [index , setIndex] = useState(0);
     const [visibleData , setVisibleData] = useState ([]);
 
+    const categories = [
+        'Moestuin',
+        'Bouw',
+        "Planten",
+    ];
+
+    let [categoryFilters, setcategoryFilters] = useState(new Set());
+
+    // Update category selection
+    function updateFilters(checked, categoryFilter) {
+    if (checked)
+        setcategoryFilters((prev) => new Set(prev).add(categoryFilter));
+    if (!checked)
+        setcategoryFilters((prev) => {
+        const next = new Set(prev);
+        next.delete(categoryFilter);
+        return next;
+        });
+    }
+
+    // Show results based of filter or no filter
     const filteredBlogs = useMemo(() => {
-        if (searchTerm !== "") {
-            return (allPosts.filter(edge => edge.node.title.toLowerCase().includes(searchTerm.toLowerCase())));
+        const array = new Set(Array.from(categoryFilters));
+        const searchFilter = allPosts.filter(edge => edge.node.title.toLowerCase().includes(searchTerm.toLowerCase()));
+        if (categoryFilters.size >= 1 && searchTerm !== "") {
+            return (searchFilter.filter(edge => array.has(edge.node.subject.toString())));
+        } else if (searchTerm !== "") {
+            return (searchFilter);
+        } else if (categoryFilters.size >= 1) {
+            return (allPosts.filter(edge => array.has(edge.node.subject.toString())));
         } else {
             return visibleData;
         }
     });
     
+    // Show only first X blog posts
     useEffect(() => {
-        const numberOfItems = PAGE_SIZE * ( index + 1 ); 
+        const numberOfItems = pageSize * ( index + 1 ); 
         const newArray = []; 
             
         for(let i= 0 ;i < allPosts.length ; i++ ){
@@ -94,10 +123,22 @@ const BlogPage = () => {
                     <input className='searchbar__input' type="text" placeholder="Zoeken..." onChange={event => {setSearchTerm(event.target.value)}}></input>
                     <FontAwesomeIcon icon={faSearch} className='searchbar__icon'/>
                 </div>  
-                <section className='blogs'>             
+                <section className='blogs'>
                     <h2 className='title-line'>
                         <span>Blog Updates</span>
                     </h2>
+                    <div className='blogs__filter'>
+                        <div class='filter-container'>
+                            {categories.map((catg, index) => {
+                                return (
+                                    <div className='filter-item' key={index}>
+                                        <input type="checkbox" id={catg} name="category" onChange={(e) => updateFilters(e.target.checked, catg)}/>
+                                        <label htmlFor={catg}>{catg}</label>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
                     {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> :
                         (<div className='post-items'>{filteredBlogs.map((edge, key) => {
                             const post = edge.node;
@@ -115,7 +156,7 @@ const BlogPage = () => {
                     }
                     <section className='center p-0'>
                         {(() => {
-                            if (index <= 1 && filteredBlogs.length !== 0 && searchTerm === "") {
+                            if (index <= 1 && searchTerm === "" && categoryFilters.size <= 0) {
                                 const waveAmount = 9;
                                 return (
                                     <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
