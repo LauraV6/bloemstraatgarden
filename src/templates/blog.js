@@ -17,6 +17,9 @@ export const query = graphql`
             slug
             contentful_id
             title
+            description {
+                description
+            }
             contentfulinternal
             publishedDate(formatString: "Do MMMM YYYY")
             featuredimage {
@@ -44,6 +47,9 @@ export const query = graphql`
                     slug
                     id
                     title
+                    description {
+                        description
+                    }
                     publishedDate(formatString: "Do MMM, YYYY")
                     featuredimage {
                         id
@@ -109,6 +115,8 @@ const Blog = (props) => {
                                             img={post.featuredimage.url} 
                                             alt={post.featuredimage.title} 
                                             title={post.title} 
+                                            description={post.description.description}
+                                            recommend={true}
                                             publishedDate={post.publishedDate}
                                         />;
                             })}

@@ -20,6 +20,9 @@ const BlogPage = () => {
                     id
                     slug
                     title
+                    description {
+                        description
+                    }
                     contentfulinternal
                     subject
                     id
@@ -30,7 +33,8 @@ const BlogPage = () => {
                       title
                     }
                     body {
-                        raw                         
+                        raw
+                                                 
                     }                   
                   }
                 }
@@ -149,6 +153,7 @@ const BlogPage = () => {
                                     img={post.featuredimage.url} 
                                     alt={post.featuredimage.title} 
                                     title={post.title} 
+                                    description={post.description.description} 
                                     publishedDate={post.publishedDate}
                                 />
                             )
@@ -156,7 +161,7 @@ const BlogPage = () => {
                     }
                     <section className='center p-0'>
                         {(() => {
-                            if (index <= 1 && searchTerm === "" && categoryFilters.size <= 0) {
+                            if (index <= 0 && searchTerm === "" && categoryFilters.size <= 0) {
                                 const waveAmount = 9;
                                 return (
                                     <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
