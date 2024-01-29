@@ -13,7 +13,7 @@ const PostCard = ({
     publishedDate
 }) => {
     return (
-        <Link className={`post-item${recommend == true ? ' recommend' : ''}`} to={`/${slug}`}>
+        <Link className={`post-item${recommend === true ? ' recommend' : ''}`} to={`/${slug}`}>
             <div className='post-item__img' style={{backgroundImage: `url(${lazyLoadPlaceholder})`}}>
                 <LazyLoadImage src={img} alt={alt} />
             </div>
