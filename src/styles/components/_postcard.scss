@@ -162,6 +162,12 @@
 .more-posts {
     margin-top: 1.5rem;
 
+    @include breakpoint-down(sm) {
+        background-color: var(--color-light);
+        padding: 2rem 1rem;
+        margin: 0 -1rem;
+    }
+
     @include breakpoint-up(md) {
         margin-top: 3rem;
     }
