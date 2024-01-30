@@ -49,7 +49,7 @@ const Footer = () => {
                 <img src={HeaderLeaveBig} className='footer__leave' alt='big-leave'></img>
             </div>
             <div className='footer__copyright'>
-                <label>Created by {author} © 2023</label>
+                <label>Created by {author} © 2024</label>
             </div>
         </footer>
     )

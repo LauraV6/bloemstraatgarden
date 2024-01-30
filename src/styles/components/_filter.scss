@@ -20,7 +20,7 @@
 
             &:checked {
                 + label {
-                    background-color: var(--color-footer);  
+                    background-color: var(--color-moss);  
                     color: hsl(0, 0%, 100%);
                 }
             }
@@ -34,7 +34,7 @@
 
             &:hover {
                 background-color: var(--color-transparent);
-                color: var(--color-footer);  
+                color: var(--color-moss);  
                 cursor: pointer;
             }
         }
