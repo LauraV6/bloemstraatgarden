@@ -1,3 +1,5 @@
+@use '../abstracts' as *;
+
 .content { 
     h2 {
         margin-top: 1rem;
@@ -7,17 +9,46 @@
         border-radius: 5px;
         margin: .5rem 0;
     }
+    p {
+        line-height: 1.4;
+    }
     blockquote {
-        margin: 1.5rem 0 .5rem 0;
+        margin: 2rem 0 .5rem 0;
 
         p {
-            color: var(--color-cta);
-            background-color: var(--color-light);
+            position: absolute;
+            background-color: var(--color-moss);
+            color: var(--color-light);
             border-radius: 5px;
             font-weight: bold;
             width: fit-content;
-            font-size: .9em;
-            padding: 10px 15px;
+            font-size: .8em;
+            padding: 6px 10px;
+            margin: -4px 0 0 10px;
+
+            @include breakpoint-up(md) {
+                font-size: .9em;
+                padding: 8px 15px;
+                margin: -8px 0 0 20px;
+            }
+        }
+    }
+    sup {
+        display: block;
+        background-color: var(--color-light);
+        border-radius: 5px;
+        padding: 3rem 1rem;
+        margin: 3rem 0;
+
+        code {
+            display: block;
+            text-align: center;
+            width: 70%;
+            color: var(--color-moss);
+            font-size: 1.3em;
+            line-height: 1.6;
+            font-weight: bold;
+            margin: 0 auto;
         }
     }
 }
