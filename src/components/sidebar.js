@@ -19,11 +19,11 @@ const Sidebar = () => {
                 <img src={profile} alt="profile"></img>
                 <div>
                     <div>
-                        <h3>Hallo, ik ben {data.site.siteMetadata.author}</h3>
+                        <h4>Hallo, ik ben {data.site.siteMetadata.author}</h4>
                         <p>{data.site.siteMetadata.description}</p>
                     </div>
                     <div>
-                        <h3>To do</h3>
+                        <h4>To do</h4>
                         <ul className='todo'>
                             <li>Nieuwe schuur bouwen</li>
                             <li>Veel planten</li>
