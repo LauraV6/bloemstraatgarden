@@ -1,3 +1,11 @@
 [[redirects]]
-    from = "bloemstraatgarden.netlify.app"
-    to = "bloemstraatgarden.nl"
+    from = "https://bloemstraatgarden.netlify.app/*"
+    to = "https://www.bloemstraatgarden.nl/:splat"
+    status = 301
+    force = true
+
+[[redirects]]
+    from = "https://bloemstraatgarden.netlify.app"
+    to = "https://www.bloemstraatgarden.nl"
+    status = 301
+    force = true
