@@ -7,7 +7,7 @@ module.exports = {
     title: 'Bloemstraat Garden',
     author: 'Laura Vlasma',
     description: 'Graag neem ik jullie mee in onze voortgang van de tuin. Dit zal voornamelijk om de moestuin gaan, maar ook de tuin renovatie.',
-    keywords: ['moestuin', 'bloemstraat', 'tuinrenovatie']
+    keywords: ['moestuin', 'bloemstraat', 'groentes', 'biodiversiteit']
   },
   plugins: [
     'gatsby-plugin-react-helmet',
