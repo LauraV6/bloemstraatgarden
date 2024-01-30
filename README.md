@@ -14,10 +14,12 @@
 Bloemstraat Garden is a blog about gardening.
 
 The content is set dynamically from <a href="https://app.contentful.com/">contentful.com</a><br/>
-To run the application you will need a space ID and access token.
-This information is classified.
+To run the application you will need a space ID and access token.<br />
+This information is classified.<br /><br />
+
+Vegetables, allotment, garden, plants, seeds, grow are important subjects for this website.
 
 **Start developing**
 
-npn install
+npn install<br/>
 npm run develop
