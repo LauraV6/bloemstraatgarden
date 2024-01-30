@@ -7,15 +7,17 @@
   Bloemstraat Garden
 </h1>
 
-## 🚀 Quick start
+<hr />
+
+<h2>🚀 Quick start</h2>
 
 Bloemstraat Garden is a blog about gardening.
 
-The content is set dynamically from <a href="https://app.contentful.com/">contentful.com</a>
+The content is set dynamically from <a href="https://app.contentful.com/">contentful.com</a><br/>
 To run the application you will need a space ID and access token.
 This information is classified.
 
-1.  **Start developing.**
+**Start developing**
 
 npn install
 npm run develop
