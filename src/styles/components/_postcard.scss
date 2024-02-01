@@ -51,9 +51,7 @@
             flex-shrink: 0;
             background-position: center;
             background-size: cover;
-            border: 1px solid hsl(231, 23%, 94%);
             background-color: hsl(0, 0%, 100%);
-            border-radius: 6px;
             height: 200px;
 
             @include breakpoint-up(lg) {

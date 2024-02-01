@@ -1,26 +1,17 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby'
+import { useSiteMetadata } from "../hooks/metadata"
 import profile from "../images/profile.jpg";
 
 const Sidebar = () => {  
-    const data = useStaticQuery(graphql`
-        query {
-            site {
-                siteMetadata {
-                    author
-                    description
-                }
-            }
-        }
-    `)
+    const { author, description } = useSiteMetadata()
     return (
         <aside className='aside'>
             <div className='aside__intro'>
                 <img src={profile} alt="profile"></img>
                 <div>
                     <div>
-                        <h4>Hallo, ik ben {data.site.siteMetadata.author}</h4>
-                        <p>{data.site.siteMetadata.description}</p>
+                        <h4>Hallo, ik ben {author}</h4>
+                        <p>{description}</p>
                     </div>
                     <div>
                         <h4>To do</h4>
