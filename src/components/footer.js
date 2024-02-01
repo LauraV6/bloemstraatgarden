@@ -1,22 +1,12 @@
 import React from 'react';
+import { useSiteMetadata } from "../hooks/metadata"
 import FooterStepOne from '../images/footerStepOne.png'
 import FooterStepTwo from '../images/footerStepTwo.png'
 import FooterStepThree from '../images/footerStepThree.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
-import { graphql, useStaticQuery } from 'gatsby'
 
 const Footer = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            site {
-                siteMetadata {
-                    author
-                }
-            }
-        }
-    `)   
-    const siteMeta = data.site.siteMetadata;
-    const author = siteMeta.author;
+    const { author } = useSiteMetadata()
     return (
         <footer className='footer'>
             <div className='footer__steps'>
