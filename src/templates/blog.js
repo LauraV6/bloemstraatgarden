@@ -11,56 +11,6 @@ import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Helmet } from 'react-helmet'
 import PostCard from "../components/postCard";
 
-export const query = graphql`
-    query($slug: String!) {
-        contentfulBlogPost(slug: {eq: $slug}) {
-            slug
-            contentful_id
-            title
-            description {
-                description
-            }
-            contentfulinternal
-            publishedDate(formatString: "Do MMMM YYYY")
-            featuredimage {
-                title
-                url
-            }
-            body {
-                raw 
-                references {
-                    ... on ContentfulAsset {
-                      __typename
-                      contentful_id
-                      title
-                      file {
-                        url
-                      }
-                    }
-                }
-            }
-        }
-
-        allContentfulBlogPost(sort: {contentful_id: ASC}) {
-            edges {
-                node {
-                    slug
-                    id
-                    title
-                    description {
-                        description
-                    }
-                    publishedDate(formatString: "Do MMM, YYYY")
-                    featuredimage {
-                        id
-                        url
-                    }
-                }
-            }
-        } 
-    }
-`
-
 const options = {
     renderNode: {
         [BLOCKS.EMBEDDED_ASSET]: node => {
@@ -129,5 +79,55 @@ const Blog = (props) => {
         </Layout>
     )
 }
+
+export const query = graphql`
+    query($slug: String!) {
+        contentfulBlogPost(slug: {eq: $slug}) {
+            slug
+            contentful_id
+            title
+            description {
+                description
+            }
+            contentfulinternal
+            publishedDate(formatString: "Do MMMM YYYY")
+            featuredimage {
+                title
+                url
+            }
+            body {
+                raw 
+                references {
+                    ... on ContentfulAsset {
+                      __typename
+                      contentful_id
+                      title
+                      file {
+                        url
+                      }
+                    }
+                }
+            }
+        }
+
+        allContentfulBlogPost(sort: {contentful_id: ASC}) {
+            edges {
+                node {
+                    slug
+                    id
+                    title
+                    description {
+                        description
+                    }
+                    publishedDate(formatString: "Do MMM, YYYY")
+                    featuredimage {
+                        id
+                        url
+                    }
+                }
+            }
+        } 
+    }
+`
 
 export default Blog
