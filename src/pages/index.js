@@ -12,6 +12,41 @@ import { Helmet } from 'react-helmet'
 import Loader from '../components/loader'
 
 const BlogPage = () => {
+    const data = useStaticQuery(graphql`
+        query {
+            allContentfulBlogPost(sort: {publishedDate: DESC}) {
+                edges {
+                  node {
+                    id
+                    slug
+                    title
+                    description {
+                        description
+                    }
+                    contentfulinternal
+                    subject
+                    id
+                    publishedDate(formatString: "Do MMM, YYYY")
+                    featuredimage {
+                      id
+                      url
+                      title
+                    }
+                    body {
+                        raw
+                                                 
+                    }                   
+                  }
+                }
+            }
+            site {
+                siteMetadata {
+                    title
+                }
+            }
+        }
+    `);
+
     const [searchTerm, setSearchTerm] = useState('');
     const allPosts = data.allContentfulBlogPost.edges;
 
@@ -145,40 +180,5 @@ const BlogPage = () => {
         </Layout>
     )
 }
-
-export const data = graphql`
-    query {
-        allContentfulBlogPost(sort: {publishedDate: DESC}) {
-            edges {
-            node {
-                id
-                slug
-                title
-                description {
-                    description
-                }
-                contentfulinternal
-                subject
-                id
-                publishedDate(formatString: "Do MMM, YYYY")
-                featuredimage {
-                id
-                url
-                title
-                }
-                body {
-                    raw
-                                            
-                }                   
-            }
-            }
-        }
-        site {
-            siteMetadata {
-                title
-            }
-        }
-    }
-`
 
 export default BlogPage
