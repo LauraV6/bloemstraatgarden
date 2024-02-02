@@ -10,13 +10,13 @@
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    padding-top: 37px;
-    margin-top: 80px;
+    padding-top: 83px;
+    margin-top: 33px;
 
     @include breakpoint-up(md) {
         height: 400px;
         max-height: 400px;
-        padding-top: 73px;
+        padding-top: 120px;
     }
 
     &__container {
