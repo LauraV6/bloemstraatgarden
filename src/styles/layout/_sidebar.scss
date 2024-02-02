@@ -1,7 +1,7 @@
 .aside {
     &__intro {
         position: sticky;
-        top: 2rem;
+        top: calc(82px + 2rem);
         border: 1px solid lightgray;
         border-radius: 5px;
 
