@@ -13,7 +13,7 @@
     0% { 
         opacity: 0;
         transform: rotate(40deg); 
-        top: -50%;
+        top: -30%;
     } 
 
     50% {
@@ -22,7 +22,7 @@
 
     100% { 
         opacity: 1;
-        top: -30%;
+        top: -20%;
         transform: rotate(45deg); 
     } 
 }
@@ -31,7 +31,7 @@
     0% { 
         opacity: 0;
         transform: rotate(0deg); 
-        top: -50%;
+        top: -30%;
     } 
 
     50% {
@@ -40,7 +40,7 @@
 
     100% { 
         opacity: 1;
-        top: -20%;
+        top: -17%;
         transform: rotate(5deg); 
     } 
 }
@@ -49,7 +49,7 @@
     0% { 
         opacity: 0;
         transform: rotate(0deg); 
-        bottom: -50%;
+        bottom: -60%;
     } 
 
     50% {
@@ -58,7 +58,7 @@
 
     100% { 
         opacity: 1;
-        bottom: -30%;
+        bottom: -22%;
         transform: rotate(5deg); 
     } 
 }
@@ -76,7 +76,7 @@
 
     100% { 
         opacity: 1;
-        bottom: -30%;
+        bottom: -20%;
         transform: rotate(5deg); 
     } 
 }
