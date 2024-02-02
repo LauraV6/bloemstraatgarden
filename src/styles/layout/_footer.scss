@@ -2,7 +2,6 @@
 
 .footer {
     overflow-x: clip;
-    color: hsl(0, 0%, 100%);
     margin-top: auto;
 
     &__steps {
@@ -67,7 +66,6 @@
             &__text {
                 display: flex;
                 align-items: center;
-                color: hsl(0, 0%, 0%);
                 padding: 0 1.5rem 0 1rem;
 
                 p {
@@ -106,6 +104,10 @@
         font-size: .9em;
         background-color: var(--color-moss);
         padding: 1rem;
+
+        label {
+            color: hsl(0, 0%, 100%);
+        }
 
         @include breakpoint-up(md) {
             padding: 1.5rem 2rem;

@@ -1,8 +1,32 @@
 @use '../abstracts' as *;
 
 header {
-    background-color: var(--color-menu);
-    border-bottom: 1px solid hsl(232.62deg 18.24% 83.63%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(15px);
+    background-color: hsl(0, 0%, 100%);
+    border-bottom: 1px solid hsl(232, 18%, 93%);
+    z-index: 100;
+
+    &.small {
+        background-color: var(--color-menu);
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+
+            .header-socials {
+                .share-icon {
+                    position: relative;
+                    right: 0;
+                    top: 0;
+                }
+            }
+        }
+    }
 
     nav {
         position: relative;
@@ -23,11 +47,12 @@ header {
 
         .logo {
             position: relative;
-            display: inline-block;
+            display: contents;
             width: 100%;
             order: 0;
 
             @include breakpoint-down(sm) {
+                display: inline-block;
                 order: -1;
 
                 &::before {
@@ -46,7 +71,26 @@ header {
             }
 
             img {
-                max-height: 120px;
+                max-height: 80px;
+                transition: .5s;
+
+                @include breakpoint-up(md) {
+                    max-height: 120px;
+                }
+            }
+
+            &--small {
+                img {
+                    max-height: 40px;
+    
+                    @include breakpoint-up(md) {
+                        max-height: 50px;
+                    }
+                } 
+
+                &::before, &::after {
+                    content: unset;
+                }
             }
         }
 
@@ -94,6 +138,10 @@ header {
 
                     svg {
                         transition: all  .1s ease-in-out; 
+
+                        path {
+                            color: var(--color-cta);
+                        }
                     }
                 }    
             }
@@ -117,6 +165,10 @@ header {
                 svg {
                     color: var(--color-cta);
                     width: 15px;
+
+                    path {
+                        color: var(--color-cta);
+                    }
                 }
     
                 &.share {

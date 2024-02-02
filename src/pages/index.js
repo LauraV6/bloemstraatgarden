@@ -107,7 +107,7 @@ const BlogPage = () => {
                 <title>{data.site.siteMetadata.title}</title>
             </Helmet>
             <main>
-                <section className='hero'>
+                <section className='hero' style={{ backgroundImage: `url(${HeaderImg})` }}>
                     <div className='hero__container'>
                         <div className='hero__text'>
                             <div>
@@ -120,7 +120,6 @@ const BlogPage = () => {
                             <img src={HeaderLeaveSmall} className='leave leave--two' alt="leaves"></img>
                             <img src={HeaderLeaveBig} className='leave leave--three' alt="leaves"></img>
                             <img src={HeaderLeaveSmall} className='leave leave--four' alt="leaves"></img>
-                            <img src={HeaderImg} className='bg-leaves' alt="header-img"></img>
                         </div>
                     </div>
                 </section>

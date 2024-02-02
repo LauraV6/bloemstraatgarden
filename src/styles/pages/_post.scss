@@ -5,8 +5,8 @@
         position: relative;
         display: grid;
         width: 100%;
-        height: 350px;
-        max-height: 350px;
+        height: 280px;
+        max-height: 280px;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -34,7 +34,6 @@
             max-width: 1200px;
             bottom: 0;
             left: 0;
-            color: hsl(0, 0%, 100%);
             padding: 1rem;
             z-index: 1;
 
@@ -55,10 +54,14 @@
             > div {
                 margin-top: auto;
 
+                h1, label, path, span {
+                    color: hsl(0, 0%, 100%);
+                }
+
                 h1 {
                     max-width: 850px;
                     margin-bottom: .5rem;
-                    animation: load_in 1s forwards;
+                    animation: load_in 1s forwards
                 }
             }
         }
