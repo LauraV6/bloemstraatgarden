@@ -1,16 +1,7 @@
 @use '../abstracts' as *;
 
 @font-face {
-    font-family: 'regular';
-    src: url('../fonts/Quicksand-Regular.woff') format('woff');
-    src: url('../fonts/Quicksand-Regular.ttf') format('truetype');
-    font-weight: revert;
-    font-style: normal;
-    font-display: block;
-}
-
-@font-face {
-    font-family: 'bold';
+    font-family: 'title';
     src: url('../fonts/PatrickHand-Regular.woff') format('woff');
     src: url('../fonts/PatrickHand-Regular.ttf') format('truetype');
     font-weight: 600;
@@ -19,8 +10,7 @@
 }
 
 :root {
-    --font-regular: 'regular';
-    --font-bold: 'bold';
+    --font-title: 'title';
 }
 
 h1 {
@@ -47,7 +37,12 @@ h4 {
     font-size: 1.3em;
 }
 
-h1, h2, h3, h4 {
-    font-family: var(--font-bold) !important;
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-title) !important;
+    color: var(--color-heading);
     margin: 0;
+}
+
+b {
+    font-weight: 500;
 }

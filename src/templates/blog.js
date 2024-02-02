@@ -37,45 +37,47 @@ const Blog = (props) => {
         <Layout>
              <Helmet>
                 <title>Bloemstraat Garden - {title}</title>
-            </Helmet>           
-            <section className="hero post-hero" style={{ backgroundImage: `url(${headerImg})` }}>
-                <div className="post-hero__content">
+            </Helmet>    
+            <main>     
+                <section className="hero post-hero" style={{ backgroundImage: `url(${headerImg})` }}>
+                    <div className="post-hero__content">
+                        <div>
+                            <h1>{title}</h1>
+                            <label>{publishedDate}</label>
+                        </div>
+                        <Weather weatherType={weatherType} />
+                    </div>
+                </section>
+                <section className="post-content">
                     <div>
-                        <h1>{title}</h1>
-                        <label>{publishedDate}</label>
-                    </div>
-                    <Weather weatherType={weatherType} />
-                </div>
-            </section>
-            <section className="post-content">
-                <div>
-                    <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{title}</span></div>
-                    <div className="content">
-                        {renderRichText (content, options)}
-                    </div>
-                    <div className='more-posts'>
-                        <h3>Bekijk meer posts over onze tuin</h3>
-                        <div className='more-posts__container'>
-                            <div className='post-items'>
-                            {shuffledPosts.map((edge, key) => {
-                                const post = edge.node;
-                                return <PostCard 
-                                            key={key}
-                                            slug={post.slug}
-                                            img={post.featuredimage.url} 
-                                            alt={post.featuredimage.title} 
-                                            title={post.title} 
-                                            description={post.description.description}
-                                            recommend={true}
-                                            publishedDate={post.publishedDate}
-                                        />;
-                            })}
+                        <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{title}</span></div>
+                        <div className="content">
+                            {renderRichText (content, options)}
+                        </div>
+                        <div className='more-posts'>
+                            <h3>Bekijk meer posts over onze tuin</h3>
+                            <div className='more-posts__container'>
+                                <div className='post-items'>
+                                {shuffledPosts.map((edge, key) => {
+                                    const post = edge.node;
+                                    return <PostCard 
+                                                key={key}
+                                                slug={post.slug}
+                                                img={post.featuredimage.url} 
+                                                alt={post.featuredimage.title} 
+                                                title={post.title} 
+                                                description={post.description.description}
+                                                recommend={true}
+                                                publishedDate={post.publishedDate}
+                                            />;
+                                })}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <Sidebar />
-            </section>
+                    <Sidebar />
+                </section>
+            </main>  
         </Layout>
     )
 }
