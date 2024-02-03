@@ -1,19 +1,19 @@
 import React from "react";
-import Layout from '../components/Layout'
-import Sidebar from '../components/Sidebar'
-import Weather from '../components/Weather'
+import Layout from '../components/layout'
+import Sidebar from '../components/sidebar'
+import Weather from '../components/weather'
 import { BLOCKS } from '@contentful/rich-text-types';
-import { shuffle } from '../utils/Helpers';
+import { shuffle } from '../utils/helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { graphql, Link } from 'gatsby'
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Helmet } from 'react-helmet'
-import PostCard from "../components/PostCard";
+import PostCard from "../components/postCard";
 
 export const query = graphql`
-    query($slug: String!) {
-        contentfulBlogPost(slug: {eq: $slug}) {
+    query {
+        contentfulBlogPost {
             slug
             contentful_id
             title
