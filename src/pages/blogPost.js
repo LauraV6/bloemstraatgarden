@@ -12,8 +12,8 @@ import { Helmet } from 'react-helmet'
 import PostCard from "../components/postCard";
 
 export const query = graphql`
-    query($slug: String!) {
-        contentfulBlogPost(slug: {eq: $slug}) {
+    query {
+        contentfulBlogPost {
             slug
             contentful_id
             title
