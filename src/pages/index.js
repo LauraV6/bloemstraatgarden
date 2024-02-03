@@ -132,7 +132,7 @@ const BlogPage = () => {
                         <span>Blog Updates</span>
                     </h2>
                     <div className='blogs__filter'>
-                        <div class='filter-container'>
+                        <div className='filter-container'>
                             {categories.map((catg, index) => {
                                 return (
                                     <div className='filter-item' key={index}>
