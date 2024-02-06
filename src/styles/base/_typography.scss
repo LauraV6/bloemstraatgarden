@@ -2,8 +2,9 @@
 
 @font-face {
     font-family: 'title';
-    src: url('../fonts/PatrickHand-Regular.woff') format('woff');
-    src: url('../fonts/PatrickHand-Regular.ttf') format('truetype');
+    src: url('../fonts/MonaSans-Medium.woff2') format('woff');
+    src: url('../fonts/MonaSans-Medium.ttf') format('truetype');
+    src: url('../fonts/MonaSans-Medium.otf') format('opentype');
     font-weight: 600;
     font-style: normal;
     font-display: block;
@@ -19,27 +20,22 @@ h1 {
     @include breakpoint-up(md) {
         font-size: 3em;
     }
-
-    @include breakpoint-up(lg) {
-        font-size: 4em;
-    }
 }
 
 h2 {
-    font-size: 1.7em;
-}
-
-h3 {
     font-size: 1.5em;
 }
 
-h4 {
+h3 {
     font-size: 1.3em;
 }
 
+h4 {
+    font-size: 1.2em;
+}
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-title) !important;
-    color: var(--color-heading);
+    font-family: var(--font-title);
     margin: 0;
 }
 
