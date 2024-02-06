@@ -112,7 +112,7 @@ const BlogPage = () => {
                         <div className='hero__text'>
                             <div>
                                 <h1>Bloemstraat Garden</h1>
-                                <p>Flowers don't tell, they show</p>                  
+                                <p>Ook zelf een moestuin beginnen? Lees in dit blog over onze ervaring, tips and tricks.</p>                  
                             </div>
                         </div>
                         <div className='hero__images'>
@@ -135,10 +135,10 @@ const BlogPage = () => {
                         <div className='filter-container'>
                             {categories.map((catg, index) => {
                                 return (
-                                    <div className='filter-item' key={index}>
+                                    <button className='filter-item' key={index}>
                                         <input type="checkbox" id={catg} name="category" onChange={(e) => updateFilters(e.target.checked, catg)}/>
                                         <label htmlFor={catg}>{catg}</label>
-                                    </div>
+                                    </button>
                                 );
                             })}
                         </div>
