@@ -17,6 +17,7 @@ header {
             align-items: center;
             gap: 10px;
             text-align: left;
+            padding: 1rem;
 
             .header-socials {
                 .share-icon {
@@ -42,7 +43,7 @@ header {
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
         }
 
         .logo {
@@ -75,7 +76,7 @@ header {
                 transition: .5s;
 
                 @include breakpoint-up(md) {
-                    max-height: 120px;
+                    max-height: 110px;
                 }
             }
 
