@@ -76,7 +76,7 @@ header {
                 transition: .5s;
 
                 @include breakpoint-up(md) {
-                    max-height: 110px;
+                    max-height: 105px;
                 }
             }
 
