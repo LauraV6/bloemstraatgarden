@@ -32,8 +32,9 @@ section:not(.hero) {
 }
 
 :focus {
-    outline: none;
-    box-shadow: 0 0 0 5px var(--color-transparent);
+    outline: 3px solid var(--color-transparent);
+    outline-offset: 2px;
+
 }
 
 * {
