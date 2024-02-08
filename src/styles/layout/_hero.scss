@@ -38,6 +38,25 @@
         text-align: center;
         padding: 1rem;
         z-index: 10;
+
+        h1 {
+            --bg-size: 400%;
+            background: linear-gradient(
+                          90deg,
+                          var(--color-cta),
+                          var(--color-moss),
+                          var(--color-cta)
+                        ) 0 0 / var(--bg-size) 100%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: textShine 8s linear infinite;
+        }
+
+        p {
+            font-family: var(--font-medium);
+            color: var(--color-font-light);
+        }
     }
 
     &__images {

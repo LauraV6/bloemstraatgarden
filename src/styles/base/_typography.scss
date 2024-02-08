@@ -1,7 +1,17 @@
 @use '../abstracts' as *;
 
 @font-face {
-    font-family: 'title';
+    font-family: 'bold';
+    src: url('../fonts/MonaSans-Bold.woff2') format('woff');
+    src: url('../fonts/MonaSans-Bold.ttf') format('truetype');
+    src: url('../fonts/MonaSans-Bold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'medium';
     src: url('../fonts/MonaSans-Medium.woff2') format('woff');
     src: url('../fonts/MonaSans-Medium.ttf') format('truetype');
     src: url('../fonts/MonaSans-Medium.otf') format('opentype');
@@ -11,11 +21,14 @@
 }
 
 :root {
-    --font-title: 'title';
+    --font-bold: 'bold';
+    --font-medium: 'medium';
 }
 
 h1 {
+    font-family: var(--font-bold);
     font-size: 1.6em;
+    margin: 0 0 2rem 0;
 
     @include breakpoint-up(md) {
         font-size: 3em;
@@ -34,8 +47,8 @@ h4 {
     font-size: 1.2em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-title);
+h2, h3, h4, h5, h6 {
+    font-family: var(--font-medium);
     margin: 0;
 }
 
