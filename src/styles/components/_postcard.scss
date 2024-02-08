@@ -78,7 +78,6 @@
             padding: 1.2rem;
 
             @include breakpoint-up(lg) {
-                gap: 22px;
                 padding: 1.7rem 1.5rem;
             }
 
@@ -88,7 +87,7 @@
 
             h2 {
                 color: var(--color-cta);
-                line-height: 1;
+                line-height: 1.5;
 
                 @include breakpoint-down(sm) {
                     font-size: 1.2em;
