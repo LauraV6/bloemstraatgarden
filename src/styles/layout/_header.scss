@@ -82,10 +82,10 @@ header {
 
             &--small {
                 img {
-                    max-height: 40px;
+                    max-height: 30px;
     
                     @include breakpoint-up(md) {
-                        max-height: 50px;
+                        max-height: 40px;
                     }
                 } 
 
@@ -159,6 +159,7 @@ header {
                 text-decoration: none;
                 width: max-content;
                 color: hsl(0, 0%, 0%);
+                transition-duration: .15s;
                 font-size: .9em;
                 padding: .3rem .5rem;   
                 z-index: 2;

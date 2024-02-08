@@ -9,6 +9,12 @@
     }  
 }
 
+@keyframes textShine {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+
 @keyframes leave-one { 
     0% { 
         opacity: 0;

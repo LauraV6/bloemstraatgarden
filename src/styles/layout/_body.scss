@@ -31,7 +31,7 @@ section:not(.hero) {
     flex-direction: column;
 }
 
-:focus {
+:focus, button:focus-within {
     outline: 3px solid var(--color-transparent);
     outline-offset: 2px;
 
