@@ -1,39 +1,18 @@
 import React from 'react';
+import { Link } from 'gatsby'
 import { useSiteMetadata } from "../hooks/metadata"
-import FooterStepOne from '../images/footerStepOne.png'
-import FooterStepTwo from '../images/footerStepTwo.png'
-import FooterStepThree from '../images/footerStepThree.png'
+import logoSmall from "../images/logoSmall.png";
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
 
 const Footer = () => {
     const { author } = useSiteMetadata()
     return (
         <footer className='footer'>
-            <div className='footer__steps'>
+            <div className='footer__adding'>
                 <div className='container'>
-                    <div className='step'>
-                        <div className='step__icon'>
-                            <img src={FooterStepOne} alt='step-one'></img>
-                        </div>
-                        <div className='step__text'>
-                            <p>Zaden selectie maken</p>
-                        </div>
-                    </div>
-                    <div className='step'>
-                        <div className='step__icon'>
-                            <img src={FooterStepTwo} alt='step-two'></img>
-                        </div>
-                        <div className='step__text'>
-                            <p>Beste manier van planten</p>
-                        </div>
-                    </div>
-                    <div className='step'>
-                        <div className='step__icon'>
-                            <img src={FooterStepThree} alt='step-three'></img>
-                        </div>
-                        <div className='step__text'>
-                            <p>Groeien en onderhouden</p>
-                        </div>
+                    <Link to='/'><img src={logoSmall} alt="logo"></img></Link>
+                    <div className='intro'>
+                        <p>Bloemstraat Garden is gelegen in Steenwijkerland en richt zich op het leren door te zien, ervaren en kennis te delen van moestuinieren.</p>
                     </div>
                 </div>
                 <img src={HeaderLeaveBig} className='footer__leave' alt='big-leave'></img>

@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: 'Bloemstraat Garden',
     author: 'Laura Vlasma',
-    description: 'Ook zelf een moestuin beginnen? We nemen je in dit blog mee in de voortgang van onze tuin. Lees over onze ervaring, tips and tricks. ',
+    description: 'Ook zelf een moestuin beginnen? We nemen je in dit blog mee in de voortgang van onze tuin. Lees over onze ervaring, tips and tricks.',
     keywords: ['moestuin', 'bloemstraat', 'groentes', 'biodiversiteit']
   },
   plugins: [
