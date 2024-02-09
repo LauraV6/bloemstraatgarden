@@ -2,7 +2,7 @@
 
 .states {
     @include breakpoint-down(sm) {
-        margin-bottom: 0!important;
+        display: none;
     }
 
     &-container {
