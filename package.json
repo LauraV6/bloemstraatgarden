@@ -1,8 +1,8 @@
 {
   "homepage": "https://LauraV6.github.io/bloemstraatgarden",
-  "name": "gatsby-starter-hello-world",
+  "name": "bloemstraat-garden",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Ook zelf een moestuin beginnen? We nemen je in dit blog mee in de voortgang van onze tuin. Lees over onze ervaring, tips and tricks.",
   "version": "0.1.0",
   "license": "0BSD",
   "engines": {

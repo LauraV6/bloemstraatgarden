@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Layout from '../components/layout'
 import PostCard from '../components/postCard'
+import States from '../components/states'
 import HeaderImg from '../images/headerBg.png'
 import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
@@ -159,22 +160,23 @@ const BlogPage = () => {
                             )
                         })}</div>)
                     }
-                    <section className='center p-0'>
-                        {(() => {
-                            if (index <= 0 && searchTerm === "" && categoryFilters.size <= 0) {
-                                const waveAmount = 9;
-                                return (
+                    {(() => {
+                        if (index <= 0 && searchTerm === "" && categoryFilters.size <= 0) {
+                            const waveAmount = 9;
+                            return (
+                                <section className='center p-0'>
                                     <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
                                         {
                                             [...Array(waveAmount)].map((e, i) => <div className='wave' key={i}></div>)
                                         }
                                     </button>
-                                )
-                            }
-                            return undefined;
-                        })()}
-                    </section>
+                                </section>
+                            )
+                        }
+                        return undefined;
+                    })()}
                 </section>
+                <States />
             </main>
         </Layout>
     )
