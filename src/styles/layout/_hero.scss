@@ -13,14 +13,9 @@
     padding-top: 117px;
 
     @include breakpoint-up(md) {
-        padding-top: 153px;
+        padding-top: 154px;
         height: 400px;
         max-height: 400px;
-    }
-
-    @include breakpoint-up(lg) {
-        padding-top: 75px;
-        margin-top: 78px;
     }
 
     &__container {

@@ -1,5 +1,9 @@
 @use '../abstracts' as *;
 
+button {
+  cursor: pointer;
+}
+
 .button {
     width: auto;
     border-radius: 40px;
@@ -22,18 +26,9 @@
             color: hsl(0, 0%, 100%);
         }
 
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 5px var(--color-transparent);
-        }
-
         &:active {
             background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
         }
-    }
-
-    &:hover {
-        cursor: pointer;
     }
 
     &--water {
