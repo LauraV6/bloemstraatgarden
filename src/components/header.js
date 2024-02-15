@@ -28,12 +28,12 @@ const Header = () => {
         <header className={small ? "small" : undefined}>
             <nav>
                 <div className='header-socials'>
-                    <button className='header-link share-icon whapp' href="https://api.whatsapp.com/send?text=https://bloemstraatgarden.netlify.app/" data-action="share/whatsapp/share" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span></button>
-                    <button className='header-link share-icon linkedin' href="https://www.linkedin.com/in/laura-vlasma-0692b0159/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faLinkedinIn}/><span>Delen</span></button>
-                    <button className='header-link share-icon insta' href="https://www.instagram.com/lauravlasma/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram}/><span>Delen</span></button>
+                    <a className='header-link share-icon whapp' href="https://api.whatsapp.com/send?text=https://bloemstraatgarden.netlify.app/" data-action="share/whatsapp/share" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span></a>
+                    <a className='header-link share-icon linkedin' href="https://www.linkedin.com/in/laura-vlasma-0692b0159/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faLinkedinIn}/><span>Delen</span></a>
+                    <a className='header-link share-icon insta' href="https://www.instagram.com/lauravlasma/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram}/><span>Delen</span></a>
                 </div>
                 <Link to='/' id='logo' className={`logo ${small ? "logo--small" : ""}`}><img src={small ? logoSmall : logo} alt="logo"></img></Link>
-                <button className='header-link share-contact' href='https://lauravlasma-portfolio.netlify.app/' target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faFolderOpen}/>Toon portfolio</button>
+                <a className='header-link share-contact' href='https://lauravlasma-portfolio.netlify.app/' target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faFolderOpen}/>Toon portfolio</a>
             </nav>
         </header>
         </>
