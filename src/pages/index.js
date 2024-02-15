@@ -65,14 +65,15 @@ const BlogPage = () => {
 
     // Update category selection
     function updateFilters(checked, categoryFilter) {
-    if (checked)
-        setcategoryFilters((prev) => new Set(prev).add(categoryFilter));
-    if (!checked)
-        setcategoryFilters((prev) => {
-        const next = new Set(prev);
-        next.delete(categoryFilter);
-        return next;
-        });
+        if (checked) {
+            setcategoryFilters((prev) => new Set(prev).add(categoryFilter));
+        } else {
+            setcategoryFilters((prev) => {
+                const next = new Set(prev);
+                next.delete(categoryFilter);
+                return next;
+            }); 
+        }
     }
 
     // Show results based of filter or no filter
@@ -88,19 +89,19 @@ const BlogPage = () => {
         } else {
             return visibleData;
         }
-    });
+    }, [allPosts, categoryFilters, searchTerm, visibleData]);
     
     // Show only first X blog posts
     useEffect(() => {
         const numberOfItems = pageSize * ( index + 1 ); 
         const newArray = []; 
             
-        for(let i= 0 ;i < allPosts.length ; i++ ){
+        for(let i= 0 ;i < allPosts.length ; i++){
             if(i < numberOfItems) 
                 newArray.push(allPosts[i])
         }
         setVisibleData(newArray);    
-    } , [index, allPosts])
+    }, [index, allPosts]);
 
     return (
         <Layout>
