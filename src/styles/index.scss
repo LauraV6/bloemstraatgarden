@@ -1,3 +1,4 @@
+@use 'components/_boxing';
 @use 'components/_breadcrumbs';
 @use 'components/_button';
 @use 'components/_content';
@@ -15,4 +16,5 @@
 @use 'layout/_footer';
 @use 'layout/_header';
 @use 'layout/_sidebar';
+@use 'layout/_story';
 @use 'pages/_post';

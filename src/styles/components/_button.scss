@@ -8,8 +8,10 @@ button {
     width: auto;
     border-radius: 40px;
     background-color: transparent;
+    font-family: var(--font-medium);
     font-size: .9rem;
     transition-duration: .15s;
+    text-decoration: none;
     text-align: center;
     padding: .5rem 1.5rem;
 
@@ -18,17 +20,39 @@ button {
     }
 
     &--cta {
-        border: 1px solid var(--color-cta);
-        color: hsl(0, 0%, 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-shrink: 0;
+      border: 1px solid var(--color-cta);
+      color: rgb(0, 0, 0);
+      z-index: 2;
 
-        &:hover, &:active, &:focus {
-            background-color: var(--color-cta);
+      svg {
+        color: var(--color-cta);
+        width: 15px;
+
+        path {
+            color: var(--color-cta);
+        }
+    }
+
+      &:hover, &:active, &:focus {
+
+        svg {
+          path {
             color: hsl(0, 0%, 100%);
+          }
         }
 
-        &:active {
-            background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
-        }
+        background-color: var(--color-cta);
+        color: hsl(0, 0%, 100%);
+      }
+
+      &:active {
+          background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+      }
     }
 
     &--water {
