@@ -100,95 +100,49 @@ header {
             &-socials {
                 display: flex;
                 gap: 10px;
+                flex-shrink: 0;
 
-                .share-icon {
-                    position: absolute;
-
-                    &:hover, &:active {
-                        svg {
-                            transform: scale(1.1);
-                            color: hsl(0, 0%, 0%);
-                        }
-                    }
-        
-                    @include breakpoint-up(md) {
-                        position: relative;
-                        height: 35px;
-                        width: 35px;
-                        border-radius: 50%;
-                        font-size: 1.1em;
-                        padding: 0;
-                    }
-                    
-                    @include breakpoint-down(sm) {
-                        right: 1rem;
-                        top: 1rem;
-        
-                        &.insta, &.linkedin {
-                            display: none;
-                        }
-                    }
-        
-                    span {
-                        font-size: .8em;
-        
+                .share {
+                    &-icon {
+                        position: absolute;
+                        padding: .2rem .5rem;
+            
                         @include breakpoint-up(md) {
-                            display: none;
+                            position: relative;
+                            height: 35px;
+                            width: 35px;
+                            border-radius: 50%;
+                            font-size: 1.1em;
+                            padding: 0;
                         }
-                    }
-
-                    svg {
-                        transition: all  .1s ease-in-out; 
-
-                        path {
-                            color: var(--color-cta);
-                        }
-                    }
-                }    
-            }
-
-            &-link {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                flex-shrink: 0;           
-                border: 1px solid var(--color-cta);
-                background-color: transparent;
-                border-radius: 30px;
-                text-decoration: none;
-                width: max-content;
-                color: hsl(0, 0%, 0%);
-                transition-duration: .15s;
-                font-size: .9em;
-                padding: .3rem .5rem;   
-                z-index: 2;
-                
-                svg {
-                    color: var(--color-cta);
-                    width: 15px;
-
-                    path {
-                        color: var(--color-cta);
-                    }
-                }
-    
-                &.share {
-                    &-contact {
-                        &:hover, &:active {
-                            svg {
-                                transform: scale(1.1);
-                                color: hsl(0, 0%, 0%);
+                        
+                        @include breakpoint-down(sm) {
+                            right: 1rem;
+                            top: 1rem;
+            
+                            &.insta, &.linkedin {
+                                display: none;
                             }
                         }
-                        svg {
-                            transition: all  .1s ease-in-out; 
-                        }                       
-                        @include breakpoint-down(sm) {
-                            display: none;
+            
+                        span {
+                            font-size: .8em;
+            
+                            @include breakpoint-up(md) {
+                                display: none;
+                            }
                         }
-                    }
-                }
+                    } 
+                } 
+            }
+        } 
+        
+        .share-contact {
+            font-size: .9em;
+            padding: .4rem .7rem;
+
+            @include breakpoint-down(sm) {
+                display: none;
             }
         }  
     }
