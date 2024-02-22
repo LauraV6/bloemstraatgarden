@@ -148,10 +148,33 @@
 
             @include breakpoint-up(md) {
                 transform: scale(1.05);
-            }    
+            }
             
             h2 {
                 color: var(--color-blue);
+            }
+        }
+
+        &--static {
+            box-shadow: none;
+
+            .post-item__content {
+                h2 {
+                    color: hsl(0, 0%, 0%);
+                }
+            }
+
+            &:hover, &:active {
+
+                .post-item__content {
+                    h2 {
+                        color: hsl(0, 0%, 0%);
+                    }
+                }
+
+                @include breakpoint-up(md) {
+                    transform: scale(1);
+                }    
             }
         }
     }
@@ -189,6 +212,13 @@
                     grid-template-columns: 1fr 1fr;
                 }
             }
+        }
+    }
+
+    &--bottom {
+        @include breakpoint-down(sm) {
+            margin-bottom: -2rem;
+            border-bottom: 1px solid var(--color-transparent);
         }
     }
 }

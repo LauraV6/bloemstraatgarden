@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 import Layout from '../components/layout'
 import PostCard from '../components/postCard'
 import States from '../components/states'
@@ -8,7 +8,7 @@ import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import { useState, useEffect, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from 'react-helmet'
 import Loader from '../components/loader'
 
@@ -176,6 +176,21 @@ const BlogPage = () => {
                         }
                         return undefined;
                     })()}
+                </section>
+                <section>
+                    <div className='boxing'>
+                        <div className='story'>
+                            <div className='story__text'>
+                                <h3>Gratis voorraad</h3>
+                                <p>Het kan voor komen dat er meer gezaaid wordt dan dat er plek voor is. Deze planten komen op de voorraad lijst te staan.
+                                    Meld je aan voor een plant uit de voorraad lijst door mij een bericht te sturen.
+                                </p>
+                            </div>
+                            <div className='story__img'>
+                                <Link className='button button--cta' to='/available'>Bekijk onze voorraad <FontAwesomeIcon icon={faArrowRight}/></Link>
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 <States />
             </main>
