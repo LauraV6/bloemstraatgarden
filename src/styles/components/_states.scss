@@ -33,6 +33,7 @@
         img {
             height: 24px;
             filter: invert(100%) sepia(55%) saturate(3000%) hue-rotate(95deg) brightness(105%) contrast(80%);
+            user-select: none;
 
             @include breakpoint-up(md) {
                 height: 28px;

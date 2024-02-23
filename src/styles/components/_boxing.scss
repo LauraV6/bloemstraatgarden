@@ -20,11 +20,17 @@
         max-width: 600px;
 
         .top-image {
-            max-height: 100px;
-            margin-bottom: 1rem;
+            max-height: 80px;
+            margin-bottom: .5rem;
+
+            @include breakpoint-up(md) {
+                max-height: 100px;
+                margin-bottom: 1rem;
+            }
         }
 
         p {
+            line-height: 1.5;
             margin: 0;
         }
     }

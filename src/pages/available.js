@@ -93,7 +93,7 @@ const Verkrijgbaar = () => {
                                 <img className="top-image" src={notAvailable} alt='niet-beschikbaar'/>
                                 <h3>Geen planten beschikbaar</h3>
                                 <p>Momenteel zijn er geen planten op voorraad. Kom op een later moment terug om te kijken of er weer planten beschikbaar zijn.
-                                    Wil je weten wanneer je de meeste kans maakt? Bekijk dan het <Link to='/moestuin-schema/'>zaaischema</Link>.
+                                    Wil je weten wanneer je de meeste kans maakt? Bekijk dan het <Link className="hyperlink" to='/moestuin-schema/'>zaaischema</Link>.
                                 </p>
                             </div>
                         </div>
