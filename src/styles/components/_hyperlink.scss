@@ -1,0 +1,29 @@
+@use '../abstracts' as *;
+
+.hyperlink {
+    position: relative;
+    color: var(--color-moss);
+    text-decoration: none;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--color-cta);
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    &:hover, &:active {
+        color: var(--color-cta);
+
+        &::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    }
+}
