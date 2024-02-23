@@ -31,7 +31,7 @@ section:not(.hero) {
     flex-direction: column;
 }
 
-:focus, button:focus-within, button:focus-visible, button:hover, button:focus {               
+:focus, button:focus-within, button:focus-visible, button:focus {               
     outline: 2px solid var(--color-transparent);
     outline-offset: 2px;
 }

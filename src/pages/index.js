@@ -182,7 +182,7 @@ const BlogPage = () => {
                         <div className='story'>
                             <div className='story__text'>
                                 <h3>Gratis voorraad</h3>
-                                <p>Het kan voor komen dat er meer gezaaid wordt dan dat er plek voor is. Deze planten komen op de voorraad lijst te staan.
+                                <p>Het kan voorkomen dat er meer gezaaid wordt dan dat er plek voor is. Deze planten komen op de voorraad lijst te staan.
                                     Meld je aan voor een plant uit de voorraad lijst door mij een bericht te sturen.
                                 </p>
                             </div>
