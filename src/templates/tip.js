@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
-import Weather from '../components/weather'
 import { BLOCKS } from '@contentful/rich-text-types';
 import { shuffle } from '../utils/helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,56 +9,6 @@ import { graphql, Link } from 'gatsby'
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Helmet } from 'react-helmet'
 import PostCard from "../components/postCard";
-
-export const query = graphql`
-    query {
-        contentfulBlogPost {
-            slug
-            contentful_id
-            title
-            description {
-                description
-            }
-            contentfulinternal
-            publishedDate(formatString: "Do MMMM YYYY")
-            featuredimage {
-                title
-                url
-            }
-            body {
-                raw 
-                references {
-                    ... on ContentfulAsset {
-                      __typename
-                      contentful_id
-                      title
-                      file {
-                        url
-                      }
-                    }
-                }
-            }
-        }
-
-        allContentfulBlogPost(sort: {contentful_id: ASC}) {
-            edges {
-                node {
-                    slug
-                    id
-                    title
-                    description {
-                        description
-                    }
-                    publishedDate(formatString: "Do MMM, YYYY")
-                    featuredimage {
-                        id
-                        url
-                    }
-                }
-            }
-        } 
-    }
-`
 
 const options = {
     renderNode: {
@@ -71,18 +20,17 @@ const options = {
     }
 }
 
-const Blog = (props) => {   
+const Tips = (props) => {   
     const allPosts = props.data.allContentfulBlogPost.edges;
-    const post = props.data.contentfulBlogPost;
+    const post = props.data.contentfulTips;
 
     const title = post.title;
     const headerImg = post.featuredimage.url;
-    const publishedDate = post.publishedDate;
-    const weatherType = post.contentfulinternal;
     const content = post.body;
 
     const filteredPosts = allPosts.filter(post => post.node.title !== title);
     const shuffledPosts = shuffle(filteredPosts).slice(0, 3);
+
     return (
         <Layout>
              <Helmet>
@@ -92,9 +40,7 @@ const Blog = (props) => {
                 <div className="post-hero__content">
                     <div>
                         <h1>{title}</h1>
-                        <label>{publishedDate}</label>
                     </div>
-                    <Weather weatherType={weatherType} />
                 </div>
             </section>
             <section className="post-content">
@@ -104,7 +50,7 @@ const Blog = (props) => {
                         {renderRichText (content, options)}
                     </div>
                     <div className='more-posts'>
-                        <h3>Bekijk meer posts over onze tuin</h3>
+                        <h3>Bekijk posts over onze tuin</h3>
                         <div className='more-posts__container'>
                             <div className='post-items'>
                             {shuffledPosts.map((edge, key) => {
@@ -130,4 +76,38 @@ const Blog = (props) => {
     )
 }
 
-export default Blog
+export const query = graphql`
+    query($slug: String!) {
+        contentfulTips(slug: {eq: $slug}) {
+            slug
+            featuredimage {
+              url
+              title
+            }
+            title
+            body {
+                raw 
+            }
+        }
+
+        allContentfulBlogPost(sort: {contentful_id: ASC}) {
+            edges {
+                node {
+                    slug
+                    id
+                    title
+                    description {
+                        description
+                    }
+                    publishedDate(formatString: "Do MMM, YYYY")
+                    featuredimage {
+                        id
+                        url
+                    }
+                }
+            }
+        } 
+    }
+`
+
+export default Tips
