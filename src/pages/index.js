@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 import Layout from '../components/layout'
 import PostCard from '../components/postCard'
+import TipCard from '../components/tipCard'
 import States from '../components/states'
 import HeaderImg from '../images/headerBg.png'
 import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
@@ -40,6 +41,21 @@ const BlogPage = () => {
                   }
                 }
             }
+            allContentfulTips {
+                edges {
+                  node {
+                    title
+                    slug
+                    body {
+                      raw
+                    }
+                    featuredimage {
+                      url
+                      title
+                    }
+                  }
+                }
+            }
             site {
                 siteMetadata {
                     title
@@ -50,10 +66,12 @@ const BlogPage = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const allPosts = data.allContentfulBlogPost.edges;
+    const allTips = data.allContentfulTips.edges;
 
     const pageSize = 9;
     const [index , setIndex] = useState(0);
     const [visibleData , setVisibleData] = useState ([]);
+    const [numberOfPosts , setNumberOfPosts] = useState ([]);
 
     const categories = [
         'Moestuin',
@@ -100,7 +118,8 @@ const BlogPage = () => {
             if(i < numberOfItems) 
                 newArray.push(allPosts[i])
         }
-        setVisibleData(newArray);    
+        setVisibleData(newArray);
+        setNumberOfPosts(numberOfItems);
     }, [index, allPosts]);
 
     return (
@@ -146,23 +165,25 @@ const BlogPage = () => {
                         </div>
                     </div>
                     {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> :
-                        (<div className='post-items'>{filteredBlogs.map((edge, key) => {
-                            const post = edge.node;
-                            return (
-                                <PostCard 
-                                    key={key}
-                                    slug={post.slug}
-                                    img={post.featuredimage.url} 
-                                    alt={post.featuredimage.title} 
-                                    title={post.title} 
-                                    description={post.description.description} 
-                                    publishedDate={post.publishedDate}
-                                />
-                            )
-                        })}</div>)
+                        (<div className='post-items'>
+                            {filteredBlogs.map((edge, key) => {
+                                const post = edge.node;
+                                return (
+                                    <PostCard 
+                                        key={key}
+                                        slug={post.slug}
+                                        img={post.featuredimage.url} 
+                                        alt={post.featuredimage.title} 
+                                        title={post.title} 
+                                        description={post.description.description} 
+                                        publishedDate={post.publishedDate}
+                                    />
+                                )
+                            })}
+                        </div>)
                     }
                     {(() => {
-                        if (index <= 0 && searchTerm === "" && categoryFilters.size <= 0) {
+                        if (numberOfPosts < allPosts.length && searchTerm === "" && categoryFilters.size <= 0) {
                             const waveAmount = 9;
                             return (
                                 <section className='center p-0'>
@@ -190,6 +211,25 @@ const BlogPage = () => {
                                 <Link className='button button--cta' to='/available'>Bekijk onze voorraad <FontAwesomeIcon icon={faArrowRight}/></Link>
                             </div>
                         </div>
+                    </div>
+                </section>                
+                <section>
+                    <h2 className='title-line' style={{display: "block"}}>
+                        <span>Moestuin tips</span>
+                    </h2>
+                    <div className='tip-items'>
+                        {allTips.map((edge, key) => {
+                            const tip = edge.node;
+                            return (
+                                <TipCard 
+                                    key={key}
+                                    slug={tip.slug}
+                                    img={tip.featuredimage.url} 
+                                    alt={tip.featuredimage.title} 
+                                    title={tip.title}
+                                />
+                            )
+                        })}
                     </div>
                 </section>
                 <States />
