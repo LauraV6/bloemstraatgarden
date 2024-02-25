@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-.hyperlink {
+.hyperlink, .content a {
     position: relative;
     color: var(--color-moss);
     text-decoration: none;
