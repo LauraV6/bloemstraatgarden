@@ -3,6 +3,12 @@
 .content { 
     margin-bottom: 2rem;
 
+    &.schema {
+        img {
+            height: auto;
+        }
+    }
+
     h2 {
         margin: 1rem 0;
 
