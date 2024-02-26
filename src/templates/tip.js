@@ -86,7 +86,17 @@ export const query = graphql`
             }
             title
             body {
-                raw 
+                raw
+                references {
+                    ... on ContentfulAsset {
+                      __typename
+                      contentful_id
+                      title
+                      file {
+                        url
+                      }
+                    }
+                }
             }
         }
 
