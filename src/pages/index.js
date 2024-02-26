@@ -41,11 +41,12 @@ const BlogPage = () => {
                   }
                 }
             }
-            allContentfulTips {
+            allContentfulTips(sort: {publishdate: DESC}) {
                 edges {
                   node {
-                    title
                     slug
+                    title
+                    publishdate(formatString: "Do MMM, YYYY")
                     body {
                       raw
                     }
