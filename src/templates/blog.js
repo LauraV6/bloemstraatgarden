@@ -33,6 +33,7 @@ const Blog = (props) => {
 
     const filteredPosts = allPosts.filter(post => post.node.title !== title);
     const shuffledPosts = shuffle(filteredPosts).slice(0, 3);
+
     return (
         <Layout>
              <Helmet>
@@ -51,7 +52,7 @@ const Blog = (props) => {
                 <section className="post-content">
                     <div>
                         <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{title}</span></div>
-                        <div className="content">
+                        <div className={title === 'Moestuin schema' ? 'content schema' : 'content'}>
                             {renderRichText (content, options)}
                         </div>
                         <div className='more-posts'>
