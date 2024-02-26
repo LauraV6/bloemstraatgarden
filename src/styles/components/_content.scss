@@ -47,7 +47,17 @@
     img {
         width: 100%;
         border-radius: 5px;
+        height: 260px;
+        object-fit: cover;
         margin: .5rem 0;
+
+        @include breakpoint-up(md) {
+            height: 300px;
+        }
+
+        @include breakpoint-up(lg) {
+            height: 500px;
+        }
     }
 
     p {
@@ -102,7 +112,12 @@
         margin: 2rem 0;
 
         @include breakpoint-up(md) {
-            font-size: 1.2em;
+            padding: 2rem 2rem;
+            margin: 2rem 0;
+        }
+
+        @include breakpoint-up(lg) {
+            font-size: 1.2em;          
             padding: 3rem 7rem;
             margin: 3rem 0;
         }
