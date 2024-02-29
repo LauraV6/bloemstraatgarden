@@ -157,8 +157,18 @@
 
         &--static {
             box-shadow: none;
+            overflow: unset;
 
             .post-item__content {
+
+                span {
+                    background-color: var(--color-transparent);
+                    font-size: .8em;
+                    font-weight: 500;
+                    color: var(--color-cta);
+                    padding: 4px 7px;
+                }
+
                 h2 {
                     color: hsl(0, 0%, 0%);
                 }
