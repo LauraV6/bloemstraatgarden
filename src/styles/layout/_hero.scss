@@ -21,9 +21,19 @@
     &--dark {
         background-color: var(--color-cta);
 
-        .hero__text {
-            h1, p {
-                color: hsl(0, 0%, 100%);
+        .hero {
+            &__text {
+                h1, p {
+                    color: hsl(0, 0%, 100%);
+                }
+            }
+
+            &__images {
+                opacity: .5;
+
+                .leave {
+                    filter: invert(51%) sepia(24%) saturate(1122%) hue-rotate(79deg) brightness(96%) contrast(88%);
+                }
             }
         }
     }
@@ -61,6 +71,11 @@
         p {
             font-family: var(--font-medium);
             color: var(--color-font-light);
+
+            @include breakpoint-up(md) {
+                max-width: 650px;
+                line-height: 1.4;
+            }
         }
     }
 

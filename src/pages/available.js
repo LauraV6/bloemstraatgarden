@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { shuffle } from '../utils/helpers';
+import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
+import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import zaaiTrays from '../images/zaaitrays.jpg';
 import notAvailable from '../images/notAvailable.png';
 import PostCard from "../components/postCard";
@@ -64,8 +66,14 @@ const Verkrijgbaar = () => {
                         <div className='hero__text'>
                             <div>
                                 <h1>Verkrijgbare planten</h1>
-                                <p>Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen.</p>                  
+                                <p>Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp.</p>                  
                             </div>
+                        </div>
+                        <div className='hero__images'>
+                            <img src={HeaderLeaveBig} className='leave leave--one' alt="leaves"></img>
+                            <img src={HeaderLeaveSmall} className='leave leave--two' alt="leaves"></img>
+                            <img src={HeaderLeaveBig} className='leave leave--three' alt="leaves"></img>
+                            <img src={HeaderLeaveSmall} className='leave leave--four' alt="leaves"></img>
                         </div>
                     </div>
                 </section>
