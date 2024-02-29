@@ -23,8 +23,10 @@ const Verkrijgbaar = () => {
                             title
                         }
                         date
+                        amount
                     }
                 }
+                totalCount
             }
             allContentfulBlogPost(sort: {contentful_id: ASC}) {
                 edges {
@@ -74,8 +76,7 @@ const Verkrijgbaar = () => {
                             <h2>Overschot</h2>
                             <p>Bij het voorzaaien worden er meerdere zaaitrays in gebruik genomen. Het komt voor dat er een overschot komt van bepaalde planten. 
                             Deze planten worden hier gratis aangeboden om van groter nut te kunnen zijn bij iemand anders.
-                            De planten worden in doosjes meegeven en de potjes zullen hergebruikt worden voor het volgende zaai item.
-                            </p>
+                            De planten worden in doosjes meegeven en de potjes zullen hergebruikt worden voor het volgende zaai item.</p>
                             <p>Ben je op de hoogte van het zaaischema en zie je er een plant tussen staan die je heel graag wilt hebben? Stuur dan een persoonlijk bericht.</p>
                         </div>
                         <div className="story__img">
@@ -85,7 +86,7 @@ const Verkrijgbaar = () => {
                 </section>
                 <section>     
                     <h2 className='title-line' style={{display: "block"}}>
-                        <span>Beschikbare planten</span>
+                        <span>{allAvailable.totalCount <= 1 ? 'Beschikbare planten' : `${allAvailable.totalCount} beschikbare planten`}</span>
                     </h2>                
                     {allAvailable.totalCount === 1 ? (
                         <div className="boxing">
@@ -107,6 +108,7 @@ const Verkrijgbaar = () => {
                                             <img src={post.availableimage.url} alt={post.availableimage.title}/>
                                         </div>
                                         <div className="post-item__content">
+                                            <span>{post.amount}</span>
                                             <h2>{post.title}</h2>
                                             <p>{post.date}</p>
                                         </div>                      
