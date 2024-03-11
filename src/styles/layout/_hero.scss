@@ -1,5 +1,22 @@
 @use '../abstracts' as *;
 
+.dark {
+    .hero {
+        &--dark {
+            background-color: var(--color-green-1);
+    
+            .hero { 
+                &__images {
+    
+                    .leave {
+                        filter: invert(51%) sepia(24%) saturate(1122%) hue-rotate(79deg) brightness(40%) contrast(88%);
+                    }
+                }
+            }
+        }
+    }
+}
+
 .hero {
     position: relative;
     height: 330px;
@@ -9,6 +26,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-color: var(--color-menu);
     overflow: hidden;
     padding-top: 117px;
 
@@ -19,7 +37,7 @@
     }
 
     &--dark {
-        background-color: var(--color-cta);
+        background-color: var(--color-green-1);
 
         .hero {
             &__text {
@@ -29,7 +47,6 @@
             }
 
             &__images {
-                opacity: .5;
 
                 .leave {
                     filter: invert(51%) sepia(24%) saturate(1122%) hue-rotate(79deg) brightness(96%) contrast(88%);
@@ -58,9 +75,9 @@
             --bg-size: 400%;
             background: linear-gradient(
                           90deg,
-                          var(--color-cta),
-                          var(--color-moss),
-                          var(--color-cta)
+                          var(--color-green-1),
+                          var(--color-green-2),
+                          var(--color-green-1)
                         ) 0 0 / var(--bg-size) 100%;
             color: transparent;
             background-clip: text;
