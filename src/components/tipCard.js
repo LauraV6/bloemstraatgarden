@@ -15,7 +15,7 @@ const TipCard = ({
                 <LazyLoadImage src={img} alt={alt} />
             </div>
             <div className='tip-item__content'>
-                <h2>{title}</h2>
+                <h3>{title}</h3>
                 <button className='button button--cta'>Lees meer</button>
             </div>                       
         </Link>

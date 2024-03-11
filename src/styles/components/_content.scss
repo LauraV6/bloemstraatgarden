@@ -37,7 +37,7 @@
         width: 30px;
         height: 30px;
         font-size: 1em;
-        color: var(--color-moss);
+        color: var(--color-green-2);
         background-color: var(--color-transparent);
         border-radius: 50%;
         margin: -50px 0 0 10px;
@@ -75,8 +75,8 @@
 
         p {
             position: absolute;
-            background-color: var(--color-moss);
-            color: var(--color-light);
+            background-color: var(--color-green-2);
+            color: var(--color-green-5);
             border-radius: 5px;
             font-weight: bold;
             width: fit-content;
@@ -100,15 +100,16 @@
 
             &::marker {
                 content: '➜';
-                color: var(--color-cta);
+                color: var(--color-green-1);
             }
         }
     }
 
     sup {
         display: block;
-        color: var(--color-cta);
-        background-color: var(--color-light);
+        color: var(--color-green-3);
+        font-family: var(--font-normal);
+        background-color: var(--color-green-5);
         border-radius: 5px;
         font-size: 1.1em;
         line-height: 1.6;

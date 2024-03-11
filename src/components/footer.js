@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import { useSiteMetadata } from "../hooks/metadata"
-import logoSmall from "../images/logoSmall.png";
+import LogoSmall from "./logoSmall";
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
 
 const Footer = () => {
@@ -10,7 +10,7 @@ const Footer = () => {
         <footer className='footer'>
             <div className='footer__adding'>
                 <div className='container'>
-                    <Link to='/'><img src={logoSmall} alt="logo"></img></Link>
+                    <Link to='/'><LogoSmall /></Link>
                     <div className='intro'>
                         <p>Bloemstraat Garden is gelegen in Steenwijkerland en richt zich op het leren door te zien, ervaren en kennis te delen van moestuinieren.</p>
                     </div>

@@ -3,9 +3,14 @@
 
 body {
     word-break: break-word;
+    background-color: var(--color-2);
     font-size: 15px;
     padding: 0;
     margin: 0;
+}
+
+main {
+    transition: .3s;
 }
 
 section:not(.hero) {
@@ -51,7 +56,7 @@ section:not(.hero) {
     background: hsl(225, 15%, 95%);
 
     &-thumb, &-thumb:horizontal {
-        background-color: var(--color-cta);
+        background-color: var(--color-green-1);
     }
 
     &-thumb:horizontal {
