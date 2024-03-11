@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { shuffle } from '../utils/helpers';
+import HeaderImg from '../images/headerBgTransparent.png'
 import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import zaaiTrays from '../images/zaaitrays.jpg';
@@ -61,7 +62,7 @@ const Verkrijgbaar = () => {
                 <title>Bloemstraat Garden - Planten verkrijgbaar</title>
             </Helmet>
             <main>
-                <section className='hero hero--dark'>
+                <section className='hero hero--dark' style={{ backgroundImage: `url(${HeaderImg})` }}>
                     <div className='hero__container'>
                         <div className='hero__text'>
                             <div>

@@ -16,6 +16,7 @@
         display: inherit;
         border: none;
         border-radius: 30px;
+        background: transparent;
         transition-duration: .15s;
         padding: 0;
 
@@ -24,23 +25,27 @@
 
             &:checked {
                 + label {
-                    background-color: var(--color-moss);  
+                    background-color: var(--color-green-2);  
                     color: hsl(0, 0%, 100%);
                 }
             }
         }
 
         label {
-            background-color: var(--color-light);
+            background-color: var(--color-green-5);
             font-size: 1.1em;
             border-radius: 30px;
             transition: background-color .2s;
             cursor: pointer;
             padding: 10px 18px;
 
+            &:hover {
+                background-image: linear-gradient(rgb(0 0 0 / 10%) 0 0);
+            }
+
             &:active {
                 color: hsl(0, 0%, 100%);
-                background-color: var(--color-moss);  
+                background-color: var(--color-green-2);  
             }
         }
     }

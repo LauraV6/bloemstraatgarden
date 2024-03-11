@@ -2,7 +2,7 @@
     &-container {
         display: flex;
         justify-content: center;
-        background-color: var(--color-light);
+        background-color: var(--color-green-5);
         border-radius: 10px;
         padding: 1rem;
     }
@@ -28,7 +28,7 @@
             width: 40px;
             height: 13px;
             background: var(--color-transparent);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--box-shadow);
         }
 
         &::after {
@@ -42,7 +42,7 @@
             top: 50%;
             background: hsl(49, 100%, 74%);
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--box-shadow);
         }
 
         &-container {

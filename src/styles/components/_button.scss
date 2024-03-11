@@ -25,16 +25,16 @@ button {
       justify-content: center;
       gap: 10px;
       flex-shrink: 0;
-      border: 1px solid var(--color-cta);
-      color: rgb(0, 0, 0);
+      border: 1px solid var(--color-green-1);
+      color: var(--color-font);
       z-index: 2;
 
       svg {
-        color: var(--color-cta);
+        color: var(--color-green-1);
         width: 15px;
 
         path {
-            color: var(--color-cta);
+            color: var(--color-green-1);
         }
     }
 
@@ -46,12 +46,12 @@ button {
           }
         }
 
-        background-color: var(--color-cta);
+        background-color: var(--color-green-1);
         color: hsl(0, 0%, 100%);
       }
 
       &:active {
-          background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+          background-image: linear-gradient(rgb(0 0 0 / 40%) 0 0);
       }
     }
 
@@ -67,7 +67,7 @@ button {
 
         &:hover {
             span {
-                color: hsl(0, 0%, 100%);
+                color: var(--color-2);
             }
 
             .wave {
@@ -84,11 +84,11 @@ button {
           .wave {
             width: 12.5%;
             height: 100%;
-            background: hsl(0, 0%, 100%);
+            background: var(--color-2);
             position: absolute;
             left: 0;
             top: -7px;
-            transition: 0.4s;
+            transition: .4s;
             animation: move-wave 3s linear infinite;
 
             &:before, &:after {
@@ -107,7 +107,7 @@ button {
               }
               
               &:after {
-                background-color: hsl(0, 0%, 100%);
+                background-color: var(--color-2);
                 left: -26%;
                 top: -1.4px;
               }

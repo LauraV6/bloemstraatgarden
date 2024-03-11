@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import PostCard from '../components/postCard'
 import TipCard from '../components/tipCard'
 import States from '../components/states'
-import HeaderImg from '../images/headerBg.png'
+import HeaderImg from '../images/headerBgTransparent.png'
 import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
 import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import { useState, useEffect, useMemo } from 'react'
@@ -150,9 +150,9 @@ const BlogPage = () => {
                     <FontAwesomeIcon icon={faSearch} className='searchbar__icon'/>
                 </div>  
                 <section className='blogs'>
-                    <h2 className='title-line'>
+                    <h4 className='title-line'>
                         <span>Blog Updates</span>
-                    </h2>
+                    </h4>
                     <div className='blogs__filter'>
                         <div className='filter-container'>
                             {categories.map((catg, index) => {
