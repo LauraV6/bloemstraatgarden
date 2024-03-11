@@ -1,5 +1,17 @@
 @use '../abstracts' as *;
 
+.dark {
+    .footer {
+        .container {
+            svg {
+                .st3 {
+                    fill: #fff;
+                }
+            }
+        }
+    }
+}
+
 .footer {
     overflow-x: clip;
     margin-top: auto;
@@ -8,7 +20,7 @@
         position: relative;
         display: flex;
         gap: 25px;
-        background-color: var(--color-light);
+        background-color: var(--color-green-5);
 
         .container {
             display: grid;
@@ -36,7 +48,7 @@
             a {
                 display: contents;
 
-                img {
+                svg {
                     max-height: 40px;
     
                     @include breakpoint-up(md) {
@@ -79,7 +91,7 @@
         display: flex;
         justify-content: center;
         font-size: .9em;
-        background-color: var(--color-cta);
+        background-color: var(--color-green-1);
         padding: 1rem;
 
         label {

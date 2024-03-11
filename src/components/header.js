@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'gatsby'
 import { useSiteMetadata } from "../hooks/metadata"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSeedling } from '@fortawesome/free-solid-svg-icons'
 import { faWhatsapp, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
-import logo from "../images/logo.png";
-import logoSmall from "../images/logoSmall.png";
+import Logo from "./logo";
+import LogoSmall from "./logoSmall";
 import { Helmet } from 'react-helmet';
+import ThemeColor from "./themeColor";
 
 const Header = () => {    
     const { author, description } = useSiteMetadata()
@@ -32,8 +32,8 @@ const Header = () => {
                     <a className='button button--cta share-icon linkedin' href="https://www.linkedin.com/in/laura-vlasma-0692b0159/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faLinkedinIn}/><span>Delen</span></a>
                     <a className='button button--cta share-icon insta' href="https://www.instagram.com/lauravlasma/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram}/><span>Delen</span></a>
                 </div>
-                <Link to='/' id='logo' className={`logo ${small ? "logo--small" : ""}`}><img src={small ? logoSmall : logo} alt="logo"></img></Link>
-                <Link className='button button--cta share-contact' to='/available/'><FontAwesomeIcon icon={faSeedling}/> Plant voorraad</Link>
+                <Link to='/' id='logo' className={`logo ${small ? "logo--small" : ""}`}>{small ? <LogoSmall /> : <Logo />}</Link>
+                <ThemeColor />
             </nav>
         </header>
         </>
