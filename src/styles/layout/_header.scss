@@ -96,10 +96,11 @@ header {
 
             &--small {
                 svg {
-                    max-height: 30px;
+                    height: 30px;
                     width: 100px;
     
                     @include breakpoint-up(md) {
+                        height: auto;
                         max-height: 40px;
                         width: 100%;
                     }
