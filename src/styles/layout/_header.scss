@@ -101,6 +101,7 @@ header {
     
                     @include breakpoint-up(md) {
                         max-height: 40px;
+                        width: 100%;
                     }
                 } 
 
