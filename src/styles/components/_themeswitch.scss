@@ -39,8 +39,8 @@
 
     @include breakpoint-down(sm) {
         position: absolute;
-        top: .7rem;
-        right: .7rem;
+        top: 1rem;
+        right: 1rem;
     }
 
     label {
@@ -80,13 +80,15 @@
         svg {
             position: absolute;
             width: 32px;
-            top: 7px;
+            top: 8px;
+            height: 14px;
             z-index: 100;
             transition: .3s;
 
             @include breakpoint-up(md) {
                 width: 32px;
                 top: 11px;
+                height: 15px;
             }
 
             &.sun {
