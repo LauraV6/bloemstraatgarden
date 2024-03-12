@@ -175,13 +175,6 @@
             }
 
             &:hover, &:active {
-
-                .post-item__content {
-                    h2 {
-                        color: hsl(0, 0%, 0%);
-                    }
-                }
-
                 @include breakpoint-up(md) {
                     transform: scale(1);
                 }    
