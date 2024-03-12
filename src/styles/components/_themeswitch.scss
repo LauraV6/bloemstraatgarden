@@ -1,5 +1,38 @@
 @use '../abstracts' as *;
 
+[data-theme="dark"] {
+    input {
+        + label {
+            background: hsl(0, 0%, 14%);
+            border: 1px solid hsl(0, 0%, 20%);
+
+            &:after {
+                left: 67px;
+                transform: translateX(-100%);
+                background: linear-gradient(180deg, var(--color-green-5), var(--color-green-5));
+
+                @include breakpoint-up(md) {
+                    left: 87px;
+                }
+            }
+
+            svg {
+                &.sun {
+                    path {
+                        fill:hsl(0, 0%, 54%);
+                    }
+                }
+
+                &.moon {
+                    path {
+                        fill:hsl(0, 0%, 100%);
+                    }
+                }
+            }
+        }
+    }
+}
+
 .themeswitch {
     display: flex;
     justify-content: flex-end;
@@ -87,36 +120,5 @@
         width: 0;
         height: 0;
         visibility: hidden;
-
-        &.clicked {
-            + label {
-                background: hsl(0, 0%, 14%);
-                border: 1px solid hsl(0, 0%, 20%);
-
-                &:after {
-                    left: 67px;
-                    transform: translateX(-100%);
-                    background: linear-gradient(180deg,var(--color-green-5), var(--color-green-5));
-
-                    @include breakpoint-up(md) {
-                        left: 87px;
-                    }
-                }
-
-                svg {
-                    &.sun {
-                        path {
-                            fill:hsl(0, 0%, 54%);
-                        }
-                    }
-
-                    &.moon {
-                        path {
-                            fill:hsl(0, 0%, 100%);
-                        }
-                    }
-                }
-            }
-        }
     }
 }

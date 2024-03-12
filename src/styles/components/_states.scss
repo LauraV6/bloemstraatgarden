@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-.dark {
+[data-theme="dark"] {
     .states {
         &__item {
             img {
