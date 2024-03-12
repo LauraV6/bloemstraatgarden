@@ -3,40 +3,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun } from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 
-const ThemeColor = () => {
-  let clickedClass = "clicked";
-  const body = document.body;
-  const lightTheme = "light";
-  const darkTheme = "dark";
-  let theme;
+const setDark = () => {
+  localStorage.setItem("theme", "dark");
+  document.documentElement.setAttribute("data-theme", "dark");
+};
 
-  if (localStorage) {
-    theme = localStorage.getItem("theme");
-  }
+const setLight = () => {
+  localStorage.setItem("theme", "light");
+  document.documentElement.setAttribute("data-theme", "light");
+};
 
-  if (theme === lightTheme || theme === darkTheme) {
-    body.classList.add(theme);
+const storedTheme = localStorage.getItem("theme");
+
+const prefersDark =
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+const defaultDark =
+  storedTheme === "dark" || (storedTheme === null && prefersDark);
+
+if (defaultDark) {
+  setDark();
+}
+
+const toggleTheme = (e) => {
+  if (e.target.checked) {
+    setDark();
   } else {
-    body.classList.add(lightTheme);
+    setLight();
   }
+};
 
-  const switchTheme = (e) => {
-    if (theme === darkTheme) {
-      body.classList.replace(darkTheme, lightTheme);
-      e.target.classList.remove(clickedClass);
-      localStorage.setItem("theme", "light");
-      theme = lightTheme;
-    } else {
-      body.classList.replace(lightTheme, darkTheme);
-      e.target.classList.add(clickedClass);
-      localStorage.setItem("theme", "dark");
-      theme = darkTheme;
-    }
-  };
-
+const ThemeColor = () => {
   return (
     <div className="themeswitch">
-        <input type="checkbox" id="themeColor" className={theme === "dark" ? clickedClass : undefined} onClick={(e) => switchTheme(e)} />
+        <input type="checkbox" id="themeColor" onChange={toggleTheme} defaultChecked={defaultDark}/>
         <label for="themeColor">
             <FontAwesomeIcon icon={faSun} className="sun"/>
             <FontAwesomeIcon icon={faMoon} className="moon"/>

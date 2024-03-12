@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-.dark {
+[data-theme="dark"] {
     nav {
         .logo {
             svg {
