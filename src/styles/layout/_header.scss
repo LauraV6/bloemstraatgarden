@@ -66,7 +66,7 @@ header {
             order: 0;
 
             @include breakpoint-down(sm) {
-                display: flex;
+                display: inline-block;
                 order: -1;
 
                 &::before {
@@ -95,10 +95,14 @@ header {
             }
 
             &--small {
-                width: fit-content;
+                display: flex;
+                width: 100px;
+
+                @include breakpoint-up(md) {
+                    width: 100%;
+                }
 
                 svg {
-                    width: 100%;
                     max-height: 30px;
     
                     @include breakpoint-up(md) {
@@ -113,7 +117,6 @@ header {
         }
 
         .header {
-
             &-socials {
                 display: flex;
                 gap: 10px;
