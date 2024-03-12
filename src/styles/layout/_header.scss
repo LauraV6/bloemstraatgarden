@@ -97,6 +97,7 @@ header {
             &--small {
                 svg {
                     max-height: 30px;
+                    width: 100px;
     
                     @include breakpoint-up(md) {
                         max-height: 40px;
