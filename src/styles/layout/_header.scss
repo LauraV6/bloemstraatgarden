@@ -62,11 +62,11 @@ header {
         .logo {
             position: relative;
             display: contents;
-            width: 100%;
+            width: fit-content;
             order: 0;
 
             @include breakpoint-down(sm) {
-                display: inherit;
+                display: flex;
                 order: -1;
 
                 &::before {
@@ -86,23 +86,20 @@ header {
 
             svg {
                 max-height: 80px;
+                width: 100%;
                 transition: .5s;
 
                 @include breakpoint-up(md) {
                     max-height: 105px;
-                    width: 100%;
                 }
             }
 
             &--small {
                 svg {
-                    height: 30px;
-                    width: 100px;
+                    max-height: 30px;
     
                     @include breakpoint-up(md) {
-                        height: auto;
                         max-height: 40px;
-                        width: 100%;
                     }
                 } 
 
