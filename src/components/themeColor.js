@@ -4,20 +4,21 @@ import { faSun } from '@fortawesome/free-solid-svg-icons'
 import { faMoon } from '@fortawesome/free-solid-svg-icons'
 
 const setDark = () => {
-  localStorage.setItem("theme", "dark");
-  document.documentElement.setAttribute("data-theme", "dark");
+  if (typeof window !== 'undefined') {
+    localStorage.setItem("theme", "dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
 };
 
 const setLight = () => {
-  localStorage.setItem("theme", "light");
-  document.documentElement.setAttribute("data-theme", "light");
+  if (typeof window !== 'undefined') {
+    localStorage.setItem("theme", "light");
+    document.documentElement.setAttribute("data-theme", "light");
+  }
 };
 
-const storedTheme = localStorage.getItem("theme");
-
-const prefersDark =
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches;
+const storedTheme = typeof window !== 'undefined' ? localStorage.getItem("theme") : null;
+const prefersDark = typeof window !== 'undefined' ? window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches : null;
 
 const defaultDark =
   storedTheme === "dark" || (storedTheme === null && prefersDark);
