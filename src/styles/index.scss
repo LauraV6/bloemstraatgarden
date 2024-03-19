@@ -11,9 +11,10 @@
 @use 'components/_states';
 @use 'components/_loader';
 @use 'components/_table';
+@use 'components/_progress';
+@use 'components/_quiz';
 @use 'components/_themeswitch';
 @use 'components/_title-line';
-@use 'components/_todo';
 @use 'layout/_body';
 @use 'layout/_hero';
 @use 'layout/_footer';
