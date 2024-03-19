@@ -1,26 +1,29 @@
 import React from 'react';
-import { useSiteMetadata } from "../hooks/metadata"
+import { useSiteMetadata } from "../hooks/metadata";
+import { Link } from 'gatsby';
 import profile from "../images/profile.jpg";
 
 const Sidebar = () => {  
     const { author, description } = useSiteMetadata()
     return (
         <aside className='aside'>
-            <div className='aside__intro'>
-                <img src={profile} alt="profile"></img>
-                <div>
+            <div className='aside__content'>
+                <div className='intro'>
+                    <img src={profile} alt="profile"></img>
                     <div>
-                        <h4>Hallo, ik ben {author}</h4>
-                        <p>{description}</p>
+                        <div>
+                            <h4>Hallo, ik ben {author}</h4>
+                            <p>{description}</p>
+                        </div>
                     </div>
+                </div>
+                <div className='test'>
                     <div>
-                        <h4>To do</h4>
-                        <ul className='todo'>
-                            <li>Nieuwe schuur bouwen</li>
-                            <li>Veel planten</li>
-                            <li>Zithoekjes maken</li>
-                            <li>Groente en fruit kweken</li>
-                        </ul>
+                        <div>
+                            <h4>Wil je jouw moestuin kennis testen?</h4>
+                            <p>Doe mee aan onze moestuin quiz en stel jouw kennis op de proef! Elke maand zijn er nieuwe vragen.</p>
+                        </div>
+                        <Link className='button button--cta' to='/quiz'>Start de quiz</Link>
                     </div>
                 </div>
             </div>
