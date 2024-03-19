@@ -39,7 +39,7 @@ const ThemeColor = () => {
   return (
     <div className="themeswitch">
         <input type="checkbox" id="themeColor" onChange={toggleTheme} defaultChecked={defaultDark}/>
-        <label for="themeColor">
+        <label htmlFor="themeColor">
             <FontAwesomeIcon icon={faSun} className="sun"/>
             <FontAwesomeIcon icon={faMoon} className="moon"/>
         </label>
