@@ -28,19 +28,25 @@ const Summary = ( { userAnswers } ) => {
             <ol className='summary__answers'>
                 {userAnswers.map((answer, index) => {
                     let cssClass = "user-answer";
+                    let showCorrectAnswer = "";
+                    const correctAnswer = QUESTIONS[index].answers[0];
+
                     if (answer === null) {
                         cssClass += " skipped";
-                    } else if (answer === QUESTIONS[index].answers[0]) {
+                        showCorrectAnswer = correctAnswer;
+                    } else if (answer === correctAnswer) {
                         cssClass += " correct";
                     } else {
                         cssClass += " wrong";
+                        showCorrectAnswer = correctAnswer;
                     }
                     
                     return (
                         <li key={index}>
                             <h3>{index + 1}</h3>
-                            <p className='question'>{QUESTIONS[index].text}</p>
+                            <h4 className='question'>{QUESTIONS[index].text}</h4>
                             <p className={cssClass}>{answer ?? 'Skipped'}</p>
+                            {answer !== correctAnswer ? <p className='question-answer'>Correct antwoord: {showCorrectAnswer}</p> : null}
                         </li>
                     );
                 })}

@@ -10,14 +10,10 @@ const Question = ( {questionIndex, onSelectAnswer, onSkipAnswer} ) => {
         isCorrect: null,
     });
 
-    let timer = 10000;
-
-    if (answer.selectedAnswer) {
-      timer = 1000;
-    }
+    let timer = 15000;
   
     if (answer.isCorrect !== null) {
-      timer = 2000;
+      timer = 3000;
     }
 
     function handleSelectAnswer(answer) {
@@ -34,21 +30,20 @@ const Question = ( {questionIndex, onSelectAnswer, onSkipAnswer} ) => {
     
           setTimeout(() => {
             onSelectAnswer(answer);
-          }, 2000);
-        }, 1000);
+          }, 3000);
+        }, 0);
       }
 
     let answerState = "";
     if (answer.selectedAnswer && answer.isCorrect !== null) {
       answerState = answer.isCorrect ? "correct" : "wrong";
-    } else if (answer.selectedAnswer) {
-      answerState = "answered";
     }
 
     return (
         <div className='quiz'>
             <QuestionTimer key={timer} timeout={timer} onTimeout={answer.selectedAnswer === "" ? onSkipAnswer : null} mode={answerState} />
             <h2>{QUESTIONS[questionIndex].text}</h2>
+            <div className='quiz-amount'>{questionIndex + 1} / {QUESTIONS.length }</div>
             <Answers 
                 answers={QUESTIONS[questionIndex].answers} 
                 selectedAnswer={answer.selectedAnswer} 
