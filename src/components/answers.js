@@ -7,20 +7,18 @@ const Answers = ( {answers, selectedAnswer, answerState, onSelect} ) => {
     if (!shuffledAnswers.current) {
         shuffledAnswers.current = [...answers];
         shuffledAnswers.current.sort(() => Math.random() - 0.5);
-      }
+    }
 
     return (
         <ul className='quiz-answers'>
-            {shuffledAnswers.current.map((answer) => {
+            {shuffledAnswers.current.map((answer, index) => {
                 const isSelected = selectedAnswer === answer;
                 let cssClass = '';
-
-                if (answerState === "answered" && isSelected) {
-                cssClass = "selected";
-                }
+                
                 if((answerState === 'correct' || answerState === 'wrong') && isSelected) {
                     cssClass = answerState;
                 }
+
                 return (
                     <li key={answer} className="answer">
                         <button onClick={() => onSelect(answer)} className={`button button--cta ${cssClass}`} disabled={answerState !== ''}>{answer}</button>

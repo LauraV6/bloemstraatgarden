@@ -1,6 +1,7 @@
 @use '../abstracts' as *;
 
 .quiz {
+    position: relative;
     display: grid;
     justify-items: center;
     gap: 1.5rem;
@@ -32,6 +33,40 @@
         @include breakpoint-up(lg) {
             width: calc(100vw - 52%);
             margin-bottom: 4rem;
+        }
+    }
+
+    &-amount {
+        position: absolute;
+        top: -1rem;
+        right: -1rem;
+        color: var(--color-font-light);
+        background-color: var(--color-1);
+        border-radius: 5px;
+        font-size: .9em;
+        padding: 3px 6px;
+
+        @include breakpoint-down(sm) {
+            top: -.5rem;
+            right: 0;
+        }
+    }
+
+    &-timer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .7rem;
+        width: 100%;
+
+        h3 {
+            &.wrong {
+                color: var(--color-error-bright);
+            }
+
+            &.correct {
+                color: var(--color-green-2);
+            }
         }
     }
 
@@ -137,6 +172,10 @@
                 &.correct {
                     background-color: var(--color-correct);
                 }
+            }
+
+            .question-answer {
+                color: var(--color-blue);
             }
         }
     }
