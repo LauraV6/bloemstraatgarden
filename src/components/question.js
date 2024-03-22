@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import QuestionTimer from './timer';
-import Answers from './answers';
 import QUESTIONS from '../data/questions'
 
 const Question = ( {questionIndex, onSelectAnswer, onSkipAnswer} ) => {
@@ -44,12 +43,6 @@ const Question = ( {questionIndex, onSelectAnswer, onSkipAnswer} ) => {
             <QuestionTimer key={timer} timeout={timer} onTimeout={answer.selectedAnswer === "" ? onSkipAnswer : null} mode={answerState} />
             <h2>{QUESTIONS[questionIndex].text}</h2>
             <div className='quiz-amount'>{questionIndex + 1} / {QUESTIONS.length}</div>
-            <Answers 
-                answers={QUESTIONS[questionIndex].answers} 
-                selectedAnswer={answer.selectedAnswer} 
-                answerState={answerState}
-                onSelect={handleSelectAnswer}
-            />
         </div>
     )
 }
