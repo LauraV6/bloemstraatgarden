@@ -25,18 +25,6 @@ const QuestionTimer = ({timeout, onTimeout, mode}) => {
     return (
       <>
           <div className='quiz-timer'>
-            {(() => {
-              const seconds = remainingTime / 1000;
-              const roundTimer = Math.round(seconds);
-              
-              if(mode === "wrong") {
-                return <h3 className={mode}>Fout antwoord</h3>
-              } else if (mode === "correct") {
-                return <h3 className={mode}>Correct!</h3>
-              } else {
-                return <h3>{roundTimer}</h3>
-              }
-            })()}
             <progress max={timeout} value={remainingTime} className={mode}></progress>
           </div>
       </>
