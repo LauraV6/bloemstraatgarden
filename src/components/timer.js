@@ -22,13 +22,13 @@ const QuestionTimer = ({timeout, onTimeout, mode}) => {
       };
     }, []);
 
-    const seconds = remainingTime / 1000;
-    const roundTimer = Math.round(seconds);
-
     return (
       <>
           <div className='quiz-timer'>
             {(() => {
+              const seconds = remainingTime / 1000;
+              const roundTimer = Math.round(seconds);
+              
               if(mode === "wrong") {
                 return <h3 className={mode}>Fout antwoord</h3>
               } else if (mode === "correct") {
