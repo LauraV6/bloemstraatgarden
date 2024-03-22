@@ -36,6 +36,7 @@ const QuestionTimer = ({timeout, onTimeout, mode}) => {
                 return <h3>{roundTimer}</h3>
               }
             })()}
+            <progress max={timeout} value={remainingTime} className={mode}></progress>
           </div>
       </>
     )
