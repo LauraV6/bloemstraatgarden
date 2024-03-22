@@ -11,7 +11,7 @@ const Answers = ( {answers, selectedAnswer, answerState, onSelect} ) => {
 
     return (
         <ul className='quiz-answers'>
-            {shuffledAnswers.current.map((answer, index) => {
+            {shuffledAnswers.current.map((answer) => {
                 const isSelected = selectedAnswer === answer;
                 let cssClass = '';
                 
