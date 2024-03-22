@@ -43,9 +43,10 @@ const Question = ( {questionIndex, onSelectAnswer, onSkipAnswer} ) => {
         <div className='quiz'>
             <QuestionTimer key={timer} timeout={timer} onTimeout={answer.selectedAnswer === "" ? onSkipAnswer : null} mode={answerState} />
             <h2>{QUESTIONS[questionIndex].text}</h2>
-            <div className='quiz-amount'>{questionIndex + 1} / {QUESTIONS.length}</div>
+            <div className='quiz-amount'>{questionIndex + 1} / {QUESTIONS.length }</div>
             <Answers 
                 answers={QUESTIONS[questionIndex].answers} 
+                selectedAnswer={answer.selectedAnswer} 
                 answerState={answerState}
                 onSelect={handleSelectAnswer}
             />
