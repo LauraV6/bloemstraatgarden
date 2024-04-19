@@ -1,58 +1,22 @@
 import React from "react";
-import Layout from '../components/layout'
-import { graphql, useStaticQuery, Link } from 'gatsby'
-import { Helmet } from 'react-helmet'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { Helmet } from 'react-helmet';
 import { shuffle } from '../utils/helpers';
-import zaaiTrays from '../images/zaaitrays.jpg';
-import notAvailable from '../images/notAvailable.png';
+import useAvailable from '../hooks/available';
+import useAllPosts from '../hooks/allposts';
+import Layout from '../components/layout';
 import PostCard from "../components/postCard";
 import Hero from "../components/hero";
+import zaaiTrays from '../images/zaaitrays.jpg';
+import notAvailable from '../images/notAvailable.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'gatsby';
 
 const Verkrijgbaar = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            allContentfulVerkrijgbaar {
-                totalCount
-                edges {
-                    node {
-                        title
-                        availableimage {
-                            url
-                            id
-                            title
-                        }
-                        date
-                        amount
-                    }
-                }
-                totalCount
-            }
-            allContentfulBlogPost(sort: {contentful_id: ASC}) {
-                edges {
-                    node {
-                        slug
-                        id
-                        title
-                        description {
-                            description
-                        }
-                        publishedDate(formatString: "Do MMM, YYYY")
-                        featuredimage {
-                            id
-                            url
-                        }
-                    }
-                }
-            }            
-        }
-    `);
+    const { available } = useAvailable();
+    const { allposts } = useAllPosts();
 
-    const allAvailable = data.allContentfulVerkrijgbaar;
-    const allPosts = data.allContentfulBlogPost.edges;
-
-    const shuffledPosts = shuffle(allPosts).slice(0, 3);
+    const shuffledPosts = shuffle(allposts).slice(0, 3);
 
     return (
         <Layout>
@@ -78,9 +42,9 @@ const Verkrijgbaar = () => {
                 </section>
                 <section>     
                     <h2 className='title-line' style={{display: "block"}}>
-                        <span>{allAvailable.totalCount <= 1 ? 'Beschikbare planten' : `${allAvailable.totalCount} beschikbare planten`}</span>
+                        <span>{available.totalCount <= 1 ? 'Beschikbare planten' : `${available.totalCount} beschikbare planten`}</span>
                     </h2>                
-                    {allAvailable.totalCount === 1 ? (
+                    {available.totalCount === 1 ? (
                         <div className="boxing">
                             <div className="boxing__content">
                                 <img className="top-image" src={notAvailable} alt='niet-beschikbaar'/>
@@ -92,7 +56,7 @@ const Verkrijgbaar = () => {
                         </div>
                     ) : (
                         <div className="post-items">
-                            {allAvailable.edges.map((edge, key) => {
+                            {available.edges.map((edge, key) => {
                                 const post = edge.node;
                                 return (
                                     <div className="post-item post-item--static" key={key}>

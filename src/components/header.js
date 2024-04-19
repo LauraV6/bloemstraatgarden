@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'gatsby'
+import { Helmet } from 'react-helmet';
 import { useSiteMetadata } from "../hooks/metadata"
+import ThemeColor from "./themeColor";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWhatsapp, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import Logo from "./logo";
 import LogoSmall from "./logoSmall";
-import { Helmet } from 'react-helmet';
-import ThemeColor from "./themeColor";
+import { Link } from 'gatsby'
 
 const Header = () => {    
     const { author, description } = useSiteMetadata()
@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <>
         <Helmet>
-            <meta name="author" content={author}></meta>
+            <meta name="author" content={author} />
             <meta name="description" content={description} />
         </Helmet>
         <header className={small ? "small" : undefined}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSiteMetadata } from "../hooks/metadata";
-import { Link } from 'gatsby';
 import profile from "../images/profile.jpg";
+import { Link } from 'gatsby';
 
 const Sidebar = () => {  
     const { author, description } = useSiteMetadata()

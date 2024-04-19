@@ -1,82 +1,30 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import Layout from '../components/layout'
-import Hero from '../components/hero'
-import StackAnnouncement from '../components/stackAnnouncement'
-import Tips from '../components/tips'
-import States from '../components/states'
 import { useState, useEffect, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
+import { useSiteMetadata } from '../hooks/metadata';
+import useAllPosts from '../hooks/allposts';
+import Layout from '../components/layout'
+import Hero from '../components/hero'
+import Tips from '../components/tips';
+import StackAnnouncement from '../components/stackAnnouncement'
+import States from '../components/states'
 import Loader from '../components/loader'
 import SearchBar from '../components/searchbar'
 import FilteredBlogs from '../components/filteredBlogs'
 
 const BlogPage = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            allContentfulBlogPost(sort: {publishedDate: DESC}) {
-                edges {
-                  node {
-                    id
-                    slug
-                    title
-                    description {
-                        description
-                    }
-                    contentfulinternal
-                    subject
-                    id
-                    publishedDate(formatString: "Do MMM, YYYY")
-                    featuredimage {
-                      id
-                      url
-                      title
-                    }
-                    body {
-                        raw
-                                                 
-                    }                   
-                  }
-                }
-            }
-            allContentfulTips(sort: {publishdate: DESC}) {
-                edges {
-                  node {
-                    slug
-                    title
-                    publishdate(formatString: "Do MMM, YYYY")
-                    body {
-                      raw
-                    }
-                    featuredimage {
-                      url
-                      title
-                    }
-                  }
-                }
-            }
-            site {
-                siteMetadata {
-                    title
-                }
-            }
-        }
-    `);
-
+    const { allposts: allPosts } = useAllPosts();
+    const { title } = useSiteMetadata();
     const [searchTerm, setSearchTerm] = useState('');
-    const allPosts = data.allContentfulBlogPost.edges;
-
     const pageSize = 9;
     const [index , setIndex] = useState(0);
     const [visibleData , setVisibleData] = useState ([]);
     const [numberOfPosts , setNumberOfPosts] = useState ([]);
-
     const categories = [
         'Moestuin',
         'Bouw',
         "Planten",
     ];
-
     let [categoryFilters, setcategoryFilters] = useState(new Set());
 
     // Update category selection
@@ -123,7 +71,7 @@ const BlogPage = () => {
     return (
         <Layout>
             <Helmet>
-                <title>{data.site.siteMetadata.title}</title>
+                <title>{title}</title>
             </Helmet>
             <main>
                 <Hero theme="light" title="Bloemstraat Garden" paragraph="Ook zelf een moestuin beginnen? Lees in dit blog over onze ervaring, tips and tricks." />
@@ -162,7 +110,7 @@ const BlogPage = () => {
                     })()}
                 </section>
                 <StackAnnouncement />   
-                <Tips tipArray={data.allContentfulTips.edges} />
+                <Tips />
                 <States />
             </main>
         </Layout>
