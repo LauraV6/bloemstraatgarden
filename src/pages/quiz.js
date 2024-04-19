@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
-import Layout from '../components/layout';
 import QUESTIONS from '../data/questions';
+import Layout from '../components/layout';
 import Question from '../components/question';
 import Summary from '../components/summary';
 
