@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import Sidebar from '../components/sidebar'
 import Layout from '../components/layout'
-import { Helmet } from 'react-helmet'
 import heroImage from "../images/404.png";
+import { Link } from 'gatsby'
 
 const NotFound = () => {
     return (

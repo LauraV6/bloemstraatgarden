@@ -25,6 +25,8 @@ const defaultDark =
 
 if (defaultDark) {
   setDark();
+} else {
+  setLight();
 }
 
 const toggleTheme = (e) => {
