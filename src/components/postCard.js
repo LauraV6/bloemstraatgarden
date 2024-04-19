@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'gatsby'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import lazyLoadPlaceholder from "../images/lazyLoadPlaceholder.jpg";
+import { Link } from 'gatsby'
 
 const PostCard = ({
     slug,

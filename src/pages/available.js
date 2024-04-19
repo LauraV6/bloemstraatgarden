@@ -1,60 +1,22 @@
 import React from "react";
-import Layout from '../components/layout'
-import { graphql, useStaticQuery, Link } from 'gatsby'
-import { Helmet } from 'react-helmet'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { Helmet } from 'react-helmet';
 import { shuffle } from '../utils/helpers';
-import HeaderImg from '../images/headerBgTransparent.png'
-import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
-import HeaderLeaveBig from '../images/headerLeaveBig.png'
+import useAvailable from '../hooks/available';
+import useAllPosts from '../hooks/allposts';
+import Layout from '../components/layout';
+import PostCard from "../components/postCard";
+import Hero from "../components/hero";
 import zaaiTrays from '../images/zaaitrays.jpg';
 import notAvailable from '../images/notAvailable.png';
-import PostCard from "../components/postCard";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'gatsby';
 
 const Verkrijgbaar = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            allContentfulVerkrijgbaar {
-                totalCount
-                edges {
-                    node {
-                        title
-                        availableimage {
-                            url
-                            id
-                            title
-                        }
-                        date
-                        amount
-                    }
-                }
-                totalCount
-            }
-            allContentfulBlogPost(sort: {contentful_id: ASC}) {
-                edges {
-                    node {
-                        slug
-                        id
-                        title
-                        description {
-                            description
-                        }
-                        publishedDate(formatString: "Do MMM, YYYY")
-                        featuredimage {
-                            id
-                            url
-                        }
-                    }
-                }
-            }            
-        }
-    `);
+    const { available } = useAvailable();
+    const { allposts } = useAllPosts();
 
-    const allAvailable = data.allContentfulVerkrijgbaar;
-    const allPosts = data.allContentfulBlogPost.edges;
-
-    const shuffledPosts = shuffle(allPosts).slice(0, 3);
+    const shuffledPosts = shuffle(allposts).slice(0, 3);
 
     return (
         <Layout>
@@ -62,22 +24,7 @@ const Verkrijgbaar = () => {
                 <title>Bloemstraat Garden - Planten verkrijgbaar</title>
             </Helmet>
             <main>
-                <section className='hero hero--dark' style={{ backgroundImage: `url(${HeaderImg})` }}>
-                    <div className='hero__container'>
-                        <div className='hero__text'>
-                            <div>
-                                <h1>Verkrijgbare planten</h1>
-                                <p>Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp.</p>                  
-                            </div>
-                        </div>
-                        <div className='hero__images'>
-                            <img src={HeaderLeaveBig} className='leave leave--one' alt="leaves"></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--two' alt="leaves"></img>
-                            <img src={HeaderLeaveBig} className='leave leave--three' alt="leaves"></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--four' alt="leaves"></img>
-                        </div>
-                    </div>
-                </section>
+                <Hero theme="dark" title="Verkrijgbare planten" paragraph="Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp." />
                 <section>
                     <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>Verkrijgbaar</span></div>                          
                     <div className="story">
@@ -95,9 +42,9 @@ const Verkrijgbaar = () => {
                 </section>
                 <section>     
                     <h2 className='title-line' style={{display: "block"}}>
-                        <span>{allAvailable.totalCount <= 1 ? 'Beschikbare planten' : `${allAvailable.totalCount} beschikbare planten`}</span>
+                        <span>{available.totalCount <= 1 ? 'Beschikbare planten' : `${available.totalCount} beschikbare planten`}</span>
                     </h2>                
-                    {allAvailable.totalCount === 1 ? (
+                    {available.totalCount === 1 ? (
                         <div className="boxing">
                             <div className="boxing__content">
                                 <img className="top-image" src={notAvailable} alt='niet-beschikbaar'/>
@@ -109,7 +56,7 @@ const Verkrijgbaar = () => {
                         </div>
                     ) : (
                         <div className="post-items">
-                            {allAvailable.edges.map((edge, key) => {
+                            {available.edges.map((edge, key) => {
                                 const post = edge.node;
                                 return (
                                     <div className="post-item post-item--static" key={key}>
