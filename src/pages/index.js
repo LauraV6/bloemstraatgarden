@@ -1,17 +1,15 @@
 import React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import Layout from '../components/layout'
-import PostCard from '../components/postCard'
-import TipCard from '../components/tipCard'
+import Hero from '../components/hero'
+import StackAnnouncement from '../components/stackAnnouncement'
+import Tips from '../components/tips'
 import States from '../components/states'
-import HeaderImg from '../images/headerBgTransparent.png'
-import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
-import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import { useState, useEffect, useMemo } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { Helmet } from 'react-helmet'
 import Loader from '../components/loader'
+import SearchBar from '../components/searchbar'
+import FilteredBlogs from '../components/filteredBlogs'
 
 const BlogPage = () => {
     const data = useStaticQuery(graphql`
@@ -67,7 +65,6 @@ const BlogPage = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const allPosts = data.allContentfulBlogPost.edges;
-    const allTips = data.allContentfulTips.edges;
 
     const pageSize = 9;
     const [index , setIndex] = useState(0);
@@ -129,26 +126,8 @@ const BlogPage = () => {
                 <title>{data.site.siteMetadata.title}</title>
             </Helmet>
             <main>
-                <section className='hero' style={{ backgroundImage: `url(${HeaderImg})` }}>
-                    <div className='hero__container'>
-                        <div className='hero__text'>
-                            <div>
-                                <h1>Bloemstraat Garden</h1>
-                                <p>Ook zelf een moestuin beginnen? Lees in dit blog over onze ervaring, tips and tricks.</p>                  
-                            </div>
-                        </div>
-                        <div className='hero__images'>
-                            <img src={HeaderLeaveBig} className='leave leave--one' alt="leaves"></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--two' alt="leaves"></img>
-                            <img src={HeaderLeaveBig} className='leave leave--three' alt="leaves"></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--four' alt="leaves"></img>
-                        </div>
-                    </div>
-                </section>
-                <div className='searchbar'>
-                    <input className='searchbar__input' type="text" placeholder="Zoeken..." onChange={event => {setSearchTerm(event.target.value)}}></input>
-                    <FontAwesomeIcon icon={faSearch} className='searchbar__icon'/>
-                </div>  
+                <Hero theme="light" title="Bloemstraat Garden" paragraph="Ook zelf een moestuin beginnen? Lees in dit blog over onze ervaring, tips and tricks." />
+                <SearchBar onChange={event => {setSearchTerm(event.target.value)}} />
                 <section className='blogs'>
                     <h4 className='title-line'>
                         <span>Blog Updates</span>
@@ -165,24 +144,7 @@ const BlogPage = () => {
                             })}
                         </div>
                     </div>
-                    {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> :
-                        (<div className='post-items'>
-                            {filteredBlogs.map((edge, key) => {
-                                const post = edge.node;
-                                return (
-                                    <PostCard 
-                                        key={key}
-                                        slug={post.slug}
-                                        img={post.featuredimage.url} 
-                                        alt={post.featuredimage.title} 
-                                        title={post.title} 
-                                        description={post.description.description} 
-                                        publishedDate={post.publishedDate}
-                                    />
-                                )
-                            })}
-                        </div>)
-                    }
+                    {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> : <FilteredBlogs blogList={filteredBlogs} />}
                     {(() => {
                         if (numberOfPosts < allPosts.length && searchTerm === "" && categoryFilters.size <= 0) {
                             const waveAmount = 9;
@@ -199,40 +161,8 @@ const BlogPage = () => {
                         return undefined;
                     })()}
                 </section>
-                <section>
-                    <div className='boxing'>
-                        <div className='story'>
-                            <div className='story__text'>
-                                <h3>Gratis voorraad</h3>
-                                <p>Het kan voorkomen dat er meer gezaaid wordt dan dat er plek voor is. Deze planten komen op de voorraad lijst te staan.
-                                    Meld je aan voor een plant uit de voorraad lijst door mij een bericht te sturen.
-                                </p>
-                            </div>
-                            <div className='story__img'>
-                                <Link className='button button--cta' to='/available'>Bekijk onze voorraad <FontAwesomeIcon icon={faArrowRight}/></Link>
-                            </div>
-                        </div>
-                    </div>
-                </section>                
-                <section>
-                    <h2 className='title-line' style={{display: "block"}}>
-                        <span>Moestuin tips</span>
-                    </h2>
-                    <div className='tip-items'>
-                        {allTips.map((edge, key) => {
-                            const tip = edge.node;
-                            return (
-                                <TipCard 
-                                    key={key}
-                                    slug={tip.slug}
-                                    img={tip.featuredimage.url} 
-                                    alt={tip.featuredimage.title} 
-                                    title={tip.title}
-                                />
-                            )
-                        })}
-                    </div>
-                </section>
+                <StackAnnouncement />   
+                <Tips tipArray={data.allContentfulTips.edges} />
                 <States />
             </main>
         </Layout>

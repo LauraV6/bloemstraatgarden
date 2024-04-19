@@ -5,12 +5,10 @@ import { Helmet } from 'react-helmet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { shuffle } from '../utils/helpers';
-import HeaderImg from '../images/headerBgTransparent.png'
-import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
-import HeaderLeaveBig from '../images/headerLeaveBig.png'
 import zaaiTrays from '../images/zaaitrays.jpg';
 import notAvailable from '../images/notAvailable.png';
 import PostCard from "../components/postCard";
+import Hero from "../components/hero";
 
 const Verkrijgbaar = () => {
     const data = useStaticQuery(graphql`
@@ -62,22 +60,7 @@ const Verkrijgbaar = () => {
                 <title>Bloemstraat Garden - Planten verkrijgbaar</title>
             </Helmet>
             <main>
-                <section className='hero hero--dark' style={{ backgroundImage: `url(${HeaderImg})` }}>
-                    <div className='hero__container'>
-                        <div className='hero__text'>
-                            <div>
-                                <h1>Verkrijgbare planten</h1>
-                                <p>Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp.</p>                  
-                            </div>
-                        </div>
-                        <div className='hero__images'>
-                            <img src={HeaderLeaveBig} className='leave leave--one' alt="leaves"></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--two' alt="leaves"></img>
-                            <img src={HeaderLeaveBig} className='leave leave--three' alt="leaves"></img>
-                            <img src={HeaderLeaveSmall} className='leave leave--four' alt="leaves"></img>
-                        </div>
-                    </div>
-                </section>
+                <Hero theme="dark" title="Verkrijgbare planten" paragraph="Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp." />
                 <section>
                     <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>Verkrijgbaar</span></div>                          
                     <div className="story">
