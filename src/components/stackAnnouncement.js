@@ -15,7 +15,7 @@ const StackAnnouncement = () => {
                         </p>
                     </div>
                     <div className='story__img'>
-                        <Link className='button button--cta' to='/available'>Bekijk onze voorraad <FontAwesomeIcon icon={faArrowRight}/></Link>
+                        <Link className='button button--cta' to='/verkrijgbaar'>Bekijk onze voorraad <FontAwesomeIcon icon={faArrowRight}/></Link>
                     </div>
                 </div>
             </div>
