@@ -1,11 +1,9 @@
 import React from "react";
 import { Helmet } from 'react-helmet';
-import { shuffle } from '../utils/helpers';
 import useAvailable from '../hooks/available';
-import useAllPosts from '../hooks/allposts';
 import Layout from '../components/layout';
-import PostCard from "../components/postCard";
 import Hero from "../components/hero";
+import MorePosts from "../components/morePosts";
 import zaaiTrays from '../images/zaaitrays.jpg';
 import notAvailable from '../images/notAvailable.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,9 +12,6 @@ import { Link } from 'gatsby';
 
 const Verkrijgbaar = () => {
     const { available } = useAvailable();
-    const { allposts } = useAllPosts();
-
-    const shuffledPosts = shuffle(allposts).slice(0, 3);
 
     return (
         <Layout>
@@ -40,7 +35,7 @@ const Verkrijgbaar = () => {
                         </div>         
                     </div>          
                 </section>
-                <section>     
+                <section>
                     <h2 className='title-line' style={{display: "block"}}>
                         <span>{available.totalCount <= 1 ? 'Beschikbare planten' : `${available.totalCount} beschikbare planten`}</span>
                     </h2>                
@@ -75,26 +70,7 @@ const Verkrijgbaar = () => {
                     )}
                 </section>
                 <section>
-                    <div className='more-posts more-posts--bottom'>
-                        <h3>Bekijk posts over onze tuin</h3>
-                        <div className='more-posts__container'>
-                            <div className='post-items'>
-                            {shuffledPosts.map((edge, key) => {
-                                const post = edge.node;
-                                return <PostCard 
-                                            key={key}
-                                            slug={post.slug}
-                                            img={post.featuredimage.url} 
-                                            alt={post.featuredimage.title} 
-                                            title={post.title} 
-                                            description={post.description.description}
-                                            recommend={true}
-                                            publishedDate={post.publishedDate}
-                                        />;
-                            })}
-                            </div>
-                        </div>
-                    </div> 
+                    <MorePosts bottom="true" />
                 </section>       
             </main>
         </Layout>
