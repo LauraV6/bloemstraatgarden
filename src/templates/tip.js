@@ -2,13 +2,12 @@ import React from "react";
 import Layout from '../components/layout'
 import Sidebar from '../components/sidebar'
 import { BLOCKS } from '@contentful/rich-text-types';
-import { shuffle } from '../utils/helpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { graphql, Link } from 'gatsby'
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Helmet } from 'react-helmet'
-import PostCard from "../components/postCard";
+import MorePosts from "../components/morePosts";
 
 const options = {
     renderNode: {
@@ -21,54 +20,27 @@ const options = {
 }
 
 const Tips = (props) => {   
-    const allPosts = props.data.allContentfulBlogPost.edges;
     const post = props.data.contentfulTips;
-
-    const title = post.title;
-    const headerImg = post.featuredimage.url;
-    const content = post.body;
-
-    const filteredPosts = allPosts.filter(post => post.node.title !== title);
-    const shuffledPosts = shuffle(filteredPosts).slice(0, 3);
 
     return (
         <Layout>
              <Helmet>
-                <title>Bloemstraat Garden - {title}</title>
+                <title>Bloemstraat Garden - {post.title}</title>
             </Helmet>           
-            <section className="hero post-hero" style={{ backgroundImage: `url(${headerImg})` }}>
+            <section className="hero post-hero" style={{ backgroundImage: `url(${post.featuredimage.url})` }}>
                 <div className="post-hero__content">
                     <div>
-                        <h1>{title}</h1>
+                        <h1>{post.title}</h1>
                     </div>
                 </div>
             </section>
             <section className="post-content">
                 <div>
-                    <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{title}</span></div>
+                    <div className="breadcrumbs"><Link to='/'>Blog</Link><FontAwesomeIcon icon={faAngleRight} /><span>{post.title}</span></div>
                     <div className="content">
-                        {renderRichText (content, options)}
+                        {renderRichText (post.body, options)}
                     </div>
-                    <div className='more-posts'>
-                        <h3>Bekijk posts over onze tuin</h3>
-                        <div className='more-posts__container'>
-                            <div className='post-items'>
-                            {shuffledPosts.map((edge, key) => {
-                                const post = edge.node;
-                                return <PostCard 
-                                            key={key}
-                                            slug={post.slug}
-                                            img={post.featuredimage.url} 
-                                            alt={post.featuredimage.title} 
-                                            title={post.title} 
-                                            description={post.description.description}
-                                            recommend={true}
-                                            publishedDate={post.publishedDate}
-                                        />;
-                            })}
-                            </div>
-                        </div>
-                    </div>
+                    <MorePosts />
                 </div>
                 <Sidebar />
             </section>
@@ -99,24 +71,6 @@ export const query = graphql`
                 }
             }
         }
-
-        allContentfulBlogPost(sort: {contentful_id: ASC}) {
-            edges {
-                node {
-                    slug
-                    id
-                    title
-                    description {
-                        description
-                    }
-                    publishedDate(formatString: "Do MMM, YYYY")
-                    featuredimage {
-                        id
-                        url
-                    }
-                }
-            }
-        } 
     }
 `
 
