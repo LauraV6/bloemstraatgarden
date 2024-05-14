@@ -24,6 +24,10 @@
         @include breakpoint-up(md) {
             flex-direction: row;
             width: calc(100% + 4rem);
+            margin: 4rem -2rem 0 -2rem;
+        }
+
+        @include breakpoint-up(lg) {
             margin: 8rem -2rem 0 -2rem;
         }
     }
