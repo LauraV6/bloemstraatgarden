@@ -8,6 +8,7 @@ import { graphql, Link } from 'gatsby'
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Helmet } from 'react-helmet'
 import MorePosts from "../components/morePosts";
+import ProgressBar from "../components/progressbar";
 
 const options = {
     renderNode: {
@@ -28,6 +29,7 @@ const Tips = (props) => {
                 <title>Bloemstraat Garden - {post.title}</title>
             </Helmet>           
             <section className="hero post-hero" style={{ backgroundImage: `url(${post.featuredimage.url})` }}>
+                <ProgressBar />
                 <div className="post-hero__content">
                     <div>
                         <h1>{post.title}</h1>
