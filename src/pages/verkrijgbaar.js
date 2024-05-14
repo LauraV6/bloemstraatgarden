@@ -28,7 +28,7 @@ const Verkrijgbaar = () => {
                             <p>Bij het voorzaaien worden er meerdere zaaitrays in gebruik genomen. Het komt voor dat er een overschot komt van bepaalde planten. 
                             Deze planten worden hier gratis aangeboden om van groter nut te kunnen zijn bij iemand anders.
                             De planten worden in doosjes meegeven en de potjes zullen hergebruikt worden voor het volgende zaai item.</p>
-                            <p>Ben je op de hoogte van het zaaischema en zie je er een plant tussen staan die je heel graag wilt hebben? Stuur dan een persoonlijk bericht.</p>
+                            <p>Ben je op de hoogte van het zaaischema en zie je er een plant tussen staan die je graag wilt hebben? Stuur dan een persoonlijk bericht.</p>
                         </div>
                         <div className="story__img">
                             <img src={zaaiTrays} alt='bloemstraat-gratis-planten'/>
