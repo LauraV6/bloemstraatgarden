@@ -67,6 +67,22 @@
         }
     }
 
+    &-progressbar {
+        position: fixed;
+        top: 59px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--color-green-2);
+        transform-origin: 0%;
+        z-index: 999;
+
+        @include breakpoint-up(md) {
+            top: 73px;
+
+        }
+    }
+
     &-content {
         display: grid;
         gap: 1.5rem;
