@@ -30,23 +30,26 @@ const Header = () => {
             <nav>
                 <div className='header-socials'>
                   <motion.a 
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                    whileTap={{ scale: 0.9, rotate: -10 }}
+                    whileHover={{ scale: [null, 1.2, 1.1], rotate: 10 }}
+                    transition={{ duration: .1 }}
+                    whileTap={{ rotate: 0 }}
                     className='button button--cta share-icon whapp' href="https://api.whatsapp.com/send?text=https://bloemstraatgarden.netlify.app/" data-action="share/whatsapp/share" target="_blank" rel="noreferrer"
                   >
                     <FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span>
                   </motion.a>
                   <motion.a 
-                    whileHover={{ scale: 1.2, rotate: -10 }}
-                    whileTap={{ scale: 0.9, rotate: 10 }}
+                    whileHover={{ scale: [null, 1.2, 1.1], rotate: -10 }}
+                    transition={{ duration: .1 }}
+                    whileTap={{ rotate: 0 }}
                     className='button button--cta share-icon linkedin' href="https://www.linkedin.com/in/laura-vlasma-0692b0159/" target="_blank" rel="noreferrer"
                   >
                     <FontAwesomeIcon icon={faLinkedinIn}/><span>Delen</span>
                   </motion.a>
 
                   <motion.a 
-                    whileHover={{ scale: 1.2, rotate: 10 }}
-                    whileTap={{ scale: 0.9, rotate: -10 }}
+                    whileHover={{ scale: [null, 1.2, 1.1], rotate: 10 }}
+                    transition={{ duration: .1 }}
+                    whileTap={{ rotate: 0 }}
                     className='button button--cta share-icon insta' href="https://www.instagram.com/lauravlasma/" target="_blank" rel="noreferrer"
                   >       
                     <FontAwesomeIcon icon={faInstagram}/><span>Delen</span>
