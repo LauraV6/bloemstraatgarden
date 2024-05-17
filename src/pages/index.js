@@ -24,7 +24,6 @@ const BlogPage = () => {
     const categories = [
         'Moestuin',
         'Bouw',
-        "Planten",
     ];
     let [categoryFilters, setcategoryFilters] = useState(new Set());
 

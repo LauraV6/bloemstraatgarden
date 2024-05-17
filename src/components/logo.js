@@ -22,7 +22,7 @@ const iconDark = {
         fill: "hsl(151, 100%, 20%, 0%)",
     },
     visible: {
-        y: 20,
+        y: 0,
         opacity: 1,
         pathLength: 1,
         fill: "hsl(151, 100%, 20%)",
