@@ -10,11 +10,11 @@ const Summary = ( { userAnswers } ) => {
 
     return (
         <div className='summary'>
-            <h2>Quiz completed!</h2>
+            <h2>Quiz voltooid!</h2>
             <div className='summary__states'>
                 <div className='score'>
                     <span className='score__number'>{skippedAnswersShare}%</span>
-                    <span className='score__text'>Skipped</span>     
+                    <span className='score__text'>Overgeslagen</span>     
                 </div>
                 <div className='score'>
                     <span className='score__number'>{correctAnswersShare}%</span>
