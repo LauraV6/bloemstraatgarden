@@ -47,6 +47,7 @@ header {
         overflow: hidden;
         max-width: 1200px;
         text-align: center;
+        transition: .4s;
         padding: 1rem;
         margin: 0 auto;
 
@@ -91,6 +92,21 @@ header {
 
                 @include breakpoint-up(md) {
                     max-height: 105px;
+                }
+
+                path {
+                    &.st1, &.st2.plant {
+                        overflow: visible;
+                        stroke-width: 1px;
+                    }
+
+                    &.st1 {
+                        stroke: hsl(152, 100%, 21%);
+                    }
+
+                    &.st2.plant {
+                        stroke: hsl(130, 47%, 42%);
+                    }
                 }
             }
 
