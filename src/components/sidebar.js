@@ -2,6 +2,7 @@ import React from 'react';
 import { useSiteMetadata } from "../hooks/metadata";
 import profile from "../images/profile.jpg";
 import { Link } from 'gatsby';
+import { motion } from "framer-motion";
 
 const Sidebar = () => {  
     const { author, description } = useSiteMetadata()
@@ -23,7 +24,11 @@ const Sidebar = () => {
                             <h4>Wil je jouw moestuin kennis testen?</h4>
                             <p>Doe mee aan onze moestuin quiz en stel jouw kennis op de proef! Elke maand zijn er nieuwe vragen.</p>
                         </div>
-                        <Link className='button button--cta' to='/quiz'>Start de quiz</Link>
+                        <motion.div       
+                            whileHover={{ scale: [null, 1.1, 1.05] }}
+                            transition={{ duration: 0.3 }}>
+                            <Link className='button button--cta' to='/quiz'>Start de quiz</Link>
+                        </motion.div>
                     </div>
                 </div>
             </div>

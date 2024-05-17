@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { Helmet } from 'react-helmet'
 import { useSiteMetadata } from '../hooks/metadata';
 import useAllPosts from '../hooks/allposts';
+import { motion } from "framer-motion";
 import Layout from '../components/layout'
 import Hero from '../components/hero'
 import Tips from '../components/tips';
@@ -84,10 +85,14 @@ const BlogPage = () => {
                         <div className='filter-container'>
                             {categories.map((catg, index) => {
                                 return (
-                                    <button className='filter-item' key={index}>
+                                    <motion.button 
+                                        className='filter-item' 
+                                        key={index}
+                                        whileHover={{ scale: [null, 1.1, 1.05] }}
+                                        transition={{ duration: 0.3 }}>
                                         <input type="checkbox" id={catg} name="category" onChange={(e) => updateFilters(e.target.checked, catg)}/>
                                         <label htmlFor={catg}>{catg}</label>
-                                    </button>
+                                    </motion.button>
                                 );
                             })}
                         </div>
@@ -98,11 +103,16 @@ const BlogPage = () => {
                             const waveAmount = 9;
                             return (
                                 <section className='center p-0'>
-                                    <button className='button button--water' onClick={ () => setIndex (index + 1 )}><span>Geef water voor meer berichten</span>
+                                    <motion.button 
+                                        className='button button--water' 
+                                        onClick={ () => setIndex (index + 1 )}
+                                        whileHover={{ scale: [null, 1.1, 1.05] }}
+                                        transition={{ duration: 0.3 }}>
+                                            <span>Geef water voor meer berichten</span>
                                         {
                                             [...Array(waveAmount)].map((e, i) => <div className='wave' key={i}></div>)
                                         }
-                                    </button>
+                                    </motion.button>
                                 </section>
                             )
                         }
