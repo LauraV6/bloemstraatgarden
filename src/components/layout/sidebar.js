@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSiteMetadata } from "../hooks/metadata";
-import profile from "../images/profile.jpg";
+import { useSiteMetadata } from "../../hooks/metadata";
+import profile from "../../images/profile.jpg";
 import { Link } from 'gatsby';
 import { motion } from "framer-motion";
 

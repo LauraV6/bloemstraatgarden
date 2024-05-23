@@ -2,9 +2,9 @@ import React from 'react';
 import { useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import QUESTIONS from '../data/questions';
-import Layout from '../components/layout';
-import Question from '../components/question';
-import Summary from '../components/summary';
+import Layout from '../components/layout/layout';
+import Question from '../components/quiz/question';
+import Summary from '../components/quiz/summary';
 
 const Quiz = () => {
     const [userAnswers, setUserAnswers] = useState([]);
