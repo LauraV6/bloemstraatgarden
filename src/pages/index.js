@@ -4,9 +4,9 @@ import { Helmet } from 'react-helmet'
 import { useSiteMetadata } from '../hooks/metadata';
 import useAllPosts from '../hooks/allposts';
 import { motion } from "framer-motion";
-import Layout from '../components/layout'
-import Hero from '../components/hero'
-import Tips from '../components/tips';
+import Layout from '../components/layout/layout'
+import Hero from '../components/layout/hero'
+import Tips from '../components/tips/tips';
 import StackAnnouncement from '../components/stackAnnouncement'
 import States from '../components/states'
 import Loader from '../components/loader'

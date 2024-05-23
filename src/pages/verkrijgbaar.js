@@ -1,17 +1,19 @@
 import React from "react";
 import { Helmet } from 'react-helmet';
 import useAvailable from '../hooks/available';
-import Layout from '../components/layout';
-import Hero from "../components/hero";
+import Layout from '../components/layout/layout';
+import Hero from "../components/layout/hero";
 import MorePosts from "../components/morePosts";
+import AvailableItem from "../components/order/availableItem";
 import zaaiTrays from '../images/zaaitrays.jpg';
 import notAvailable from '../images/notAvailable.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'gatsby';
+import OrderHeader from "../components/order/orderHeader";
 
 const Verkrijgbaar = () => {
-    const { available } = useAvailable();
+    const { available } = useAvailable(); 
 
     return (
         <Layout>
@@ -50,23 +52,17 @@ const Verkrijgbaar = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className="post-items">
-                            {available.edges.map((edge, key) => {
-                                const post = edge.node;
-                                return (
-                                    <div className="post-item post-item--static" key={key}>
-                                        <div className="post-item__img">
-                                            <img src={post.availableimage.url} alt={post.availableimage.title}/>
-                                        </div>
-                                        <div className="post-item__content">
-                                            <span>{post.amount}</span>
-                                            <h2>{post.title}</h2>
-                                            <p>{post.date}</p>
-                                        </div>                      
-                                    </div>                                   
-                                )
-                            })}
-                        </div>
+                        <>
+                            <OrderHeader />
+                            <div className="post-items">
+                                {available.edges.map((edge, key) => {
+                                    const post = edge.node;
+                                    return (
+                                        <AvailableItem key={key} plant={post} />                            
+                                    )
+                                })}
+                            </div>
+                        </>
                     )}
                 </section>
                 <section>

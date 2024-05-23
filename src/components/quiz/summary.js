@@ -1,5 +1,5 @@
 import React from 'react';
-import QUESTIONS from '../data/questions'
+import QUESTIONS from '../../data/questions'
 
 const Summary = ( { userAnswers } ) => {
     const skippedAnswers = userAnswers.filter((answer) => answer === null);

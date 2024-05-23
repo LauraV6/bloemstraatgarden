@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from 'react-helmet';
-import { useSiteMetadata } from "../hooks/metadata"
+import { useSiteMetadata } from "../../hooks/metadata"
 import { motion } from "framer-motion";
-import ThemeColor from "./themeColor";
+import ThemeColor from "../themeColor";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWhatsapp, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
-import Logo from "./logo";
-import LogoSmall from "./logoSmall";
+import Logo from "../logo";
+import LogoSmall from "../logoSmall";
 import { Link } from 'gatsby'
 
 const Header = () => {    

@@ -73,8 +73,10 @@
         }
 
         &__content {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: 16px;
+            height: 100%;
             padding: 1.2rem;
 
             @include breakpoint-up(lg) {
@@ -108,6 +110,7 @@
 
             .button {
                 width: auto;
+                margin-top: auto;
             }
         }
 
@@ -158,7 +161,6 @@
 
         &--static {
             box-shadow: none;
-            overflow: unset;
 
             .post-item__content {
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSiteMetadata } from "../hooks/metadata"
-import LogoSmall from "./logoSmall";
-import HeaderLeaveBig from '../images/headerLeaveBig.png'
+import { useSiteMetadata } from "../../hooks/metadata"
+import LogoSmall from "../logoSmall";
+import HeaderLeaveBig from '../../images/headerLeaveBig.png'
 import { Link } from 'gatsby'
 
 const Footer = () => {
