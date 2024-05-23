@@ -1,6 +1,6 @@
 import React from 'react';
-import TipCard from '../components/tipCard'
-import useAllTips from '../hooks/tips';
+import TipCard from './tipCard'
+import useAllTips from '../../hooks/tips';
 
 const Tips = () => {
     const { tips } = useAllTips();

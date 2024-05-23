@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRef } from "react";
 import { useInView } from "framer-motion";
-import HeaderImg from '../images/headerBgTransparent.png'
-import HeaderLeaveSmall from '../images/headerLeaveSmall.png'
-import HeaderLeaveBig from '../images/headerLeaveBig.png'
+import HeaderImg from '../../images/headerBgTransparent.png'
+import HeaderLeaveSmall from '../../images/headerLeaveSmall.png'
+import HeaderLeaveBig from '../../images/headerLeaveBig.png'
 
 const Hero = ( {theme, title, paragraph}) => {
     const ref = useRef(null);

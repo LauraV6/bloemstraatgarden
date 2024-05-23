@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from 'react-helmet'
-import Sidebar from '../components/sidebar'
-import Layout from '../components/layout'
+import Sidebar from '../components/layout/sidebar'
+import Layout from '../components/layout/layout'
 import heroImage from "../images/404.png";
 import { Link } from 'gatsby'
 
