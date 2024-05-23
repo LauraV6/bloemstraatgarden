@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from '../components/layout'
-import Sidebar from '../components/sidebar'
+import Layout from '../components/layout/layout'
+import Sidebar from '../components/layout/sidebar'
 import { BLOCKS } from '@contentful/rich-text-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'

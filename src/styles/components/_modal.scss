@@ -1,0 +1,138 @@
+@use '../abstracts' as *;
+
+.modal {
+    background-color: var(--color-1);
+    border-radius: 5px;
+    border: none;
+    width: calc(100vw - 6rem);
+    max-width: 500px;
+    padding: 2rem;
+
+    @include breakpoint-up(md) {
+        width: calc(100vw - 8rem);
+        min-width: 400px;
+    }
+
+    @include breakpoint-up(lg) {
+        width: fit-content;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    h2 {
+        margin-bottom: 2rem;
+
+        svg {
+            margin-right: 10px;
+        }
+    }
+
+    &__items {
+        display: grid;
+        gap: 1rem;
+        list-style-type: none;
+        padding: 0;
+
+        &.checkout {
+            gap: 5px;
+            background-color: var(--color-transparent-1);
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 0;
+        }
+
+        > li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 11px;
+
+                img {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+
+                h4 {
+                    font-size: 1em;
+                }
+            }
+
+            .amount {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                span {
+                    text-align: center;
+                    min-width: 20px;
+                }
+
+                button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;                    
+                    border-radius: 50px;
+                    background-color: var(--color-green-2);
+                    border: none;
+                    font-size: 10px;
+                    width: 25px;
+                    height: 25px;
+                    padding: 0;
+
+                    &:hover, &:active, &:focus {
+                        background-color: var(--color-green-1);
+                    }
+
+                    svg {
+                        path {
+                            color: hsl(0, 0%, 100%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__inputs {
+        display: grid; 
+        gap: 1rem;
+
+        > div {
+            display: grid;
+            gap: 5px;
+
+            label {
+                display: block;
+            }
+    
+            input {
+                color: hsl(0, 0%, 0%);
+                border-radius: 5px;
+                border: 1px solid var(--color-3);
+                font-size: 1em;
+                padding: .5rem;
+    
+                &:focus {
+                    outline: 2px solid var(--color-green-1);
+                    outline-offset: 0;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+}
