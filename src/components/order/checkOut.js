@@ -14,6 +14,7 @@ const CheckOut = () => {
     const [email, setEmail] = useState('');
     const [openSuccesModal, setOpenSuccesModal] = useState(false);
     const [openErrorModal, setOpenErrorModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleClose() {
         userProgressCtx.hideCheckout();
@@ -47,13 +48,13 @@ const CheckOut = () => {
         };
 
         try {
-            const res = await axios.post("https://api.emailjs.com/api/v1.0/email/send", data)
-            console.log(res.data);
+            setIsLoading(true);
+            const response = await axios.post("https://api.emailjs.com/api/v1.0/email/send", data);
             setName('');
             setEmail('');
             setOpenSuccesModal(true);
         } catch (error) {
-            console.log(error);
+            setIsLoading(false);
             setOpenErrorModal(true);
         }
     };
@@ -85,7 +86,7 @@ const CheckOut = () => {
     return (
         <Modal open={userProgressCtx.progress === 'checkout'} onClose={handleClose}>
             <form onSubmit={handleSubmit}>
-                <h2>Checkout</h2>
+                <h2>Bestelling bevestigen</h2>
                 <div className='modal__inputs'>   
                     <ul className='modal__items checkout'>
                     {
@@ -102,12 +103,15 @@ const CheckOut = () => {
                     </div>
                 </div>
                 <div className='modal__footer'>
-                    <button type='button' onClick={handleClose} className='button button--ter'>Annuleren</button>
-                    <button id="submit" className='button button--cta' >Versturen</button>
+
+                    {isLoading ? <button className='button button--cta' disabled>Versturen...</button> : (
+                    <>
+                        <button type='button' onClick={handleClose} className='button button--ter'>Annuleren</button> 
+                        <button id="submit" className='button button--cta'>Versturen</button>
+                    </>
+                    )}
                 </div>
             </form>
-            {    console.log(`'email:' ${email}, 'naam:' ${name}`)
-}
         </Modal>
     )
 }

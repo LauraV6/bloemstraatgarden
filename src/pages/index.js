@@ -11,7 +11,7 @@ import StackAnnouncement from '../components/stackAnnouncement'
 import States from '../components/states'
 import Loader from '../components/loader'
 import SearchBar from '../components/searchbar'
-import FilteredBlogs from '../components/filteredBlogs'
+import FilteredBlogs from '../components/posts/filteredBlogs'
 
 const BlogPage = () => {
     const { allposts: allPosts } = useAllPosts();
