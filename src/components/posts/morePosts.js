@@ -1,7 +1,7 @@
 import React from 'react'
 import PostCard from "./postCard";
-import useAllPosts from '../hooks/allposts';
-import { shuffle } from '../utils/helpers';
+import useAllPosts from '../../hooks/allposts';
+import { shuffle } from '../../utils/helpers';
 
 const MorePosts = ( bottom ) => {
     const { allposts } = useAllPosts();

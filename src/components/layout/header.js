@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import ThemeColor from "../themeColor";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWhatsapp, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
-import Logo from "../logo";
-import LogoSmall from "../logoSmall";
+import Logo from "../logo/logo";
+import LogoSmall from "../logo/logoSmall";
 import { Link } from 'gatsby'
 
 const Header = () => {    

@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import useAvailable from '../hooks/available';
 import Layout from '../components/layout/layout';
 import Hero from "../components/layout/hero";
-import MorePosts from "../components/morePosts";
+import MorePosts from "../components/posts/morePosts";
 import AvailableItem from "../components/order/availableItem";
 import zaaiTrays from '../images/zaaitrays.jpg';
 import notAvailable from '../images/notAvailable.png';
