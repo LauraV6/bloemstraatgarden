@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSiteMetadata } from "../../hooks/metadata"
-import LogoSmall from "../logoSmall";
+import LogoSmall from "../logo/logoSmall";
 import HeaderLeaveBig from '../../images/headerLeaveBig.png'
 import { Link } from 'gatsby'
 

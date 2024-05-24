@@ -8,7 +8,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { graphql, Link } from 'gatsby'
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Helmet } from 'react-helmet'
-import MorePosts from "../components/morePosts";
+import MorePosts from "../components/posts/morePosts";
 import ProgressBar from "../components/progressbar";
 
 const options = {
