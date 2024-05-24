@@ -14,12 +14,14 @@ const Modal = ({children, open, onClose}) => {
         return() => modal.close();
     }, [open])
 
-    return (
-        createPortal(
-            <dialog ref={dialog} className="modal" onClose={onClose}>{children}</dialog>, 
-            document.body
+    if (typeof document !== `undefined`) {
+        return (
+            createPortal(
+                <dialog ref={dialog} className="modal" onClose={onClose}>{children}</dialog>, 
+                document.body
+            )
         )
-    )
+      }
 }
 
 export default Modal
