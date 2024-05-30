@@ -17,7 +17,11 @@ const Modal = ({children, open, onClose}) => {
     if (typeof document !== `undefined`) {
         return (
             createPortal(
-                <dialog ref={dialog} className="modal" onClose={onClose}>{children}</dialog>, 
+                <dialog ref={dialog} className="modal" onClose={onClose}>
+                    <div className='modal-container'>
+                        {children}
+                    </div>
+                </dialog>, 
                 document.body
             )
         )

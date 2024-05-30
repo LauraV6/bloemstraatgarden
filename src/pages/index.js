@@ -93,7 +93,7 @@ const BlogPage = () => {
                                         <label htmlFor={catg}>{catg}</label>
                                     </motion.button>
                                 );
-                            })}
+                            })}0/ 
                         </div>
                     </div>
                     {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> : <FilteredBlogs blogList={filteredBlogs} />}
