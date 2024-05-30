@@ -12,3 +12,9 @@ $breakpoints-down: ("sm": "766px", "md": "991px", "lg": "1199px", "xlg": "1399px
         @content;
     }
 }
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
