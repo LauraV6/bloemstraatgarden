@@ -10,7 +10,7 @@ const TipCard = ({
     title,
 }) => {
     return (
-        <Link className='tip-item' to={`/${slug}`}>
+        <Link to={`/${slug}`}>
             <div className='tip-item__img' style={{backgroundImage: `url(${lazyLoadPlaceholder})`}}>
                 <LazyLoadImage src={img} alt={alt} />
             </div>
