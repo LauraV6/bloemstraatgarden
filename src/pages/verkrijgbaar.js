@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'gatsby';
 import OrderHeader from "../components/order/orderHeader";
+import FadeIn from '../components/animation/fadeIn';
 
 const Verkrijgbaar = () => {
     const { available } = useAvailable(); 
@@ -58,7 +59,9 @@ const Verkrijgbaar = () => {
                                 {available.edges.map((edge, key) => {
                                     const post = edge.node;
                                     return (
-                                        <AvailableItem key={key} plant={post} />                            
+                                        <FadeIn delay={key * 0.1}>
+                                            <AvailableItem key={key} plant={post} />     
+                                        </FadeIn>                       
                                     )
                                 })}
                             </div>

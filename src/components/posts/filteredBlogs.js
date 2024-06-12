@@ -1,5 +1,6 @@
 import React from 'react';
-import PostCard from './postCard'
+import PostCard from './postCard';
+import FadeIn from '../animation/fadeIn';
 
 const FilteredBlogs = ( {blogList} ) => {
     return (
@@ -7,6 +8,7 @@ const FilteredBlogs = ( {blogList} ) => {
             {blogList.map((edge, key) => {
                 const post = edge.node;
                 return (
+                    <FadeIn delay={key * 0.1}>
                         <PostCard 
                             key={key}
                             slug={post.slug}
@@ -16,6 +18,7 @@ const FilteredBlogs = ( {blogList} ) => {
                             description={post.description.description} 
                             publishedDate={post.publishedDate}
                         />
+                    </FadeIn>
                 )
             })}
         </div>

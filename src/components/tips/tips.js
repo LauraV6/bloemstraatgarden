@@ -1,6 +1,7 @@
 import React from 'react';
 import TipCard from './tipCard'
 import useAllTips from '../../hooks/tips';
+import FadeIn from '../animation/fadeIn';
 
 const Tips = () => {
     const { tips } = useAllTips();
@@ -13,13 +14,15 @@ const Tips = () => {
                 {tips.map((edge, key) => {
                     const tip = edge.node;
                     return (
-                        <TipCard 
-                            key={key}
-                            slug={tip.slug}
-                            img={tip.featuredimage.url} 
-                            alt={tip.featuredimage.title} 
-                            title={tip.title}
-                        />
+                        <FadeIn delay={key * 0.1} className='tip-item'>
+                            <TipCard 
+                                key={key}
+                                slug={tip.slug}
+                                img={tip.featuredimage.url} 
+                                alt={tip.featuredimage.title} 
+                                title={tip.title}
+                            />
+                        </FadeIn>
                     )
                 })}
             </div>

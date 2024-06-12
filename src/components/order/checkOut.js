@@ -50,6 +50,7 @@ const CheckOut = () => {
         try {
             setIsLoading(true);
             const response = await axios.post("https://api.emailjs.com/api/v1.0/email/send", data);
+            console.log(response);
             setName('');
             setEmail('');
             setOpenSuccesModal(true);
