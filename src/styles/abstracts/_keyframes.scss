@@ -22,10 +22,6 @@
         top: -30%;
     } 
 
-    50% {
-        transform: rotate(50deg);
-    }
-
     100% { 
         opacity: 1;
         top: -20%;
@@ -57,10 +53,6 @@
         transform: rotate(0deg); 
         bottom: -60%;
     } 
-
-    50% {
-        transform: rotate(10deg);
-    }
 
     100% { 
         opacity: 1;

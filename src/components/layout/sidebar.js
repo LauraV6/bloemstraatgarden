@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSiteMetadata } from "../../hooks/metadata";
 import profile from "../../images/profile.jpg";
+import FadeIn from '../animation/fadeIn';
 import { Link } from 'gatsby';
 import { motion } from "framer-motion";
 
@@ -9,7 +10,7 @@ const Sidebar = () => {
     return (
         <aside className='aside'>
             <div className='aside__content'>
-                <div className='intro'>
+                <FadeIn className='intro'>
                     <img src={profile} alt="profile"></img>
                     <div>
                         <div>
@@ -17,8 +18,8 @@ const Sidebar = () => {
                             <p>{description}</p>
                         </div>
                     </div>
-                </div>
-                <div className='test'>
+                </FadeIn>
+                <FadeIn className='test' delay={0.3}>
                     <div>
                         <div>
                             <h4>Wil je jouw moestuin kennis testen?</h4>
@@ -30,7 +31,7 @@ const Sidebar = () => {
                             <Link className='button button--cta' to='/quiz'>Start de quiz</Link>
                         </motion.div>
                     </div>
-                </div>
+                </FadeIn>
             </div>
         </aside>
     )
