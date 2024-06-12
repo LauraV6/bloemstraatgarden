@@ -1,13 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import FadeIn from './animation/fadeIn';
 import { Link } from 'gatsby';
 import { motion } from "framer-motion";
 
 const StackAnnouncement = () => {
     return (
         <section>
-            <div className='boxing'>
+            <FadeIn className='boxing' delay={0.3}>
                 <div className='story'>
                     <div className='story__text'>
                         <h3>Gratis voorraad</h3>
@@ -23,7 +24,7 @@ const StackAnnouncement = () => {
                         </motion.div>
                     </div>
                 </div>
-            </div>
+            </FadeIn>
         </section> 
     )
 }

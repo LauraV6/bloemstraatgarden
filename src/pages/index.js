@@ -1,17 +1,18 @@
-import React from 'react'
-import { useState, useEffect, useMemo } from 'react'
-import { Helmet } from 'react-helmet'
+import React from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { Helmet } from 'react-helmet';
 import { useSiteMetadata } from '../hooks/metadata';
 import useAllPosts from '../hooks/allposts';
 import { motion } from "framer-motion";
-import Layout from '../components/layout/layout'
-import Hero from '../components/layout/hero'
+import Layout from '../components/layout/layout';
+import Hero from '../components/layout/hero';
 import Tips from '../components/tips/tips';
-import StackAnnouncement from '../components/stackAnnouncement'
-import States from '../components/states'
-import Loader from '../components/loader'
-import SearchBar from '../components/searchbar'
-import FilteredBlogs from '../components/posts/filteredBlogs'
+import StackAnnouncement from '../components/stackAnnouncement';
+import States from '../components/states';
+import Loader from '../components/loader';
+import SearchBar from '../components/searchbar';
+import FilteredBlogs from '../components/posts/filteredBlogs';
+import FadeIn from '../components/animation/fadeIn';
 
 const BlogPage = () => {
     const { allposts: allPosts } = useAllPosts();
@@ -93,7 +94,7 @@ const BlogPage = () => {
                                         <label htmlFor={catg}>{catg}</label>
                                     </motion.button>
                                 );
-                            })}0/ 
+                            })}
                         </div>
                     </div>
                     {filteredBlogs.length === 0 && searchTerm === "" ? <Loader /> : <FilteredBlogs blogList={filteredBlogs} />}
@@ -102,16 +103,18 @@ const BlogPage = () => {
                             const waveAmount = 9;
                             return (
                                 <section className='center p-0'>
-                                    <motion.button 
-                                        className='button button--water' 
-                                        onClick={ () => setIndex (index + 1 )}
-                                        whileHover={{ scale: [null, 1.1, 1.05] }}
-                                        transition={{ duration: 0.3 }}>
-                                            <span>Geef water voor meer berichten</span>
-                                        {
-                                            [...Array(waveAmount)].map((e, i) => <div className='wave' key={i}></div>)
-                                        }
-                                    </motion.button>
+                                    <FadeIn delay={0.5}>
+                                        <motion.button 
+                                            className='button button--water' 
+                                            onClick={ () => setIndex (index + 1 )}
+                                            whileHover={{ scale: [null, 1.1, 1.05] }}
+                                            transition={{ duration: 0.3 }}>
+                                                <span>Geef water voor meer berichten</span>
+                                            {
+                                                [...Array(waveAmount)].map((e, i) => <div className='wave' key={i}></div>)
+                                            }
+                                        </motion.button>
+                                    </FadeIn>
                                 </section>
                             )
                         }

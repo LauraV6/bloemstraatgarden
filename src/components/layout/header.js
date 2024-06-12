@@ -9,6 +9,8 @@ import Logo from "../logo/logo";
 import LogoSmall from "../logo/logoSmall";
 import { Link } from 'gatsby'
 
+import FadeIn from '../animation/fadeIn';
+
 const Header = () => {    
     const { author, description } = useSiteMetadata()
     const [small, setSmall] = useState(false);
@@ -29,36 +31,43 @@ const Header = () => {
         <header className={small ? "small" : undefined}>
             <nav>
                 <div className='header-socials'>
-                  <motion.a 
-                    whileHover={{ scale: [null, 1.2, 1.1], rotate: 10 }}
-                    transition={{ duration: .1 }}
-                    whileTap={{ rotate: 0 }}
-                    className='button button--cta share-icon whapp' href="https://api.whatsapp.com/send?text=https://bloemstraatgarden.netlify.app/" data-action="share/whatsapp/share" target="_blank" rel="noreferrer"
-                  >
-                    <FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span>
-                  </motion.a>
-                  <motion.a 
-                    whileHover={{ scale: [null, 1.2, 1.1], rotate: -10 }}
-                    transition={{ duration: .1 }}
-                    whileTap={{ rotate: 0 }}
-                    className='button button--cta share-icon linkedin' href="https://www.linkedin.com/in/laura-vlasma-0692b0159/" target="_blank" rel="noreferrer"
-                  >
-                    <FontAwesomeIcon icon={faLinkedinIn}/><span>Delen</span>
-                  </motion.a>
-
-                  <motion.a 
-                    whileHover={{ scale: [null, 1.2, 1.1], rotate: 10 }}
-                    transition={{ duration: .1 }}
-                    whileTap={{ rotate: 0 }}
-                    className='button button--cta share-icon insta' href="https://www.instagram.com/lauravlasma/" target="_blank" rel="noreferrer"
-                  >       
-                    <FontAwesomeIcon icon={faInstagram}/><span>Delen</span>
-                  </motion.a>
-
+                  <FadeIn>
+                    <motion.a 
+                      whileHover={{ scale: [null, 1.2, 1.1], rotate: 10 }}
+                      transition={{ duration: .1 }}
+                      whileTap={{ rotate: 0 }}
+                      className='button button--cta share-icon whapp' href="https://api.whatsapp.com/send?text=https://bloemstraatgarden.netlify.app/" data-action="share/whatsapp/share" target="_blank" rel="noreferrer"
+                    >
+                      <FontAwesomeIcon icon={faWhatsapp}/><span>Delen</span>
+                    </motion.a>
+                  </FadeIn>
+                  <FadeIn>
+                    <motion.a 
+                      whileHover={{ scale: [null, 1.2, 1.1], rotate: -10 }}
+                      transition={{ duration: .1 }}
+                      whileTap={{ rotate: 0 }}
+                      className='button button--cta share-icon linkedin' href="https://www.linkedin.com/in/laura-vlasma-0692b0159/" target="_blank" rel="noreferrer"
+                    >
+                      <FontAwesomeIcon icon={faLinkedinIn}/><span>Delen</span>
+                    </motion.a>
+                  </FadeIn>
+                  <FadeIn>
+                    <motion.a 
+                      whileHover={{ scale: [null, 1.2, 1.1], rotate: 10 }}
+                      transition={{ duration: .1 }}
+                      whileTap={{ rotate: 0 }}
+                      className='button button--cta share-icon insta' href="https://www.instagram.com/lauravlasma/" target="_blank" rel="noreferrer"
+                    >       
+                      <FontAwesomeIcon icon={faInstagram}/><span>Delen</span>
+                    </motion.a>
+                  </FadeIn>
                 </div>
-  
-                <Link to='/' id='logo' className={`logo ${small ? "logo--small" : ""}`}>{small ? <LogoSmall /> : <Logo />}</Link>
-                <ThemeColor />
+                <FadeIn>
+                  <Link to='/' id='logo' className={`logo ${small ? "logo--small" : ""}`}>{small ? <LogoSmall /> : <Logo />}</Link>
+                </FadeIn>
+                <FadeIn>
+                  <ThemeColor />
+                </FadeIn>
             </nav>
         </header>
         </>

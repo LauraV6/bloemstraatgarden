@@ -2,6 +2,7 @@ import React from 'react'
 import PostCard from "./postCard";
 import useAllPosts from '../../hooks/allposts';
 import { shuffle } from '../../utils/helpers';
+import FadeIn from '../animation/fadeIn';
 
 const MorePosts = ( bottom ) => {
     const { allposts } = useAllPosts();
@@ -16,16 +17,20 @@ const MorePosts = ( bottom ) => {
                 <div className='post-items'>
                 {shuffledPosts.map((edge, key) => {
                     const post = edge.node;
-                    return <PostCard 
-                                key={key}
-                                slug={post.slug}
-                                img={post.featuredimage.url} 
-                                alt={post.featuredimage.title} 
-                                title={post.title} 
-                                description={post.description.description}
-                                recommend={true}
-                                publishedDate={post.publishedDate}
-                            />;
+                    return (
+                        <FadeIn delay={key * 0.1}>
+                            <PostCard 
+                                    key={key}
+                                    slug={post.slug}
+                                    img={post.featuredimage.url} 
+                                    alt={post.featuredimage.title} 
+                                    title={post.title} 
+                                    description={post.description.description}
+                                    recommend={true}
+                                    publishedDate={post.publishedDate}
+                            />
+                        </FadeIn>
+                    );
                 })}
                 </div>
             </div>
