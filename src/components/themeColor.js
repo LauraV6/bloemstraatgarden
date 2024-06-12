@@ -7,9 +7,6 @@ const setDark = () => {
   if (typeof window !== 'undefined') {
     localStorage.setItem("theme", "dark");
     document.documentElement.setAttribute("data-theme", "dark");
-  } else {
-    localStorage.setItem("theme", "light");
-    document.documentElement.setAttribute("data-theme", "light");
   }
 };
 
@@ -17,9 +14,6 @@ const setLight = () => {
   if (typeof window !== 'undefined') {
     localStorage.setItem("theme", "light");
     document.documentElement.setAttribute("data-theme", "light");
-  } else {
-    localStorage.setItem("theme", "dark");
-    document.documentElement.setAttribute("data-theme", "dark");
   }
 };
 
@@ -36,7 +30,7 @@ if (defaultDark) {
 }
 
 const toggleTheme = () => {
-  if (localStorage.getItem("theme") === 'light') {
+  if (typeof window !== 'undefined' ? localStorage.getItem("theme") === 'light' : null) {
     setDark();
   } else {
     setLight();
