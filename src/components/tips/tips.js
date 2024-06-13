@@ -14,7 +14,7 @@ const Tips = () => {
                 {tips.map((edge, key) => {
                     const tip = edge.node;
                     return (
-                        <FadeIn delay={key * 0.1} className='tip-item'>
+                        <FadeIn className='tip-item'>
                             <TipCard 
                                 key={key}
                                 slug={tip.slug}

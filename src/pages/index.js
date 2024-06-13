@@ -103,7 +103,7 @@ const BlogPage = () => {
                             const waveAmount = 9;
                             return (
                                 <section className='center p-0'>
-                                    <FadeIn delay={0.5}>
+                                    <FadeIn delay={0.2}>
                                         <motion.button 
                                             className='button button--water' 
                                             onClick={ () => setIndex (index + 1 )}

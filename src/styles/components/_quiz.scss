@@ -134,7 +134,11 @@
         padding: 0;
         margin: 0;
 
-        li {
+        @include breakpoint-up(md) {
+            gap: 3rem;
+        }
+
+        div {
             display: grid;
             justify-content: center;
             gap: 1rem;

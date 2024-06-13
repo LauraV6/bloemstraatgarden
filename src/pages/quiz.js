@@ -5,6 +5,7 @@ import QUESTIONS from '../data/questions';
 import Layout from '../components/layout/layout';
 import Question from '../components/quiz/question';
 import Summary from '../components/quiz/summary';
+import FadeIn from '../components/animation/fadeIn';
 
 const Quiz = () => {
     const [userAnswers, setUserAnswers] = useState([]);
@@ -31,7 +32,7 @@ const Quiz = () => {
                     <div className='hero__container'>
                         <div className='hero__text'>
                             <h1 className='quiz-header'>Moestuin Quiz</h1>
-                            <div className='quiz-container'>
+                            <FadeIn className='quiz-container'>
                                 {quizIsComplete ? <Summary userAnswers={userAnswers} /> :                                 
                                 <Question
                                     key={activeQuestionIndex}
@@ -39,7 +40,7 @@ const Quiz = () => {
                                     onSelectAnswer={handleSelectAnswer}
                                     onSkipAnswer={handleSkipAnswer}            
                                 />}
-                            </div>
+                            </FadeIn>
                         </div>
                     </div>
                 </section>
