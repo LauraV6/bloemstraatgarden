@@ -1,9 +1,10 @@
 import React from 'react';
-import QUESTIONS from '../../data/questions'
+import QUESTIONS from '../../data/questions';
+import FadeIn from '../animation/fadeIn';
 
 const Summary = ( { userAnswers } ) => {
     const skippedAnswers = userAnswers.filter((answer) => answer === null);
-    const correctAnswers = userAnswers.filter((answer, index) => answer === QUESTIONS[index].answers[0]);
+    const correctAnswers = userAnswers.filter((answer, i) => answer === QUESTIONS[i].answers[0]);
     const skippedAnswersShare = Math.round((skippedAnswers.length / userAnswers.length) * 100);
     const correctAnswersShare = Math.round((correctAnswers.length / userAnswers.length) * 100);
     const wrongAnswersShare = 100 - skippedAnswersShare - correctAnswersShare;
@@ -12,24 +13,24 @@ const Summary = ( { userAnswers } ) => {
         <div className='summary'>
             <h2>Quiz voltooid!</h2>
             <div className='summary__states'>
-                <div className='score'>
+                <FadeIn className='score'>
                     <span className='score__number'>{skippedAnswersShare}%</span>
                     <span className='score__text'>Overgeslagen</span>     
-                </div>
-                <div className='score'>
+                </FadeIn>
+                <FadeIn className='score' delay={0.2}>
                     <span className='score__number'>{correctAnswersShare}%</span>
                     <span className='score__text'>Correct</span>     
-                </div>
-                <div className='score'>
+                </FadeIn>
+                <FadeIn className='score' delay={0.4}>
                     <span className='score__number'>{wrongAnswersShare}%</span>
                     <span className='score__text'>Fout</span>     
-                </div>
+                </FadeIn>
             </div>
             <ol className='summary__answers'>
-                {userAnswers.map((answer, index) => {
+                {userAnswers.map((answer, i) => {
                     let cssClass = "user-answer";
                     let showCorrectAnswer = "";
-                    const correctAnswer = QUESTIONS[index].answers[0];
+                    const correctAnswer = QUESTIONS[i].answers[0];
 
                     if (answer === null) {
                         cssClass += " skipped";
@@ -42,11 +43,13 @@ const Summary = ( { userAnswers } ) => {
                     }
                     
                     return (
-                        <li key={index}>
-                            <h3>{index + 1}</h3>
-                            <h4 className='question'>{QUESTIONS[index].text}</h4>
-                            <p className={cssClass}>{answer ?? 'Skipped'}</p>
-                            {answer !== correctAnswer ? <p className='question-answer'>Correct antwoord: {showCorrectAnswer}</p> : null}
+                        <li key={i}>
+                            <FadeIn delay={i * 0.2}>
+                                <h3>{i + 1}</h3>
+                                <h4 className='question'>{QUESTIONS[i].text}</h4>
+                                <p className={cssClass}>{answer ?? 'Skipped'}</p>
+                                {answer !== correctAnswer ? <p className='question-answer'>Correct antwoord: {showCorrectAnswer}</p> : null}
+                            </FadeIn>
                         </li>
                     );
                 })}
