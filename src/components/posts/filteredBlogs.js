@@ -8,7 +8,7 @@ const FilteredBlogs = ( {blogList} ) => {
             {blogList.map((edge, key) => {
                 const post = edge.node;
                 return (
-                    <FadeIn delay={key * 0.1}>
+                    <FadeIn>
                         <PostCard 
                             key={key}
                             slug={post.slug}

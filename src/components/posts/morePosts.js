@@ -14,11 +14,10 @@ const MorePosts = ( bottom ) => {
         <div className={`more-posts ${bottom ? 'more-posts--bottom' : ''}`}>
             <h3>Bekijk posts over onze tuin</h3>
             <div className='more-posts__container'>
-                <div className='post-items'>
-                {shuffledPosts.map((edge, key) => {
-                    const post = edge.node;
-                    return (
-                        <FadeIn delay={key * 0.1}>
+                <FadeIn className='post-items'>
+                    {shuffledPosts.map((edge, key) => {
+                        const post = edge.node;
+                        return (
                             <PostCard 
                                     key={key}
                                     slug={post.slug}
@@ -29,10 +28,9 @@ const MorePosts = ( bottom ) => {
                                     recommend={true}
                                     publishedDate={post.publishedDate}
                             />
-                        </FadeIn>
-                    );
-                })}
-                </div>
+                        );
+                    })}
+                </FadeIn>
             </div>
         </div>
     )
