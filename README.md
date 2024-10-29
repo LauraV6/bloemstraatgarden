@@ -18,5 +18,5 @@ To run the application you will need a space ID and access token.<br /><br />
 
 **Start developing**
 
-npn install<br/>
+npm install<br/>
 npm run develop

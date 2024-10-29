@@ -140,6 +140,10 @@ header {
                 gap: 10px;
                 flex-shrink: 0;
 
+                @include breakpoint-down(sm) {
+                    display: none;
+                }
+
                 .share {
                     &-icon {
                         position: absolute;
