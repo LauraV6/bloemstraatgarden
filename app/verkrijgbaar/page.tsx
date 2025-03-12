@@ -9,7 +9,6 @@ import NonAvailable from "../../components/available/nonAvailable";
 import Zaaitrays from "../../public/images/zaaitrays.jpg";
 import styles from "../../components/stocking/stocking.module.scss";
 import Image from "next/image";
-import { MorePosts } from "../../components/posts/morePosts";
 
 export default function Available() {
     return (
