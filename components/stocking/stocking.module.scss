@@ -1,0 +1,61 @@
+@use '../../styles/mixins' as *;
+
+.boxing {
+    background-color: var(--color-green-5);
+    border-radius: 5px;
+    padding: 1.2rem;
+
+    @include breakpoint-up(md) {
+        padding: 3rem 5rem;
+    }
+}
+
+.story {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__container {
+        display: grid;
+        gap: 1rem;
+    
+        @include breakpoint-up(md) {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            width: 100%;
+        }
+    }
+
+    &__text {
+        display: grid;
+        gap: 1rem;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &__adding {
+        position: relative;
+
+        @include breakpoint-up(md) {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .react-loading-skeleton, img {
+            width: 100%;
+            height: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+
+            @include breakpoint-up(md) {
+                width: 65%;
+                height: 100%;
+                min-height: 265px;
+                max-height: auto;
+            }
+        }
+    }
+}
