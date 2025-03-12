@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid"
 import { TitleLine } from "../../components/titleLine";
 import NonAvailable from "../../components/available/nonAvailable";
-import Zaaitrays from "../../public/images/zaaitrays.jpg";
+import Zaaitrays from "../../public/zaaitrays.jpg";
 import styles from "../../components/stocking/stocking.module.scss";
 import Image from "next/image";
 

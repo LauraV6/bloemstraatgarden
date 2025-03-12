@@ -1,6 +1,6 @@
 import styles from "./nonAvailable.module.scss";
 import Image from "next/image";
-import nonAvailable from "../../public/images/notAvailable.png";
+import nonAvailable from "../../public/notAvailable.png";
 
 export default function NonAvailable() {
   return (
