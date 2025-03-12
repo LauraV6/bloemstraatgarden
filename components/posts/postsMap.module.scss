@@ -1,0 +1,189 @@
+@use '../../styles/mixins' as *;
+
+.blogGrid {
+    position: relative;
+    display: grid;
+    gap: 1.3rem;
+    margin-top: 1.2rem;
+
+    @include breakpoint-up(md) {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    @include breakpoint-up(lg) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &:empty {
+        display: flex;
+        justify-content: center;
+        border: 1px solid hsl(0, 0%, 80%);
+        border-radius: 5px;
+        padding: 1rem;
+
+        &::after {
+            content: "Sorry... Ik heb geen artikel geschreven met deze titel 🥀";
+        }
+    }
+}
+
+.morePosts {
+  position: relative;
+  margin-top: 1rem;
+
+  @include breakpoint-up(md) {
+    margin-top: 4rem;
+  }
+
+  .blogGrid {
+    @include breakpoint-down(sm) {
+      display: flex;
+      overflow: hidden;
+      overflow-x: scroll;
+    }
+
+    @media only screen and (max-width: 1299px) and (min-width: 767px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    > div {
+      box-shadow: none;
+      flex: 0 0 65vw;
+
+      @media only screen and (max-width: 1299px) and (min-width: 767px)  {
+        &:nth-child(3) {
+            display: none;
+        }
+      }
+
+      div:first-of-type {
+        height: 170px;
+      }
+
+      div:last-of-type {
+        padding: 1rem;
+
+        h2 {
+          font-size: 1.2em;
+        }
+  
+        p {
+          font-size: .9em;
+        }
+      }
+    }
+  }
+}
+
+.blogBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+
+    button {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        font-family: var(--font-pacaembu);
+        width: fit-content;
+        height: 30px;
+        border-radius: 40px;
+        background-color: var(--color-blue);
+        overflow: hidden;
+        border: 1px solid var(--color-blue);
+        text-align: center;
+        padding: .5rem 1.5rem;
+
+        &:hover {
+            cursor: pointer;
+
+            span {
+                color: var(--color-2);
+            }
+
+            .wave {
+                top: -120px;
+              }
+        }
+
+        span {
+            position: relative;
+            font-family: var(--font-pacaembu);
+            z-index: 1;
+          }
+      
+          .wave {
+            width: 12.5%;
+            height: 100%;
+            background: var(--color-2);
+            position: absolute;
+            left: 0;
+            top: -7px;
+            transition: .4s;
+            animation: move-wave 3s linear infinite;
+
+            &:before, &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                border-radius: 100%;
+                width: 100%;
+                height: 50px;         
+            }
+      
+            &:before {             
+                background-color: var(--color-blue);
+                right: -24%;
+                top: 42px;
+              }
+              
+              &:after {
+                background-color: var(--color-2);
+                left: -26%;
+                top: -1.4px;
+              }
+
+              &:nth-child(2) {
+                left: 0%;
+              }
+
+              &:nth-child(3) {
+                left: 12.5%;
+              }
+
+              &:nth-child(4) {
+                left: 25%;
+              }
+
+              &:nth-child(5) {
+                left: 37.5%;
+              }
+
+              &:nth-child(6) {
+                left: 50%;
+              }
+
+              &:nth-child(7) {
+                left: 62.5%;
+              }
+
+              &:nth-child(8) {
+                left: 75%;
+              }
+
+              &:nth-child(9) {
+                left: 87.5%;
+              }
+
+              &:nth-child(10) {
+                left: 100%;
+              }
+          }
+    }
+}
+
+@keyframes move-wave {
+    100% { transform: translateX(-100%) }
+}

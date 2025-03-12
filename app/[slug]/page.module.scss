@@ -1,0 +1,219 @@
+@use '@/../styles/mixins' as *;
+
+.postheader {
+    position: relative;
+    display: grid;
+    width: 100%;
+    max-width: unset;
+    height: 280px;
+    max-height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    margin: 0;
+
+    @include breakpoint-up(md) {
+        height: 600px;
+        max-height: 600px;
+    }
+
+    &::after {
+        content: "";
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.45) 100%);
+        z-index: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    &Bg {
+        background-color: var(--color-green-2);
+    }
+
+    &__content {
+        position: relative;
+        display: grid;
+        max-width: 1200px;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        z-index: 1;
+
+        @include breakpoint-up(md) {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: calc(100% - 4rem);
+            padding: 0 2rem;
+            margin: 3rem auto;
+        }
+
+        @include breakpoint-up(lg) {
+            width: calc(100% - 10rem);
+            padding: 0 5rem;
+        }
+        
+        > div {
+            margin-top: auto;
+
+            h1, label, path, span {
+                color: hsl(0, 0%, 100%);
+            }
+
+            h1 {
+                max-width: 850px;
+                margin-bottom: .5rem;
+                animation: load_in 1s forwards
+            }
+        }
+    }
+}
+
+.postcontent {
+    display: grid;
+    gap: 1.5rem;
+
+    @include breakpoint-up(md) {
+        grid-template-columns: 60% 1fr;
+        gap: 4rem;
+    }
+
+    @include breakpoint-up(lg) {
+        grid-template-columns: 1fr 260px;
+        gap: 5rem;
+    }
+
+    &__story {
+
+        h2, h3, h4 {
+            margin-top: 2rem;
+        }
+    
+        h6 {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            font-size: 1em;
+            color: var(--color-green-2);
+            background-color: var(--color-transparent);
+            border-radius: 50%;
+            margin: -50px 0 0 10px;
+    
+            @include breakpoint-up(md) {
+                width: 60px;
+                height: 60px;
+                font-size: 2em;
+                margin: -90px 0 0 20px;
+            }
+        }
+
+        img {
+            width: 100%;
+            border-radius: 5px;
+            height: 260px;
+            object-fit: cover;
+            margin: .5rem 0;
+    
+            @include breakpoint-up(md) {
+                height: 300px;
+            }
+    
+            @include breakpoint-up(lg) {
+                height: 500px;
+            }
+        }
+
+        p {
+            line-height: 1.5;
+        }
+    
+        blockquote {
+            margin: 2rem 0 .5rem 0;
+    
+            p {
+                position: absolute;
+                background-color: var(--color-green-2);
+                color: var(--color-green-5);
+                border-radius: 5px;
+                font-weight: bold;
+                width: fit-content;
+                font-size: .8em;
+                text-transform: uppercase;
+                padding: 6px 10px;
+                margin: -4px 0 0 10px;
+    
+                @include breakpoint-up(md) {
+                    padding: 8px 15px;
+                    margin: -8px 0 0 20px;
+                }
+            }
+        }
+    
+        ul {
+            padding-left: 1rem;
+    
+            li {
+                padding-left: 7px;
+    
+                &::marker {
+                    content: '➜';
+                    color: var(--color-green-1);
+                }
+            }
+        }
+    
+        sup {
+            display: block;
+            color: var(--color-green-3);
+            font-family: var(--font-pacaembu);
+            background-color: var(--color-green-5);
+            border-radius: 5px;
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-align: center;
+            font-weight: 500;
+            padding: 2.5rem 1.5rem;
+            margin: 2rem 0;
+    
+            @include breakpoint-up(md) {
+                padding: 2rem 2rem;
+                margin: 2rem 0;
+            }
+    
+            @include breakpoint-up(lg) {
+                font-size: 1.2em;          
+                padding: 3rem 7rem;
+                margin: 3rem 0;
+            }
+        }
+    
+        hr {
+            margin: 1.5rem 0;
+        }
+    }
+}
+
+.post {
+    &-progressbar {
+        position: fixed;
+        top: 59px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--color-green-2);
+        transform-origin: 0%;
+        z-index: 999;
+
+        @include breakpoint-up(md) {
+            top: 73px;
+
+        }
+    }
+}
