@@ -1,5 +1,5 @@
 import Link from "next/link";
-import heroImage from "../public/images/404.png";
+import heroImage from "../public/404.png";
 import heroStyles from "../components/layout/hero.module.scss";
 import styles from "./[slug]/page.module.scss";
 import Image from "next/image";

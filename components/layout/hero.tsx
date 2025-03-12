@@ -1,9 +1,9 @@
 "use client";
 
 import styles from "../layout/hero.module.scss";
-import HeaderLeaveBig from "../../public/images/headerLeaveBig.png";
-import HeaderLeaveSmall from "../../public/images/headerLeaveSmall.png";
-import HeaderImg from "../../public/images/headerBgTransparent.png";
+import HeaderLeaveBig from "../../public/headerLeaveBig.png";
+import HeaderLeaveSmall from "../../public/headerLeaveSmall.png";
+import HeaderImg from "../../public/headerBgTransparent.png";
 import FadeIn from "../fadeIn";
 import Image from "next/image";
 

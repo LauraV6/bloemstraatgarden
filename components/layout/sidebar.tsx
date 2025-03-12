@@ -1,6 +1,6 @@
 "use client";
 
-import Profile from "../../public/images/profile.png";
+import Profile from "../../public/profile.png";
 import styles from './sidebar.module.scss';
 import Image from "next/image";
 import FadeIn from "../fadeIn";

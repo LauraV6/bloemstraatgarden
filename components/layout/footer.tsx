@@ -1,6 +1,6 @@
 import styles from "./footer.module.scss";
 import LogoSmall from '../logo/logoSmall';
-import HeaderLeaveBig from '../../public/images/headerLeaveBig.png';
+import HeaderLeaveBig from '../../public/headerLeaveBig.png';
 import Link from "next/link";
 import { metadata } from "../../app/layout";
 
