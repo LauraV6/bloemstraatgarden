@@ -49,9 +49,7 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <body className={fontPacaembu.variable}>
-        <ThemeProvider attribute="class"
-          defaultTheme="system"
-          enableSystem>
+        <ThemeProvider >
           <Header />
           {children}
           <Footer />
