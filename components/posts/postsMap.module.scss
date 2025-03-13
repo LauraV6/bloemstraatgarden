@@ -80,7 +80,11 @@
 .blogBtn {
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
+    margin-top: 2rem;
+
+    @include breakpoint-up(lg) {
+      margin-top: 4rem;
+    }
 
     button {
         position: relative;

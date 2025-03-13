@@ -144,32 +144,3 @@ h1 {
       border-radius: 50px;
   }
 }
-
-.meta {
-  background-color: rgba(31, 95, 12, .8);
-  border-radius: 10px;
-  color: var(--white-clr);
-  float: right;
-  padding: 1rem;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-
-  @include mixin.breakpoint-up(md) {
-    position: relative;
-    background-color: hsla(0, 0%, 100%, .2);
-    right: 2rem;
-    top: 0;
-    padding: 1.5rem 2rem;
-  }
-
-  > div {
-    display: flex;   
-    align-items: center;
-    gap: 10px;
-
-    span::first-letter {
-      text-transform: uppercase;
-    }
-  }
-}

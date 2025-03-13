@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faCloudSun, faCloud } from '@fortawesome/free-solid-svg-icons'
+import styles from "./weather.module.scss";
 
 const Weather = ({weatherType} : {weatherType: string}) => {
     return (
@@ -8,7 +9,7 @@ const Weather = ({weatherType} : {weatherType: string}) => {
             {(() => {
                 if(weatherType) {
                     return (
-                        <div className="meta">
+                        <div className={styles.meta}>
                             <div>
                                 {(() => {
                                     const weatherText = weatherType.toString();
