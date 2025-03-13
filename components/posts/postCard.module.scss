@@ -5,6 +5,7 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        height: 100%;
         gap: 0;
         transition: ease-in-out .2s;
         color: hsl(0, 0%, 0%);
@@ -45,7 +46,8 @@
             }
 
             span {
-                min-height: 100%;
+                display: block;                      
+                height: 100%;
             }
         }
 

@@ -48,6 +48,10 @@
       grid-template-columns: 1fr 1fr;
     }
 
+    article {
+      height: calc(100% - 2px);
+    }
+
     > div {
       box-shadow: none;
       flex: 0 0 65vw;
