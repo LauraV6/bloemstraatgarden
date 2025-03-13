@@ -13,7 +13,6 @@ const ThemeSwitcher = () => {
   useEffect(() => {
     setMount(true);
   }, []);
-  console.log(currentTheme);
   return mount ? (
       <button
         className={`button button--cta ${styles.themeSwitch}`}

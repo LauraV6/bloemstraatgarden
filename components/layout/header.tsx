@@ -15,7 +15,7 @@ export default function Header() {
     useEffect(() => {
       if (typeof window !== "undefined") {
         window.addEventListener("scroll", () =>
-          setSmall(window.pageYOffset > 0)
+          setSmall(window.pageYOffset > 30)
         );
       }
     }, []);

@@ -1,6 +1,14 @@
+@use '../styles/mixins' as *;
+
 .themeSwitch {
     line-height: 1;
     padding-left: 10px;
     padding-right: 15px;
     margin-left: auto;
+
+    @include breakpoint-down(sm) {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+    }
 }
