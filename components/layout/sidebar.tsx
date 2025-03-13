@@ -15,9 +15,9 @@ export default function Sidebar() {
                     <Image src={Profile.src} alt="profile" width={600} height={500} />
                     <div>
                         <div>
-                            <h4>Hallo, wij zijn Laura en Pieter              
+                            <h4>Hallo, ik ben Laura!
                             </h4>
-                            <p>Ook zelf een moestuin beginnen? We nemen je in dit blog mee in de voortgang van onze tuin. Lees over onze ervaring, tips and tricks.</p>
+                            <p>Overdag programmeur en in de avonduren moestuinierder. Wil jij ook een moestuin beginnen? Laat je op dit blog inspireren om de handen uit de mouwen te steken.</p>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@ export default function Sidebar() {
                         <div>
                             <h4>Wil je jouw moestuin kennis testen?</h4>
                             <p>Doe mee aan onze moestuin quiz en stel jouw kennis op de proef! Elke maand zijn er nieuwe vragen.</p>
-                            <motion.div       
+                            <motion.div
                                 whileHover={{ scale: [null, 1.1, 1.05] }}
                                 transition={{ duration: 0.3 }}>
                                 <Link className='button button--cta' href='/quiz'>Start de quiz</Link>

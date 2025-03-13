@@ -36,6 +36,7 @@ export const Hero: React.FC<Props> = ({ theme, title, paragraph }) => {
               alt="leaves"
               width={300}
               height={300}
+              style={{ width: '100%', height: 'auto' }}
             />
           </FadeIn>
           <FadeIn>
@@ -44,7 +45,8 @@ export const Hero: React.FC<Props> = ({ theme, title, paragraph }) => {
               className={styles.leave + " " + styles.leaveTwo}
               alt="leaves"
               width={300}
-              height={240}
+              height={300}
+              style={{ width: '100%', height: 'auto' }}
             />
           </FadeIn>
           <FadeIn>
@@ -54,6 +56,7 @@ export const Hero: React.FC<Props> = ({ theme, title, paragraph }) => {
               alt="leaves"
               width={300}
               height={300}
+              style={{ width: '100%', height: 'auto' }}
             />
           </FadeIn>
           <FadeIn>
@@ -62,7 +65,8 @@ export const Hero: React.FC<Props> = ({ theme, title, paragraph }) => {
               className={styles.leave + " " + styles.leaveFour}
               alt="leaves"
               width={300}
-              height={240}
+              height={300}
+              style={{ width: '100%', height: 'auto' }}
             />
           </FadeIn>
         </div>
