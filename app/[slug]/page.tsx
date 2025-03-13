@@ -52,7 +52,7 @@ export default async function KnowledgeArticlePage({
   const { slug } = await params;
   const { isEnabled } = await draftMode();
   const article = await getArticle(slug, isEnabled);
-  const allArticles = await getAllArticles(10, isEnabled);
+  const allArticles = await getAllArticles();
 
   if (!article) {
     notFound();

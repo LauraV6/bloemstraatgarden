@@ -195,6 +195,47 @@
         hr {
             margin: 1.5rem 0;
         }
+
+        table {
+            display: block;
+            border-collapse: collapse;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-width: fit-content;
+            white-space: nowrap;
+            width: 100%;
+            margin-bottom: 1rem;
+        
+            @include breakpoint-down(sm) {
+                width: calc(100vw - 2rem);
+                min-width: 100%;
+            }
+        
+            th {
+                background-color: var(--color-transparent);
+                font-size: .9em;
+            }
+        
+            td {
+                vertical-align: top;
+                line-height: 2;
+        
+                &:nth-child(even) {
+                    background-color: var(--color-green-5);
+                }
+            }
+        
+            th, td {
+                width: 100%;
+                padding: 10px;
+        
+                p {
+                    padding: 5px;
+                    margin: 0;
+                }
+            }
+        }
     }
 }
 
