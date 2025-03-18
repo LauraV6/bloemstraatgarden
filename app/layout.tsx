@@ -47,9 +47,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl">
+    <html lang="nl" suppressHydrationWarning>
       <body className={fontPacaembu.variable}>
-        <ThemeProvider >
+        <ThemeProvider>
           <Header />
           {children}
           <Footer />

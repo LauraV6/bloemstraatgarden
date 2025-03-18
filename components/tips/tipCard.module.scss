@@ -4,7 +4,6 @@
     &Item {
         position: relative;
         transition: ease-in-out 0.2s;
-        box-shadow: var(--box-shadow);
 
         @include breakpoint-down(sm) {
             flex: 0 0 65vw;
