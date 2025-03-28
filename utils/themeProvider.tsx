@@ -1,11 +1,7 @@
 "use client";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { ReactNode } from "react";
 
-interface Props {
-  children? : ReactNode
-}
+import {ThemeProvider as NextThemesProvider, ThemeProviderProps} from "next-themes";
 
-export default function ThemeProvider({ children, ...props }: Props) {
+export default function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
