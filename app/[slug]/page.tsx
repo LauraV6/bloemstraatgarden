@@ -6,7 +6,6 @@ import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import styles from "./page.module.scss";
 import Sidebar from "@/../components/layout/sidebar";
 import { notFound } from "next/navigation";
-import { draftMode } from "next/headers";
 import { BLOCKS } from "@contentful/rich-text-types";
 import Weather from "../../components/weather";
 import Image from "next/image";
@@ -47,11 +46,10 @@ function renderOptions(links: any) {
 export default async function KnowledgeArticlePage({
   params,
 }: {
-  params: any;
+  params: Promise<{slug: string}>;
 }) {
   const { slug } = await params;
-  const { isEnabled } = await draftMode();
-  const article = await getArticle(slug, isEnabled);
+  const article = await getArticle(slug);
   const allArticles = await getAllArticles();
 
   if (!article) {

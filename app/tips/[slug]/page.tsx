@@ -6,7 +6,6 @@ import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import styles from "../../[slug]/page.module.scss";
 import Sidebar from "@/../components/layout/sidebar";
 import { notFound } from "next/navigation";
-import { draftMode } from "next/headers";
 import { BLOCKS } from "@contentful/rich-text-types";
 import Image from "next/image";
 import { MorePosts } from "../../../components/posts/morePosts";
@@ -45,9 +44,8 @@ export async function generateStaticParams() {
 
 export default async function TipsPage({ params }: { params: any }) {
   const { slug } = await params;
-  const { isEnabled } = await draftMode();
-  const article = await getTip(slug, isEnabled);
-  const allTips = await getAllTips(5, isEnabled);
+  const article = await getTip(slug);
+  const allTips = await getAllTips();
 
   const options = {
     renderNode: {
