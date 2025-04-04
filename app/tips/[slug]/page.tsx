@@ -42,7 +42,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function TipsPage({ params }: { params: any }) {
+export default async function TipsPage({ params }: { params: Promise<{slug: string}>; }) {
   const { slug } = await params;
   const article = await getTip(slug);
   const allTips = await getAllTips();
