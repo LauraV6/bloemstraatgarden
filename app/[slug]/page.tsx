@@ -43,13 +43,9 @@ function renderOptions(links: any) {
   };
 }
 
-export default async function KnowledgeArticlePage({
-  params,
-}: {
-  params: Promise<{slug: string}>;
-}) {
+export default async function KnowledgeArticlePage({ params }: { params: Promise<{slug: string}> }) {
   const { slug } = await params;
-  const article = await getArticle(slug);
+  const article = await getArticle(slug);  
   const allArticles = await getAllArticles();
 
   if (!article) {

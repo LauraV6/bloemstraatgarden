@@ -22,7 +22,7 @@ export default function PostsMap({ articles }: any) {
     <>
       <div className={styles.blogGrid}>
         {articles.slice(0, postNum).map((blog: any) => (
-          <div key={blog.title}>
+          <div key={blog.sys.id}>
             <FadeIn>
               <PostCard props={blog} />
             </FadeIn>
