@@ -4,7 +4,6 @@ import styles from "./postsMap.module.scss";
 import { PostCard } from "./postCard";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import FadeIn from "../fadeIn";
 
 export default function PostsMap({ articles }: any) {
   let showMore = true;
@@ -16,16 +15,14 @@ export default function PostsMap({ articles }: any) {
     setPostNum((prevPostNum) => prevPostNum + 6);
   }
 
-  articles.length + 1 <= postNum ? (showMore = false) : (showMore = true);
+  articles.length + 0 <= postNum ? (showMore = false) : (showMore = true);
 
   return (
     <>
       <div className={styles.blogGrid}>
         {articles.slice(0, postNum).map((blog: any) => (
           <div key={blog.sys.id}>
-            <FadeIn>
-              <PostCard props={blog} />
-            </FadeIn>
+            <PostCard props={blog} />
           </div>
         ))}
       </div>

@@ -23,7 +23,7 @@ export default function Slide({ children, delay, className}: any) {
         visible: { opacity: 1 },
       }}
       transition={{
-        duration: 1, 
+        duration: .5, 
         ease: "easeOut",
         delay: delay,
       }}
