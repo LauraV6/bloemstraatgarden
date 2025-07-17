@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { Document } from "@contentful/rich-text-types";
-import { getAllTips, getTip } from "@/../lib/api";
-import Sidebar from "@/../components/layout/sidebar";
+import { getAllTips, getTip } from "@/lib/api";
+import Sidebar from "@/components/layout/sidebar";
 import { MorePosts } from "../../../components/posts/morePosts";
 import styles from "../../[slug]/page.module.scss";
 

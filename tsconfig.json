@@ -23,7 +23,7 @@
     ],
     "paths": {
       "@/*": [
-        "./src/*"
+        "./*"
       ]
     },
     "target": "ES2017"
@@ -34,11 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/articles/[slug]/page.js",
-    "app/articles/[slug]/page.js",
-    "app/articles/[slug]/page.js",
-    "app/articles/[slug]/page.js",
-    "app/articles/[slug]/page.js"
-, "components/logo/logoSmall.js"  ],
+    "components/logo/logoSmall.js"
+  ],
   "exclude": [
     "node_modules"
   ]
