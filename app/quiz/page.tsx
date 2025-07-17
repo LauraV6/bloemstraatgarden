@@ -5,6 +5,7 @@ import Question from "../../components/quiz/question";
 import Summary from "../../components/quiz/summary";
 import FadeIn from "../../components/fadeIn";
 import QUESTIONS from "../../lib/quiz";
+import { trackQuizEvent } from "../../lib/gtag";
 import styles from "./page.module.scss";
 import heroStyles from "../../components/layout/hero.module.scss";
 
@@ -31,14 +32,26 @@ const useQuizState = () => {
     : 0;
 
   const handleSelectAnswer = useCallback((selectedAnswer: string | null) => {
-    setUserAnswers((prevAnswers) => [
-      ...prevAnswers,
-      {
-        questionIndex: activeQuestionIndex,
-        selectedAnswer,
-        timestamp: Date.now()
+    setUserAnswers((prevAnswers) => {
+      const newAnswers = [
+        ...prevAnswers,
+        {
+          questionIndex: activeQuestionIndex,
+          selectedAnswer,
+          timestamp: Date.now()
+        }
+      ];
+      
+      // Track the answer - ADD THIS
+      trackQuizEvent('question_answered', activeQuestionIndex, selectedAnswer || 'skipped');
+      
+      // Check if quiz is complete - ADD THIS
+      if (newAnswers.length === QUIZ_CONFIG.totalQuestions) {
+        trackQuizEvent('quiz_completed');
       }
-    ]);
+      
+      return newAnswers;
+    });
   }, [activeQuestionIndex]);
 
   const handleSkipAnswer = useCallback(() => {
@@ -47,6 +60,8 @@ const useQuizState = () => {
 
   const resetQuiz = useCallback(() => {
     setUserAnswers([]);
+    // Track quiz reset - ADD THIS
+    trackQuizEvent('quiz_reset');
   }, []);
 
   return {
@@ -93,15 +108,16 @@ const QuizContent: React.FC<QuizContentProps> = ({
     const answersForSummary = userAnswers.map(answer => answer.selectedAnswer);
     
     return (
-      <>
+      <div>
         <Summary userAnswers={answersForSummary} />
         <button 
           onClick={onResetQuiz}
           className="button button--cta"
+          style={{ marginTop: '2rem' }}
         >
           Start opnieuw
         </button>
-      </>
+      </div>
     );
   }
 
@@ -148,6 +164,13 @@ export default function QuizPage() {
     setIsMounted(true);
   }, []);
 
+  // Track quiz start when component mounts - ADD THIS
+  useEffect(() => {
+    if (isMounted && userAnswers.length === 0) {
+      trackQuizEvent('quiz_start');
+    }
+  }, [isMounted, userAnswers.length]);
+
   // Memoize the quiz status for performance
   const quizStatus = useMemo(() => ({
     isComplete: quizIsComplete,
@@ -163,7 +186,7 @@ export default function QuizPage() {
         <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
           <div className={heroStyles.hero__container}>
             <div className={heroStyles.hero__text}>
-              <h1 className={styles.quiz__header}>Loading quiz...</h1>
+              <h1>Loading quiz...</h1>
             </div>
           </div>
         </section>
@@ -178,7 +201,7 @@ export default function QuizPage() {
         <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
           <div className={heroStyles.hero__container}>
             <div className={heroStyles.hero__text}>
-              <h1 className={styles.quiz__header}>Loading quiz...</h1>
+              <h1>Loading quiz...</h1>
               <p>Please wait while we load the quiz questions.</p>
             </div>
           </div>
@@ -193,7 +216,7 @@ export default function QuizPage() {
         <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
           <div className={heroStyles.hero__container}>
             <div className={heroStyles.hero__text}>
-              <h1 className={styles.quiz__header}>No Quiz Available</h1>
+              <h1>No Quiz Available</h1>
               <p>There are no quiz questions available at this time.</p>
             </div>
           </div>
@@ -214,6 +237,11 @@ export default function QuizPage() {
               <h1 className={styles.quiz__header}>
                 {QUIZ_CONFIG.title}
               </h1>
+              {!quizStatus.isComplete && (
+                <div className={styles.quiz__progress || ''}>
+                  Vraag {quizStatus.currentQuestion} van {quizStatus.totalQuestions}
+                </div>
+              )}
             </header>
             
             <FadeIn className={styles.quiz__container}>
