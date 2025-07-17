@@ -1,11 +1,20 @@
 import styles from "./titleLine.module.scss";
 
-interface Props {
-    title: string;
-  }
-  
-export const TitleLine: React.FC<Props> = ({ title }) => {
-    return (
-        <h4 className={styles.titleLine}><span>{title}</span></h4>
-    );
+// Types
+interface TitleLineProps {
+  title: string;
+  className?: string;
+}
+
+export const TitleLine: React.FC<TitleLineProps> = ({ 
+  title,
+  className
+}) => {
+  const titleClass = [styles.titleLine, className].filter(Boolean).join(' ');
+
+  return (
+    <h4 className={titleClass}>
+      <span>{title}</span>
+    </h4>
+  );
 };
