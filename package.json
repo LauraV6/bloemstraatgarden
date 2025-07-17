@@ -27,7 +27,9 @@
     "react-dom": "^19.0.0",
     "react-lazy-load-image-component": "^1.6.3",
     "react-loading-skeleton": "^3.5.0",
-    "sass-loader": "^16.0.5"
+    "sass-loader": "^16.0.5",
+    "sass": "^1.85.0"
+
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -35,7 +37,6 @@
     "@types/react-dom": "^18",
     "@types/react-lazy-load-image-component": "^1.6.4",
     "encoding": "^0.1.13",
-    "sass": "^1.85.0",
     "typescript": "^5"
   }
 }
