@@ -8,10 +8,7 @@ import QUESTIONS from "../../lib/quiz";
 import styles from "./page.module.scss";
 import heroStyles from "../../components/layout/hero.module.scss";
 
-// Types
-interface QuizPageProps {
-  className?: string;
-}
+// Remove QuizPageProps interface - not needed for Next.js app directory pages
 
 interface UserAnswer {
   questionIndex: number;
@@ -100,7 +97,8 @@ const QuizContent: React.FC<QuizContentProps> = ({
   );
 };
 
-export default function QuizPage({ className }: QuizPageProps) {
+// Remove the className prop - Next.js app directory pages don't receive props
+export default function QuizPage() {
   const {
     userAnswers,
     activeQuestionIndex,
@@ -119,10 +117,8 @@ export default function QuizPage({ className }: QuizPageProps) {
     progress
   }), [quizIsComplete, activeQuestionIndex, progress]);
 
-  const mainClass = [className].filter(Boolean).join(' ');
-
   return (
-    <main className={mainClass} role="main">
+    <main role="main">
       <section 
         className={`${heroStyles.hero} ${heroStyles.heroVh}`}
         aria-label="Moestuin quiz sectie"
