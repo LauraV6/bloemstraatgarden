@@ -1,17 +1,52 @@
-import styles from "./nonAvailable.module.scss";
 import Image from "next/image";
+import styles from "./nonAvailable.module.scss";
 import nonAvailable from "../../public/notAvailable.png";
 
-export default function NonAvailable() {
+// Types
+interface NonAvailableProps {
+  className?: string;
+  title?: string;
+  description?: string;
+  imageAlt?: string;
+}
+
+// Constants
+const DEFAULT_CONTENT = {
+  title: "Geen planten beschikbaar",
+  description: "Momenteel zijn er geen planten op voorraad. Kom op een later moment terug om te kijken of er weer planten beschikbaar zijn.",
+  imageAlt: "Geen planten beschikbaar illustratie"
+} as const;
+
+export default function NonAvailable({ 
+  className,
+  title = DEFAULT_CONTENT.title,
+  description = DEFAULT_CONTENT.description,
+  imageAlt = DEFAULT_CONTENT.imageAlt
+}: NonAvailableProps) {
+  const containerClass = [styles.nonAvailable, className].filter(Boolean).join(' ');
+
   return (
-    <div className={styles.nonAvailable}>
+    <div 
+      className={containerClass}
+      role="status" 
+      aria-live="polite"
+    >
       <div className={styles.nonAvailable__content}>
-        <Image src={nonAvailable} alt="Niet beschikbaar" />
-        <h3>Geen planten beschikbaar</h3>
-        <p>
-          Momenteel zijn er geen planten op voorraad. Kom op een later moment
-          terug om te kijken of er weer planten beschikbaar zijn.
-        </p>
+        <Image 
+          src={nonAvailable} 
+          alt={imageAlt}
+          width={300}
+          height={300}
+          sizes="(max-width: 768px) 250px, 300px"
+          style={{ 
+            width: '100%', 
+            height: 'auto',
+            maxWidth: '300px'
+          }}
+          priority={false}
+        />
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     </div>
   );

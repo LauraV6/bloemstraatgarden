@@ -1,74 +1,111 @@
 "use client";
 
+import Image from "next/image";
 import styles from "../layout/hero.module.scss";
 import HeaderLeaveBig from "../../public/headerLeaveBig.png";
 import HeaderLeaveSmall from "../../public/headerLeaveSmall.png";
 import HeaderImg from "../../public/headerBgTransparent.png";
 import FadeIn from "../fadeIn";
-import Image from "next/image";
 
-interface Props {
-  theme?: string;
+// Types
+interface HeroProps {
+  theme?: 'dark' | 'light';
   title: string;
   paragraph: string;
+  className?: string;
 }
 
-export const Hero: React.FC<Props> = ({ theme, title, paragraph }) => {
+interface LeafImageProps {
+  src: typeof HeaderLeaveBig | typeof HeaderLeaveSmall;
+  className: string;
+  alt: string;
+}
+
+// Constants
+const LEAF_IMAGES = [
+  {
+    src: HeaderLeaveBig,
+    className: `${styles.leave} ${styles.leaveOne}`,
+    alt: "Decoratief blad - groot"
+  },
+  {
+    src: HeaderLeaveSmall,
+    className: `${styles.leave} ${styles.leaveTwo}`,
+    alt: "Decoratief blad - klein"
+  },
+  {
+    src: HeaderLeaveBig,
+    className: `${styles.leave} ${styles.leaveThree}`,
+    alt: "Decoratief blad - groot"
+  },
+  {
+    src: HeaderLeaveSmall,
+    className: `${styles.leave} ${styles.leaveFour}`,
+    alt: "Decoratief blad - klein"
+  }
+] as const;
+
+// Leaf Image Component
+const LeafImage: React.FC<LeafImageProps> = ({ src, className, alt }) => (
+  <FadeIn>
+    <Image
+      src={src}
+      className={className}
+      alt={alt}
+      width={300}
+      height={300}
+      sizes="(max-width: 768px) 200px, 300px"
+      style={{ 
+        width: '100%', 
+        height: 'auto',
+        objectFit: 'contain'
+      }}
+      priority={false}
+    />
+  </FadeIn>
+);
+
+export const Hero: React.FC<HeroProps> = ({ 
+  theme, 
+  title, 
+  paragraph, 
+  className 
+}) => {
+  // Determine hero class based on theme
+  const heroClass = [
+    styles.hero,
+    theme === 'dark' ? styles.heroDark : '',
+    className || ''
+  ].filter(Boolean).join(' ');
+
   return (
     <section
-      className={
-        theme !== undefined ? `${styles.hero} ${styles.heroDark}` : styles.hero
-      }
+      className={heroClass}
       style={{ backgroundImage: `url(${HeaderImg.src})` }}
+      role="banner"
+      aria-labelledby="hero-title"
     >
       <div className={styles.hero__container}>
-        <div className={styles.hero__text}>
+        <header className={styles.hero__text}>
           <div>
-            <h1>{title}</h1>
+            <h1 id="hero-title">{title}</h1>
             <p>{paragraph}</p>
           </div>
-        </div>
-        <div className={styles.hero__images}>
-          <FadeIn>
-            <Image
-              src={HeaderLeaveBig.src}
-              className={styles.leave + " " + styles.leaveOne}
-              alt="leaves"
-              width={300}
-              height={300}
-              style={{ width: '100%', height: 'auto' }}
+        </header>
+        
+        <div 
+          className={styles.hero__images}
+          role="img" 
+          aria-label="Decoratieve bladeren"
+        >
+          {LEAF_IMAGES.map((leaf, index) => (
+            <LeafImage
+              key={`leaf-${index}`}
+              src={leaf.src}
+              className={leaf.className}
+              alt={leaf.alt}
             />
-          </FadeIn>
-          <FadeIn>
-            <Image
-              src={HeaderLeaveSmall.src}
-              className={styles.leave + " " + styles.leaveTwo}
-              alt="leaves"
-              width={300}
-              height={300}
-              style={{ width: '100%', height: 'auto' }}
-            />
-          </FadeIn>
-          <FadeIn>
-            <Image
-              src={HeaderLeaveBig.src}
-              className={styles.leave + " " + styles.leaveThree}
-              alt="leaves"
-              width={300}
-              height={300}
-              style={{ width: '100%', height: 'auto' }}
-            />
-          </FadeIn>
-          <FadeIn>
-            <Image
-              src={HeaderLeaveSmall.src}
-              className={styles.leave + " " + styles.leaveFour}
-              alt="leaves"
-              width={300}
-              height={300}
-              style={{ width: '100%', height: 'auto' }}
-            />
-          </FadeIn>
+          ))}
         </div>
       </div>
     </section>
