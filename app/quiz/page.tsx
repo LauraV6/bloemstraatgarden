@@ -93,7 +93,7 @@ const QuizContent: React.FC<QuizContentProps> = ({
     const answersForSummary = userAnswers.map(answer => answer.selectedAnswer);
     
     return (
-      <div>
+      <>
         <Summary userAnswers={answersForSummary} />
         <button 
           onClick={onResetQuiz}
@@ -101,7 +101,7 @@ const QuizContent: React.FC<QuizContentProps> = ({
         >
           Start opnieuw
         </button>
-      </div>
+      </>
     );
   }
 
@@ -163,7 +163,7 @@ export default function QuizPage() {
         <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
           <div className={heroStyles.hero__container}>
             <div className={heroStyles.hero__text}>
-              <h1>Loading quiz...</h1>
+              <h1 className={styles.quiz__header}>Loading quiz...</h1>
             </div>
           </div>
         </section>
@@ -178,7 +178,7 @@ export default function QuizPage() {
         <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
           <div className={heroStyles.hero__container}>
             <div className={heroStyles.hero__text}>
-              <h1>Loading quiz...</h1>
+              <h1 className={styles.quiz__header}>Loading quiz...</h1>
               <p>Please wait while we load the quiz questions.</p>
             </div>
           </div>
@@ -193,7 +193,7 @@ export default function QuizPage() {
         <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
           <div className={heroStyles.hero__container}>
             <div className={heroStyles.hero__text}>
-              <h1>No Quiz Available</h1>
+              <h1 className={styles.quiz__header}>No Quiz Available</h1>
               <p>There are no quiz questions available at this time.</p>
             </div>
           </div>
