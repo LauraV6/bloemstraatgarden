@@ -1,45 +1,140 @@
 "use client";
 
-import styles from "./postsMap.module.scss";
-import { PostCard } from "./postCard";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
+import { PostCard } from "./postCard";
+import styles from "./postsMap.module.scss";
 
-export default function PostsMap({ articles }: any) {
-  let showMore = true;
+// Types
+interface ArticleImage {
+  url: string;
+  title?: string;
+}
 
-  const [postNum, setPostNum] = useState(6);
-  const waveAmount = 9;
+interface Article {
+  sys: {
+    id: string;
+  };
+  slug: string;
+  title: string;
+  date: string;
+  summary: string;
+  articleImage: ArticleImage;
+}
 
-  function loadMore() {
-    setPostNum((prevPostNum) => prevPostNum + 6);
+interface PostsMapProps {
+  articles: Article[];
+  className?: string;
+  initialPostCount?: number;
+  loadMoreIncrement?: number;
+  url?: string;
+}
+
+// Constants
+const DEFAULT_CONFIG = {
+  initialPostCount: 6,
+  loadMoreIncrement: 6,
+  waveAmount: 9,
+  buttonText: "Geef water voor meer berichten",
+  animationDuration: 0.3
+} as const;
+
+// Components
+interface LoadMoreButtonProps {
+  onClick: () => void;
+  waveAmount: number;
+  buttonText: string;
+}
+
+const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({ 
+  onClick, 
+  waveAmount, 
+  buttonText 
+}) => (
+  <motion.button
+    onClick={onClick}
+    whileHover={{ scale: [null, 1.1, 1.05] }}
+    transition={{ duration: DEFAULT_CONFIG.animationDuration }}
+    className={styles.loadMoreButton}
+    aria-label={`${buttonText} - Laad meer artikelen`}
+  >
+    <span>{buttonText}</span>
+    {Array.from({ length: waveAmount }, (_, index) => (
+      <div className={styles.wave} key={`wave-${index}`} aria-hidden="true" />
+    ))}
+  </motion.button>
+);
+
+interface PostsGridDisplayProps {
+  articles: Article[];
+  postCount: number;
+  url?: string;
+}
+
+const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({ 
+  articles, 
+  postCount, 
+  url 
+}) => (
+  <div className={styles.blogGrid}>
+    {articles.slice(0, postCount).map((article) => (
+      <div key={article.sys.id}>
+        <PostCard props={article} url={url} />
+      </div>
+    ))}
+  </div>
+);
+
+export default function PostsMap({ 
+  articles,
+  className,
+  initialPostCount = DEFAULT_CONFIG.initialPostCount,
+  loadMoreIncrement = DEFAULT_CONFIG.loadMoreIncrement,
+  url
+}: PostsMapProps) {
+  const [postCount, setPostCount] = useState(initialPostCount);
+
+  // Memoize the showMore calculation for performance
+  const showMore = useMemo(() => {
+    return articles.length > postCount;
+  }, [articles.length, postCount]);
+
+  // Memoize the load more function
+  const loadMore = useCallback(() => {
+    setPostCount((prevCount) => prevCount + loadMoreIncrement);
+  }, [loadMoreIncrement]);
+
+  // Handle empty articles array
+  if (!articles || articles.length === 0) {
+    return (
+      <div className={styles.emptyState} role="status">
+        <p>Geen artikelen beschikbaar.</p>
+      </div>
+    );
   }
 
-  articles.length + 0 <= postNum ? (showMore = false) : (showMore = true);
+  const containerClass = [className].filter(Boolean).join(' ');
 
   return (
-    <>
-      <div className={styles.blogGrid}>
-        {articles.slice(0, postNum).map((blog: any) => (
-          <div key={blog.sys.id}>
-            <PostCard props={blog} />
-          </div>
-        ))}
-      </div>
-      <section className={styles.blogBtn}>
-        {showMore && (
-          <motion.button
+    <div className={containerClass}>
+      <PostsGridDisplay 
+        articles={articles}
+        postCount={postCount}
+        url={url}
+      />
+      
+      {showMore && (
+        <section 
+          className={styles.blogBtn}
+          aria-label="Meer artikelen laden"
+        >
+          <LoadMoreButton
             onClick={loadMore}
-            whileHover={{ scale: [null, 1.1, 1.05] }}
-            transition={{ duration: 0.3 }}
-          >
-            <span>Geef water voor meer berichten</span>
-            {[...Array(waveAmount)].map((e, i) => (
-              <div className={styles.wave} key={i}></div>
-            ))}
-          </motion.button>
-        )}
-      </section>
-    </>
+            waveAmount={DEFAULT_CONFIG.waveAmount}
+            buttonText={DEFAULT_CONFIG.buttonText}
+          />
+        </section>
+      )}
+    </div>
   );
 }

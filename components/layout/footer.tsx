@@ -1,28 +1,63 @@
-import styles from "./footer.module.scss";
-import LogoSmall from '../logo/logoSmall';
-import HeaderLeaveBig from '../../public/headerLeaveBig.png';
+import Image from "next/image";
 import Link from "next/link";
 import { metadata } from "../../app/layout";
+import LogoSmall from '../logo/logoSmall';
+import HeaderLeaveBig from '../../public/headerLeaveBig.png';
+import styles from "./footer.module.scss";
 
-export default function Footer() {
-    const title = metadata.title as string;
+interface FooterProps {
+  className?: string;
+}
 
-    return (
-        <footer className={styles.footer}>
-            <div className={styles.footer__adding}>
-                <div className={styles.container}>
-                    <Link id="logoFooter" href='/'><LogoSmall /></Link>
-                    <div className={styles.intro}>
-                        <p>{title} is gelegen in Steenwijkerland en richt zich op het leren door te zien, ervaren en kennis te delen van moestuinieren.</p>
-                    </div>
-                </div>
-                <img src={HeaderLeaveBig.src} className={styles.footer__leave} alt='big-leave'></img>
-            </div>
-            <div className={styles.footer__copyright}>
-            <label>
-                Created by {metadata.creator} © 2025
-            </label>
-            </div>
-        </footer>
-    )
+const CURRENT_YEAR = new Date().getFullYear();
+
+export default function Footer({ className }: FooterProps) {
+  const siteTitle = (metadata.title as string) || "Bloemstraat Garden";
+  const siteCreator = (metadata.creator as string) || "Laura";
+
+  return (
+    <footer 
+      className={`${styles.footer} ${className || ''}`}
+      role="contentinfo"
+      aria-label="Website footer"
+    >
+      <div className={styles.footer__adding}>
+        <div className={styles.container}>
+          <Link 
+            href="/" 
+            className={styles.logoFooter}
+            aria-label={`${siteTitle} - Ga naar homepage`}
+          >
+            <LogoSmall />
+          </Link>
+          
+          <div className={styles.intro}>
+            <p>
+              <strong>{siteTitle}</strong> is gelegen in Steenwijkerland en richt zich op het 
+              leren door te zien, ervaren en kennis te delen van moestuinieren.
+            </p>
+          </div>
+        </div>
+        
+        <Image
+        src={HeaderLeaveBig}
+        alt="Decoratief blad"
+        className={styles.footer__leave}
+        priority={false}
+        placeholder="blur"
+        sizes="(max-width: 768px) 200px, 300px"
+        style={{
+            width: '100%',
+            height: 'auto',
+            maxWidth: 'var(--footer-leave-max-width)',
+            objectFit: 'contain'
+        }}
+        />
+      </div>
+      
+      <div className={styles.footer__copyright}>
+        Created by {siteCreator} © {CURRENT_YEAR}
+      </div>
+    </footer>
+  );
 }
