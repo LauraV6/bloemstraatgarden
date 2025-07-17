@@ -1,4 +1,4 @@
-import { getAllArticles } from "@/../lib/api";
+import { getAllArticles } from "@/lib/api";
 import PostsMap from "./postsMap";
 
 // Types
