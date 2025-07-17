@@ -11,4 +11,23 @@
         right: 1rem;
         top: 1rem;
     }
+
+    .skeleton {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        .themeIcon {
+            animation: spin 1s linear infinite;
+        }
+    }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
