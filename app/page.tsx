@@ -10,10 +10,7 @@ import PostCardSkeleton from "../components/posts/postCardSkeleton";
 import TipCardSkeleton from "../components/tips/tipCardSkeleton";
 import posts from "../components/posts/postsMap.module.scss";
 
-// Types
-interface HomePageProps {
-  className?: string;
-}
+// Remove the HomePageProps interface - not needed for Next.js app directory pages
 
 interface PageSectionProps {
   title: string;
@@ -53,12 +50,13 @@ const TipsLoadingFallback = () => (
   <TipCardSkeleton amount={PAGE_CONTENT.skeletonCounts.tips} />
 );
 
-export default function Home({ className }: HomePageProps) {
+// Remove the props parameter - Next.js app directory pages don't receive props
+export default function Home() {
   // Safely extract metadata with fallback
   const siteTitle = (metadata.title as string) || "Bloemstraat Garden";
 
   return (
-    <main className={className} role="main">
+    <main role="main">
       <Hero title={siteTitle} paragraph={PAGE_CONTENT.heroSubtitle}/>
 
       {/* Blog Posts Section */}
