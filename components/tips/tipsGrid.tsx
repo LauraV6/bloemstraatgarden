@@ -1,6 +1,6 @@
 import styles from "./tipsGrid.module.scss";
 import { TipCard } from './tipCard';
-import { getAllTips } from "@/../lib/api";
+import { getAllTips } from "@/lib/api";
 
 export default async function TipsGrid() {
     const tips = await getAllTips();
