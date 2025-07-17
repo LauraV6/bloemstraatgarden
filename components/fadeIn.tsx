@@ -1,31 +1,79 @@
-"use client"
+"use client";
 
-import React from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
 import { useRef, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 
-export default function Slide({ children, delay, className}: any) {
-  const ref = useRef(null);
-  const isInview = useInView(ref, { once: true });
+// Types
+interface SlideProps {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  duration?: number;
+  direction?: 'up' | 'down' | 'left' | 'right' | 'fade';
+  once?: boolean;
+}
+
+// Constants
+const SLIDE_CONFIG = {
+  defaultDuration: 0.5,
+  defaultDelay: 0,
+  defaultDirection: 'fade' as const,
+  defaultOnce: true,
+  ease: "easeOut"
+} as const;
+
+// Animation variants
+const createVariants = (direction: SlideProps['direction']) => {
+  const distance = 50;
+  
+  const directionVariants = {
+    up: { opacity: 0, y: distance },
+    down: { opacity: 0, y: -distance },
+    left: { opacity: 0, x: distance },
+    right: { opacity: 0, x: -distance },
+    fade: { opacity: 0 }
+  };
+
+  return {
+    hidden: directionVariants[direction || 'fade'],
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      y: 0 
+    }
+  };
+};
+
+export default function Slide({ 
+  children,
+  delay = SLIDE_CONFIG.defaultDelay,
+  className,
+  duration = SLIDE_CONFIG.defaultDuration,
+  direction = SLIDE_CONFIG.defaultDirection,
+  once = SLIDE_CONFIG.defaultOnce
+}: SlideProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once });
   const controls = useAnimation();
 
   useEffect(() => {
-    if (isInview) {
+    if (isInView) {
       controls.start("visible");
+    } else if (!once) {
+      controls.start("hidden");
     }
-  }, [isInview]);
+  }, [isInView, controls, once]);
+
+  const variants = createVariants(direction);
 
   return (
     <motion.div
       ref={ref}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1 },
-      }}
+      variants={variants}
       transition={{
-        duration: .5, 
-        ease: "easeOut",
-        delay: delay,
+        duration,
+        ease: SLIDE_CONFIG.ease,
+        delay,
       }}
       initial="hidden"
       animate={controls}
