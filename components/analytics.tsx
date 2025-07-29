@@ -18,7 +18,7 @@ function AnalyticsInner(): null {
   return null;
 }
 
-export default function Analytics(): null {
+export default function Analytics() {
   return (
     <Suspense fallback={null}>
       <AnalyticsInner />
