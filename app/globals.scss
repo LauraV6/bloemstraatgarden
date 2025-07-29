@@ -12,6 +12,7 @@
   --color-menu: hsla(0, 0%, 100%, .9);
   --color-error:  hsl(0, 100%, 90%);
   --color-error-bright: hsl(0, 91%, 40%);
+  --color-error-light: hsl(0, 100%, 97%);
   --color-correct: hsl(128, 22%, 85%);
   --color-green-1: hsl(152, 100%, 21%);
   --color-green-2: hsl(130, 47%, 42%);
@@ -19,6 +20,13 @@
   --color-green-5:	hsl(132, 16%, 94%);
   --color-transparent:hsl(128, 22%, 85%);
   --color-transparent-1: hsla(0, 0%, 100%, .6);
+  
+  --color-bg: var(--color-2);
+  --color-surface: var(--color-1);
+  --color-primary: var(--color-green-2);
+  --color-primary-dark: var(--color-green-1);
+  --color-text-secondary: var(--color-font-light);
+  --color-text-muted: hsl(0, 0%, 45%);
 
   --box-shadow: 0px 0px 25px 10px hsl(220, 16%, 96%);
 }
@@ -33,11 +41,19 @@
   --color-menu: hsla(0, 0%, 10%, .9);
   --color-error:  hsl(0, 74%, 27%);
   --color-error-bright: hsl(0, 78%, 56%);
+  --color-error-light: hsl(0, 74%, 20%);
   --color-correct: hsl(152, 100%, 21%);
   --color-green-3: hsl(128, 22%, 85%);
   --color-green-5:	hsl(152, 100%, 11%);
   --color-transparent:hsl(132, 4%, 26%);
   --color-transparent-1: hsla(0, 0%, 100%, .05);
+  
+  --color-bg: var(--color-2);
+  --color-surface: var(--color-1);
+  --color-primary: var(--color-4);
+  --color-primary-dark: hsl(130, 47%, 35%);
+  --color-text-secondary: hsl(0, 0%, 70%);
+  --color-text-muted: hsl(0, 0%, 55%);
 
   --box-shadow: 0px 0px 25px 10px hsl(0, 0%, 10%);
 }
