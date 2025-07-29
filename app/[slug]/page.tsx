@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { Document } from "@contentful/rich-text-types";
+import type { Metadata } from "next";
 import { getAllArticles, getArticle } from "@/lib/api";
 import Sidebar from "@/components/layout/sidebar";
 import Weather from "../../components/weather";
@@ -155,6 +156,36 @@ const PostHeader: React.FC<PostHeaderProps> = ({
     </div>
   </section>
 );
+
+// Generate metadata for each article page
+export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  
+  try {
+    const article = await getArticle(slug);
+    
+    if (!article) {
+      return {
+        title: 'Artikel niet gevonden - Bloemstraat Garden',
+      };
+    }
+    
+    return {
+      title: `${article.title} - Bloemstraat Garden`,
+      description: article.summary || `Lees meer over ${article.title} in onze moestuin`,
+      openGraph: {
+        title: article.title,
+        description: article.summary,
+        images: article.articleImage?.url ? [article.articleImage.url] : [],
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: 'Bloemstraat Garden',
+    };
+  }
+}
 
 // Static params generation
 export async function generateStaticParams(): Promise<ArticlePageParams[]> {
