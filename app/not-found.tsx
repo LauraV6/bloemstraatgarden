@@ -3,7 +3,7 @@ import Link from "next/link";
 import heroImage from "../public/404.png";
 import Sidebar from "../components/layout/sidebar";
 import heroStyles from "../components/layout/hero.module.scss";
-import styles from "./[slug]/page.module.scss";
+import styles from "../app/[slug]/page.module.scss";
 
 // Types
 interface NotFoundProps {
