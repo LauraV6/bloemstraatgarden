@@ -8,7 +8,7 @@ import Header from "../components/layout/header";
 import Footer from "../components/layout/footer";
 import ThemeProvider from "../utils/themeProvider";
 import Analytics from "../components/analytics";
-//import CookieConsent from "../components/cookieConsent";
+import CookieConsent from "../components/cookieConsent";
 
 config.autoAddCss = false;
 
@@ -138,10 +138,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                   
-                  // Initialize with consent mode
+                  // Initialize with consent mode - GDPR compliant
                   gtag('consent', 'default', {
                     'analytics_storage': 'granted',
-                    'ad_storage': 'denied',
+                    'ad_storage': 'granted',
                     'wait_for_update': 500,
                   });
                   
@@ -166,7 +166,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Footer />
             <Analytics />
             {/* Cookie consent for GDPR compliance */}
-            {/* <CookieConsent /> */}
+            <CookieConsent />
           </div>
         </ThemeProvider>
       </body>
