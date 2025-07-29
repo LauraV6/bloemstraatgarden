@@ -11,7 +11,13 @@ function AnalyticsInner(): null {
   useEffect(() => {
     if (GA_TRACKING_ID) {
       const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-      pageview(url);
+      
+      // Small delay to ensure document.title is updated
+      const timer = setTimeout(() => {
+        pageview(url);
+      }, 100);
+      
+      return () => clearTimeout(timer);
     }
   }, [pathname, searchParams]);
 
