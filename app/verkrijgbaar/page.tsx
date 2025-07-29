@@ -27,7 +27,13 @@ export default function Available() {
                                 <p>Ben je op de hoogte van het zaaischema en zie je er een plant tussen staan die je graag wilt hebben? Stuur dan een persoonlijk bericht.</p>
                             </div>
                             <div className={styles.story__adding}>
-                                <Image src={Zaaitrays} alt="zaaitrays" width={500} />
+                                <Image 
+                                    src={Zaaitrays} 
+                                    alt="zaaitrays" 
+                                    width={500} 
+                                    height={300}
+                                    style={{ width: '100%', height: 'auto' }}
+                                />                            
                             </div>
                         </div>
                     </div>

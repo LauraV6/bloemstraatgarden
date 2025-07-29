@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from 'next/script';
 import localFont from "next/font/local";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -6,6 +7,8 @@ import "./globals.scss";
 import Header from "../components/layout/header";
 import Footer from "../components/layout/footer";
 import ThemeProvider from "../utils/themeProvider";
+import Analytics from "../components/analytics";
+//import CookieConsent from "../components/cookieConsent";
 
 config.autoAddCss = false;
 
@@ -36,7 +39,8 @@ const fontPacaembu = localFont({
   preload: true,
 });
 
-// Metadata configuration
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
+
 export const metadata: Metadata = {
   title: 'Bloemstraat Garden',
   description: "Leer moestuinieren door ervaring, tips en kennis te delen. Ontdek hoe je je eigen groenten kunt kweken in Steenwijkerland.",
@@ -62,11 +66,20 @@ export const metadata: Metadata = {
     siteName: 'Bloemstraat Garden',
     locale: 'nl_NL',
     type: 'website',
+    images: [
+      {
+        url: 'https://bloemstraatgarden.nl/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Bloemstraat Garden - Moestuinieren leren',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Bloemstraat Garden',
     description: "Leer moestuinieren door ervaring, tips en kennis te delen.",
+    images: ['https://bloemstraatgarden.nl/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -99,20 +112,49 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         
-        {/* Viewport meta tag for responsive design */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        {/* Theme color for mobile browsers */}
         <meta name="theme-color" content="#2d8018ff" />
         
-        {/* Favicon and app icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        
-        {/* Manifest for PWA */}
-        <link rel="manifest" href="/manifest.json" />
+
+        {/* Google Analytics - Only load if GA_TRACKING_ID exists */}
+        {GA_TRACKING_ID && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+              id="gtag-init"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  
+                  // Initialize with consent mode
+                  gtag('consent', 'default', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'denied',
+                    'wait_for_update': 500,
+                  });
+                  
+                  gtag('config', '${GA_TRACKING_ID}', {
+                    page_location: typeof window !== 'undefined' ? window.location.href : '',
+                    page_title: typeof document !== 'undefined' ? document.title : '',
+                    cookie_flags: 'SameSite=None;Secure',
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className={fontPacaembu.className}>
         <ThemeProvider>
@@ -122,6 +164,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
               {children}
             </main>
             <Footer />
+            <Analytics />
+            {/* Cookie consent for GDPR compliance */}
+            {/* <CookieConsent /> */}
           </div>
         </ThemeProvider>
       </body>
