@@ -32,19 +32,21 @@ export default function NonAvailable({
       aria-live="polite"
     >
       <div className={styles.nonAvailable__content}>
-        <Image 
-          src={nonAvailable} 
-          alt={imageAlt}
-          width={300}
-          height={300}
-          sizes="(max-width: 768px) 250px, 300px"
-          style={{ 
-            width: '100%', 
-            height: 'auto',
-            maxWidth: '300px'
-          }}
-          priority={false}
-        />
+        <div className={styles.nonAvailable__imageWrapper}>
+          <Image 
+            src={nonAvailable} 
+            alt={imageAlt}
+            width={300}
+            height={300}
+            style={{ 
+              width: 'auto',
+              height: 'auto',
+              maxWidth: '100%',
+              maxHeight: '150px'
+            }}
+            priority={false}
+          />
+        </div>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
