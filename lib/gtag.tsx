@@ -13,7 +13,9 @@ declare global {
 export const pageview = (url: string): void => {
   if (typeof window !== 'undefined' && window.gtag && GA_TRACKING_ID) {
     window.gtag('config', GA_TRACKING_ID, {
-      page_location: url,
+      page_location: window.location.origin + url,
+      page_path: url,
+      page_title: document.title,
     });
   }
 };
