@@ -140,7 +140,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   
                   // Initialize with consent mode
                   gtag('consent', 'default', {
-                    'analytics_storage': 'denied',
+                    'analytics_storage': 'granted',
                     'ad_storage': 'denied',
                     'wait_for_update': 500,
                   });
