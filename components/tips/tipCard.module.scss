@@ -4,6 +4,7 @@
     &Item {
         position: relative;
         transition: ease-in-out 0.2s;
+        height: 100%;
 
         @include breakpoint-down(sm) {
             flex: 0 0 65vw;
@@ -11,17 +12,6 @@
 
         @include breakpoint-up(md) {
             box-shadow: var(--box-shadow);
-        }
-
-        &:first-of-type {
-            @include breakpoint-up(md) {
-                grid-row-start: 1;
-                grid-row-end: 3;
-
-                .tip-item__img {
-                    height: 100%;
-                }
-            }
         }
 
         &__img {
@@ -32,7 +22,7 @@
             img {
                 display: block;
                 object-fit: cover;
-                height: auto;
+                height: 100%;
                 width: 100%;
                 text-indent: 10px;
                 text-transform: capitalize;
