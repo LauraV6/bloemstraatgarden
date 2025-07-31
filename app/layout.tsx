@@ -160,9 +160,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <div id="__next">
             <Header />
-            <main role="main">
-              {children}
-            </main>
+            {children}
             <Footer />
             <Analytics />
             {/* Cookie consent for GDPR compliance */}
