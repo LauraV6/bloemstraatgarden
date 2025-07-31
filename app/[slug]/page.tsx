@@ -12,6 +12,7 @@ import Sidebar from "@/components/layout/sidebar";
 import Weather from "../../components/weather";
 import { MorePosts } from "../../components/posts/morePosts";
 import styles from "./page.module.scss";
+import BlogPostClient from "@/components/blogPostClient";
 
 // Types
 interface ArticlePageParams {
@@ -217,35 +218,37 @@ export default async function KnowledgeArticlePage({ params }: ArticlePageProps)
 
     return (
       <main role="main">
-        <PostHeader
-          title={article.title}
-          date={article.date}
-          backgroundImageUrl={article.articleImage.url}
-          imageAlt={article.articleImage.title}
-          weather={article.weather}
-        />
-        
-        <section className={styles.postcontent}>
-          <article>
-            <Breadcrumbs
-              homeLabel={BREADCRUMB_CONFIG.homeLabel}
-              homeUrl={BREADCRUMB_CONFIG.homeUrl}
-              currentTitle={article.title}
-            />
-            
-            <div className={styles.postcontent__story}>
-              {documentToReactComponents(article.details.json, renderOptions)}
-            </div>
-            
-            <MorePosts 
-              title="Meer over onze moestuin" 
-              slug={article.slug} 
-              articles={allArticles}
-            />
-          </article>
+        <BlogPostClient>
+          <PostHeader
+            title={article.title}
+            date={article.date}
+            backgroundImageUrl={article.articleImage.url}
+            imageAlt={article.articleImage.title}
+            weather={article.weather}
+          />
           
-          <Sidebar />
-        </section>
+          <section className={styles.postcontent}>
+            <article>
+              <Breadcrumbs
+                homeLabel={BREADCRUMB_CONFIG.homeLabel}
+                homeUrl={BREADCRUMB_CONFIG.homeUrl}
+                currentTitle={article.title}
+              />
+              
+              <div className={styles.postcontent__story}>
+                {documentToReactComponents(article.details.json, renderOptions)}
+              </div>
+              
+              <MorePosts 
+                title="Meer over onze moestuin" 
+                slug={article.slug} 
+                articles={allArticles}
+              />
+            </article>
+            
+            <Sidebar />
+          </section>
+        </BlogPostClient>
       </main>
     );
   } catch (error) {
