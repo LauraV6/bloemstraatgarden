@@ -19,4 +19,17 @@
         grid-template-columns: 2fr 1fr 1fr;
         gap: 2.5rem;
     }
+
+    > div {
+        &:first-of-type {
+            @include breakpoint-up(md) {
+                grid-row-start: 1;
+                grid-row-end: 3;
+
+                .tip-item__img {
+                    height: 100%;
+                }
+            }
+        }
+    }
 }

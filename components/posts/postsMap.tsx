@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { PostCard } from "./postCard";
 import styles from "./postsMap.module.scss";
 
@@ -38,6 +38,43 @@ const DEFAULT_CONFIG = {
   buttonText: "Geef water voor meer berichten",
   animationDuration: 0.3
 } as const;
+
+// Animation variants
+const containerVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  initial: { 
+    opacity: 0, 
+    y: 50,
+    scale: 0.9
+  },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+    transition: {
+      duration: 0.2
+    }
+  }
+};
 
 // Components
 interface LoadMoreButtonProps {
@@ -76,13 +113,31 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
   postCount, 
   url 
 }) => (
-  <div className={styles.blogGrid}>
-    {articles.slice(0, postCount).map((article) => (
-      <div key={article.sys.id}>
-        <PostCard props={article} url={url} />
-      </div>
-    ))}
-  </div>
+  <motion.div 
+    className={styles.blogGrid}
+    initial="initial"
+    animate="animate"
+    variants={containerVariants}
+  >
+    <AnimatePresence mode="popLayout">
+      {articles.slice(0, postCount).map((article, index) => (
+        <motion.div 
+          key={article.sys.id}
+          layout
+          variants={itemVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          whileHover={{ 
+            scale: 1.03,
+            transition: { duration: 0.2 }
+          }}
+        >
+          <PostCard props={article} url={url} />
+        </motion.div>
+      ))}
+    </AnimatePresence>
+  </motion.div>
 );
 
 export default function PostsMap({ 
@@ -124,16 +179,23 @@ export default function PostsMap({
       />
       
       {showMore && (
-        <section 
+        <motion.section 
           className={styles.blogBtn}
           aria-label="Meer artikelen laden"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            delay: 0.5,
+            duration: 0.5,
+            ease: [0.22, 1, 0.36, 1]
+          }}
         >
           <LoadMoreButton
             onClick={loadMore}
             waveAmount={DEFAULT_CONFIG.waveAmount}
             buttonText={DEFAULT_CONFIG.buttonText}
           />
-        </section>
+        </motion.section>
       )}
     </div>
   );

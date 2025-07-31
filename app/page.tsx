@@ -1,14 +1,14 @@
 import { Suspense } from "react";
-import { metadata } from "./layout";
 import { Hero } from "../components/layout/hero";
 import { TitleLine } from "../components/titleLine";
 import PostsGrid from "../components/posts/postsGrid";
-import TipsGrid from "../components/tips/tipsGrid";
+import TipsGrid from "../components/tips/tipsGridWrapper";
 import States from "../components/states";
 import Stock from "../components/stocking/stock";
 import PostCardSkeleton from "../components/posts/postCardSkeleton";
 import TipCardSkeleton from "../components/tips/tipCardSkeleton";
 import posts from "../components/posts/postsMap.module.scss";
+import HomePageClient from "../components/homePageClient";
 
 // Remove the HomePageProps interface - not needed for Next.js app directory pages
 
@@ -52,13 +52,11 @@ const TipsLoadingFallback = () => (
 
 // Remove the props parameter - Next.js app directory pages don't receive props
 export default function Home() {
-  // Safely extract metadata with fallback
-  const siteTitle = (metadata.title as string) || "Bloemstraat Garden";
+  const siteTitle = "Bloemstraat Garden";
 
   return (
     <main role="main">
-      <Hero title={siteTitle} paragraph={PAGE_CONTENT.heroSubtitle}/>
-
+      <HomePageClient siteTitle={siteTitle}>
       {/* Blog Posts Section */}
       <PageSection title={PAGE_CONTENT.sections.blog}>
         <Suspense fallback={<PostsLoadingFallback />}>
@@ -82,6 +80,7 @@ export default function Home() {
       <Suspense fallback={<div>Statistieken laden...</div>}>
         <States />
       </Suspense>
+      </HomePageClient>
     </main>
   );
 }

@@ -11,6 +11,7 @@ import { getAllTips, getTip } from "@/lib/api";
 import Sidebar from "@/components/layout/sidebar";
 import { MorePosts } from "../../../components/posts/morePosts";
 import styles from "../../[slug]/page.module.scss";
+import TipsPageClient from "@/components/tipsPageClient";
 
 interface TipsPageParams {
   slug: string;
@@ -213,35 +214,37 @@ export default async function TipsPage({ params }: TipsPageProps) {
 
     return (
       <main role="main">
-        <PostHeader
-          title={article.title}
-          date={article.date}
-          backgroundImageUrl={article.articleImage.url}
-          imageAlt={article.articleImage.title}
-        />
-        
-        <section className={styles.postcontent}>
-          <article>
-            <Breadcrumbs
-              homeLabel={BREADCRUMB_CONFIG.homeLabel}
-              homeUrl={BREADCRUMB_CONFIG.homeUrl}
-              currentTitle={article.title}
-            />
-            
-            <div className={styles.postcontent__story}>
-              {documentToReactComponents(article.details.json, renderOptions)}
-            </div>
-            
-            <MorePosts 
-              title="Meer moestuin tips" 
-              slug={article.slug} 
-              articles={allTips} 
-              url="/tips" 
-            />
-          </article>
+        <TipsPageClient>
+          <PostHeader
+            title={article.title}
+            date={article.date}
+            backgroundImageUrl={article.articleImage.url}
+            imageAlt={article.articleImage.title}
+          />
           
-          <Sidebar />
-        </section>
+          <section className={styles.postcontent}>
+            <article>
+              <Breadcrumbs
+                homeLabel={BREADCRUMB_CONFIG.homeLabel}
+                homeUrl={BREADCRUMB_CONFIG.homeUrl}
+                currentTitle={article.title}
+              />
+              
+              <div className={styles.postcontent__story}>
+                {documentToReactComponents(article.details.json, renderOptions)}
+              </div>
+              
+              <MorePosts 
+                title="Meer moestuin tips" 
+                slug={article.slug} 
+                articles={allTips} 
+                url="/tips" 
+              />
+            </article>
+            
+            <Sidebar />
+          </section>
+        </TipsPageClient>
       </main>
     );
   } catch (error) {
