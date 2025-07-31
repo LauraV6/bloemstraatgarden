@@ -34,7 +34,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/articles/[slug]/page.js",
-    "components/logo/logoSmall.js"
+    "components/logo/logoSmall.js",
+    "jest-dom.d.ts"
   ],
   "exclude": [
     "node_modules"
