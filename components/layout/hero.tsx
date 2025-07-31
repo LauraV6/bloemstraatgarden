@@ -6,6 +6,7 @@ import HeaderLeaveBig from "../../public/headerLeaveBig.png";
 import HeaderLeaveSmall from "../../public/headerLeaveSmall.png";
 import HeaderImg from "../../public/headerBgTransparent.png";
 import FadeIn from "../fadeIn";
+import { motion } from "framer-motion";
 
 // Types
 interface HeroProps {
@@ -20,6 +21,24 @@ interface LeafImageProps {
   className: string;
   alt: string;
 }
+
+// Animation variants
+const heroTextVariants = {
+  initial: { 
+    opacity: 0, 
+    y: 30,
+    scale: 0.95
+  },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
 
 // Constants
 const LEAF_IMAGES = [
@@ -86,12 +105,30 @@ export const Hero: React.FC<HeroProps> = ({
       aria-labelledby="hero-title"
     >
       <div className={styles.hero__container}>
-        <header className={styles.hero__text}>
+        <motion.header 
+          className={styles.hero__text}
+          initial="initial"
+          animate="animate"
+          variants={heroTextVariants}
+        >
           <div>
-            <h1 id="hero-title">{title}</h1>
-            <p>{paragraph}</p>
+            <motion.h1 
+              id="hero-title"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {title}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {paragraph}
+            </motion.p>
           </div>
-        </header>
+        </motion.header>
         
         <div 
           className={styles.hero__images}

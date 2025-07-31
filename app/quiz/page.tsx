@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useMemo, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Question from "../../components/quiz/question";
 import Summary from "../../components/quiz/summary";
 import FadeIn from "../../components/fadeIn";
@@ -225,32 +226,73 @@ export default function QuizPage() {
   }
 
   return (
-    <main role="main">
-      <section 
+    <motion.main 
+      role="main"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
+      <motion.section 
         className={`${heroStyles.hero} ${heroStyles.heroVh}`}
         aria-label="Moestuin quiz sectie"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 0.6, 
+          ease: [0.22, 1, 0.36, 1]
+        }}
       >
         <div className={heroStyles.hero__container}>
           <div className={heroStyles.hero__text}>
-            <header>
+            <motion.header
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6,
+                delay: 0.2,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+            >
               <h1 className={styles.quiz__header}>
                 {QUIZ_CONFIG.title}
               </h1>
-            </header>
+            </motion.header>
             
-            <FadeIn className={styles.quiz__container}>
-              <QuizContent
-                quizIsComplete={quizStatus.isComplete}
-                userAnswers={userAnswers}
-                activeQuestionIndex={activeQuestionIndex}
-                onSelectAnswer={handleSelectAnswer}
-                onSkipAnswer={handleSkipAnswer}
-                onResetQuiz={resetQuiz}
-              />
-            </FadeIn>
+            <motion.div
+              className={styles.quiz__container}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={quizIsComplete ? 'summary' : `question-${activeQuestionIndex}`}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                >
+                  <QuizContent
+                    quizIsComplete={quizStatus.isComplete}
+                    userAnswers={userAnswers}
+                    activeQuestionIndex={activeQuestionIndex}
+                    onSelectAnswer={handleSelectAnswer}
+                    onSkipAnswer={handleSkipAnswer}
+                    onResetQuiz={resetQuiz}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
           </div>
         </div>
-      </section>
-    </main>
+      </motion.section>
+    </motion.main>
   );
 }
