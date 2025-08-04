@@ -92,7 +92,11 @@
 
     article {
         min-width: 0;
-        overflow-x: hidden;
+        overflow: hidden;
+
+        @include breakpoint-up(md) {
+            overflow: unset;
+        }
     }
 
     &__story {
