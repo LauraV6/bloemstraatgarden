@@ -42,7 +42,7 @@ export default function BlogPostClient({ children }: BlogPostClientProps) {
       </motion.div>
 
       {/* Post Content Section */}
-      <motion.section
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ 
@@ -52,7 +52,7 @@ export default function BlogPostClient({ children }: BlogPostClientProps) {
         }}
       >
         {childrenArray[1]}
-      </motion.section>
+      </motion.div>
     </motion.div>
   );
 }

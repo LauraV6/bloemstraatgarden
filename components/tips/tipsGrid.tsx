@@ -51,6 +51,7 @@ export default function TipsGridClient({ tips }: TipsGridClientProps) {
                     <motion.div
                         key={tip.sys.id}
                         variants={itemVariants}
+                        className={styles.tipCard}
                         whileHover={{ 
                             scale: 1.05,
                             transition: { duration: 0.2 }
