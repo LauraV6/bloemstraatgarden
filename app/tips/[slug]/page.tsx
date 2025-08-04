@@ -222,7 +222,7 @@ export default async function TipsPage({ params }: TipsPageProps) {
             imageAlt={article.articleImage.title}
           />
           
-          <section className={styles.postcontent}>
+          <div className={styles.postcontent}>
             <article>
               <Breadcrumbs
                 homeLabel={BREADCRUMB_CONFIG.homeLabel}
@@ -243,7 +243,7 @@ export default async function TipsPage({ params }: TipsPageProps) {
             </article>
             
             <Sidebar />
-          </section>
+          </div>
         </TipsPageClient>
       </main>
     );
