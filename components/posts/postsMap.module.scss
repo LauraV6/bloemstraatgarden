@@ -6,6 +6,14 @@
     gap: 1.3rem;
     margin-top: 1.2rem;
 
+    @include breakpoint-down(sm) {
+      overflow: auto hidden;
+
+      > div {
+          flex: 0 0 65vw;
+      }
+    }
+
     @include breakpoint-up(md) {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
@@ -31,17 +39,16 @@
 
 .morePosts {
   position: relative;
+  width: 100%;
   margin-top: 1rem;
 
   @include breakpoint-up(md) {
-    margin-top: 4rem;
+    margin-top: 3rem;
   }
 
   .blogGrid {
     @include breakpoint-down(sm) {
       display: flex;
-      overflow: hidden;
-      overflow-x: scroll;
     }
 
     @media only screen and (max-width: 1299px) and (min-width: 767px) {

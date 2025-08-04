@@ -43,7 +43,6 @@
         width: 100%;
         bottom: 0;
         left: 0;
-        padding: 1rem;
         z-index: 1;
 
         @include breakpoint-up(md) {
@@ -58,6 +57,11 @@
         }
         
         > div {
+            margin: 1rem;
+
+            @include breakpoint-up(md) {
+                margin: 0;
+            }
 
             h1, label, path, span {
                 color: hsl(0, 0%, 100%);
@@ -86,8 +90,18 @@
         gap: 5rem;
     }
 
-    &__story {
+    article {
+        min-width: 0;
+        overflow: hidden;
 
+        @include breakpoint-up(md) {
+            overflow: unset;
+        }
+    }
+
+    &__story {
+        overflow-x: hidden;
+        
         h2, h3, h4 {
             margin-top: .5rem;
         }
@@ -213,8 +227,9 @@
             margin-bottom: 1rem;
         
             @include breakpoint-down(sm) {
-                width: calc(100vw - 2rem);
+                width: 100%;
                 min-width: 100%;
+                max-width: 100%;
             }
         
             th {
@@ -242,6 +257,12 @@
             }
         }
     }
+}
+
+.contentImage {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: cover;
 }
 
 .post {
