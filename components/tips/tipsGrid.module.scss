@@ -6,6 +6,10 @@
 
     @include breakpoint-down(sm) {
         overflow: auto hidden;
+
+        > div {
+            flex: 0 0 65vw;
+        }
     }
 
     @include breakpoint-up(md) {

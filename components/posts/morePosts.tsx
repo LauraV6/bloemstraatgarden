@@ -90,11 +90,9 @@ export const MorePosts: React.FC<MorePostsProps> = ({
     return null;
   }
 
-  const containerClass = [styles.morePosts, className].filter(Boolean).join(' ');
-
   return (
     <div 
-      className={containerClass}
+      className={styles.morePosts}
       aria-labelledby="more-posts-heading"
     >
       <h3 id="more-posts-heading">{title}</h3>
