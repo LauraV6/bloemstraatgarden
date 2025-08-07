@@ -1,12 +1,13 @@
 import styles from './tipCard.module.scss'
 import Image from "next/image";
 import Link from "next/link";
+import { Tip } from '@/lib/contentful/api';
 
-interface Props {
-    props: any;
-  }
+interface TipCardProps {
+    props: Tip;
+}
   
-export const TipCard: React.FC<Props> = ({ props }) => {
+export const TipCard: React.FC<TipCardProps> = ({ props }) => {
     return (
         <article className={`${styles.postItem} ${styles.active}`}>
             <Link href={`/tips/${props.slug}`}>
