@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Weather from '@/components/weather';
+import Weather from '@/components/features/weather/weather';
 import { faSun, faCloudSun, faCloud } from '@fortawesome/free-solid-svg-icons';
 
 // Mock FontAwesomeIcon to avoid rendering complexity
