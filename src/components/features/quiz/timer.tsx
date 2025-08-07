@@ -5,7 +5,13 @@ import stylesQuestion from "./question.module.scss";
 import { useEffect, useState } from "react";
 import FadeIn from "@/components/common/fadeIn";
 
-export default function QuestionTimer({ timeout, onTimeout, mode }: any) {
+interface QuestionTimerProps {
+  timeout: number;
+  onTimeout: () => void;
+  mode?: string;
+}
+
+export default function QuestionTimer({ timeout, onTimeout, mode }: QuestionTimerProps) {
   const [remainingTime, setRemainingTime] = useState(timeout);
 
   // Add input validation
