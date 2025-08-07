@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "@/../public/404.png";
 import Sidebar from "@/components/layout/sidebar";
 import heroStyles from "@/components/layout/hero.module.scss";
 import styles from "@/app/[slug]/page.module.scss";
@@ -59,7 +58,7 @@ export default function NotFound({ className }: NotFoundProps) {
         aria-label="404 foutpagina"
       >        
         <Image 
-          src={heroImage} 
+          src="/404.png" 
           alt={ERROR_CONTENT.imageAlt}
           width={3000}
           height={2000}
