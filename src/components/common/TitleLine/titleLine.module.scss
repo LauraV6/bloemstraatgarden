@@ -1,0 +1,37 @@
+@use '@/styles/mixins' as *;
+
+.titleLine {
+    display: none;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  
+    @include breakpoint-up(md) {
+        display: block;
+        margin-bottom: 3rem;
+    }
+  
+    span {
+        position: relative;
+        font-weight: 500;
+        animation: load_in 1s forwards;
+  
+        &::before, &::after {
+            content: "";
+            border-top: 1px solid hsl(105, 29%, 84%);
+            height: 1px;
+            position: absolute;
+            right: -620px;
+            bottom: 5px;
+            width: 600px;
+        }
+  
+        &::before {
+            left: -620px;
+            right: auto;
+        }
+    }
+}
