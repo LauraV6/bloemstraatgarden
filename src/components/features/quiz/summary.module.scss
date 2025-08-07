@@ -1,0 +1,96 @@
+@use '@/styles/mixins' as *;
+
+.summary {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    gap: 2rem;
+    text-align: center;
+
+    &__states {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        margin: 0 auto;
+
+        .score {
+            display: grid;
+            gap: .7rem;
+            border-radius: 5px;
+            background-color: var(--color-transparent-1);
+            padding: 1rem;
+
+            @include breakpoint-up(md) {
+                width: 130px;
+            }
+
+            &__number {
+                font-size: 1.3em;
+                font-family: var(--font-pacaembu);
+                color: var(--color-4);
+
+                @include breakpoint-up(md) {
+                    font-size: 3em;
+                }
+            }
+        }
+    }
+
+    &__answers {
+        display: grid;
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        @include breakpoint-up(md) {
+            gap: 3rem;
+        }
+
+        div {
+            display: grid;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+
+            h3 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+                color: var(--color-green-2);
+                background-color: var(--color-transparent);
+                border-radius: 50%;
+                margin: 0 auto;
+            }
+
+            p {
+                margin: 0;
+            }   
+            
+            .userAnswer {
+                width: fit-content;
+                background-color: var(--color-3);
+                font-family: var(--font-pacaembu);
+                border-radius: 5px;
+                padding: 1rem;
+                margin: 0 auto;
+
+                &.wrong {
+                    background-color: var(--color-error);
+                }
+
+                &.correct {
+                    background-color: var(--color-correct);
+                }
+            }
+
+            .questionAnswer {
+                color: var(--color-blue);
+                font-family: var(--font-pacaembu);
+            }
+        }
+    }
+}

@@ -23,18 +23,17 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
     ".next/types/**/*.ts",
-    "app/articles/[slug]/page.js",
-    "components/logo/logoSmall.js",
     "jest-dom.d.ts"
   ],
   "exclude": [

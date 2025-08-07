@@ -2,7 +2,24 @@
   "permissions": {
     "allow": [
       "Bash(npm install)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(xcopy:*)",
+      "Bash(robocopy:*)",
+      "Bash(powershell:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm test)",
+      "Bash(curl:*)",
+      "Bash(del next.config.mjs)",
+      "Bash(npx next build:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(npx next dev:*)",
+      "Bash(npm run lint)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": []
   }
