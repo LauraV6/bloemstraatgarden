@@ -1,0 +1,245 @@
+@use '@/styles/mixins' as *;
+
+.hero {
+    position: relative;
+    height: 330px;
+    width: 100%;
+    max-width: 100%;
+    height: 280px;
+    max-height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-menu);
+    overflow: hidden;
+    padding: 117px 0 0 0;
+    margin: 0;
+
+    @include breakpoint-up(md) {
+        padding-top: 154px;
+        height: 400px;
+        max-height: 400px;
+    }
+
+    img[alt="404"] {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &Dark {
+        background-color: var(--color-green-1);
+
+        .hero {
+            &__text {
+                h1, p {
+                    color: hsl(0, 0%, 100%);
+                }
+            }
+
+            &__images {
+
+                .leave {
+                    filter: invert(51%) sepia(24%) saturate(1122%) hue-rotate(79deg) brightness(96%) contrast(88%);
+                }
+            }
+        }
+    }
+
+    &Vh {
+        height: 100%;
+        max-height: 100%;
+        min-height: calc(100vh - 231px);
+
+        @include breakpoint-up(md) {
+            min-height: calc(100vh - 360px);
+        }
+
+        @include breakpoint-up(lg) {
+            min-height: calc(100vh - 422px);
+        }
+
+        .hero__text {
+            position: relative;
+            flex-direction: column;
+
+            p {
+                max-width: unset;
+            }
+        }
+    }
+
+    &__container {
+        position: relative;
+        height: 100%;
+    }
+
+    &__text {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+        text-align: center;
+        padding: 1rem;
+        z-index: 10;
+
+        h1 {
+            --bg-size: 400%;
+            background: linear-gradient(
+                          90deg,
+                          var(--color-green-1),
+                          var(--color-green-2),
+                          var(--color-green-1)
+                        ) 0 0 / var(--bg-size) 100%;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: textShine 8s linear infinite;
+        }
+
+        p {
+            font-family: var(--font-pacaembu);
+            color: var(--color-font-light);
+
+            @include breakpoint-up(md) {
+                max-width: 650px;
+                line-height: 1.4;
+            }
+        }
+    }
+
+    &__images {
+        position: relative;
+        height: 100%;
+        user-select: none;
+
+        .leave {
+            position: absolute;
+            max-width: 130px;
+
+            @include breakpoint-up(md) {
+                max-width: 220px;
+            }
+
+            @include breakpoint-up(xlg) {
+                max-width: 260px;
+            }
+
+            &One {
+                left: 0px;
+                rotate: 35deg;
+                animation: leave-one 3s forwards;
+
+                @include breakpoint-up(xlg) {
+                    left: 20px;
+                    rotate: 80deg;
+                }
+            }
+
+            &Two {
+                right: -50px;
+                rotate: 90deg;
+                animation: leave-two 2s forwards;
+
+                @include breakpoint-up(md) {
+                    right: 0;
+                }
+            }
+
+            &Three {
+                right: 0;
+                rotate: 260deg;
+                animation: leave-three 3s forwards;
+
+                @include breakpoint-up(md) {
+                    right: 20px;
+                }
+
+                @include breakpoint-up(lg) {
+                    right: 50px;
+                    rotate: 320deg;
+                }
+            }
+
+            &Four {
+                left: -10px;
+                rotate: 280deg;
+                animation: leave-four 2s forwards;
+
+                @include breakpoint-up(md) {
+                    left: 5px;
+                }
+
+                @include breakpoint-up(xlg) {
+                    left: 30px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes leave-one { 
+    0% { 
+        opacity: 0;
+        transform: rotate(40deg); 
+        top: -30%;
+    } 
+
+    100% { 
+        opacity: 1;
+        top: -20%;
+        transform: rotate(45deg); 
+    } 
+}
+
+@keyframes leave-two { 
+    0% { 
+        opacity: 0;
+        transform: rotate(0deg); 
+        top: -30%;
+    } 
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% { 
+        opacity: 1;
+        top: -17%;
+        transform: rotate(5deg); 
+    } 
+}
+
+@keyframes leave-three { 
+    0% { 
+        opacity: 0;
+        transform: rotate(0deg); 
+        bottom: -60%;
+    } 
+
+    100% { 
+        opacity: 1;
+        bottom: -22%;
+        transform: rotate(5deg); 
+    } 
+}
+
+@keyframes leave-four { 
+    0% { 
+        opacity: 0;
+        transform: rotate(0deg); 
+        bottom: -50%;
+    } 
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% { 
+        opacity: 1;
+        bottom: -20%;
+        transform: rotate(5deg); 
+    } 
+}

@@ -1,0 +1,90 @@
+@use '@/styles/mixins' as *;
+
+.states {
+    max-width: 1200px;
+    padding: 0 1rem;
+    margin: 2rem 0;
+
+    @include breakpoint-up(md) {
+        width: calc(100% - 4rem);
+        padding: 0 2rem;
+        margin: 3rem auto;
+    }
+
+    @include breakpoint-up(lg) {
+        width: calc(100% - 10rem);
+        margin: 5rem auto;
+    }
+
+    @include breakpoint-down(sm) {
+        display: none;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 -1rem;
+
+        @include breakpoint-up(md) {
+            flex-direction: row;
+            width: calc(100% + 4rem);
+            margin: 4rem -2rem 0 -2rem;
+        }
+
+        @include breakpoint-up(lg) {
+            margin: 8rem -2rem 0 -2rem;
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 1rem 2rem;
+
+        @include breakpoint-up(md) {
+            flex-direction: row;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        svg {
+            height: 24px;
+
+            @include breakpoint-up(md) {
+                height: 28px;
+            }
+
+            * {
+                color: var(--color-green-1);
+            }
+        }
+
+        .textContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            h4 {
+                color: var(--color-4);
+                font-size: 1em;
+            }
+
+            p {
+                color: var(--color-font-light);
+                margin: 0;
+            }
+        }
+
+        &:nth-child(2) {
+            border-style: solid;
+            border-width: 1px 0px;
+            border-color: var(--color-transparent);
+
+            @include breakpoint-up(md) {
+                border-width: 0px 1px;
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+@use '@/styles/mixins' as *;
+
+.tipsGrid {
+    display: flex;
+    gap: 1.3rem;
+
+    @include breakpoint-down(sm) {
+        overflow: auto hidden;
+
+        > div {
+            flex: 0 0 65vw;
+        }
+    }
+
+    @include breakpoint-up(md) {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 2rem;
+    }
+
+    @include breakpoint-up(lg) {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 2.5rem;
+    }
+
+    > div {
+        &:first-of-type {
+            @include breakpoint-up(md) {
+                grid-row-start: 1;
+                grid-row-end: 3;
+
+                .tip-item__img {
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
