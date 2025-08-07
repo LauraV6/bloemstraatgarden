@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import styles from "./hero.module.scss";
-import HeaderLeaveBig from "../../../public/headerLeaveBig.png";
-import HeaderLeaveSmall from "../../../public/headerLeaveSmall.png";
-import HeaderImg from "../../../public/headerBgTransparent.png";
 import FadeIn from "@/components/common/fadeIn";
 import { motion } from "framer-motion";
 
@@ -17,7 +14,7 @@ interface HeroProps {
 }
 
 interface LeafImageProps {
-  src: typeof HeaderLeaveBig | typeof HeaderLeaveSmall;
+  src: string;
   className: string;
   alt: string;
 }
@@ -43,22 +40,22 @@ const heroTextVariants = {
 // Constants
 const LEAF_IMAGES = [
   {
-    src: HeaderLeaveBig,
+    src: "/headerLeaveBig.png",
     className: `${styles.leave} ${styles.leaveOne}`,
     alt: "Decoratief blad - groot"
   },
   {
-    src: HeaderLeaveSmall,
+    src: "/headerLeaveSmall.png",
     className: `${styles.leave} ${styles.leaveTwo}`,
     alt: "Decoratief blad - klein"
   },
   {
-    src: HeaderLeaveBig,
+    src: "/headerLeaveBig.png",
     className: `${styles.leave} ${styles.leaveThree}`,
     alt: "Decoratief blad - groot"
   },
   {
-    src: HeaderLeaveSmall,
+    src: "/headerLeaveSmall.png",
     className: `${styles.leave} ${styles.leaveFour}`,
     alt: "Decoratief blad - klein"
   }
@@ -100,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section
       className={heroClass}
-      style={{ backgroundImage: `url(${HeaderImg.src})` }}
+      style={{ backgroundImage: `url(/headerBgTransparent.png)` }}
       role="banner"
       aria-labelledby="hero-title"
     >
