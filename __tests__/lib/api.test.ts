@@ -1,4 +1,4 @@
-import { getAllArticles, getArticle, getAllTips, getTip } from '@/lib/api';
+import { getAllArticles, getArticle, getAllTips, getTip } from '@/lib/contentful/api';
 
 // Mock the fetch function
 global.fetch = jest.fn();
