@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import Profile from "../../../public/profile.png";
 import FadeIn from "@/components/common/fadeIn";
 import styles from './sidebar.module.scss';
 
@@ -15,7 +14,7 @@ interface SidebarProps {
 interface ProfileSectionProps {
   name: string;
   description: string;
-  profileImage: typeof Profile;
+  profileImage: string;
 }
 
 interface QuizSectionProps {
@@ -30,7 +29,7 @@ const ANIMATION_DURATION = 0.3;
 const PROFILE_DATA = {
   name: "Laura",
   description: "Overdag programmeur en in de avonduren moestuinierder. Wil jij ook een moestuin beginnen? Laat je op dit blog inspireren om de handen uit de mouwen te steken.",
-  profileImage: Profile
+  profileImage: "/profile.png"
 } as const;
 
 const QUIZ_DATA = {
