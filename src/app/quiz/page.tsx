@@ -1,0 +1,298 @@
+"use client";
+
+import { useState, useCallback, useMemo, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Question from "@/components/features/quiz/question";
+import Summary from "@/components/features/quiz/summary";
+import FadeIn from "@/components/common/fadeIn";
+import QUESTIONS from "@/lib/quiz";
+import { trackQuizEvent } from "@/lib/analytics/gtag";
+import styles from "./page.module.scss";
+import heroStyles from "@/components/layout/hero.module.scss";
+
+interface UserAnswer {
+  questionIndex: number;
+  selectedAnswer: string | null;
+  timestamp: number;
+}
+
+// Constants with validation
+const QUIZ_CONFIG = {
+  title: "Moestuin Quiz",
+  totalQuestions: QUESTIONS && Array.isArray(QUESTIONS) ? QUESTIONS.length : 0
+} as const;
+
+// Custom hooks
+const useQuizState = () => {
+  const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
+  
+  const activeQuestionIndex = userAnswers.length;
+  const quizIsComplete = activeQuestionIndex === QUIZ_CONFIG.totalQuestions;
+  const progress = QUIZ_CONFIG.totalQuestions > 0 
+    ? Math.round((activeQuestionIndex / QUIZ_CONFIG.totalQuestions) * 100) 
+    : 0;
+
+  const handleSelectAnswer = useCallback((selectedAnswer: string | null) => {
+    setUserAnswers((prevAnswers) => {
+      const newAnswers = [
+        ...prevAnswers,
+        {
+          questionIndex: activeQuestionIndex,
+          selectedAnswer,
+          timestamp: Date.now()
+        }
+      ];
+      
+      // Track the answer - ADD THIS
+      trackQuizEvent('question_answered', activeQuestionIndex, selectedAnswer || 'skipped');
+      
+      // Check if quiz is complete - ADD THIS
+      if (newAnswers.length === QUIZ_CONFIG.totalQuestions) {
+        trackQuizEvent('quiz_completed');
+      }
+      
+      return newAnswers;
+    });
+  }, [activeQuestionIndex]);
+
+  const handleSkipAnswer = useCallback(() => {
+    handleSelectAnswer(null);
+  }, [handleSelectAnswer]);
+
+  const resetQuiz = useCallback(() => {
+    setUserAnswers([]);
+    // Track quiz reset - ADD THIS
+    trackQuizEvent('quiz_reset');
+  }, []);
+
+  return {
+    userAnswers,
+    activeQuestionIndex,
+    quizIsComplete,
+    progress,
+    handleSelectAnswer,
+    handleSkipAnswer,
+    resetQuiz
+  };
+};
+
+// Components
+interface QuizContentProps {
+  quizIsComplete: boolean;
+  userAnswers: UserAnswer[];
+  activeQuestionIndex: number;
+  onSelectAnswer: (answer: string | null) => void;
+  onSkipAnswer: () => void;
+  onResetQuiz: () => void;
+}
+
+const QuizContent: React.FC<QuizContentProps> = ({
+  quizIsComplete,
+  userAnswers,
+  activeQuestionIndex,
+  onSelectAnswer,
+  onSkipAnswer,
+  onResetQuiz
+}) => {
+  // Add validation for QUESTIONS array
+  if (!QUESTIONS || !Array.isArray(QUESTIONS) || QUESTIONS.length === 0) {
+    return (
+      <div className={styles.quiz__error || ''}>
+        <h2>Quiz data not available</h2>
+        <p>Please check that the quiz questions are properly loaded.</p>
+      </div>
+    );
+  }
+
+  if (quizIsComplete) {
+    // Transform UserAnswer[] to the format Summary expects (just the answers)
+    const answersForSummary = userAnswers.map(answer => answer.selectedAnswer);
+    
+    return (
+      <>
+        <Summary userAnswers={answersForSummary} />
+        <button 
+          onClick={onResetQuiz}
+          className="button button--cta"
+        >
+          Start opnieuw
+        </button>
+      </>
+    );
+  }
+
+  // Validate current question index
+  if (activeQuestionIndex >= QUESTIONS.length) {
+    console.error(`Active question index ${activeQuestionIndex} is out of bounds`);
+    return (
+      <div className={styles.quiz__error || ''}>
+        <h2>Quiz error</h2>
+        <p>Question index is out of range.</p>
+        <button onClick={onResetQuiz} className="button button--cta">
+          Reset Quiz
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <Question
+      key={activeQuestionIndex}
+      questionIndex={activeQuestionIndex}
+      onSelectAnswer={onSelectAnswer}
+      onSkipAnswer={onSkipAnswer}            
+    />
+  );
+};
+
+export default function QuizPage() {
+  // Add mounted state to prevent hydration issues
+  const [isMounted, setIsMounted] = useState(false);
+  
+  const {
+    userAnswers,
+    activeQuestionIndex,
+    quizIsComplete,
+    progress,
+    handleSelectAnswer,
+    handleSkipAnswer,
+    resetQuiz
+  } = useQuizState();
+
+  // Only render after hydration is complete
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Track quiz start when component mounts - ADD THIS
+  useEffect(() => {
+    if (isMounted && userAnswers.length === 0) {
+      trackQuizEvent('quiz_start');
+    }
+  }, [isMounted, userAnswers.length]);
+
+  // Memoize the quiz status for performance
+  const quizStatus = useMemo(() => ({
+    isComplete: quizIsComplete,
+    currentQuestion: activeQuestionIndex + 1,
+    totalQuestions: QUIZ_CONFIG.totalQuestions,
+    progress
+  }), [quizIsComplete, activeQuestionIndex, progress]);
+
+  // Show loading until mounted (prevents hydration mismatch)
+  if (!isMounted) {
+    return (
+      <main role="main">
+        <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
+          <div className={heroStyles.hero__container}>
+            <div className={heroStyles.hero__text}>
+              <h1 className={styles.quiz__header}>Loading quiz...</h1>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  // Add loading state for when QUESTIONS is not available
+  if (!QUESTIONS || !Array.isArray(QUESTIONS)) {
+    return (
+      <main role="main">
+        <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
+          <div className={heroStyles.hero__container}>
+            <div className={heroStyles.hero__text}>
+              <h1 className={styles.quiz__header}>Loading quiz...</h1>
+              <p>Please wait while we load the quiz questions.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  if (QUESTIONS.length === 0) {
+    return (
+      <main role="main">
+        <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
+          <div className={heroStyles.hero__container}>
+            <div className={heroStyles.hero__text}>
+              <h1 className={styles.quiz__header}>No Quiz Available</h1>
+              <p>There are no quiz questions available at this time.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <motion.main 
+      role="main"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
+      <motion.section 
+        className={`${heroStyles.hero} ${heroStyles.heroVh}`}
+        aria-label="Moestuin quiz sectie"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 0.6, 
+          ease: [0.22, 1, 0.36, 1]
+        }}
+      >
+        <div className={heroStyles.hero__container}>
+          <div className={heroStyles.hero__text}>
+            <motion.header
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6,
+                delay: 0.2,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+            >
+              <h1 className={styles.quiz__header}>
+                {QUIZ_CONFIG.title}
+              </h1>
+            </motion.header>
+            
+            <motion.div
+              className={styles.quiz__container}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.6,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={quizIsComplete ? 'summary' : `question-${activeQuestionIndex}`}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                >
+                  <QuizContent
+                    quizIsComplete={quizStatus.isComplete}
+                    userAnswers={userAnswers}
+                    activeQuestionIndex={activeQuestionIndex}
+                    onSelectAnswer={handleSelectAnswer}
+                    onSkipAnswer={handleSkipAnswer}
+                    onResetQuiz={resetQuiz}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+    </motion.main>
+  );
+}
