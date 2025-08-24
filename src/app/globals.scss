@@ -122,6 +122,10 @@ h1 {
   }
 }
 
+svg path.st3 {
+  fill: var(--color-font);
+}
+
 .breadcrumbs {
   display: flex;
   align-items: center;
