@@ -36,14 +36,12 @@
       } 
 
       &:hover, &:active, &:focus {
-        svg {
-          path {
-            color: hsl(0, 0%, 100%);
-          }
-        }
-
         background-color: var(--color-green-1);
         color: hsl(0, 0%, 100%);
+
+        span, svg path {
+          color: hsl(0, 0%, 100%);
+        }
       }
 
       &:active {
