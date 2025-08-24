@@ -1,6 +1,6 @@
 "use client";
 
-1import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import { orderService } from '@/services/orderService';
