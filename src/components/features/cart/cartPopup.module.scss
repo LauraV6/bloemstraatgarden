@@ -288,7 +288,8 @@
   border-radius: 8px;
   text-align: center;
   animation: slideUp 0.3s ease;
-  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
   .successIcon {
     font-size: 2rem;
@@ -299,6 +300,8 @@
   p {
     margin: 0.5rem 0;
     font-weight: 600;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   small {
@@ -306,6 +309,8 @@
     margin-top: 0.5rem;
     opacity: 0.9;
     font-size: 0.875rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -316,7 +321,8 @@
   border-radius: 8px;
   text-align: center;
   animation: slideUp 0.3s ease;
-  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
   p {
     margin: 0;
