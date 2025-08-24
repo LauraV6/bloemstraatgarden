@@ -171,9 +171,6 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                 </button>
               </div>
             ))}
-          </div>
-
-          <div className={styles.cartPopup__footer}>
             {orderStatus === 'success' && (
               <div className={styles.cartPopup__successMessage}>
                 <FontAwesomeIcon icon={faCheck} className={styles.successIcon} />
@@ -187,7 +184,9 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                 <p>{orderMessage}</p>
               </div>
             )}
+          </div>
 
+          <div className={styles.cartPopup__footer}>
             {orderStatus !== 'success' && (
               <>
                 <button
