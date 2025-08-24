@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+1import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
+import { orderService } from '@/services/orderService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faTrash, faPlus, faMinus } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
+import { faTimes, faTrash, faPlus, faMinus, faSpinner, faCheck } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
 import styles from './cartPopup.module.scss';
 
 interface CartPopupProps {
@@ -15,6 +16,10 @@ interface CartPopupProps {
 export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
   const { cartItems, removeFromCart, updateQuantity, clearCart, getTotalItems } = useShoppingCart();
   const popupRef = useRef<HTMLDivElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orderStatus, setOrderStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [orderMessage, setOrderMessage] = useState('');
+  const [orderId, setOrderId] = useState('');
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -41,6 +46,55 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
+
+  const handleOrderSubmit = async () => {
+    if (cartItems.length === 0) return;
+
+    setIsSubmitting(true);
+    setOrderStatus('loading');
+    setOrderMessage('');
+
+    try {
+      // Use mock service for local development, real service for production
+      const response = process.env.NODE_ENV === 'development' 
+        ? await orderService.mockSubmitOrder(cartItems)
+        : await orderService.submitOrder(cartItems);
+
+      if (response.success) {
+        setOrderStatus('success');
+        setOrderMessage(response.message);
+        setOrderId(response.orderId || '');
+        
+        // Clear cart after successful order
+        setTimeout(() => {
+          clearCart();
+          // Reset states after 5 seconds
+          setTimeout(() => {
+            setOrderStatus('idle');
+            setOrderMessage('');
+            onClose();
+          }, 5000);
+        }, 2000);
+      } else {
+        setOrderStatus('error');
+        setOrderMessage(response.message);
+        // Reset error state after 3 seconds
+        setTimeout(() => {
+          setOrderStatus('idle');
+          setOrderMessage('');
+        }, 3000);
+      }
+    } catch (error) {
+      setOrderStatus('error');
+      setOrderMessage('Er ging iets mis. Probeer het later opnieuw.');
+      setTimeout(() => {
+        setOrderStatus('idle');
+        setOrderMessage('');
+      }, 3000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -111,6 +165,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                   className={styles.cartItem__removeBtn}
                   onClick={() => removeFromCart(item.sys.id)}
                   aria-label="Verwijder uit winkelwagen"
+                  title="Verwijder uit winkelwagen"
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
@@ -119,20 +174,45 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
           </div>
 
           <div className={styles.cartPopup__footer}>
-            <button
-              className={styles.cartPopup__clearBtn}
-              onClick={clearCart}
-            >
-              Winkelwagen leegmaken
-            </button>
-            <button
-              className={styles.cartPopup__checkoutBtn}
-              onClick={() => {
-                alert('Neem contact op via Instagram of WhatsApp om je bestelling te plaatsen!');
-              }}
-            >
-              Contact opnemen
-            </button>
+            {orderStatus === 'success' && (
+              <div className={styles.cartPopup__successMessage}>
+                <FontAwesomeIcon icon={faCheck} className={styles.successIcon} />
+                <p>{orderMessage}</p>
+                {orderId && <small>Order ID: {orderId}</small>}
+              </div>
+            )}
+            
+            {orderStatus === 'error' && (
+              <div className={styles.cartPopup__errorMessage}>
+                <p>{orderMessage}</p>
+              </div>
+            )}
+
+            {orderStatus !== 'success' && (
+              <>
+                <button
+                  className={styles.cartPopup__clearBtn}
+                  onClick={clearCart}
+                  disabled={isSubmitting}
+                > 
+                  Winkelwagen leegmaken
+                </button>
+                <button
+                  className={styles.cartPopup__checkoutBtn}
+                  onClick={handleOrderSubmit}
+                  disabled={isSubmitting || cartItems.length === 0}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <FontAwesomeIcon icon={faSpinner} spin className={styles.spinner} />
+                      Bestelling verzenden...
+                    </>
+                  ) : (
+                    'Bestelling plaatsen'
+                  )}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
