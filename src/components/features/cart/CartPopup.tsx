@@ -68,21 +68,21 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
         // Clear cart after successful order
         setTimeout(() => {
           clearCart();
-          // Reset states after 5 seconds
+          // Keep success message visible for 10 seconds before closing
           setTimeout(() => {
             setOrderStatus('idle');
             setOrderMessage('');
             onClose();
-          }, 5000);
+          }, 10000);
         }, 2000);
       } else {
         setOrderStatus('error');
         setOrderMessage(response.message);
-        // Reset error state after 3 seconds
+        // Keep error message visible for 7 seconds
         setTimeout(() => {
           setOrderStatus('idle');
           setOrderMessage('');
-        }, 3000);
+        }, 7000);
       }
     } catch (error) {
       setOrderStatus('error');
@@ -90,7 +90,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
       setTimeout(() => {
         setOrderStatus('idle');
         setOrderMessage('');
-      }, 3000);
+      }, 7000);
     } finally {
       setIsSubmitting(false);
     }
