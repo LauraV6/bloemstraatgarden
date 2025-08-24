@@ -44,7 +44,6 @@ export default function Footer({ className }: FooterProps) {
         alt="Decoratief blad"
         className={styles.footer__leave}
         priority={false}
-        placeholder="blur"
         sizes="(max-width: 768px) 200px, 300px"
         style={{
             width: '100%',
