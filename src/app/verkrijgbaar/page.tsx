@@ -22,10 +22,8 @@ export default async function Available() {
                         <div className={styles.story__container}>
                             <div className={styles.story__text}>
                                 <h2>Overschot</h2>
-                                <p>Bij het voorzaaien worden er meerdere zaaitrays in gebruik genomen. Het komt voor dat er een overschot komt van bepaalde planten. 
-                                Deze planten worden hier gratis aangeboden om van groter nut te kunnen zijn bij iemand anders.
-                                De planten worden in doosjes meegeven en de potjes zullen hergebruikt worden voor het volgende zaai item.</p>
-                                <p>Ben je op de hoogte van het zaaischema en zie je er een plant tussen staan die je graag wilt hebben? Stuur dan een persoonlijk bericht.</p>
+                                <p>Tijdens het voorzaaien maken we gebruik van meerdere zaaitrays. Soms groeit er meer op dan we zelf kunnen gebruiken. In plaats van deze jonge plantjes verloren te laten gaan, geven we ze graag gratis weg aan iemand die er plezier van heeft.</p>
+                                <p>Ben je bekend met het zaaischema en zie je daar iets tussen staan wat je graag zou willen hebben? Stuur me dan een persoonlijk berichtje en misschien staat er binnenkort een extra plantje voor jou klaar!</p>
                             </div>
                             <div className={styles.story__adding}>
                                 <Image 
