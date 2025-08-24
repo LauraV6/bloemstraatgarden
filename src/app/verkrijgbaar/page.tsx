@@ -3,12 +3,15 @@ import { Hero } from "@/components/layout/hero"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid"
 import { TitleLine } from "@/components/common/TitleLine/titleLine";
-import NonAvailable from "@/components/features/available/nonAvailable";
+import AvailablePosts from "@/components/features/available/Available";
+import CartIcon from "@/components/features/cart/CartIcon";
 import styles from "@/components/features/stocking/stocking.module.scss";
 import Image from "next/image";
 import VerkrijgbaarPageClient from "@/components/verkrijgbaarPageClient";
+import { getAllVerkrijgbaar } from "@/lib/contentful/api";
 
-export default function Available() {
+export default async function Available() {
+    const availablePosts = await getAllVerkrijgbaar();
     return (
         <main>
             <VerkrijgbaarPageClient>
@@ -38,7 +41,8 @@ export default function Available() {
                 </section>
                 <section>
                     <TitleLine title="Beschikbare planten" />
-                    <NonAvailable />
+                    <CartIcon />
+                    <AvailablePosts availablePosts={availablePosts} />
                 </section>
             </VerkrijgbaarPageClient>
         </main>

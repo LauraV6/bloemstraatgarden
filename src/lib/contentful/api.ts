@@ -47,6 +47,14 @@ export interface Tip {
   articleImage: ArticleImage;
 }
 
+export interface Verkrijgbaar {
+  sys: SystemFields;
+  title: string;
+  amount: string;
+  date: string;
+  postImage: ArticleImage;
+}
+
 interface GraphQLResponse<T> {
   data?: T;
   errors?: Array<{
@@ -64,6 +72,12 @@ interface ArticleCollection {
 interface TipsCollection {
   tipsCollection: {
     items: Tip[];
+  };
+}
+
+interface VerkrijgbaarCollection {
+  verkrijgbaarCollection: {
+    items: Verkrijgbaar[];
   };
 }
 
@@ -124,6 +138,18 @@ const TIP_GRAPHQL_FIELDS = `
   }
 `;
 
+const VERKRIJGBAAR_GRAPHQL_FIELDS = `
+  sys {
+    id
+  }
+  title
+  amount
+  date
+  postImage {
+    url
+  }
+`;
+
 async function fetchGraphQL<T = any>(query: string): Promise<GraphQLResponse<T>> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
@@ -172,6 +198,10 @@ function extractArticleEntries(fetchResponse: GraphQLResponse<ArticleCollection>
 
 function extractTipsEntries(fetchResponse: GraphQLResponse<TipsCollection>): Tip[] | undefined {
   return fetchResponse?.data?.tipsCollection?.items;
+}
+
+function extractVerkrijgbaarEntries(fetchResponse: GraphQLResponse<VerkrijgbaarCollection>): Verkrijgbaar[] | undefined {
+  return fetchResponse?.data?.verkrijgbaarCollection?.items;
 }
 
 export async function getAllArticles(): Promise<Article[]> {
@@ -236,4 +266,22 @@ export async function getTip(slug: string): Promise<Tip | undefined> {
   );
   const entries = extractTipsEntries(tip);
   return entries ? entries[0] : undefined;
+}
+
+export async function getAllVerkrijgbaar(): Promise<Verkrijgbaar[]> {
+  try {
+    const verkrijgbaar = await fetchGraphQL<VerkrijgbaarCollection>(
+      `query {
+          verkrijgbaarCollection(order: date_DESC, limit: 100) {
+            items {
+              ${VERKRIJGBAAR_GRAPHQL_FIELDS}
+            }
+          }
+        }`,
+    );
+    return extractVerkrijgbaarEntries(verkrijgbaar) || [];
+  } catch (error) {
+    console.error('Error fetching verkrijgbaar plants:', error);
+    return []; // Return empty array as fallback
+  }
 }

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
 
 // Animation variants
 const pageVariants = {
@@ -23,50 +24,52 @@ export default function VerkrijgbaarPageClient({ children }: VerkrijgbaarPageCli
   const childrenArray = Array.isArray(children) ? children : [children];
 
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={pageVariants}
-      style={{ width: "100%" }}
-    >
-      {/* Hero Section */}
+    <ShoppingCartProvider>
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.6, 
-          ease: [0.22, 1, 0.36, 1]
-        }}
+        initial="initial"
+        animate="animate"
+        variants={pageVariants}
+        style={{ width: "100%" }}
       >
-        {childrenArray[0]}
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          {childrenArray[0]}
+        </motion.div>
+
+        {/* Breadcrumbs and Story Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ 
+            duration: 0.6,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          {childrenArray[1]}
+        </motion.section>
+
+        {/* Available Plants Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ 
+            duration: 0.6,
+            delay: 0.1,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          {childrenArray[2]}
+        </motion.section>
       </motion.div>
-
-      {/* Breadcrumbs and Story Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ 
-          duration: 0.6,
-          ease: [0.22, 1, 0.36, 1]
-        }}
-      >
-        {childrenArray[1]}
-      </motion.section>
-
-      {/* Available Plants Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{ 
-          duration: 0.6,
-          delay: 0.1,
-          ease: [0.22, 1, 0.36, 1]
-        }}
-      >
-        {childrenArray[2]}
-      </motion.section>
-    </motion.div>
+    </ShoppingCartProvider>
   );
 }
