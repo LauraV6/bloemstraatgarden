@@ -1,4 +1,5 @@
 import { Handler, HandlerEvent } from '@netlify/functions';
+import { getStore } from '@netlify/blobs';
 
 interface CartItem {
   sys: { id: string };
@@ -35,63 +36,44 @@ const handler: Handler = async (event: HandlerEvent) => {
     };
   }
 
-  // Try to use Netlify Blobs if available
-  let useBlobs = false;
-  let getStore: any;
-  
-  try {
-    // Dynamically import Blobs - this way it won't crash if not available
-    const blobsModule = await import('@netlify/blobs');
-    getStore = blobsModule.getStore;
-    useBlobs = true;
-  } catch (error) {
-    console.log('Netlify Blobs not available, using in-memory storage');
-  }
-
-  // Handle GET requests
+  // Handle GET requests - retrieve orders from Netlify Blobs
   if (event.httpMethod === 'GET') {
-    if (useBlobs && getStore) {
-      try {
-        const ordersStore = getStore('orders');
-        const ordersList = await ordersStore.list();
-        const orders = [];
-        
-        for (const key of ordersList.blobs) {
-          const orderData = await ordersStore.get(key.key, { type: 'json' });
-          if (orderData) {
-            orders.push(orderData);
-          }
+    try {
+      const ordersStore = getStore('orders');
+      const ordersList = await ordersStore.list();
+      const orders = [];
+      
+      // Fetch each order
+      for (const key of ordersList.keys) {
+        const orderData = await ordersStore.get(key, { type: 'json' });
+        if (orderData) {
+          orders.push(orderData);
         }
-        
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({
-            success: true,
-            orders: orders.sort((a: any, b: any) => 
-              new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-            ),
-            totalOrders: orders.length,
-            storage: 'Netlify Blobs',
-          }),
-        };
-      } catch (error) {
-        console.error('Error fetching from Blobs:', error);
       }
+      
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          success: true,
+          orders: orders.sort((a: any, b: any) => 
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+          ),
+          totalOrders: orders.length,
+        }),
+      };
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          success: true,
+          orders: [],
+          totalOrders: 0,
+        }),
+      };
     }
-    
-    // Fallback response
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        success: true,
-        orders: [],
-        totalOrders: 0,
-        storage: 'temporary',
-        message: 'Check Netlify Function logs for orders',
-      }),
-    };
   }
 
   // Handle POST requests - submit new order
@@ -139,27 +121,18 @@ const handler: Handler = async (event: HandlerEvent) => {
         status: 'received'
       };
 
-      // Try to save to Netlify Blobs
-      if (useBlobs && getStore) {
-        try {
-          const ordersStore = getStore('orders');
-          await ordersStore.setJSON(orderId, order);
-          console.log('✅ Order saved to Netlify Blobs:', orderId);
-        } catch (error) {
-          console.error('Could not save to Blobs:', error);
-          // Continue anyway - order is still logged
-        }
-      }
+      // SAVE TO NETLIFY BLOBS (permanent storage!)
+      const ordersStore = getStore('orders');
+      await ordersStore.setJSON(orderId, order);
       
-      // Always log the order
-      console.log('📦 NEW ORDER RECEIVED:', {
+      console.log('✅ Order saved to Netlify Blobs:', orderId);
+      console.log('📦 Order details:', {
         orderId,
         totalItems,
         items: orderData.items.map((item: any) => ({
           name: item.title,
           quantity: item.quantity
-        })),
-        timestamp: orderDate,
+        }))
       });
       
       // Return success response
@@ -172,6 +145,7 @@ const handler: Handler = async (event: HandlerEvent) => {
           message: `Bestelling ${orderId} is succesvol ontvangen! We nemen binnen 24 uur contact met je op.`,
           timestamp: orderDate,
           totalItems,
+          estimatedDelivery: '2-3 werkdagen',
         }),
       };
     } catch (error) {
