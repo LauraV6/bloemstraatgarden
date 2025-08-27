@@ -12,23 +12,20 @@ export default function CartIcon() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const totalItems = getTotalItems();
 
-  // Only show cart icon when there are items
-  if (totalItems === 0) {
-    return null;
-  }
-
   return (
     <>
-      <button
-        className={styles.cartIcon}
-        onClick={() => setIsPopupOpen(true)}
-        aria-label={`Winkelwagen openen, ${totalItems} items`}
-      >
-        <FontAwesomeIcon icon={faShoppingCart} />
-        <span className={styles.cartIcon__badge}>
-          {totalItems}
-        </span>
-      </button>
+      {totalItems > 0 && (
+        <button
+          className={styles.cartIcon}
+          onClick={() => setIsPopupOpen(true)}
+          aria-label={`Winkelwagen openen, ${totalItems} items`}
+        >
+          <FontAwesomeIcon icon={faShoppingCart} />
+          <span className={styles.cartIcon__badge}>
+            {totalItems}
+          </span>
+        </button>
+      )}
       <CartPopup 
         isOpen={isPopupOpen} 
         onClose={() => setIsPopupOpen(false)} 
