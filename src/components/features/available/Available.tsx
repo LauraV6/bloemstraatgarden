@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./available.module.scss";
 import { Verkrijgbaar } from "@/lib/contentful/api";
 import { useShoppingCart } from "@/context/ShoppingCartContext";
@@ -32,8 +32,15 @@ function AvailableCard({ post }: { post: Verkrijgbaar }) {
   const maxAmount = parseInt(post.amount) || 1;
   const availableToAdd = canAddToCart(post.sys.id, maxAmount);
   const currentInCart = getItemQuantity(post.sys.id);
-  const [quantity, setQuantity] = useState(Math.min(1, availableToAdd || 1));
+  const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
+
+  // Reset quantity to 1 when item is no longer in cart (after order is placed)
+  useEffect(() => {
+    if (currentInCart === 0) {
+      setQuantity(1);
+    }
+  }, [currentInCart]);
 
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity >= 1 && newQuantity <= availableToAdd) {

@@ -77,28 +77,28 @@ class OrderService {
 
 
   // Mock function for testing without Netlify
-  async mockSubmitOrder(cartItems: CartItem[]): Promise<OrderResponse> {
+  async mockSubmitOrder(cartItems: CartItem[], customerInfo?: any): Promise<OrderResponse> {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    // Simulate random success/failure for testing
-    const isSuccess = Math.random() > 0.1; // 90% success rate
-
-    if (isSuccess) {
-      const orderId = `MOCK-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
-      return {
-        success: true,
-        orderId,
-        message: `Test bestelling ${orderId} ontvangen!`,
-        timestamp: new Date().toISOString(),
-        totalItems: cartItems.reduce((sum, item) => sum + item.quantity, 0),
-      };
-    } else {
-      return {
-        success: false,
-        message: 'Test fout: Probeer het opnieuw',
-      };
-    }
+    const orderId = `MOCK-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+    const customerName = customerInfo?.name || 'Onbekend';
+    const customerEmail = customerInfo?.email || '';
+    
+    console.log('Mock order received:', {
+      orderId,
+      customer: { name: customerName, email: customerEmail },
+      items: cartItems,
+      totalItems: cartItems.reduce((sum, item) => sum + item.quantity, 0)
+    });
+    
+    return {
+      success: true,
+      orderId,
+      message: `Beste ${customerName}, uw bestelling ${orderId} is ontvangen! We sturen een bevestiging naar ${customerEmail}.`,
+      timestamp: new Date().toISOString(),
+      totalItems: cartItems.reduce((sum, item) => sum + item.quantity, 0),
+    };
   }
 }
 
