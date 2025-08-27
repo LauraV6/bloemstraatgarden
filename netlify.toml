@@ -8,6 +8,10 @@
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
+# Enable Netlify Blobs
+[functions]
+  node_bundler = "esbuild"
+
 # Enable Next.js runtime
 [[plugins]]
   package = "@netlify/plugin-nextjs"
