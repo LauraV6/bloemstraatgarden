@@ -1,6 +1,5 @@
 import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
 import { getStore } from '@netlify/blobs';
-import { env } from 'process';
 
 interface CartItem {
   sys: { id: string };
@@ -42,29 +41,18 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   let blobsAvailable = false;
   
   try {
-    // For Netlify Dev, we need to pass configuration explicitly
-    const siteId = env.SITE_ID || env.NETLIFY_SITE_ID || '8c9ce268-7ebb-431a-bed9-3443171cb2be';
-    const token = env.NETLIFY_AUTH_TOKEN || env.NETLIFY_ACCESS_TOKEN;
+    // Check if we're in Netlify environment
+    const isNetlifyEnv = process.env.NETLIFY === 'true' || process.env.NETLIFY_LOCAL === 'true';
     
-    if (env.NETLIFY_DEV === 'true' && token) {
-      // Netlify Dev with explicit configuration
-      console.log('Initializing Blobs for Netlify Dev...');
-      ordersStore = getStore({
-        name: 'orders',
-        siteID: siteId,
-        token: token
-      });
-    } else {
-      // Production or regular netlify dev
+    if (isNetlifyEnv && typeof getStore === 'function') {
       ordersStore = getStore('orders');
+      blobsAvailable = true;
+      console.log('✅ Netlify Blobs initialized successfully');
+    } else {
+      console.log('📝 Running without Blobs - orders will be logged only');
     }
-    
-    blobsAvailable = true;
-    console.log('✅ Netlify Blobs initialized successfully');
   } catch (error: any) {
-    console.log('⚠️ Blobs initialization failed:', error.message);
-    console.log('📝 Orders will be logged to function logs only');
-    console.log('To enable Blobs locally, set NETLIFY_AUTH_TOKEN environment variable');
+    console.log('📝 Netlify Blobs not configured:', error.message || 'Using function logs for order storage');
   }
 
   // Handle GET requests
