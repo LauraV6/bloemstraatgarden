@@ -1,6 +1,4 @@
-import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { getStore } from '@netlify/blobs';
-import { env } from 'process';
+import { Handler, HandlerEvent } from '@netlify/functions';
 
 interface CartItem {
   sys: { id: string };
@@ -20,7 +18,7 @@ interface OrderRequest {
   };
 }
 
-const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+const handler: Handler = async (event: HandlerEvent) => {
   // Handle CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -37,81 +35,14 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     };
   }
 
-  // Initialize Netlify Blobs store
-  let ordersStore: any = null;
-  let blobsAvailable = false;
-  
-  try {
-    // Just try to use getStore directly
-    // In production Netlify, it should have the necessary context
-    // In Netlify Dev with proper linking, it should also work
-    console.log('Attempting to initialize Netlify Blobs...');
-    console.log('Environment:', {
-      CONTEXT: process.env.CONTEXT,
-      DEPLOY_ID: process.env.DEPLOY_ID,
-      SITE_NAME: process.env.SITE_NAME,
-      NETLIFY_DEV: process.env.NETLIFY_DEV
-    });
-    
-    // Simple approach - let getStore handle the environment detection
-    ordersStore = getStore('orders');
-    
-    // Test if it works by trying to list
-    await ordersStore.list({ prefix: '_test_' });
-    
-    blobsAvailable = true;
-    console.log('✅ Netlify Blobs initialized and tested successfully');
-  } catch (error: any) {
-    console.log('📝 Blobs not available:', error.message);
-    console.log('Orders will be saved in function logs only');
-    
-    // In production, this shouldn't happen unless Blobs isn't enabled for the account
-    if (process.env.CONTEXT === 'production') {
-      console.log('⚠️ Warning: Blobs failed in production. Check if Blobs is enabled for your Netlify plan.');
-    }
-  }
-
-  // Handle GET requests
+  // Handle GET requests - simple status check
   if (event.httpMethod === 'GET') {
-    if (blobsAvailable && ordersStore) {
-      try {
-        const ordersList = await ordersStore.list();
-        const orders = [];
-        
-        for (const key of ordersList.blobs) {
-          const orderData = await ordersStore.get(key.key, { type: 'json' });
-          if (orderData) {
-            orders.push(orderData);
-          }
-        }
-        
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({
-            success: true,
-            orders: orders.sort((a: any, b: any) => 
-              new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-            ),
-            totalOrders: orders.length,
-            storage: 'Netlify Blobs',
-          }),
-        };
-      } catch (error) {
-        console.error('Error fetching from Blobs:', error);
-      }
-    }
-    
-    // Fallback response
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
-        orders: [],
-        totalOrders: 0,
-        storage: 'temporary',
-        message: 'Check Netlify Function logs for orders',
+        message: 'Order endpoint is working. Orders are logged in Netlify Function logs.',
       }),
     };
   }
@@ -155,28 +86,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
       const totalItems = orderData.items.reduce((sum, item) => sum + item.quantity, 0);
       const orderDate = new Date().toISOString();
 
-      // Create order object
-      const order = {
-        orderId,
-        items: orderData.items,
-        customer: orderData.customer || {},
-        timestamp: orderDate,
-        totalItems,
-        status: 'received'
-      };
-
-      // Try to save to Netlify Blobs
-      if (blobsAvailable && ordersStore) {
-        try {
-          await ordersStore.setJSON(orderId, order);
-          console.log('✅ Order saved to Netlify Blobs:', orderId);
-        } catch (error) {
-          console.error('Could not save to Blobs:', error);
-          // Continue anyway - order is still logged
-        }
-      }
-      
-      // Always log the order
+      // Log the order
       console.log('📦 NEW ORDER RECEIVED:', {
         orderId,
         customer: {
