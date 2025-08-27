@@ -42,29 +42,39 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   let blobsAvailable = false;
   
   try {
-    // For Netlify Dev, we need to pass configuration explicitly
-    const siteId = env.SITE_ID || env.NETLIFY_SITE_ID || '8c9ce268-7ebb-431a-bed9-3443171cb2be';
-    const token = env.NETLIFY_AUTH_TOKEN || env.NETLIFY_ACCESS_TOKEN;
+    // Check if we're in Netlify production environment
+    const isProduction = process.env.NETLIFY === 'true' && !process.env.NETLIFY_DEV;
     
-    if (env.NETLIFY_DEV === 'true' && token) {
-      // Netlify Dev with explicit configuration
-      console.log('Initializing Blobs for Netlify Dev...');
-      ordersStore = getStore({
-        name: 'orders',
-        siteID: siteId,
-        token: token
-      });
-    } else {
-      // Production or regular netlify dev
+    if (isProduction) {
+      console.log('Production environment detected');
+      // In production, context should provide the necessary info
       ordersStore = getStore('orders');
+    } else if (process.env.NETLIFY_DEV === 'true') {
+      console.log('Netlify Dev environment detected');
+      // For local dev, we need explicit config
+      const siteId = '8c9ce268-7ebb-431a-bed9-3443171cb2be';
+      const token = process.env.NETLIFY_AUTH_TOKEN;
+      
+      if (token) {
+        ordersStore = getStore({
+          name: 'orders',
+          siteID: siteId,
+          token: token
+        });
+      } else {
+        console.log('No auth token provided for local dev');
+        throw new Error('Local dev requires NETLIFY_AUTH_TOKEN');
+      }
+    } else {
+      console.log('Unknown environment - skipping Blobs');
+      throw new Error('Not in Netlify environment');
     }
     
     blobsAvailable = true;
     console.log('✅ Netlify Blobs initialized successfully');
   } catch (error: any) {
-    console.log('⚠️ Blobs initialization failed:', error.message);
-    console.log('📝 Orders will be logged to function logs only');
-    console.log('To enable Blobs locally, set NETLIFY_AUTH_TOKEN environment variable');
+    console.log('📝 Blobs not available:', error.message);
+    console.log('Orders will be saved in function logs only');
   }
 
   // Handle GET requests
