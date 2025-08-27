@@ -41,15 +41,18 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   let blobsAvailable = false;
   
   try {
-    // Netlify provides the site ID through context in production
-    // In development, Blobs might not be available
-    if (context && typeof getStore === 'function') {
+    // Check if we're in Netlify environment
+    const isNetlifyEnv = process.env.NETLIFY === 'true' || process.env.NETLIFY_LOCAL === 'true';
+    
+    if (isNetlifyEnv && typeof getStore === 'function') {
       ordersStore = getStore('orders');
       blobsAvailable = true;
-      console.log('Netlify Blobs initialized successfully');
+      console.log('✅ Netlify Blobs initialized successfully');
+    } else {
+      console.log('📝 Running without Blobs - orders will be logged only');
     }
-  } catch (error) {
-    console.log('Netlify Blobs not available, will use function logs only');
+  } catch (error: any) {
+    console.log('📝 Netlify Blobs not configured:', error.message || 'Using function logs for order storage');
   }
 
   // Handle GET requests
