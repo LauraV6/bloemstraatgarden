@@ -1,4 +1,5 @@
-import { Handler, HandlerEvent } from '@netlify/functions';
+import { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
+import { getStore } from '@netlify/blobs';
 
 interface CartItem {
   sys: { id: string };
@@ -18,7 +19,7 @@ interface OrderRequest {
   };
 }
 
-const handler: Handler = async (event: HandlerEvent) => {
+const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   // Handle CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -35,24 +36,26 @@ const handler: Handler = async (event: HandlerEvent) => {
     };
   }
 
-  // Try to use Netlify Blobs if available
-  let useBlobs = false;
-  let getStore: any;
+  // Initialize Netlify Blobs store
+  let ordersStore: any = null;
+  let blobsAvailable = false;
   
   try {
-    // Dynamically import Blobs - this way it won't crash if not available
-    const blobsModule = await import('@netlify/blobs');
-    getStore = blobsModule.getStore;
-    useBlobs = true;
+    // Netlify provides the site ID through context in production
+    // In development, Blobs might not be available
+    if (context && typeof getStore === 'function') {
+      ordersStore = getStore('orders');
+      blobsAvailable = true;
+      console.log('Netlify Blobs initialized successfully');
+    }
   } catch (error) {
-    console.log('Netlify Blobs not available, using in-memory storage');
+    console.log('Netlify Blobs not available, will use function logs only');
   }
 
   // Handle GET requests
   if (event.httpMethod === 'GET') {
-    if (useBlobs && getStore) {
+    if (blobsAvailable && ordersStore) {
       try {
-        const ordersStore = getStore('orders');
         const ordersList = await ordersStore.list();
         const orders = [];
         
@@ -125,6 +128,10 @@ const handler: Handler = async (event: HandlerEvent) => {
       // Generate order ID
       const orderId = `NL-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
       
+      // Extract customer info
+      const customerName = orderData.customer?.name || 'Klant';
+      const customerEmail = orderData.customer?.email || '';
+      
       // Calculate totals
       const totalItems = orderData.items.reduce((sum, item) => sum + item.quantity, 0);
       const orderDate = new Date().toISOString();
@@ -140,9 +147,8 @@ const handler: Handler = async (event: HandlerEvent) => {
       };
 
       // Try to save to Netlify Blobs
-      if (useBlobs && getStore) {
+      if (blobsAvailable && ordersStore) {
         try {
-          const ordersStore = getStore('orders');
           await ordersStore.setJSON(orderId, order);
           console.log('✅ Order saved to Netlify Blobs:', orderId);
         } catch (error) {
@@ -154,6 +160,10 @@ const handler: Handler = async (event: HandlerEvent) => {
       // Always log the order
       console.log('📦 NEW ORDER RECEIVED:', {
         orderId,
+        customer: {
+          name: customerName,
+          email: customerEmail || 'Not provided'
+        },
         totalItems,
         items: orderData.items.map((item: any) => ({
           name: item.title,
@@ -169,7 +179,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         body: JSON.stringify({
           success: true,
           orderId,
-          message: `Bestelling ${orderId} is succesvol ontvangen! We nemen binnen 24 uur contact met je op.`,
+          message: `Beste ${customerName}, uw bestelling ${orderId} is succesvol ontvangen! We nemen binnen 24 uur contact met je op.`,
           timestamp: orderDate,
           totalItems,
         }),
