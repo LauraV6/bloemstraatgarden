@@ -42,39 +42,33 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   let blobsAvailable = false;
   
   try {
-    // Check if we're in Netlify production environment
-    const isProduction = process.env.NETLIFY === 'true' && !process.env.NETLIFY_DEV;
+    // Just try to use getStore directly
+    // In production Netlify, it should have the necessary context
+    // In Netlify Dev with proper linking, it should also work
+    console.log('Attempting to initialize Netlify Blobs...');
+    console.log('Environment:', {
+      CONTEXT: process.env.CONTEXT,
+      DEPLOY_ID: process.env.DEPLOY_ID,
+      SITE_NAME: process.env.SITE_NAME,
+      NETLIFY_DEV: process.env.NETLIFY_DEV
+    });
     
-    if (isProduction) {
-      console.log('Production environment detected');
-      // In production, context should provide the necessary info
-      ordersStore = getStore('orders');
-    } else if (process.env.NETLIFY_DEV === 'true') {
-      console.log('Netlify Dev environment detected');
-      // For local dev, we need explicit config
-      const siteId = '8c9ce268-7ebb-431a-bed9-3443171cb2be';
-      const token = process.env.NETLIFY_AUTH_TOKEN;
-      
-      if (token) {
-        ordersStore = getStore({
-          name: 'orders',
-          siteID: siteId,
-          token: token
-        });
-      } else {
-        console.log('No auth token provided for local dev');
-        throw new Error('Local dev requires NETLIFY_AUTH_TOKEN');
-      }
-    } else {
-      console.log('Unknown environment - skipping Blobs');
-      throw new Error('Not in Netlify environment');
-    }
+    // Simple approach - let getStore handle the environment detection
+    ordersStore = getStore('orders');
+    
+    // Test if it works by trying to list
+    await ordersStore.list({ prefix: '_test_' });
     
     blobsAvailable = true;
-    console.log('✅ Netlify Blobs initialized successfully');
+    console.log('✅ Netlify Blobs initialized and tested successfully');
   } catch (error: any) {
     console.log('📝 Blobs not available:', error.message);
     console.log('Orders will be saved in function logs only');
+    
+    // In production, this shouldn't happen unless Blobs isn't enabled for the account
+    if (process.env.CONTEXT === 'production') {
+      console.log('⚠️ Warning: Blobs failed in production. Check if Blobs is enabled for your Netlify plan.');
+    }
   }
 
   // Handle GET requests
