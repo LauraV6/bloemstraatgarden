@@ -5,7 +5,7 @@ import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid"
 import { TitleLine } from "@/components/common/TitleLine/TitleLine";
 import AvailablePosts from "@/components/features/available/Available";
 import CartIcon from "@/components/features/cart/CartIcon";
-import styles from "@/components/features/stocking/Stocking.module.scss";
+import styles from "@/components/features/stocking/stocking.module.scss";
 import Image from "next/image";
 import VerkrijgbaarPageClient from "@/components/VerkrijgbaarPageClient";
 import { getAllVerkrijgbaar } from "@/lib/contentful/api";
