@@ -33,7 +33,7 @@ const truncateSummary = (summary: string, maxLength: number = 170): string => {
   if (!summary) return '';
   return summary.length > maxLength 
     ? `${summary.substring(0, maxLength).trim()}...`
-    : `${summary}..`;
+    : summary;
 };
 
 // Components
