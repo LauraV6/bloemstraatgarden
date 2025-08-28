@@ -190,7 +190,8 @@ describe('PostCard', () => {
 
     render(<PostCard props={postWithoutSummary} />);
     
-    expect(screen.queryByText(/\.\./)).toBeInTheDocument();
+    const summary = screen.getByText('..');
+    expect(summary).toBeInTheDocument();
   });
 
   it('renders complete post structure', () => {
