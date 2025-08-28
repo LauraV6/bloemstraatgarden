@@ -30,7 +30,7 @@ const customJestConfig = {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   transformIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/(?!(@faker-js/faker)/)',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   collectCoverageFrom: [
@@ -38,9 +38,46 @@ const customJestConfig = {
     'src/components/**/*.{js,jsx,ts,tsx}',
     'src/lib/**/*.{js,jsx,ts,tsx}',
     'src/utils/**/*.{js,jsx,ts,tsx}',
+    'src/services/**/*.{js,jsx,ts,tsx}',
+    'src/context/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
     '!**/node_modules/**',
     '!**/.next/**',
+    '!**/coverage/**',
+    '!src/app/**/layout.tsx',
+    '!src/app/**/loading.tsx',
+    '!src/app/**/error.tsx',
+    '!src/app/**/not-found.tsx',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 25,
+      functions: 25,
+      lines: 25,
+      statements: 25,
+    },
+    './src/services/': {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+    './src/lib/performance/': {
+      branches: 80,
+      functions: 80,
+      lines: 85,
+      statements: 85,
+    },
+  },
+  coverageReporters: ['text', 'text-summary', 'html', 'lcov', 'json'],
+  testMatch: [
+    '**/__tests__/**/*.(test|spec).[jt]s?(x)',
+    '**/?(*.)+(spec|test).[jt]s?(x)',
+  ],
+  verbose: true,
+  watchPlugins: [
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
   ],
 }
 

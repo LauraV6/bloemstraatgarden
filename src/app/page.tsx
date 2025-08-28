@@ -6,7 +6,7 @@ import States from "@/components/features/states/States";
 import Stock from "@/components/features/stocking/Stock";
 import PostCardSkeleton from "@/components/features/posts/PostCardSkeleton";
 import TipCardSkeleton from "@/components/features/tips/TipCardSkeleton";
-import posts from "@/components/features/posts/PostsMap.module.scss";
+import posts from "@/components/features/posts/postsMap.module.scss";
 import HomePageClient from "@/components/HomePageClient";
 
 interface PageSectionProps {

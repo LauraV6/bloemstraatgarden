@@ -27,7 +27,7 @@ const DEFAULT_CONTENT = {
 } as const;
 
 // AvailableCard Component
-function AvailableCard({ post }: { post: Verkrijgbaar }) {
+function AvailableCard({ post, index }: { post: Verkrijgbaar; index: number }) {
   const { addToCart, canAddToCart, getItemQuantity } = useShoppingCart();
   const maxAmount = parseInt(post.amount) || 1;
   const availableToAdd = canAddToCart(post.sys.id, maxAmount);
@@ -66,9 +66,11 @@ function AvailableCard({ post }: { post: Verkrijgbaar }) {
             alt={post.title}
             width={300}
             height={200}
+            priority={index < 4}
+            loading={index < 4 ? 'eager' : 'lazy'}
             style={{ 
               width: '100%',
-              height: '100%',
+              height: 'auto',
               objectFit: 'cover'
             }}
           />
@@ -137,8 +139,8 @@ export default function Available({
     return (
       <div className={containerClass}>
         <div className={styles.availableGrid}>
-          {availablePosts.map((post) => (
-            <AvailableCard key={post.sys.id} post={post} />
+          {availablePosts.map((post, index) => (
+            <AvailableCard key={post.sys.id} post={post} index={index} />
           ))}
         </div>
       </div>
