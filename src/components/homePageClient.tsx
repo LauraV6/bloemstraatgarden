@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Hero } from "@/components/layout/hero";
+import { Hero } from "@/components/layout/Hero";
 import { ReactNode } from "react";
 
 // Animation variants
@@ -12,18 +12,6 @@ const pageVariants = {
     transition: {
       duration: 0.4,
       ease: "easeOut"
-    }
-  }
-};
-
-const sectionVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
     }
   }
 };

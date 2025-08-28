@@ -1,5 +1,5 @@
 import { getAllArticles } from "@/lib/contentful/api";
-import PostsMap from "./postsMap";
+import PostsMap from "./PostsMap";
 
 // Types
 interface ArticleImage {

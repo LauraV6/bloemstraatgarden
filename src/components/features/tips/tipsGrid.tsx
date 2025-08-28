@@ -1,8 +1,9 @@
 "use client";
 
 import styles from "./tipsGrid.module.scss";
-import { TipCard } from './tipCard';
+import { TipCard } from './TipCard';
 import { motion } from "framer-motion";
+import { Tip } from '@/lib/contentful/api';
 
 const containerVariants = {
     initial: { opacity: 0 },
@@ -34,7 +35,7 @@ const itemVariants = {
 };
 
 interface TipsGridClientProps {
-    tips: any[];
+    tips: Tip[];
 }
 
 export default function TipsGridClient({ tips }: TipsGridClientProps) {
@@ -47,7 +48,7 @@ export default function TipsGridClient({ tips }: TipsGridClientProps) {
             variants={containerVariants}
         >
             {
-                tips.map((tip: any, index: number) => (
+                tips.map((tip) => (
                     <motion.div
                         key={tip.sys.id}
                         variants={itemVariants}

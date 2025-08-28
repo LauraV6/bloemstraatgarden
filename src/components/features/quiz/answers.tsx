@@ -3,7 +3,14 @@
 import { useEffect, useState } from "react";
 import styles from "./answers.module.scss"
 
-export default function Answers({ answers, selectedAnswer, answerState, onSelect }: any) {
+interface AnswersProps {
+  answers: string[];
+  selectedAnswer: string | null;
+  answerState: string;
+  onSelect: (answer: string) => void;
+}
+
+export default function Answers({ answers, selectedAnswer, answerState, onSelect }: AnswersProps) {
     const [allAnswers, setAllAnswers] = useState<string[]>([]);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -20,7 +27,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
         }
 
         // Filter out any null/undefined answers
-        const validAnswers = answers.filter((answer: any) => answer !== null && answer !== undefined);
+        const validAnswers = answers.filter((answer) => answer !== null && answer !== undefined);
         
         if (validAnswers.length === 0) {
             console.warn('No valid answers found');
@@ -38,7 +45,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
         }
     }, [answers, isMounted]);
 
-    function shuffle(array: any[]): any[] {
+    function shuffle<T>(array: T[]): T[] {
         if (!Array.isArray(array) || array.length === 0) {
             return [];
         }
@@ -60,7 +67,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
 
     return (
         <ul className={styles.quiz__answers}>
-            {allAnswers.map((answer: any, index: number) => {
+            {allAnswers.map((answer, index) => {
                 // Add safety check for each answer
                 if (answer === null || answer === undefined) {
                     return null;

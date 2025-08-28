@@ -8,11 +8,21 @@ interface VitalsData {
   value: number;
   rating?: 'good' | 'needs-improvement' | 'poor';
   delta?: number;
-  entries?: any[];
+  entries?: PerformanceEntry[];
+}
+
+interface NavigatorConnection {
+  effectiveType?: string;
+}
+
+interface NavigatorWithConnection extends Navigator {
+  connection?: NavigatorConnection;
+  mozConnection?: NavigatorConnection;
+  webkitConnection?: NavigatorConnection;
 }
 
 function getConnectionSpeed() {
-  const nav = navigator as any;
+  const nav = navigator as NavigatorWithConnection;
   const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
   
   if (connection?.effectiveType) {
@@ -52,7 +62,7 @@ export function sendToAnalytics(metric: Metric) {
       event_category: 'Web Vitals',
       event_label: metric.id,
       value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
-      non_interaction: true,
+      non_interaction: 1,
       metric_rating: metric.rating,
       connection_speed: getConnectionSpeed(),
     });
@@ -134,7 +144,7 @@ export function reportRenderPerformance(componentName: string, renderTime: numbe
       event_category: 'Performance',
       event_label: componentName,
       value: Math.round(renderTime),
-      non_interaction: true,
+      non_interaction: 1,
     });
   }
 }

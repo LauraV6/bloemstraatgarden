@@ -1,4 +1,5 @@
 import { Verkrijgbaar } from '@/lib/contentful/api';
+import { Customer, OrderResponse } from '@/types';
 
 interface CartItem extends Verkrijgbaar {
   quantity: number;
@@ -6,20 +7,7 @@ interface CartItem extends Verkrijgbaar {
 
 interface OrderRequest {
   items: CartItem[];
-  customer?: {
-    name?: string;
-    email?: string;
-    phone?: string;
-    message?: string;
-  };
-}
-
-interface OrderResponse {
-  success: boolean;
-  orderId?: string;
-  message: string;
-  timestamp?: string;
-  totalItems?: number;
+  customer?: Customer;
 }
 
 class OrderService {
@@ -33,7 +21,7 @@ class OrderService {
       : '/.netlify/functions';
   }
 
-  async submitOrder(cartItems: CartItem[], customerInfo?: any): Promise<OrderResponse> {
+  async submitOrder(cartItems: CartItem[], customerInfo?: Customer): Promise<OrderResponse> {
     try {
       const orderData: OrderRequest = {
         items: cartItems.map(item => ({
@@ -77,7 +65,7 @@ class OrderService {
 
 
   // Mock function for testing without Netlify
-  async mockSubmitOrder(cartItems: CartItem[], customerInfo?: any): Promise<OrderResponse> {
+  async mockSubmitOrder(cartItems: CartItem[], customerInfo?: Customer): Promise<OrderResponse> {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 1500));
 
@@ -96,7 +84,6 @@ class OrderService {
       success: true,
       orderId,
       message: `Beste ${customerName}, uw bestelling ${orderId} is ontvangen! We sturen een bevestiging naar ${customerEmail}.`,
-      timestamp: new Date().toISOString(),
       totalItems: cartItems.reduce((sum, item) => sum + item.quantity, 0),
     };
   }

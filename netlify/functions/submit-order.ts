@@ -94,7 +94,7 @@ const handler: Handler = async (event: HandlerEvent) => {
           email: customerEmail || 'Not provided'
         },
         totalItems,
-        items: orderData.items.map((item: any) => ({
+        items: orderData.items.map((item) => ({
           name: item.title,
           quantity: item.quantity
         })),
