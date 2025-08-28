@@ -57,9 +57,13 @@ interface PostsGridProps {
 
 const PostsGrid: React.FC<PostsGridProps> = ({ posts, url }) => (
   <>
-    {posts.map((post) => (
+    {posts.map((post, index) => (
       <FadeIn key={post.sys.id}>
-        <PostCard props={post} url={url} />
+        <PostCard 
+          props={post} 
+          url={url} 
+          priority={false}
+        />
       </FadeIn>
     ))}
   </>
