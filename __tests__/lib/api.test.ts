@@ -52,17 +52,18 @@ describe('API functions', () => {
       expect(result).toEqual(mockResponse.data.knowledgeArticleCollection.items);
     });
 
-    it('should throw error on HTTP failure', async () => {
+    it('should return empty array on HTTP failure', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: false,
         status: 404,
         statusText: 'Not Found'
       });
 
-      await expect(getAllArticles()).rejects.toThrow('HTTP error! status: 404, statusText: Not Found');
+      const result = await getAllArticles();
+      expect(result).toEqual([]);
     });
 
-    it('should throw error on GraphQL errors', async () => {
+    it('should return empty array on GraphQL errors', async () => {
       const mockResponse = {
         errors: [{ message: 'GraphQL error' }]
       };
@@ -72,7 +73,8 @@ describe('API functions', () => {
         json: async () => mockResponse
       });
 
-      await expect(getAllArticles()).rejects.toThrow('GraphQL errors:');
+      const result = await getAllArticles();
+      expect(result).toEqual([]);
     });
   });
 
@@ -186,19 +188,21 @@ describe('API functions', () => {
   });
 
   describe('error scenarios', () => {
-    it('should handle network errors', async () => {
+    it('should handle network errors gracefully', async () => {
       (fetch as jest.Mock).mockRejectedValueOnce(new Error('Network error'));
 
-      await expect(getAllArticles()).rejects.toThrow('Network error');
+      const result = await getAllArticles();
+      expect(result).toEqual([]);
     });
 
-    it('should handle malformed JSON response', async () => {
+    it('should handle malformed JSON response gracefully', async () => {
       (fetch as jest.Mock).mockResolvedValueOnce({
         ok: true,
         json: async () => { throw new Error('Invalid JSON'); }
       });
 
-      await expect(getAllArticles()).rejects.toThrow('Invalid JSON');
+      const result = await getAllArticles();
+      expect(result).toEqual([]);
     });
   });
 });

@@ -1,5 +1,5 @@
 import headerStyles from "@/app/[slug]/page.module.scss";
-import styles from "@/components/features/stocking/Stocking.module.scss";
+import styles from "@/components/features/stocking/stocking.module.scss";
 import Skeleton from "react-loading-skeleton";
 import titlelineStyles from "@/components/common/TitleLine/titleLine.module.scss";
 import "react-loading-skeleton/dist/skeleton.css";
