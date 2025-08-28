@@ -249,7 +249,6 @@ jobs:
             Commit: ${{ github.sha }}
             Author: ${{ github.actor }}
             Message: ${{ github.event.head_commit.message }}
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
