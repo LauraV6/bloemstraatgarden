@@ -200,7 +200,7 @@ jobs:
             http://localhost:3000
             http://localhost:3000/verkrijgbaar
             http://localhost:3000/tips
-          uploadArtifacts: true
+          uploadArtifacts: false
           temporaryPublicStorage: true
 
   deploy-preview:
