@@ -1,10 +1,10 @@
 "use client";
 
 import { Suspense, useMemo } from "react";
-import { PostCard } from "./postCard";
-import PostCardSkeleton from "./postCardSkeleton";
-import FadeIn from "@/components/common/fadeIn";
-import { shuffle } from "@/utils/shuffle";
+import { PostCard } from "./PostCard";
+import PostCardSkeleton from "./PostCardSkeleton";
+import FadeIn from "@/components/common/FadeIn";
+import { shuffle } from "@/utils/Shuffle";
 import styles from "./postsMap.module.scss";
 
 // Types

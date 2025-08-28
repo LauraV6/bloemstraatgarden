@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { grantAnalyticsConsent, denyAnalyticsConsent } from '@/lib/analytics/gtag';
+import { grantAnalyticsConsent, denyAnalyticsConsent } from '@/lib/analytics/Gtag';
 import styles from './cookieConsent.module.scss';
 
 export default function CookieConsent(): JSX.Element | null {

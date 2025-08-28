@@ -4,12 +4,11 @@ import localFont from "next/font/local";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.scss";
-import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
-import ThemeProvider from "@/components/providers/ThemeProvider/themeProvider";
-import Analytics from "@/components/analytics";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import ThemeProvider from "@/components/providers/ThemeProvider/ThemeProvider";
+import Analytics from "@/components/Analytics";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
-//import CookieConsent from "@/components/cookieConsent";
 
 config.autoAddCss = false;
 
@@ -164,8 +163,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Footer />
             <Analytics />
             <PerformanceMonitor />
-            {/* Cookie consent for GDPR compliance */}
-            {/* <CookieConsent /> */}
           </div>
         </ThemeProvider>
       </body>

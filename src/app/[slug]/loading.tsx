@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Sidebar from "@/components/layout/sidebar";
+import Sidebar from "@/components/layout/Sidebar";
 import styles from "./page.module.scss";
 
 // Types

@@ -1,4 +1,5 @@
 @use '@/styles/mixins' as *;
+@use '@/styles/keyframes' as *;
 
 .cartOverlay {
   position: fixed;
@@ -86,31 +87,6 @@
     padding: 1.5rem;
   }
 
-  &__empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--color-green-2);
-
-    p {
-      margin: 0.5rem 0;
-      font-size: 1.125rem;
-    }
-  }
-
-  &__emptyIcon {
-    font-size: 3rem;
-    color: var(--color-green-3);
-    margin-bottom: 1rem;
-  }
-
-  &__emptySubtext {
-    font-size: 0.875rem !important;
-    color: var(--color-green-3);
-  }
 
   &__items {
     display: flex;
@@ -262,27 +238,6 @@
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
 .cartPopup__successMessage {
   display: grid;
@@ -349,7 +304,7 @@
   background: linear-gradient(135deg, var(--color-green-5) 0%, var(--color-green-4) 100%);
   border: 1px solid var(--color-green-2);
   margin-bottom: 1rem;
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse-opacity 2s ease-in-out infinite;
 
   svg {
     font-size: 2rem;
@@ -367,16 +322,6 @@
     letter-spacing: 0.5px;
   }
 
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.9;
-      transform: scale(0.98);
-    }
-  }
 }
 
 .spinner {

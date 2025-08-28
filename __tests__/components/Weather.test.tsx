@@ -1,11 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Weather from '@/components/features/weather/weather';
+import Weather from '@/components/features/weather/Weather';
 import { faSun, faCloudSun, faCloud } from '@fortawesome/free-solid-svg-icons';
 
 // Mock FontAwesomeIcon to avoid rendering complexity
 jest.mock('@fortawesome/react-fontawesome', () => ({
-  FontAwesomeIcon: ({ icon }: { icon: any }) => {
+  FontAwesomeIcon: ({ icon }: { icon: { iconName?: string } }) => {
     const iconName = icon.iconName || 'default-icon';
     return <span data-testid={`icon-${iconName}`}>{iconName}</span>;
   }

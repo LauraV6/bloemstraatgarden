@@ -9,7 +9,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import Logo from "@/components/common/Logo/logo";
 import LogoSmall from "@/components/common/Logo/logoSmall";
 import styles from "./header.module.scss";
-import ThemeSwitcher from "@/components/common/ThemeSwitcher/themeSwitcher";
+import ThemeSwitcher from "@/components/common/ThemeSwitcher/ThemeSwitcher";
 
 // Types
 interface SocialLink {
