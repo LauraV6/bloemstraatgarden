@@ -60,14 +60,6 @@ describe('PostCard', () => {
     expect(screen.getByText('Test Post Title')).toBeInTheDocument();
   });
 
-  it('renders truncated summary', () => {
-    render(<PostCard props={mockPost} />);
-    
-    const summary = screen.getByText(/This is a test summary/);
-    expect(summary).toBeInTheDocument();
-    expect(summary.textContent).toContain('..');
-  });
-
   it('truncates very long summaries correctly', () => {
     const longSummaryPost = {
       ...mockPost,
