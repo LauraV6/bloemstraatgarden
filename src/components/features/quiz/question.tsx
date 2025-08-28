@@ -1,15 +1,26 @@
 "use client"
 
 import { useState } from "react";
-import Answers from "./answers";
-import QuestionTimer from "./timer";
+import Answers from "./Answers";
+import QuestionTimer from "./Timer";
 import QUESTIONS from "@/lib/quiz";
 import styles from "./question.module.scss"
 
-export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }: any) {
-  const [answer, setAnswer] = useState({
+interface QuestionProps {
+  questionIndex: number;
+  onSelectAnswer: (answer: string) => void;
+  onSkipAnswer: () => void;
+}
+
+interface AnswerState {
+  selectedAnswer: string;
+  isCorrect: boolean | null;
+}
+
+export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }: QuestionProps) {
+  const [answer, setAnswer] = useState<AnswerState>({
     selectedAnswer: "",
-    isCorrect: null as any,
+    isCorrect: null,
   });
 
   // Add safety checks
@@ -35,7 +46,7 @@ export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }
     timer = 3000;
   }
 
-  function handleSelectAnswer(selectedAnswer: any) {
+  function handleSelectAnswer(selectedAnswer: string) {
     setAnswer({
       selectedAnswer: selectedAnswer,
       isCorrect: null,
@@ -69,7 +80,7 @@ export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }
       <QuestionTimer 
         key={timer} 
         timeout={timer} 
-        onTimeout={answer.selectedAnswer === "" ? onSkipAnswer : null} 
+        onTimeout={answer.selectedAnswer === "" ? onSkipAnswer : () => {}} 
         mode={answerStatus} 
       />
       <h2>{currentQuestion.text || 'Question text missing'}</h2>

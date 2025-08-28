@@ -5,13 +5,13 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import { BLOCKS } from "@contentful/rich-text-types";
-import type { Document } from "@contentful/rich-text-types";
+import type { Document, Block } from "@contentful/rich-text-types";
 import type { Metadata } from "next";
-import { getAllTips, getTip } from "@/lib/contentful/api";
-import Sidebar from "@/components/layout/sidebar";
-import { MorePosts } from "@/components/features/posts/morePosts";
+import { getAllTips, getTip, type Tip } from "@/lib/contentful/api";
+import Sidebar from "@/components/layout/Sidebar";
+import { MorePosts } from "@/components/features/posts/MorePosts";
 import styles from "@/app/[slug]/page.module.scss";
-import TipsPageClient from "@/components/tipsPageClient";
+import TipsPageClient from "@/components/TipsPageClient";
 
 interface TipsPageParams {
   slug: string;
@@ -80,7 +80,7 @@ const createRenderOptions = (links: ContentfulLinks) => {
 
   return {
     renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | any) => {
         const asset = assetMap.get(node.data.target.sys.id);
         if (!asset) {
           console.warn(`Asset not found for ID: ${node.data.target.sys.id}`);
@@ -188,8 +188,8 @@ export async function generateMetadata({ params }: TipsPageProps): Promise<Metad
 export async function generateStaticParams(): Promise<TipsPageParams[]> {
   try {
     const allTips = await getAllTips();
-    return allTips.map((article: Article) => ({
-      slug: article.slug,
+    return allTips.map((tip: Tip) => ({
+      slug: tip.slug,
     }));
   } catch (error) {
     console.error("Error generating static params:", error);

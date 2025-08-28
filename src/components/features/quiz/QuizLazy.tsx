@@ -35,7 +35,7 @@ interface TimerProps {
 
 // Lazy load the quiz components with loading fallback
 export const Question = dynamic(
-  () => import('./question'),
+  () => import('./Question'),
   { 
     loading: () => <div>Loading question...</div>,
     ssr: false 
@@ -43,7 +43,7 @@ export const Question = dynamic(
 );
 
 export const Summary = dynamic(
-  () => import('./summary'),
+  () => import('./Summary'),
   { 
     loading: () => <div>Loading summary...</div>,
     ssr: false 
@@ -51,7 +51,7 @@ export const Summary = dynamic(
 );
 
 export const Timer = dynamic(
-  () => import('./timer'),
+  () => import('./Timer'),
   { 
     loading: () => <div>Loading timer...</div>,
     ssr: false 

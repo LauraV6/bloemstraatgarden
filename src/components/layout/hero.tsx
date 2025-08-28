@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./hero.module.scss";
-import FadeIn from "@/components/common/fadeIn";
+import FadeIn from "@/components/common/FadeIn";
 import { motion } from "framer-motion";
 
 // Types

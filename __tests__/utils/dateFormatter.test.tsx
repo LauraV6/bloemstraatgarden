@@ -1,4 +1,4 @@
-import { formatDate, formatDateTimeAttribute, formatDateShort } from '@/utils/dateFormatter';
+import { formatDate, formatDateTimeAttribute, formatDateShort } from '@/utils/DateFormatter';
 
 // Mock console methods to avoid noise in test output
 beforeAll(() => {

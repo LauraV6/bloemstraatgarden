@@ -1,8 +1,12 @@
 import styles from "./summary.module.scss"
-import FadeIn from "@/components/common/fadeIn";
+import FadeIn from "@/components/common/FadeIn";
 import QUESTIONS from "@/lib/quiz";
 
-export default function Summary({userAnswers}: any) {
+interface SummaryProps {
+  userAnswers: (string | null)[];
+}
+
+export default function Summary({userAnswers}: SummaryProps) {
     // Add safety checks
     if (!QUESTIONS || !Array.isArray(QUESTIONS)) {
         console.error('QUESTIONS is not properly imported or is not an array');
@@ -14,8 +18,8 @@ export default function Summary({userAnswers}: any) {
         return <div>Error loading user answers</div>;
     }
 
-    const skippedAnswers = userAnswers.filter((answer: any) => answer === null);
-    const correctAnswers = userAnswers.filter((answer: any, i: any) => {
+    const skippedAnswers = userAnswers.filter((answer) => answer === null);
+    const correctAnswers = userAnswers.filter((answer, i) => {
         // Add bounds checking
         if (i >= QUESTIONS.length || !QUESTIONS[i] || !QUESTIONS[i].answers) {
             console.warn(`Question at index ${i} is missing or malformed`);
@@ -46,7 +50,7 @@ export default function Summary({userAnswers}: any) {
                 </FadeIn>
             </div>
             <ol className={styles.summary__answers}>
-                {userAnswers.map((answer: any, i: any) => {
+                {userAnswers.map((answer, i) => {
                     // Add bounds checking for QUESTIONS array
                     if (i >= QUESTIONS.length || !QUESTIONS[i]) {
                         console.warn(`Question at index ${i} is missing`);

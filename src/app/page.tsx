@@ -1,16 +1,13 @@
 import { Suspense } from "react";
-import { Hero } from "@/components/layout/hero";
-import { TitleLine } from "@/components/common/TitleLine/titleLine";
-import PostsGrid from "@/components/features/posts/postsGrid";
-import TipsGrid from "@/components/features/tips/tipsGridWrapper";
-import States from "@/components/features/states/states";
-import Stock from "@/components/features/stocking/stock";
-import PostCardSkeleton from "@/components/features/posts/postCardSkeleton";
-import TipCardSkeleton from "@/components/features/tips/tipCardSkeleton";
-import posts from "@/components/features/posts/postsMap.module.scss";
-import HomePageClient from "@/components/homePageClient";
-
-// Remove the HomePageProps interface - not needed for Next.js app directory pages
+import { TitleLine } from "@/components/common/TitleLine/TitleLine";
+import PostsGrid from "@/components/features/posts/PostsGrid";
+import TipsGrid from "@/components/features/tips/TipsGridWrapper";
+import States from "@/components/features/states/States";
+import Stock from "@/components/features/stocking/Stock";
+import PostCardSkeleton from "@/components/features/posts/PostCardSkeleton";
+import TipCardSkeleton from "@/components/features/tips/TipCardSkeleton";
+import posts from "@/components/features/posts/PostsMap.module.scss";
+import HomePageClient from "@/components/HomePageClient";
 
 interface PageSectionProps {
   title: string;
@@ -50,7 +47,6 @@ const TipsLoadingFallback = () => (
   <TipCardSkeleton amount={PAGE_CONTENT.skeletonCounts.tips} />
 );
 
-// Remove the props parameter - Next.js app directory pages don't receive props
 export default function Home() {
   const siteTitle = "Bloemstraat Garden";
 
