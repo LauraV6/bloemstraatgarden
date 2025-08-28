@@ -9,6 +9,8 @@ interface CartItem extends Verkrijgbaar {
 
 interface ShoppingCartContextType {
   cartItems: CartItem[];
+  cartQuantity: number;
+  isOpen: boolean;
   addToCart: (item: Verkrijgbaar, quantity?: number) => void;
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
@@ -17,23 +19,28 @@ interface ShoppingCartContextType {
   isInCart: (itemId: string) => boolean;
   getItemQuantity: (itemId: string) => number;
   canAddToCart: (itemId: string, maxAmount: number) => number;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
 
 export function ShoppingCartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('shoppingCart');
+    const savedCart = localStorage.getItem('shopping-cart');
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('shoppingCart', JSON.stringify(cartItems));
+    localStorage.setItem('shopping-cart', JSON.stringify(cartItems));
   }, [cartItems]);
+  
+  const cartQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const addToCart = (item: Verkrijgbaar, quantity: number = 1) => {
     setCartItems(prevItems => {
@@ -76,6 +83,9 @@ export function ShoppingCartProvider({ children }: { children: ReactNode }) {
   const clearCart = () => {
     setCartItems([]);
   };
+  
+  const openCart = () => setIsOpen(true);
+  const closeCart = () => setIsOpen(false);
 
   const getTotalItems = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -99,6 +109,8 @@ export function ShoppingCartProvider({ children }: { children: ReactNode }) {
     <ShoppingCartContext.Provider
       value={{
         cartItems,
+        cartQuantity,
+        isOpen,
         addToCart,
         removeFromCart,
         updateQuantity,
@@ -106,7 +118,9 @@ export function ShoppingCartProvider({ children }: { children: ReactNode }) {
         getTotalItems,
         isInCart,
         getItemQuantity,
-        canAddToCart
+        canAddToCart,
+        openCart,
+        closeCart
       }}
     >
       {children}

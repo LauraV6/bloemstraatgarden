@@ -21,6 +21,7 @@ interface PostCardProps {
   props: PostData;
   url?: string;
   className?: string;
+  priority?: boolean;
 }
 
 // Utility functions
@@ -42,15 +43,21 @@ interface PostImageProps {
   title?: string;
 }
 
-const PostImage: React.FC<PostImageProps> = ({ src, alt, title }) => (
+interface ExtendedPostImageProps extends PostImageProps {
+  priority?: boolean;
+}
+
+const PostImage: React.FC<ExtendedPostImageProps> = ({ src, alt, title, priority = false }) => (
   <div className={styles.postItem__img}>
     <Image 
+      priority={priority}
       src={src} 
       alt={alt}
       fill 
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       style={{ objectFit: 'cover' }}
       title={title}
+      loading={priority ? 'eager' : 'lazy'}
     />      
   </div>
 );
@@ -78,7 +85,8 @@ const PostContent: React.FC<PostContentProps> = ({ title, summary, date }) => (
 export const PostCard: React.FC<PostCardProps> = ({ 
   props, 
   url, 
-  className 
+  className,
+  priority = false 
 }) => {
   // Generate the post URL
   const postUrl = generatePostUrl(props.slug, url);
@@ -104,6 +112,7 @@ export const PostCard: React.FC<PostCardProps> = ({
           src={props.articleImage.url}
           alt={imageAlt}
           title={props.articleImage.title}
+          priority={priority}
         />
         
         <PostContent
