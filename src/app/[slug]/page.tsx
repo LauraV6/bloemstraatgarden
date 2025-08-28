@@ -5,14 +5,14 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import { BLOCKS } from "@contentful/rich-text-types";
-import type { Document } from "@contentful/rich-text-types";
+import type { Document, Block } from "@contentful/rich-text-types";
 import type { Metadata } from "next";
 import { getAllArticles, getArticle } from "@/lib/contentful/api";
-import Sidebar from "@/components/layout/sidebar";
-import Weather from "@/components/features/weather/weather";
-import { MorePosts } from "@/components/features/posts/morePosts";
+import Sidebar from "@/components/layout/Sidebar";
+import Weather from "@/components/features/weather/Weather";
+import { MorePosts } from "@/components/features/posts/MorePosts";
 import styles from "./page.module.scss";
-import BlogPostClient from "@/components/blogPostClient";
+import BlogPostClient from "@/components/BlogPostClient";
 
 // Types
 interface ArticlePageParams {
@@ -82,7 +82,7 @@ const createRenderOptions = (links: ContentfulLinks) => {
 
   return {
     renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | any) => {
         const asset = assetMap.get(node.data.target.sys.id);
         if (!asset) {
           console.warn(`Asset not found for ID: ${node.data.target.sys.id}`);

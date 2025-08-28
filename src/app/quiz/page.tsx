@@ -2,11 +2,11 @@
 
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Question from "@/components/features/quiz/question";
-import Summary from "@/components/features/quiz/summary";
-import FadeIn from "@/components/common/fadeIn";
+import Question from "@/components/features/quiz/Question";
+import Summary from "@/components/features/quiz/Summary";
+import FadeIn from "@/components/common/FadeIn";
 import QUESTIONS from "@/lib/quiz";
-import { trackQuizEvent } from "@/lib/analytics/gtag";
+import { trackQuizEvent } from "@/lib/analytics/Gtag";
 import styles from "./page.module.scss";
 import heroStyles from "@/components/layout/hero.module.scss";
 

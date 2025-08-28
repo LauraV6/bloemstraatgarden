@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PostCard } from "./postCard";
+import { PostCard } from "./PostCard";
 import styles from "./postsMap.module.scss";
 
 // Types
@@ -120,7 +120,7 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
     variants={containerVariants}
   >
     <AnimatePresence mode="popLayout">
-      {articles.slice(0, postCount).map((article, index) => (
+      {articles.slice(0, postCount).map((article) => (
         <motion.div 
           key={article.sys.id}
           layout

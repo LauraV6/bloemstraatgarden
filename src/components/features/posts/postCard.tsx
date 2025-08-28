@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatDate } from "@/utils/dateFormatter";
+import { formatDate } from "@/utils/DateFormatter";
 import styles from './postCard.module.scss';
 
 // Types

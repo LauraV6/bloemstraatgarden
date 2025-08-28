@@ -1,4 +1,4 @@
-// utils/dateFormatter.ts
+// utils/DateFormatter.ts
 
 /**
  * Formats a date string consistently across server and client
