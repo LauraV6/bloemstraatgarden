@@ -19,7 +19,12 @@
       "Bash(npm run lint)",
       "Bash(npm install:*)",
       "Bash(find:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(git checkout:*)",
+      "Bash(dir:*)",
+      "Bash(git mv:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
