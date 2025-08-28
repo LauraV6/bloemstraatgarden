@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
-import StackAction from "./stockAction";
+import StackAction from "./StockAction";
 import styles from "./stocking.module.scss";
 
 // Types

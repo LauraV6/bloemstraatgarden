@@ -2,7 +2,7 @@
 
 import { useEffect, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { pageview, GA_TRACKING_ID } from '@/lib/analytics/gtag';
+import { pageview, GA_TRACKING_ID } from '@/lib/analytics/Gtag';
 
 function AnalyticsInner(): null {
   const pathname = usePathname();

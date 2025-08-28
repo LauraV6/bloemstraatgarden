@@ -1,11 +1,33 @@
 // lib/gtag.ts
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
 
+// Type definitions for Google Analytics
+type GtagCommand = 'config' | 'event' | 'js' | 'set' | 'consent';
+
+interface GtagEventParams {
+  page_location?: string;
+  page_path?: string;
+  page_title?: string;
+  event_category?: string;
+  event_label?: string;
+  value?: number;
+  [key: string]: string | number | undefined;
+}
+
+interface ConsentParams {
+  analytics_storage?: 'granted' | 'denied';
+  ad_storage?: 'granted' | 'denied';
+}
+
 // Extend Window interface to include gtag
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
+    gtag: (
+      command: GtagCommand,
+      targetId: string | Date | 'update',
+      params?: GtagEventParams | ConsentParams
+    ) => void;
+    dataLayer: Array<unknown>;
   }
 }
 
@@ -55,29 +77,6 @@ export const trackQuizEvent = (
   });
 };
 
-export const trackPlantEvent = (
-  action: 'plant_viewed' | 'plant_search' | 'plant_filter',
-  plantName?: string
-): void => {
-  event({
-    action: action,
-    category: 'Plants',
-    label: plantName,
-    value: 1
-  });
-};
-
-export const trackContactEvent = (
-  action: 'form_submit' | 'email_click' | 'social_click',
-  label?: string
-): void => {
-  event({
-    action: action,
-    category: 'Contact',
-    label: label,
-    value: 1
-  });
-};
 
 // Grant consent for analytics
 export const grantAnalyticsConsent = (): void => {
