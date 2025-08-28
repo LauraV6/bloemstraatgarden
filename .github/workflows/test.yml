@@ -250,7 +250,7 @@ jobs:
     
     steps:
       - name: 📢 Slack Notification
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.SLACK_WEBHOOK != ''
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -260,7 +260,7 @@ jobs:
             Author: ${{ github.actor }}
             Message: ${{ github.event.head_commit.message }}
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK || '' }}
         continue-on-error: true
 
       - name: 📝 Create summary
