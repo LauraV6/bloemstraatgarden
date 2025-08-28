@@ -43,10 +43,10 @@ export function sendToAnalytics(metric: Metric) {
 
   // Log to console in development
   if (process.env.NODE_ENV === 'development') {
-    console.log('[Web Vitals]', analyticsData);
+    console.log(`[Web Vitals] ${metric.name}:`, analyticsData);
     
     // Provide performance recommendations
-    if (metric.rating === 'poor') {
+    if (metric.rating === 'poor' || metric.rating === 'needs-improvement') {
       console.warn(`⚠️ Poor ${metric.name} performance detected:`, {
         value: metric.value,
         threshold: getThreshold(metric.name),

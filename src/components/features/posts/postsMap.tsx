@@ -120,7 +120,7 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
     variants={containerVariants}
   >
     <AnimatePresence mode="popLayout">
-      {articles.slice(0, postCount).map((article) => (
+      {articles.slice(0, postCount).map((article, index) => (
         <motion.div 
           key={article.sys.id}
           layout
@@ -133,7 +133,11 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
             transition: { duration: 0.2 }
           }}
         >
-          <PostCard props={article} url={url} />
+          <PostCard 
+            props={article} 
+            url={url} 
+            priority={index < 2}
+          />
         </motion.div>
       ))}
     </AnimatePresence>
