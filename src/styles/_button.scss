@@ -1,4 +1,5 @@
 @use "./mixins" as *;
+@use "./keyframes" as *;
 
 .button {
     width: auto;
@@ -175,6 +176,3 @@ button[disabled] {
   opacity: .8;
 }
 
-@keyframes move-wave {
-    100% { transform: translateX(-100%) }
-  }

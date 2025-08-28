@@ -21,8 +21,10 @@ export interface RichTextLinks {
   };
 }
 
+import type { Document } from "@contentful/rich-text-types";
+
 export interface RichTextContent {
-  json: any; // This is the raw JSON from Contentful Rich Text
+  json: Document; // Contentful Rich Text Document
   links: RichTextLinks;
 }
 

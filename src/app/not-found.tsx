@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Sidebar from "@/components/layout/sidebar";
+import Sidebar from "@/components/layout/Sidebar";
 import heroStyles from "@/components/layout/hero.module.scss";
 import styles from "@/app/[slug]/page.module.scss";
 

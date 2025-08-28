@@ -3,7 +3,7 @@
 import styles from "./timer.module.scss"
 import stylesQuestion from "./question.module.scss";
 import { useEffect, useState } from "react";
-import FadeIn from "@/components/common/fadeIn";
+import FadeIn from "@/components/common/FadeIn";
 
 interface QuestionTimerProps {
   timeout: number;
