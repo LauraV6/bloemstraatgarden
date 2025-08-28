@@ -154,7 +154,7 @@ describe('Available', () => {
 
       const addButton = screen.getAllByRole('button', { name: /Maximum bereikt/i })[0];
       expect(addButton).toBeDisabled();
-      expect(screen.getByText('Maximum bereikt')).toBeInTheDocument();
+      expect(screen.getAllByText('Maximum bereikt')[0]).toBeInTheDocument();
     });
 
     it('respects maximum available quantity', () => {
