@@ -155,8 +155,8 @@ export default function PostsMap({
 
   // Memoize the showMore calculation for performance
   const showMore = useMemo(() => {
-    return articles.length > postCount;
-  }, [articles.length, postCount]);
+    return articles && articles.length > postCount;
+  }, [articles, postCount]);
 
   // Memoize the load more function
   const loadMore = useCallback(() => {
