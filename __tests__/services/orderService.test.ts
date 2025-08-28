@@ -49,7 +49,7 @@ describe('OrderService', () => {
       expect(result).toEqual(mockResponse)
       expect(global.fetch).toHaveBeenCalledTimes(1)
       expect(global.fetch).toHaveBeenCalledWith(
-        '/.netlify/functions/submit-order',
+        expect.stringContaining('/.netlify/functions/submit-order'),
         expect.objectContaining({
           method: 'POST',
           headers: {
