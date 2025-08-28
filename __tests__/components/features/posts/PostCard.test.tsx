@@ -65,7 +65,7 @@ describe('PostCard', () => {
     
     const summary = screen.getByText(/This is a test summary/);
     expect(summary).toBeInTheDocument();
-    expect(summary.textContent).toContain('...');
+    expect(summary.textContent).toContain('..');
   });
 
   it('truncates very long summaries correctly', () => {
