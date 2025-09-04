@@ -2,8 +2,8 @@
 
 import { useArticles } from '@/hooks/useContentful';
 import PostsMap from './PostsMap';
-import LoadingState from '@/components/common/LoadingState';
-import ErrorState from '@/components/common/ErrorState';
+import LoadingState from '@/components/ui/LoadingState';
+import ErrorState from '@/components/ui/ErrorState';
 
 interface PostsGridClientProps {
   className?: string;

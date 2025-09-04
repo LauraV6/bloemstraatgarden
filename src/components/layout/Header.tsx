@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import Logo from "@/components/common/Logo/logo";
-import LogoSmall from "@/components/common/Logo/logoSmall";
+import Logo from "@/components/ui/Logo/logo";
+import LogoSmall from "@/components/ui/Logo/logoSmall";
 import styles from "./header.module.scss";
-import ThemeSwitcher from "@/components/common/ThemeSwitcher/ThemeSwitcher";
+import ThemeSwitcher from "@/components/ui/ThemeSwitcher/ThemeSwitcher";
 
 // Types
 interface SocialLink {
