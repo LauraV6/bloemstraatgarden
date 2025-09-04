@@ -13,7 +13,7 @@ interface AvailableCardProps {
   item: {
     sys: { id: string };
     title: string;
-    amount: number;
+    amount: string;
     date: string;
     postImage: {
       url: string;
