@@ -6,7 +6,7 @@
 import React, { ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
 import { ShoppingCartProvider } from '@/context/ShoppingCartContext'
-import { Verkrijgbaar, Tip, Article } from '@/lib/contentful/api'
+import { Verkrijgbaar, Tip, Article } from '@/types/contentful'
 
 // Custom render function that includes all providers
 interface AllTheProvidersProps {

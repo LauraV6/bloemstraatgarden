@@ -24,7 +24,7 @@
         gap: 2.5rem;
     }
 
-    > div {
+    > article {
         &:first-of-type {
             @include breakpoint-up(md) {
                 grid-row-start: 1;

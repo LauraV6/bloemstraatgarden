@@ -2,17 +2,6 @@
 @use '@/styles/keyframes' as *;
 
 .available {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-green-5);
-    border-radius: 5px;
-    padding: 1.2rem;
-
-    @include breakpoint-up(md) {
-        padding: 3rem;
-    }
-
     &__content {
         display: grid;
         justify-items: center;
@@ -42,12 +31,14 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 2rem;
-        width: 100%;
-        padding: 1rem;
+        background-color: var(--color-green-5);
+        border-radius: 5px;
+        padding: 1.2rem;
 
         @include breakpoint-up(md) {
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             gap: 2.5rem;
+            padding: 3rem;
         }
     }
 
@@ -95,10 +86,14 @@
         }
 
         &__actions {
-            display: flex;
-            gap: 0.75rem;
+            display: grid;
+            gap: .75rem;
             margin-top: 1rem;
-            align-items: center;
+
+            @include breakpoint-up(md) {
+                display: flex;
+                align-items: center;
+            }
         }
 
         &__quantity {
