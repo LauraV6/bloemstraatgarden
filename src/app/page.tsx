@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { TitleLine } from "@/components/common/TitleLine/TitleLine";
+import { TitleLine } from "@/components/ui/TitleLine/TitleLine";
 import PostsGridClient from "@/components/features/posts/PostsGridClient";
 import TipsGridApollo from "@/components/features/tips/TipsGridApollo";
 import States from "@/components/features/states/States";

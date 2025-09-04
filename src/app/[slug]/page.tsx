@@ -12,7 +12,7 @@ import Weather from "@/components/features/weather/Weather";
 import { MorePosts } from "@/components/features/posts/MorePosts";
 import styles from "./page.module.scss";
 import BlogPostClient from "@/components/BlogPostClient";
-import BlogPostApollo from "@/components/BlogPostApollo";
+import BlogPostDetail from "@/components/features/blog/BlogPostDetail";
 
 // Types
 interface ArticlePageParams {
@@ -179,7 +179,7 @@ export default async function KnowledgeArticlePage({ params }: ArticlePageProps)
   return (
     <main role="main">
       <BlogPostClient>
-        <BlogPostApollo slug={slug} />
+        <BlogPostDetail slug={slug} />
       </BlogPostClient>
     </main>
   );
