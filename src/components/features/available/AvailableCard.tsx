@@ -1,37 +1,32 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import styles from "./available.module.scss";
-import { Verkrijgbaar } from "@/lib/contentful/api";
 import { useShoppingCart } from "@/context/ShoppingCartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faCheck, faPlus, faMinus } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
+import styles from "./available.module.scss";
 
 const nonAvailableSrc = "/notAvailable.png";
 
-// Types
-interface AvailableProps {
-  className?: string;
-  title?: string;
-  description?: string;
-  imageAlt?: string;
-  availablePosts?: Verkrijgbaar[];
+interface AvailableCardProps {
+  item: {
+    sys: { id: string };
+    title: string;
+    amount: number;
+    date: string;
+    postImage: {
+      url: string;
+    };
+  };
+  index?: number;
 }
 
-// Constants
-const DEFAULT_CONTENT = {
-  title: "Geen planten beschikbaar",
-  description: "Momenteel zijn er geen planten op voorraad. Kom op een later moment terug om te kijken of er weer planten beschikbaar zijn.",
-  imageAlt: "Geen planten beschikbaar illustratie"
-} as const;
-
-// AvailableCard Component
-function AvailableCard({ post, index }: { post: Verkrijgbaar; index: number }) {
+export default function AvailableCard({ item, index = 0 }: AvailableCardProps) {
   const { addToCart, canAddToCart, getItemQuantity } = useShoppingCart();
-  const maxAmount = parseInt(post.amount) || 1;
-  const availableToAdd = canAddToCart(post.sys.id, maxAmount);
-  const currentInCart = getItemQuantity(post.sys.id);
+  const maxAmount = parseInt(String(item.amount)) || 1;
+  const availableToAdd = canAddToCart(item.sys.id, maxAmount);
+  const currentInCart = getItemQuantity(item.sys.id);
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
 
@@ -50,7 +45,7 @@ function AvailableCard({ post, index }: { post: Verkrijgbaar; index: number }) {
 
   const handleAddToCart = () => {
     if (quantity <= availableToAdd) {
-      addToCart(post, quantity);
+      addToCart(item, quantity);
       setJustAdded(true);
       setTimeout(() => setJustAdded(false), 2000);
       setQuantity(Math.min(1, availableToAdd - quantity));
@@ -59,11 +54,11 @@ function AvailableCard({ post, index }: { post: Verkrijgbaar; index: number }) {
 
   return (
     <div className={styles.availableCard}>
-      {post.postImage?.url && (
+      {item.postImage?.url && (
         <div className={styles.availableCard__imageWrapper}>
           <Image 
-            src={post.postImage.url} 
-            alt={post.title}
+            src={item.postImage.url} 
+            alt={item.title}
             width={300}
             height={200}
             priority={index < 4}
@@ -77,9 +72,9 @@ function AvailableCard({ post, index }: { post: Verkrijgbaar; index: number }) {
         </div>
       )}
       <div className={styles.availableCard__content}>
-        <h3>{post.title}</h3>
-        <p className={styles.availableCard__amount}>Aantal beschikbaar: {post.amount}</p>
-        <p className={styles.availableCard__date}>{post.date}</p>
+        <h3>{item.title}</h3>
+        <p className={styles.availableCard__amount}>Aantal beschikbaar: {item.amount}</p>
+        <p className={styles.availableCard__date}>{item.date}</p>
         
         <div className={styles.availableCard__actions}>
           <div className={styles.availableCard__quantity}>
@@ -121,56 +116,6 @@ function AvailableCard({ post, index }: { post: Verkrijgbaar; index: number }) {
             <span>{availableToAdd === 0 ? "Maximum bereikt" : justAdded ? "Toegevoegd!" : "Voeg toe"}</span>
           </button>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export default function Available({ 
-  className,
-  title = DEFAULT_CONTENT.title,
-  description = DEFAULT_CONTENT.description,
-  imageAlt = DEFAULT_CONTENT.imageAlt,
-  availablePosts = []
-}: AvailableProps) {
-  const containerClass = [styles.available, className].filter(Boolean).join(' ');
-
-  if (availablePosts && availablePosts.length > 0) {
-    return (
-      <div className={containerClass}>
-        <div className={styles.availableGrid}>
-          {availablePosts.map((post, index) => (
-            <AvailableCard key={post.sys.id} post={post} index={index} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div 
-      className={containerClass}
-      role="status" 
-      aria-live="polite"
-    >
-      <div className={styles.nonAvailable__content}>
-        <div className={styles.nonAvailable__imageWrapper}>
-          <Image 
-            src={nonAvailableSrc} 
-            alt={imageAlt}
-            width={300}
-            height={300}
-            style={{ 
-              width: 'auto',
-              height: 'auto',
-              maxWidth: '100%',
-              maxHeight: '150px'
-            }}
-            priority={false}
-          />
-        </div>
-        <h3>{title}</h3>
-        <p>{description}</p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import styles from './tipCard.module.scss'
 import Image from "next/image";
 import Link from "next/link";
-import { Tip } from '@/lib/contentful/api';
+import { Tip } from '@/types/contentful';
 
 interface TipCardProps {
     props: Tip;

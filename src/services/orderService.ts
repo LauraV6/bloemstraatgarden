@@ -1,4 +1,4 @@
-import { Verkrijgbaar } from '@/lib/contentful/api';
+import { Verkrijgbaar } from '@/types/contentful';
 import { Customer, OrderResponse } from '@/types';
 
 interface CartItem extends Verkrijgbaar {
