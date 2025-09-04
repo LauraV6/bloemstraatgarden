@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { Verkrijgbaar } from '@/lib/contentful/api';
+import { Verkrijgbaar } from '@/types/contentful';
 
 interface CartItem extends Verkrijgbaar {
   quantity: number;
