@@ -3,7 +3,7 @@
 import { Suspense, useMemo } from "react";
 import { PostCard } from "./PostCard";
 import PostCardSkeleton from "./PostCardSkeleton";
-import FadeIn from "@/components/common/FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 import { shuffle } from "@/utils/Shuffle";
 import styles from "./postsMap.module.scss";
 

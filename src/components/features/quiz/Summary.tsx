@@ -1,5 +1,5 @@
 import styles from "./summary.module.scss"
-import FadeIn from "@/components/common/FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 import QUESTIONS from "@/lib/quiz";
 
 interface SummaryProps {
