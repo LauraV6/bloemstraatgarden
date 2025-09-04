@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Question from "@/components/features/quiz/Question";
 import Summary from "@/components/features/quiz/Summary";
-import FadeIn from "@/components/common/FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 import QUESTIONS from "@/lib/quiz";
 import { trackQuizEvent } from "@/lib/analytics/Gtag";
 import styles from "./page.module.scss";

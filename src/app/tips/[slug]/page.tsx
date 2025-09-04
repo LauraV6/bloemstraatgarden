@@ -11,7 +11,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import { MorePosts } from "@/components/features/posts/MorePosts";
 import styles from "@/app/[slug]/page.module.scss";
 import TipsPageClient from "@/components/TipsPageClient";
-import TipPostApollo from "@/components/TipPostApollo";
+import TipPostDetail from "@/components/features/tips/TipPostDetail";
 
 interface TipsPageParams {
   slug: string;
@@ -175,7 +175,7 @@ export default async function TipsPage({ params }: TipsPageProps) {
   return (
     <main role="main">
       <TipsPageClient>
-        <TipPostApollo slug={slug} />
+        <TipPostDetail slug={slug} />
       </TipsPageClient>
     </main>
   );

@@ -7,12 +7,12 @@ import {
   GET_ALL_TIPS,
   GET_TIP_BY_SLUG,
   GET_AVAILABLE_ITEMS
-} from '@/lib/graphql/queries';
+} from '@/lib/api/graphql/queries';
 import type { 
   ArticleCollection, 
   TipCollection, 
   AvailableCollection 
-} from '@/lib/graphql/types';
+} from '@/lib/api/graphql/types';
 import type { Article, Tip } from '@/types/contentful';
 
 export function useArticles(limit: number = 10, skip: number = 0) {
