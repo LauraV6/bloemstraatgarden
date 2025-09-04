@@ -7,12 +7,12 @@ import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { Document, Block } from "@contentful/rich-text-types";
 import type { Metadata } from "next";
-import { getAllArticles, getArticle } from "@/lib/contentful/api";
 import Sidebar from "@/components/layout/Sidebar";
 import Weather from "@/components/features/weather/Weather";
 import { MorePosts } from "@/components/features/posts/MorePosts";
 import styles from "./page.module.scss";
 import BlogPostClient from "@/components/BlogPostClient";
+import BlogPostApollo from "@/components/BlogPostApollo";
 
 // Types
 interface ArticlePageParams {
@@ -162,97 +162,25 @@ const PostHeader: React.FC<PostHeaderProps> = ({
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   
-  try {
-    const article = await getArticle(slug);
-    
-    if (!article) {
-      return {
-        title: 'Artikel niet gevonden - Bloemstraat Garden',
-      };
-    }
-    
-    return {
-      title: `${article.title} - Bloemstraat Garden`,
-      description: article.summary || `Lees meer over ${article.title} in onze moestuin`,
-      openGraph: {
-        title: article.title,
-        description: article.summary,
-        images: article.articleImage?.url ? [article.articleImage.url] : [],
-      },
-    };
-  } catch (error) {
-    console.error("Error generating metadata:", error);
-    return {
-      title: 'Bloemstraat Garden',
-    };
-  }
+  return {
+    title: `Bloemstraat Garden`,
+    description: `Lees meer in onze moestuin`,
+  };
 }
 
-// Static params generation
+// Static params generation - disabled for now since we're using Apollo
 export async function generateStaticParams(): Promise<ArticlePageParams[]> {
-  try {
-    const allArticles = await getAllArticles();
-    return allArticles.map((article: Article) => ({
-      slug: article.slug,
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
+  return [];
 }
 
 export default async function KnowledgeArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
   
-  try {
-    const [article, allArticles] = await Promise.all([
-      getArticle(slug),
-      getAllArticles()
-    ]);
-
-    if (!article) {
-      notFound();
-    }
-
-    const renderOptions = createRenderOptions(article.details.links);
-
-    return (
-      <main role="main">
-        <BlogPostClient>
-          <PostHeader
-            title={article.title}
-            date={article.date}
-            backgroundImageUrl={article.articleImage.url}
-            imageAlt={article.articleImage.title}
-            weather={article.weather}
-          />
-          
-          <section className={styles.postcontent}>
-            <article>
-              <Breadcrumbs
-                homeLabel={BREADCRUMB_CONFIG.homeLabel}
-                homeUrl={BREADCRUMB_CONFIG.homeUrl}
-                currentTitle={article.title}
-              />
-              
-              <div className={styles.postcontent__story}>
-                {documentToReactComponents(article.details.json, renderOptions)}
-              </div>
-              
-              <MorePosts 
-                title="Meer over onze moestuin" 
-                slug={article.slug} 
-                articles={allArticles}
-              />
-            </article>
-            
-            <Sidebar />
-          </section>
-        </BlogPostClient>
-      </main>
-    );
-  } catch (error) {
-    console.error("Error loading article:", error);
-    notFound();
-  }
+  return (
+    <main role="main">
+      <BlogPostClient>
+        <BlogPostApollo slug={slug} />
+      </BlogPostClient>
+    </main>
+  );
 }
