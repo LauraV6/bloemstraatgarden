@@ -5,6 +5,11 @@
         position: relative;
         transition: ease-in-out 0.2s;
         height: 100%;
+        min-width: 80vw;
+
+        @include breakpoint-up(md) {
+            min-width: auto;
+        }
 
         @include breakpoint-up(md) {
             box-shadow: var(--box-shadow);
