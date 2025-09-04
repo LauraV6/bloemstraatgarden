@@ -122,7 +122,10 @@
       "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\services/**)",
       "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src/**)",
       "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\types/**)",
-      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\services/**)"
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\services/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\components\\features\\available/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\__tests__\\components\\features\\available/**)",
+      "Bash(npm test:*)"
     ],
     "deny": []
   }
