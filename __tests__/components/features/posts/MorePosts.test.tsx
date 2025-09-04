@@ -8,7 +8,7 @@ jest.mock('@/utils/Shuffle', () => ({
   shuffle: jest.fn((arr) => [...arr])
 }));
 
-jest.mock('@/components/common/FadeIn', () => ({
+jest.mock('@/components/ui/FadeIn', () => ({
   __esModule: true,
   default: ({ children }: { children: React.ReactNode }) => <>{children}</>
 }));

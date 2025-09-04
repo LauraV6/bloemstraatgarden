@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { metadata } from "@/app/layout";
-import LogoSmall from '@/components/common/Logo/logoSmall';
+import LogoSmall from '@/components/ui/Logo/logoSmall';
 import HeaderLeaveBig from '../../../public/headerLeaveBig.png';
 import styles from "./footer.module.scss";
 

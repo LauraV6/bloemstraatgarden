@@ -2,8 +2,8 @@
 
 import { useTips } from '@/hooks/useContentful';
 import { TipCard } from './TipCard';
-import LoadingState from '@/components/common/LoadingState';
-import ErrorState from '@/components/common/ErrorState';
+import LoadingState from '@/components/ui/LoadingState';
+import ErrorState from '@/components/ui/ErrorState';
 import styles from './tipsGrid.module.scss';
 
 export default function TipsGridApollo() {
