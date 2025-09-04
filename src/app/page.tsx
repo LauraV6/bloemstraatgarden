@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { TitleLine } from "@/components/common/TitleLine/TitleLine";
-import PostsGrid from "@/components/features/posts/PostsGrid";
-import TipsGrid from "@/components/features/tips/TipsGridWrapper";
+import PostsGridClient from "@/components/features/posts/PostsGridClient";
+import TipsGridApollo from "@/components/features/tips/TipsGridApollo";
 import States from "@/components/features/states/States";
 import Stock from "@/components/features/stocking/Stock";
 import PostCardSkeleton from "@/components/features/posts/PostCardSkeleton";
@@ -56,7 +56,7 @@ export default function Home() {
       {/* Blog Posts Section */}
       <PageSection title={PAGE_CONTENT.sections.blog}>
         <Suspense fallback={<PostsLoadingFallback />}>
-          <PostsGrid />
+          <PostsGridClient />
         </Suspense>
       </PageSection>
 
@@ -68,7 +68,7 @@ export default function Home() {
       {/* Tips Section */}
       <PageSection title={PAGE_CONTENT.sections.tips}>
         <Suspense fallback={<TipsLoadingFallback />}>
-          <TipsGrid />
+          <TipsGridApollo />
         </Suspense>
       </PageSection>
 
