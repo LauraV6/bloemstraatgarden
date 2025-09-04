@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Hero } from "@/components/layout/Hero"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid"
-import { TitleLine } from "@/components/common/TitleLine/TitleLine";
+import { TitleLine } from "@/components/ui/TitleLine/TitleLine";
 import AvailableApollo from "@/components/features/available/AvailableApollo";
 import CartIcon from "@/components/features/cart/CartIcon";
 import styles from "@/components/features/stocking/stocking.module.scss";

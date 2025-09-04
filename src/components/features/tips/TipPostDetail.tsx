@@ -1,45 +1,44 @@
 'use client';
 
-import { useArticleBySlug, useArticles } from '@/hooks/useContentful';
+import { useTipBySlug, useTips } from '@/hooks/useContentful';
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
-import LoadingState from '@/components/common/LoadingState';
-import ErrorState from '@/components/common/ErrorState';
-import Weather from "@/components/features/weather/Weather";
+import LoadingState from '@/components/ui/LoadingState';
+import ErrorState from '@/components/ui/ErrorState';
 import { MorePosts } from "@/components/features/posts/MorePosts";
 import Sidebar from "@/components/layout/Sidebar";
 import styles from '@/app/[slug]/page.module.scss';
 
-interface BlogPostApolloProps {
+interface TipPostApolloProps {
   slug: string;
 }
 
-export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
-  const { article, loading: articleLoading, error: articleError } = useArticleBySlug(slug);
-  const { articles: allArticles, loading: articlesLoading } = useArticles(100);
+export default function TipPostApollo({ slug }: TipPostApolloProps) {
+  const { tip, loading: tipLoading, error: tipError } = useTipBySlug(slug);
+  const { tips: allTips, loading: tipsLoading } = useTips(10);
 
-  if (articleLoading) {
-    return <LoadingState message="Artikel laden..." fullPage />;
+  if (tipLoading) {
+    return <LoadingState message="Tip laden..." fullPage />;
   }
 
-  if (articleError) {
+  if (tipError) {
     return (
       <ErrorState 
-        error={articleError}
+        error={tipError}
         onRetry={() => window.location.reload()}
         fullPage
       />
     );
   }
 
-  if (!article) {
+  if (!tip) {
     return (
       <ErrorState 
-        error="Artikel niet gevonden"
+        error="Tip niet gevonden"
         fullPage
       />
     );
@@ -61,7 +60,7 @@ export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
     return assetMap;
   };
 
-  const assetMap = createAssetMap(article.details.links.assets.block);
+  const assetMap = createAssetMap(tip.details.links.assets.block);
   
   const renderOptions = {
     renderNode: {
@@ -97,18 +96,17 @@ export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
       {/* Hero Header with Background Image */}
       <section
         className={styles.postheader}
-        style={{ backgroundImage: `url(${article.articleImage.url})` }}
+        style={{ backgroundImage: `url(${tip.articleImage.url})` }}
         role="banner"
-        aria-label={article.articleImage.title || `Header afbeelding voor ${article.title}`}
+        aria-label={tip.articleImage.title || `Header afbeelding voor ${tip.title}`}
       >
         <div className={styles.postheader__content}>
           <div>
-            <h1>{article.title}</h1>
-            <time dateTime={article.date} className={styles.postDate}>
-              {formatDate(article.date)}
+            <h1>{tip.title}</h1>
+            <time dateTime={tip.date} style={{ color: 'hsl(0, 0%, 100%)' }}>
+              {formatDate(tip.date)}
             </time>
           </div>
-          {article.weather && <Weather weatherType={article.weather} />}
         </div>
       </section>
 
@@ -117,24 +115,25 @@ export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
         <article>
           {/* Breadcrumbs */}
           <nav className="breadcrumbs" aria-label="Breadcrumb navigatie">
-            <Link href="/" aria-label="Ga naar Blog">
-              Blog
+            <Link href="/tips" aria-label="Ga naar Tips">
+              Tips
             </Link>
             <FontAwesomeIcon icon={faRight} aria-hidden="true" />
-            <span aria-current="page">{article.title}</span>
+            <span aria-current="page">{tip.title}</span>
           </nav>
 
           {/* Article Content */}
           <div className={styles.postcontent__story}>
-            {documentToReactComponents(article.details.json, renderOptions)}
+            {documentToReactComponents(tip.details.json, renderOptions)}
           </div>
 
           {/* More Posts Section */}
-          {!articlesLoading && allArticles && (
+          {allTips && allTips.length > 0 && (
             <MorePosts 
-              title="Meer over onze moestuin" 
-              slug={article.slug} 
-              articles={allArticles}
+              title="Meer moestuin tips" 
+              slug={tip.slug} 
+              articles={allTips}
+              url="/tips"
             />
           )}
         </article>
