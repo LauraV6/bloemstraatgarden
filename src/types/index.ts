@@ -7,6 +7,8 @@ export * from './api/contentful';
 export * from './features/blog';
 export * from './features/tips';
 export * from './features/products';
+export * from './features/order';
+export * from './features/quiz';
 
 // Keep backward compatibility
 export * from './contentful';

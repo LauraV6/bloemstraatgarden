@@ -1,5 +1,5 @@
 import { Verkrijgbaar } from '@/types/contentful';
-import { Customer, OrderResponse } from '@/types';
+import { Customer, OrderResponse } from '@/types/features/order';
 
 interface CartItem extends Verkrijgbaar {
   quantity: number;

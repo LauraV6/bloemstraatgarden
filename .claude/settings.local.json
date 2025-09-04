@@ -114,7 +114,15 @@
       "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\components\\providers/**)",
       "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\hooks/**)",
       "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\types/**)",
-      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\__tests__\\components\\features\\available/**)"
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\__tests__\\components\\features\\available/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\components\\features\\posts/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\components\\features\\posts/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\components\\features\\tips/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\components\\layout/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\services/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\types/**)",
+      "Read(/C:\\Users\\LauraVlasma\\source\\repos\\bloemstraatgarden\\src\\services/**)"
     ],
     "deny": []
   }
