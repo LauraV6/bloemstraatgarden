@@ -7,6 +7,7 @@ import "./globals.scss";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ThemeProvider from "@/components/providers/ThemeProvider/ThemeProvider";
+import ApolloProvider from "@/components/providers/ApolloProvider";
 import Analytics from "@/components/Analytics";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 
@@ -157,13 +158,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </head>
       <body className={fontPacaembu.className}>
         <ThemeProvider>
-          <div id="__next">
-            <Header />
-            {children}
-            <Footer />
-            <Analytics />
-            <PerformanceMonitor />
-          </div>
+          <ApolloProvider>
+            <div id="__next">
+              <Header />
+              {children}
+              <Footer />
+              <Analytics />
+              <PerformanceMonitor />
+            </div>
+          </ApolloProvider>
         </ThemeProvider>
       </body>
     </html>

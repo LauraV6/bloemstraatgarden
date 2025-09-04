@@ -7,11 +7,11 @@ import { faRight } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
 import { BLOCKS } from "@contentful/rich-text-types";
 import type { Document, Block } from "@contentful/rich-text-types";
 import type { Metadata } from "next";
-import { getAllTips, getTip, type Tip } from "@/lib/contentful/api";
 import Sidebar from "@/components/layout/Sidebar";
 import { MorePosts } from "@/components/features/posts/MorePosts";
 import styles from "@/app/[slug]/page.module.scss";
 import TipsPageClient from "@/components/TipsPageClient";
+import TipPostApollo from "@/components/TipPostApollo";
 
 interface TipsPageParams {
   slug: string;
@@ -158,97 +158,25 @@ const PostHeader: React.FC<PostHeaderProps> = ({
 export async function generateMetadata({ params }: TipsPageProps): Promise<Metadata> {
   const { slug } = await params;
   
-  try {
-    const tip = await getTip(slug);
-    
-    if (!tip) {
-      return {
-        title: 'Tip niet gevonden - Bloemstraat Garden',
-      };
-    }
-    
-    return {
-      title: `${tip.title} - Moestuin Tips - Bloemstraat Garden`,
-      description: tip.summary || `Lees onze moestuin tip: ${tip.title}`,
-      openGraph: {
-        title: tip.title,
-        description: tip.summary,
-        images: tip.articleImage?.url ? [tip.articleImage.url] : [],
-      },
-    };
-  } catch (error) {
-    console.error("Error generating metadata:", error);
-    return {
-      title: 'Moestuin Tips - Bloemstraat Garden',
-    };
-  }
+  return {
+    title: `Moestuin Tips - Bloemstraat Garden`,
+    description: `Lees onze moestuin tips`,
+  };
 }
 
-// Static params generation
+// Static params generation - disabled for now since we're using Apollo
 export async function generateStaticParams(): Promise<TipsPageParams[]> {
-  try {
-    const allTips = await getAllTips();
-    return allTips.map((tip: Tip) => ({
-      slug: tip.slug,
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
+  return [];
 }
 
 export default async function TipsPage({ params }: TipsPageProps) {
   const { slug } = await params;
   
-  try {
-    const [article, allTips] = await Promise.all([
-      getTip(slug),
-      getAllTips()
-    ]);
-
-    if (!article) {
-      notFound();
-    }
-
-    const renderOptions = createRenderOptions(article.details.links);
-
-    return (
-      <main role="main">
-        <TipsPageClient>
-          <PostHeader
-            title={article.title}
-            date={article.date}
-            backgroundImageUrl={article.articleImage.url}
-            imageAlt={article.articleImage.title}
-          />
-          
-          <div className={styles.postcontent}>
-            <article>
-              <Breadcrumbs
-                homeLabel={BREADCRUMB_CONFIG.homeLabel}
-                homeUrl={BREADCRUMB_CONFIG.homeUrl}
-                currentTitle={article.title}
-              />
-              
-              <div className={styles.postcontent__story}>
-                {documentToReactComponents(article.details.json, renderOptions)}
-              </div>
-              
-              <MorePosts 
-                title="Meer moestuin tips" 
-                slug={article.slug} 
-                articles={allTips} 
-                url="/tips" 
-              />
-            </article>
-            
-            <Sidebar />
-          </div>
-        </TipsPageClient>
-      </main>
-    );
-  } catch (error) {
-    console.error("Error loading tip:", error);
-    notFound();
-  }
+  return (
+    <main role="main">
+      <TipsPageClient>
+        <TipPostApollo slug={slug} />
+      </TipsPageClient>
+    </main>
+  );
 }
