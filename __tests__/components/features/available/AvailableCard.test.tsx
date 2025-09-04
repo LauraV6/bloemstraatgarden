@@ -194,11 +194,17 @@ describe('AvailableCard', () => {
     });
 
     it('resets quantity after order is placed', () => {
+      // Initially, simulate item is in cart
+      mockGetItemQuantity.mockReturnValue(2);
       const { rerender } = render(<AvailableCard item={mockItem} />);
 
       const incrementButton = screen.getByLabelText('Verhoog hoeveelheid');
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
+      
+      // Verify quantity was changed
+      const quantityInputBefore = screen.getByLabelText('Selecteer hoeveelheid') as HTMLInputElement;
+      expect(quantityInputBefore.value).toBe('3');
       
       // Simulate cart being cleared (order placed)
       mockGetItemQuantity.mockReturnValue(0);
