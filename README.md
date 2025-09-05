@@ -13,7 +13,6 @@
 - [Deployment](#deployment)
 - [Troubleshooting / FAQ](#troubleshooting--faq)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overzicht
 
