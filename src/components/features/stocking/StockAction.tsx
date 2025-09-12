@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRight } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
 
@@ -17,9 +16,6 @@ interface StackActionProps {
 const STACK_ACTION_CONFIG = {
   defaultHref: '/verkrijgbaar',
   defaultButtonText: 'Bekijk onze voorraad',
-  animationDuration: 0.3,
-  hoverScale: 1.05,
-  tapScale: 0.95,
   icon: faRight
 } as const;
 
@@ -29,26 +25,27 @@ export default function StackAction({
   buttonText = STACK_ACTION_CONFIG.defaultButtonText,
   variant = 'primary'
 }: StackActionProps) {
+  const router = useRouter();
   const buttonClass = `button button--cta ${variant === 'secondary' ? 'button--secondary' : ''} ${className || ''}`.trim();
 
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    router.push(href);
+  };
+
   return (
-    <motion.div       
-      whileHover={{ scale: STACK_ACTION_CONFIG.hoverScale }}
-      whileTap={{ scale: STACK_ACTION_CONFIG.tapScale }}
-      transition={{ duration: STACK_ACTION_CONFIG.animationDuration }}
+    <a 
+      className={buttonClass}
+      href={href}
+      aria-label={`${buttonText} - Ga naar voorraad pagina`}
+      onClick={handleClick}
     >
-      <Link 
-        className={buttonClass}
-        href={href}
-        aria-label={`${buttonText} - Ga naar voorraad pagina`}
-      >
-        {buttonText} 
-        <FontAwesomeIcon 
-          icon={STACK_ACTION_CONFIG.icon} 
-          aria-hidden="true"
-          style={{ marginLeft: '0.5rem' }}
-        />
-      </Link>
-    </motion.div>
+      <span>{buttonText}</span>
+      <FontAwesomeIcon 
+        icon={STACK_ACTION_CONFIG.icon} 
+        aria-hidden="true"
+        className="stack-action-icon"
+      />
+    </a>
   );
 }

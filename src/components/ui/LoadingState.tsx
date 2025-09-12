@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import styles from './LoadingState.module.scss';
+import { LoadingContainer, FullPageWrapper, Spinner, SpinnerRing, LoadingMessage } from './LoadingState.styled';
 
 interface LoadingStateProps {
   message?: string;
@@ -8,19 +10,19 @@ interface LoadingStateProps {
 
 export default function LoadingState({ message = 'Laden...', fullPage = false }: LoadingStateProps) {
   const content = (
-    <div className={styles.loadingContainer}>
-      <div className={styles.spinner}>
-        <div className={styles.spinnerRing}></div>
-        <div className={styles.spinnerRing}></div>
-        <div className={styles.spinnerRing}></div>
-        <div className={styles.spinnerRing}></div>
-      </div>
-      <p className={styles.loadingMessage}>{message}</p>
-    </div>
+    <LoadingContainer>
+      <Spinner>
+        <SpinnerRing delay={-0.45} />
+        <SpinnerRing delay={-0.3} />
+        <SpinnerRing delay={-0.15} />
+        <SpinnerRing />
+      </Spinner>
+      <LoadingMessage>{message}</LoadingMessage>
+    </LoadingContainer>
   );
 
   if (fullPage) {
-    return <div className={styles.fullPageWrapper}>{content}</div>;
+    return <FullPageWrapper>{content}</FullPageWrapper>;
   }
 
   return content;

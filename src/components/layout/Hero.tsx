@@ -1,7 +1,9 @@
 "use client";
 
+import React from 'react';
 import Image from "next/image";
-import styles from "./hero.module.scss";
+import { useTheme } from 'next-themes';
+import { HeroContainer, HeroContainer2, HeroText, HeroImages, LeaveImage, HomePageTitle } from './Hero.styled';
 import FadeIn from "@/components/ui/FadeIn";
 import { motion } from "framer-motion";
 
@@ -11,11 +13,13 @@ interface HeroProps {
   title: string;
   paragraph: string;
   className?: string;
+  forceWhiteText?: boolean;
+  isHomePage?: boolean;
 }
 
 interface LeafImageProps {
   src: string;
-  className: string;
+  variant: 'one' | 'two' | 'three' | 'four';
   alt: string;
 }
 
@@ -41,32 +45,31 @@ const heroTextVariants = {
 const LEAF_IMAGES = [
   {
     src: "/headerLeaveBig.png",
-    className: `${styles.leave} ${styles.leaveOne}`,
+    variant: "one" as const,
     alt: "Decoratief blad - groot"
   },
   {
     src: "/headerLeaveSmall.png",
-    className: `${styles.leave} ${styles.leaveTwo}`,
+    variant: "two" as const,
     alt: "Decoratief blad - klein"
   },
   {
     src: "/headerLeaveBig.png",
-    className: `${styles.leave} ${styles.leaveThree}`,
+    variant: "three" as const,
     alt: "Decoratief blad - groot"
   },
   {
     src: "/headerLeaveSmall.png",
-    className: `${styles.leave} ${styles.leaveFour}`,
+    variant: "four" as const,
     alt: "Decoratief blad - klein"
   }
 ] as const;
 
 // Leaf Image Component
-const LeafImage: React.FC<LeafImageProps> = ({ src, className, alt }) => (
-  <FadeIn>
+const LeafImage: React.FC<LeafImageProps> = ({ src, variant, alt }) => (
+  <LeaveImage variant={variant}>
     <Image
       src={src}
-      className={className}
       alt={alt}
       width={300}
       height={300}
@@ -78,70 +81,72 @@ const LeafImage: React.FC<LeafImageProps> = ({ src, className, alt }) => (
       }}
       priority={false}
     />
-  </FadeIn>
+  </LeaveImage>
 );
 
 export const Hero: React.FC<HeroProps> = ({ 
   theme, 
   title, 
   paragraph, 
-  className 
+  className,
+  forceWhiteText = false,
+  isHomePage = false
 }) => {
-  // Determine hero class based on theme
-  const heroClass = [
-    styles.hero,
-    theme === 'dark' ? styles.heroDark : '',
-    className || ''
-  ].filter(Boolean).join(' ');
-
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Always use false on initial render to match server
+  const isDarkMode = false;
+  
   return (
-    <section
-      className={heroClass}
+    <HeroContainer
+      className={`${className || ''} ${isHomePage ? 'homepage-hero' : ''}`}
+      isHomePage={isHomePage}
       style={{ backgroundImage: `url(/headerBgTransparent.png)` }}
       role="banner"
       aria-labelledby="hero-title"
     >
-      <div className={styles.hero__container}>
-        <motion.header 
-          className={styles.hero__text}
-          initial="initial"
-          animate="animate"
-          variants={heroTextVariants}
-        >
+      <HeroContainer2 isHomePage={isHomePage} isDarkMode={isDarkMode}>
+        <HeroText>
           <div>
-            <motion.h1 
-              id="hero-title"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {title}
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            {isHomePage ? (
+              <HomePageTitle id="hero-title">
+                {title}
+              </HomePageTitle>
+            ) : (
+              <h1 
+                id="hero-title"
+                style={forceWhiteText || theme === 'dark' ? { color: 'white' } : {}}
+              >
+                {title}
+              </h1>
+            )}
+            <p
+              style={forceWhiteText || theme === 'dark' ? { color: 'white' } : {}}
             >
               {paragraph}
-            </motion.p>
+            </p>
           </div>
-        </motion.header>
+        </HeroText>
         
-        <div 
-          className={styles.hero__images}
-          role="img" 
-          aria-label="Decoratieve bladeren"
-        >
-          {LEAF_IMAGES.map((leaf, index) => (
-            <LeafImage
-              key={`leaf-${index}`}
-              src={leaf.src}
-              className={leaf.className}
-              alt={leaf.alt}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+        {/* Only render leaves after mounting to avoid hydration mismatch */}
+        {mounted && (
+          <HeroImages>
+            {LEAF_IMAGES.map((leaf, index) => (
+              <LeafImage 
+                key={index}
+                src={leaf.src}
+                variant={leaf.variant}
+                alt={leaf.alt}
+              />
+            ))}
+          </HeroImages>
+        )}
+      </HeroContainer2>
+    </HeroContainer>
   );
 };

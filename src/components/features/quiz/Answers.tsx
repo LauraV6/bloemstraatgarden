@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./answers.module.scss"
+import { AnswersList, AnswerItem, AnswerButton } from "./Answers.styled";
 
 interface AnswersProps {
   answers: string[];
@@ -66,7 +66,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
     }
 
     return (
-        <ul className={styles.quiz__answers}>
+        <AnswersList>
             {allAnswers.map((answer, index) => {
                 // Add safety check for each answer
                 if (answer === null || answer === undefined) {
@@ -76,22 +76,22 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
                 const isSelected = selectedAnswer === answer;
                 let cssClass = '';
 
-                if ((answerState === styles.correct || answerState === styles.wrong) && isSelected) {
+                if ((answerState === 'correct' || answerState === 'wrong') && isSelected) {
                     cssClass = answerState;
                 }
 
                 return (
-                    <li key={`${answer}-${index}`} className={styles.answer}>
-                        <button 
+                    <AnswerItem key={`${answer}-${index}`}>
+                        <AnswerButton 
                             onClick={() => onSelect && onSelect(answer)} 
                             className={`button button--cta ${cssClass}`} 
                             disabled={answerState !== ''}
                         >
-                            {String(answer)}
-                        </button>
-                    </li>
+                            <span>{String(answer)}</span>
+                        </AnswerButton>
+                    </AnswerItem>
                 );
             })}
-        </ul>
+        </AnswersList>
     )
 }
