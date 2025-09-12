@@ -1,7 +1,6 @@
 "use client"
 
-import styles from "./timer.module.scss"
-import stylesQuestion from "./question.module.scss";
+import { TimerContainer, TimerHeading, TimerProgress } from "./Timer.styled";
 import { useEffect, useState } from "react";
 import FadeIn from "@/components/ui/FadeIn";
 
@@ -58,23 +57,23 @@ export default function QuestionTimer({ timeout, onTimeout, mode }: QuestionTime
 
   return (
     <>
-      <div className={styles.quiz__timer}>
+      <TimerContainer>
         {(() => {
           // Add safety checks for mode comparison
-          if (mode && mode === stylesQuestion.wrong) {
-            return <FadeIn><h3 className={mode}>Fout antwoord</h3></FadeIn>
-          } else if (mode && mode === stylesQuestion.correct) {
-            return <FadeIn><h3 className={mode}>Correct!</h3></FadeIn>
+          if (mode && mode === 'wrong') {
+            return <FadeIn><TimerHeading $status="wrong">Fout antwoord</TimerHeading></FadeIn>
+          } else if (mode && mode === 'correct') {
+            return <FadeIn><TimerHeading $status="correct">Correct!</TimerHeading></FadeIn>
           } else {
-            return <h3>{roundTimer}</h3>
+            return <TimerHeading>{roundTimer}</TimerHeading>
           }
         })()}
-        <progress 
+        <TimerProgress 
           max={validTimeout} 
           value={progressValue} 
-          className={mode || ''}
+          $status={mode as 'correct' | 'wrong' | 'answered' | '' || ''}
         />
-      </div>
+      </TimerContainer>
     </>
   )
 }

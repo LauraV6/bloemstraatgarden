@@ -9,7 +9,7 @@ import {
   faHandHoldingSeedling 
 } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import styles from "./states.module.scss";
+import { StatesSection, StatesContainer, StatesItem, TextContainer } from "./States.styled";
 
 // Types
 interface StatesProps {
@@ -75,8 +75,8 @@ const StateItemComponent: React.FC<StateItemComponentProps> = ({
   isInView, 
   index 
 }) => (
-  <div 
-    className={styles.states__item}
+  <StatesItem 
+    isSecond={index === 1}
     style={createAnimationStyle(isInView, delay)}
     role="listitem"
     aria-label={`Stap ${index + 1}: ${title}`}
@@ -84,13 +84,12 @@ const StateItemComponent: React.FC<StateItemComponentProps> = ({
     <FontAwesomeIcon 
       icon={icon} 
       aria-hidden="true"
-      className={styles.stateIcon}
     />
-    <div className={styles.textContainer}>
+    <TextContainer>
       <h4>{title}</h4>
       <p>{description}</p>
-    </div>
-  </div>
+    </TextContainer>
+  </StatesItem>
 );
 
 export default function States({ 
@@ -100,16 +99,14 @@ export default function States({
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once });
 
-  const sectionClass = [styles.states, className].filter(Boolean).join(' ');
-
   return (
-    <section 
-      className={sectionClass} 
+    <StatesSection 
+      className={className} 
       ref={ref}
       role="list"
       aria-label="Moestuin proces stappen"
     >
-      <div className={styles.states__container}>
+      <StatesContainer>
         {STATES_DATA.map((item, index) => (
           <StateItemComponent
             key={`state-${index}`}
@@ -118,7 +115,7 @@ export default function States({
             index={index}
           />
         ))}
-      </div>
-    </section>
+      </StatesContainer>
+    </StatesSection>
   );
 }

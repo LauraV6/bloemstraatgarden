@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { grantAnalyticsConsent, denyAnalyticsConsent } from '@/lib/analytics/Gtag';
-import styles from './cookieConsent.module.scss';
+import { CookieConsentContainer, Content, Text, Buttons, AcceptButton, DeclineButton } from './CookieConsent.styled';
 
 export default function CookieConsent(): JSX.Element | null {
   const [showConsent, setShowConsent] = useState(false);
@@ -34,32 +34,30 @@ export default function CookieConsent(): JSX.Element | null {
   if (!showConsent) return null;
 
   return (
-    <div className={styles.cookieConsent}>
-      <div className={styles.content}>
-        <div className={styles.text}>
+    <CookieConsentContainer>
+      <Content>
+        <Text>
           <h3>🍪 Cookies</h3>
           <p>
             We gebruiken analytische cookies om onze website te verbeteren en je tuinervaring 
             te personaliseren. Deze helpen ons begrijpen welke tuininformatie het meest waardevol voor je is.
           </p>
-        </div>
-        <div className={styles.buttons}>
-          <button 
+        </Text>
+        <Buttons>
+          <AcceptButton 
             onClick={acceptCookies} 
-            className={`${styles.button} ${styles.accept}`}
             aria-label="Accepteer analytische cookies"
           >
             Accepteren
-          </button>
-          <button 
+          </AcceptButton>
+          <DeclineButton 
             onClick={declineCookies} 
-            className={`${styles.button} ${styles.decline}`}
             aria-label="Weiger analytische cookies"
           >
             Weigeren
-          </button>
-        </div>
-      </div>
-    </div>
+          </DeclineButton>
+        </Buttons>
+      </Content>
+    </CookieConsentContainer>
   );
 }

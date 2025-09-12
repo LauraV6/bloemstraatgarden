@@ -4,11 +4,102 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Question from "@/components/features/quiz/Question";
 import Summary from "@/components/features/quiz/Summary";
-import FadeIn from "@/components/ui/FadeIn";
 import QUESTIONS from "@/lib/quiz";
 import { trackQuizEvent } from "@/lib/analytics/Gtag";
-import styles from "./page.module.scss";
-import heroStyles from "@/components/layout/hero.module.scss";
+import styled from '@emotion/styled';
+
+const Hero = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 119px 0 2rem 0;
+  margin: 0;
+  width: 100%;
+  background-color: ${({ theme }) => 
+    theme.colors.background === '#23252a' 
+      ? theme.colors.menu  // Dark mode: use menu color (darker)
+      : theme.colors.background  // Light mode: keep normal background
+  };
+  position: relative;
+  overflow-x: hidden;
+  max-width: 100vw;
+  min-height: 100vh;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 154px 0 2rem 0;
+  }
+`;
+
+const HeroContainer = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 2rem;
+  }
+`;
+
+const HeroText = styled.div`
+  width: 100%;
+`;
+
+const QuizHeader = styled.h1`
+  font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  color: ${({ theme }) => theme.colors.primary};
+  font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
+    margin-bottom: ${({ theme }) => theme.spacing.xl};
+  }
+`;
+
+const QuizContainer = styled(motion.div, {
+  shouldForwardProp: (prop) => prop !== '$isComplete'
+})<{ $isComplete?: boolean }>`
+  max-width: ${props => props.$isComplete ? '900px' : '1100px'};
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.green5};
+  border-radius: ${({ theme }) => theme.radii.lg};
+  position: relative;
+  transition: max-width 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 2rem 3rem;
+    width: calc(100% - 2rem);
+    margin: 0 1rem;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 1rem 0.75rem;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
+`;
+
+const QuizError = styled.div`
+  background: ${({ theme }) => theme.colors.error};
+  color: white;
+  padding: ${({ theme }) => theme.spacing.lg};
+  border-radius: ${({ theme }) => theme.radii.md};
+  text-align: center;
+  
+  h2 {
+    margin-bottom: ${({ theme }) => theme.spacing.md};
+  }
+`;
 
 interface UserAnswer {
   questionIndex: number;
@@ -25,6 +116,33 @@ const QUIZ_CONFIG = {
 // Custom hooks
 const useQuizState = () => {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
+  const [isRestoring, setIsRestoring] = useState(true);
+  
+  // Load saved state from localStorage on mount
+  useEffect(() => {
+    const savedState = localStorage.getItem('quizState');
+    if (savedState) {
+      try {
+        const parsed = JSON.parse(savedState);
+        if (parsed.answers && Array.isArray(parsed.answers)) {
+          setUserAnswers(parsed.answers);
+        }
+      } catch (e) {
+        console.error('Failed to restore quiz state:', e);
+      }
+    }
+    setIsRestoring(false);
+  }, []);
+
+  // Save state to localStorage whenever answers change
+  useEffect(() => {
+    if (!isRestoring && userAnswers.length > 0) {
+      localStorage.setItem('quizState', JSON.stringify({
+        answers: userAnswers,
+        savedAt: Date.now()
+      }));
+    }
+  }, [userAnswers, isRestoring]);
   
   const activeQuestionIndex = userAnswers.length;
   const quizIsComplete = activeQuestionIndex === QUIZ_CONFIG.totalQuestions;
@@ -61,6 +179,7 @@ const useQuizState = () => {
 
   const resetQuiz = useCallback(() => {
     setUserAnswers([]);
+    localStorage.removeItem('quizState'); // Clear saved state
     // Track quiz reset - ADD THIS
     trackQuizEvent('quiz_reset');
   }, []);
@@ -72,7 +191,8 @@ const useQuizState = () => {
     progress,
     handleSelectAnswer,
     handleSkipAnswer,
-    resetQuiz
+    resetQuiz,
+    isRestoring
   };
 };
 
@@ -97,10 +217,10 @@ const QuizContent: React.FC<QuizContentProps> = ({
   // Add validation for QUESTIONS array
   if (!QUESTIONS || !Array.isArray(QUESTIONS) || QUESTIONS.length === 0) {
     return (
-      <div className={styles.quiz__error || ''}>
+      <QuizError>
         <h2>Quiz data not available</h2>
         <p>Please check that the quiz questions are properly loaded.</p>
-      </div>
+      </QuizError>
     );
   }
 
@@ -109,15 +229,16 @@ const QuizContent: React.FC<QuizContentProps> = ({
     const answersForSummary = userAnswers.map(answer => answer.selectedAnswer);
     
     return (
-      <>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', width: '100%' }}>
         <Summary userAnswers={answersForSummary} />
         <button 
           onClick={onResetQuiz}
           className="button button--cta"
+          style={{ margin: '0 auto' }}
         >
-          Start opnieuw
+          <span>Start opnieuw</span>
         </button>
-      </>
+      </div>
     );
   }
 
@@ -125,13 +246,13 @@ const QuizContent: React.FC<QuizContentProps> = ({
   if (activeQuestionIndex >= QUESTIONS.length) {
     console.error(`Active question index ${activeQuestionIndex} is out of bounds`);
     return (
-      <div className={styles.quiz__error || ''}>
+      <QuizError>
         <h2>Quiz error</h2>
         <p>Question index is out of range.</p>
         <button onClick={onResetQuiz} className="button button--cta">
           Reset Quiz
         </button>
-      </div>
+      </QuizError>
     );
   }
 
@@ -156,7 +277,8 @@ export default function QuizPage() {
     progress,
     handleSelectAnswer,
     handleSkipAnswer,
-    resetQuiz
+    resetQuiz,
+    isRestoring
   } = useQuizState();
 
   // Only render after hydration is complete
@@ -166,10 +288,10 @@ export default function QuizPage() {
 
   // Track quiz start when component mounts - ADD THIS
   useEffect(() => {
-    if (isMounted && userAnswers.length === 0) {
+    if (isMounted && !isRestoring && userAnswers.length === 0) {
       trackQuizEvent('quiz_start');
     }
-  }, [isMounted, userAnswers.length]);
+  }, [isMounted, isRestoring, userAnswers.length]);
 
   // Memoize the quiz status for performance
   const quizStatus = useMemo(() => ({
@@ -179,17 +301,17 @@ export default function QuizPage() {
     progress
   }), [quizIsComplete, activeQuestionIndex, progress]);
 
-  // Show loading until mounted (prevents hydration mismatch)
-  if (!isMounted) {
+  // Show loading until mounted and restored (prevents hydration mismatch)
+  if (!isMounted || isRestoring) {
     return (
       <main role="main">
-        <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
-          <div className={heroStyles.hero__container}>
-            <div className={heroStyles.hero__text}>
-              <h1 className={styles.quiz__header}>Loading quiz...</h1>
-            </div>
-          </div>
-        </section>
+        <Hero>
+          <HeroContainer>
+            <HeroText>
+              <QuizHeader>Loading quiz...</QuizHeader>
+            </HeroText>
+          </HeroContainer>
+        </Hero>
       </main>
     );
   }
@@ -198,14 +320,14 @@ export default function QuizPage() {
   if (!QUESTIONS || !Array.isArray(QUESTIONS)) {
     return (
       <main role="main">
-        <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
-          <div className={heroStyles.hero__container}>
-            <div className={heroStyles.hero__text}>
-              <h1 className={styles.quiz__header}>Loading quiz...</h1>
+        <Hero>
+          <HeroContainer>
+            <HeroText>
+              <QuizHeader>Loading quiz...</QuizHeader>
               <p>Please wait while we load the quiz questions.</p>
-            </div>
-          </div>
-        </section>
+            </HeroText>
+          </HeroContainer>
+        </Hero>
       </main>
     );
   }
@@ -213,14 +335,14 @@ export default function QuizPage() {
   if (QUESTIONS.length === 0) {
     return (
       <main role="main">
-        <section className={`${heroStyles.hero} ${heroStyles.heroVh}`}>
-          <div className={heroStyles.hero__container}>
-            <div className={heroStyles.hero__text}>
-              <h1 className={styles.quiz__header}>No Quiz Available</h1>
+        <Hero>
+          <HeroContainer>
+            <HeroText>
+              <QuizHeader>No Quiz Available</QuizHeader>
               <p>There are no quiz questions available at this time.</p>
-            </div>
-          </div>
-        </section>
+            </HeroText>
+          </HeroContainer>
+        </Hero>
       </main>
     );
   }
@@ -232,18 +354,11 @@ export default function QuizPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <motion.section 
-        className={`${heroStyles.hero} ${heroStyles.heroVh}`}
+      <Hero
         aria-label="Moestuin quiz sectie"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.6, 
-          ease: [0.22, 1, 0.36, 1]
-        }}
       >
-        <div className={heroStyles.hero__container}>
-          <div className={heroStyles.hero__text}>
+        <HeroContainer>
+          <HeroText>
             <motion.header
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -253,13 +368,13 @@ export default function QuizPage() {
                 ease: [0.22, 1, 0.36, 1]
               }}
             >
-              <h1 className={styles.quiz__header}>
+              <QuizHeader>
                 {QUIZ_CONFIG.title}
-              </h1>
+              </QuizHeader>
             </motion.header>
             
-            <motion.div
-              className={styles.quiz__container}
+            <QuizContainer
+              $isComplete={quizStatus.isComplete}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
@@ -289,10 +404,10 @@ export default function QuizPage() {
                   />
                 </motion.div>
               </AnimatePresence>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
+            </QuizContainer>
+          </HeroText>
+        </HeroContainer>
+      </Hero>
     </motion.main>
   );
 }

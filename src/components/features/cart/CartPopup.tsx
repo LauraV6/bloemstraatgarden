@@ -1,13 +1,35 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import { orderService } from '@/services/orderService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faTrash, faPlus, faMinus, faSpinner, faCheck } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
 import OrderForm from './OrderForm';
-import styles from './cartPopup.module.scss';
+import {
+  CartOverlay,
+  CartPopupContainer,
+  CartHeader,
+  CartBadge,
+  CloseButton,
+  CartContent,
+  CartItems,
+  CartFooter,
+  ClearButton,
+  CheckoutButton,
+  CartItem,
+  CartItemImage,
+  CartItemDetails,
+  CartItemInfo,
+  CartItemQuantity,
+  QuantityButton,
+  QuantityValue,
+  RemoveButton,
+  SuccessMessage,
+  ErrorMessage,
+  LoadingMessage
+} from './CartPopup.styled';
 
 interface CartPopupProps {
   isOpen: boolean;
@@ -24,7 +46,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
   const [showOrderForm, setShowOrderForm] = useState(false);
   const [orderedItems, setOrderedItems] = useState<typeof cartItems>([]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     // Reset all state when closing
     setOrderStatus('idle');
     setOrderMessage('');
@@ -32,7 +54,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
     setShowOrderForm(false);
     setOrderId('');
     onClose();
-  };
+  }, [onClose]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -58,7 +80,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   const handleShowOrderForm = () => {
     if (cartItems.length === 0) return;
@@ -108,24 +130,23 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.cartOverlay}>
-      <div className={styles.cartPopup} ref={popupRef}>
-        <div className={styles.cartPopup__header}>
+    <CartOverlay>
+      <CartPopupContainer ref={popupRef}>
+        <CartHeader>
           <h2>Winkelwagen
             {getTotalItems() > 0 && (
-              <span className={styles.cartPopup__badge}>{getTotalItems()}</span>
+              <CartBadge>{getTotalItems()}</CartBadge>
             )}
           </h2>
-          <button
-            className={styles.cartPopup__closeBtn}
+          <CloseButton
             onClick={handleClose}
             aria-label="Sluit winkelwagen"
           >
             <FontAwesomeIcon icon={faTimes} />
-          </button>
-        </div>
+          </CloseButton>
+        </CartHeader>
 
-        <div className={styles.cartPopup__content}>
+        <CartContent>
           {showOrderForm && orderStatus === 'idle' ? (
             <OrderForm
               onSubmit={handleOrderSubmit}
@@ -133,36 +154,36 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
               isSubmitting={isSubmitting}
             />
           ) : (
-          <div className={styles.cartPopup__items}>
+          <CartItems>
             {orderStatus === 'loading' && (
-              <div className={styles.cartPopup__loadingMessage}>
+              <LoadingMessage>
                 <FontAwesomeIcon icon={faSpinner} spin />
                 <p>Bestelling wordt verwerkt...</p>
-              </div>
+              </LoadingMessage>
             )}
             
             {(orderStatus === 'success' || orderStatus === 'error') && (
               <>
                 {orderStatus === 'success' && (
-                  <div className={styles.cartPopup__successMessage}>
-                    <FontAwesomeIcon icon={faCheck} className={styles.successIcon} />
+                  <SuccessMessage>
+                    <FontAwesomeIcon icon={faCheck} className="successIcon" />
                     <p>{orderMessage}</p>
                     {orderId && <small>Order ID: {orderId}</small>}
-                  </div>
+                  </SuccessMessage>
                 )}
                 
                 {orderStatus === 'error' && (
-                  <div className={styles.cartPopup__errorMessage}>
+                  <ErrorMessage>
                     <p>{orderMessage}</p>
-                  </div>
+                  </ErrorMessage>
                 )}
               </>
             )}
             
             {((orderStatus === 'success' || orderStatus === 'error' || orderStatus === 'loading') ? orderedItems : cartItems).map((item) => (
-              <div key={item.sys.id} className={styles.cartItem}>
+              <CartItem key={item.sys.id}>
                 {item.postImage?.url && (
-                  <div className={styles.cartItem__image}>
+                  <CartItemImage>
                     <Image
                       src={item.postImage.url}
                       alt={item.title}
@@ -174,76 +195,71 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                         objectFit: 'cover'
                       }}
                     />
-                  </div>
+                  </CartItemImage>
                 )}
-                <div className={styles.cartItem__details}>
+                <CartItemDetails>
                   <h3>{item.title}</h3>
-                  <p className={styles.cartItem__info}>
+                  <CartItemInfo>
                     {orderStatus === 'success' || orderStatus === 'error' || orderStatus === 'loading'
                       ? `Aantal: ${item.quantity}` 
                       : `Max. ${item.amount} beschikbaar`}
-                  </p>
+                  </CartItemInfo>
                   {orderStatus !== 'success' && orderStatus !== 'error' && orderStatus !== 'loading' && (
-                    <div className={styles.cartItem__quantity}>
-                      <button
-                        className={styles.cartItem__quantityBtn}
+                    <CartItemQuantity>
+                      <QuantityButton
                         onClick={() => updateQuantity(item.sys.id, item.quantity - 1)}
                         aria-label="Verminder hoeveelheid"
                       >
                         <FontAwesomeIcon icon={faMinus} />
-                      </button>
-                      <span className={styles.cartItem__quantityValue}>
+                      </QuantityButton>
+                      <QuantityValue>
                         {item.quantity}
-                      </span>
-                      <button
-                        className={styles.cartItem__quantityBtn}
+                      </QuantityValue>
+                      <QuantityButton
                         onClick={() => updateQuantity(item.sys.id, item.quantity + 1)}
                         aria-label="Verhoog hoeveelheid"
                         disabled={item.quantity >= parseInt(item.amount)}
                       >
                         <FontAwesomeIcon icon={faPlus} />
-                      </button>
-                    </div>
+                      </QuantityButton>
+                    </CartItemQuantity>
                   )}
-                </div>
+                </CartItemDetails>
                 {orderStatus !== 'success' && orderStatus !== 'error' && orderStatus !== 'loading' && (
-                  <button
-                    className={styles.cartItem__removeBtn}
+                  <RemoveButton
                     onClick={() => removeFromCart(item.sys.id)}
                     aria-label="Verwijder uit winkelwagen"
                     title="Verwijder uit winkelwagen"
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                  </button>
+                  </RemoveButton>
                 )}
-              </div>
+              </CartItem>
             ))}
-          </div>
+          </CartItems>
           )}
 
           {!showOrderForm && orderStatus !== 'success' && orderStatus !== 'error' && orderStatus !== 'loading' && (
-            <div className={styles.cartPopup__footer}>
+            <CartFooter>
               {(
                 <>
-                  <button
-                    className={styles.cartPopup__clearBtn}
+                  <ClearButton
                     onClick={handleClose}
                   > 
                     Verder winkelen
-                  </button>
-                  <button
-                    className={styles.cartPopup__checkoutBtn}
+                  </ClearButton>
+                  <CheckoutButton
                     onClick={handleShowOrderForm}
                     disabled={isSubmitting || cartItems.length === 0}
                   >
                     Bestelling plaatsen
-                  </button>
+                  </CheckoutButton>
                 </>
               )}
-            </div>
+            </CartFooter>
           )}
-        </div>
-      </div>
-    </div>
+        </CartContent>
+      </CartPopupContainer>
+    </CartOverlay>
   );
 }

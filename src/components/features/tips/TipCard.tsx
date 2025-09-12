@@ -1,4 +1,6 @@
-import styles from './tipCard.module.scss'
+'use client';
+
+import { PostItem, PostItemImage, PostItemContent } from './TipCard.styled';
 import Image from "next/image";
 import Link from "next/link";
 import { Tip } from '@/types/contentful';
@@ -9,16 +11,16 @@ interface TipCardProps {
   
 export const TipCard: React.FC<TipCardProps> = ({ props }) => {
     return (
-        <article className={`${styles.postItem} ${styles.active}`}>
+        <PostItem>
             <Link href={`/tips/${props.slug}`}>
-                <div className={styles.postItem__img}>
+                <PostItemImage>
                     <Image src={props.articleImage.url} alt={props.title} fill sizes="(max-width: 768px) 100vw, 33vw" />
-                </div>
-                <div className={styles.postItem__content}>
-                    <h3>{props.title}</h3>
-                    <button className="button button--cta">Lees meer</button>
-                </div>
+                </PostItemImage>
+                <PostItemContent>
+                    <h4 style={{ color: 'white' }}>{props.title}</h4>
+                    <button className="button button--cta"><span style={{ color: 'white' }}>Lees meer</span></button>
+                </PostItemContent>
             </Link>
-      </article>
+      </PostItem>
     );
 };
