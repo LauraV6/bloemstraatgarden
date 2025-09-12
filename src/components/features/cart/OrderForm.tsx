@@ -161,9 +161,12 @@ export default function OrderForm({ onSubmit, onBack, isSubmitting }: OrderFormP
             disabled={isSubmitting}
             placeholder="Voer uw naam in"
             autoComplete="name"
+            aria-describedby={errors.name && touched.name ? "name-error" : undefined}
+            aria-invalid={errors.name && touched.name ? true : false}
+            aria-required="true"
           />
           {errors.name && touched.name && (
-            <ErrorMessage>
+            <ErrorMessage id="name-error" role="alert">
               <FontAwesomeIcon icon={faExclamationCircle} />
               {errors.name}
             </ErrorMessage>
@@ -184,9 +187,12 @@ export default function OrderForm({ onSubmit, onBack, isSubmitting }: OrderFormP
             disabled={isSubmitting}
             placeholder="uw.email@voorbeeld.nl"
             autoComplete="email"
+            aria-describedby={errors.email && touched.email ? "email-error" : undefined}
+            aria-invalid={errors.email && touched.email ? true : false}
+            aria-required="true"
           />
           {errors.email && touched.email && (
-            <ErrorMessage>
+            <ErrorMessage id="email-error" role="alert">
               <FontAwesomeIcon icon={faExclamationCircle}/>
               {errors.email}
             </ErrorMessage>
