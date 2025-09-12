@@ -122,7 +122,6 @@ export const SubmitButton = styled.button`
   align-items: center;
   gap: 10px;
   background-color: hsl(130, 47%, 42%); /* --color-green-2 */
-  color: hsl(0, 0%, 100%);
   width: 100%;
   font-weight: 600;
   border: none;
@@ -131,6 +130,10 @@ export const SubmitButton = styled.button`
   padding: 0.8rem 0;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  span {
+    color: hsl(0, 0%, 100%);
+  }
 
   &:hover:not(:disabled) {
     background-color: hsl(152, 100%, 21%); /* --color-green-1 */
