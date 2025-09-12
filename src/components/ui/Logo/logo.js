@@ -46,7 +46,7 @@ const iconDark = {
 
 const Logo = () => {
     return (
-        <motion.svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500">
+        <motion.svg role="img" aria-label="Bloemstraat Garden logo met decoratieve plant" version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 500 500">
             <g>
                 <g>
                     <g>
