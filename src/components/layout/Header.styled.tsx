@@ -64,37 +64,33 @@ export const Nav = withTransientProps('nav')<{ isScrolled: boolean }>`
 
 export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
   position: relative;
-  display: contents;
+  display: block;
   width: 100%;
+  height: 80px;
   order: 0;
 
-  @media (max-width: ${props => props.theme.breakpoints.sm}) {
-    display: inline-block;
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
     order: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    &::before {
-      left: 0;
-    }
-
-    &::before, 
-    &::after {
-      content: "";
-      border-top: 1px solid hsl(0, 0%, 80%);
-      height: 39%;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: calc(50% - 70px);
-    }
+  @media (min-width: ${props => props.theme.breakpoints.md}) {
+    display: contents;
+    height: auto;
   }
 
   svg {
+    height: 100%;
     max-height: 80px;
-    width: 100%;
+    width: auto;
     transition: 0.5s;
 
     @media (min-width: ${props => props.theme.breakpoints.md}) {
       max-height: 105px;
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -150,7 +146,7 @@ export const ShareIcon = withTransientProps('a')<{ isScrolled: boolean; classNam
     padding: 0;
   }
 
-  @media (max-width: ${props => props.theme.breakpoints.sm}) {
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
     display: none;
   }
 
@@ -202,13 +198,5 @@ export const ShareIcon = withTransientProps('a')<{ isScrolled: boolean; classNam
   &:active {
     background-image: linear-gradient(rgb(0 0 0 / 40%) 0 0);
     transform: scale(0.95);
-  }
-
-  span {
-    font-size: 0.8em;
-
-    @media (min-width: ${props => props.theme.breakpoints.md}) {
-      display: none;
-    }
   }
 `;
