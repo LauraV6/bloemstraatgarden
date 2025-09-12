@@ -5,7 +5,18 @@ import { useState, useEffect } from "react";
 import { useShoppingCart } from "@/context/ShoppingCartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus, faCheck, faPlus, faMinus } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
-import styles from "./available.module.scss";
+import {
+  AvailableCardContainer,
+  ImageWrapper,
+  CardContent,
+  Amount,
+  Date,
+  Actions,
+  QuantityContainer,
+  QuantityButton,
+  QuantityInput,
+  AddButton
+} from "./AvailableCard.styled";
 
 const nonAvailableSrc = "/notAvailable.png";
 
@@ -53,9 +64,9 @@ export default function AvailableCard({ item, index = 0 }: AvailableCardProps) {
   };
 
   return (
-    <div className={styles.availableCard}>
+    <AvailableCardContainer>
       {item.postImage?.url && (
-        <div className={styles.availableCard__imageWrapper}>
+        <ImageWrapper>
           <Image 
             src={item.postImage.url} 
             alt={item.title}
@@ -69,26 +80,24 @@ export default function AvailableCard({ item, index = 0 }: AvailableCardProps) {
               objectFit: 'cover'
             }}
           />
-        </div>
+        </ImageWrapper>
       )}
-      <div className={styles.availableCard__content}>
+      <CardContent>
         <h3>{item.title}</h3>
-        <p className={styles.availableCard__amount}>Aantal beschikbaar: {item.amount}</p>
-        <p className={styles.availableCard__date}>{item.date}</p>
+        <Amount>Aantal beschikbaar: {item.amount}</Amount>
+        <Date>{item.date}</Date>
         
-        <div className={styles.availableCard__actions}>
-          <div className={styles.availableCard__quantity}>
-            <button
-              className={styles.availableCard__quantityBtn}
+        <Actions>
+          <QuantityContainer>
+            <QuantityButton
               onClick={() => handleQuantityChange(quantity - 1)}
               disabled={quantity <= 1 || availableToAdd === 0}
               aria-label="Verminder hoeveelheid"
             >
               <FontAwesomeIcon icon={faMinus} />
-            </button>
-            <input
+            </QuantityButton>
+            <QuantityInput
               type="number"
-              className={styles.availableCard__quantityInput}
               value={availableToAdd === 0 ? 0 : quantity}
               onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
               min={availableToAdd === 0 ? 0 : 1}
@@ -96,27 +105,27 @@ export default function AvailableCard({ item, index = 0 }: AvailableCardProps) {
               disabled={availableToAdd === 0}
               aria-label="Selecteer hoeveelheid"
             />
-            <button
-              className={styles.availableCard__quantityBtn}
+            <QuantityButton
               onClick={() => handleQuantityChange(quantity + 1)}
               disabled={quantity >= availableToAdd || availableToAdd === 0}
               aria-label="Verhoog hoeveelheid"
             >
               <FontAwesomeIcon icon={faPlus} />
-            </button>
-          </div>
+            </QuantityButton>
+          </QuantityContainer>
           
-          <button 
-            className={`${styles.availableCard__addButton} ${justAdded ? styles['availableCard__addButton--added'] : ''} ${availableToAdd === 0 ? styles['availableCard__addButton--disabled'] : ''}`}
+          <AddButton 
+            $justAdded={justAdded}
+            $disabled={availableToAdd === 0}
             onClick={handleAddToCart}
             disabled={availableToAdd === 0}
             aria-label={availableToAdd === 0 ? "Maximum bereikt" : "Voeg toe aan winkelwagen"}
           >
             <FontAwesomeIcon icon={availableToAdd === 0 ? faCheck : justAdded ? faCheck : faCartPlus} />
             <span>{availableToAdd === 0 ? "Maximum bereikt" : justAdded ? "Toegevoegd!" : "Voeg toe"}</span>
-          </button>
-        </div>
-      </div>
-    </div>
+          </AddButton>
+        </Actions>
+      </CardContent>
+    </AvailableCardContainer>
   );
 }

@@ -1,7 +1,9 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/DateFormatter";
-import styles from './postCard.module.scss';
+import { PostCardContainer, PostLink, PostImageContainer, PostContent, DateBadge } from './PostCard.styled';
 
 // Types
 interface ArticleImage {
@@ -50,7 +52,7 @@ interface ExtendedPostImageProps extends PostImageProps {
 }
 
 const PostImage: React.FC<ExtendedPostImageProps> = ({ src, alt, title, priority = false }) => (
-  <div className={styles.postItem__img}>
+  <PostImageContainer>
     <Image 
       priority={priority}
       src={src} 
@@ -61,7 +63,7 @@ const PostImage: React.FC<ExtendedPostImageProps> = ({ src, alt, title, priority
       title={title}
       loading={priority ? 'eager' : 'lazy'}
     />      
-  </div>
+  </PostImageContainer>
 );
 
 interface PostContentProps {
@@ -70,18 +72,17 @@ interface PostContentProps {
   date: string;
 }
 
-const PostContent: React.FC<PostContentProps> = ({ title, summary, date }) => (
-  <div className={styles.postItem__content}>
+const PostContentComponent: React.FC<PostContentProps> = ({ title, summary, date }) => (
+  <PostContent>
     <h2>{title}</h2>
     <p>{truncateSummary(summary)}</p>
-    <time 
+    <DateBadge 
       dateTime={date} 
-      className={styles.date}
       title={`Gepubliceerd op ${formatDate(date)}`}
     >
       {formatDate(date)}
-    </time>
-  </div>
+    </DateBadge>
+  </PostContent>
 );
 
 export const PostCard: React.FC<PostCardProps> = ({ 
@@ -92,23 +93,16 @@ export const PostCard: React.FC<PostCardProps> = ({
 }) => {
   // Generate the post URL
   const postUrl = generatePostUrl(props.slug, url);
-  
-  // Combine CSS classes
-  const cardClass = [
-    styles.postItem, 
-    styles.active, 
-    className
-  ].filter(Boolean).join(' ');
 
   // Prepare image alt text
   const imageAlt = props.articleImage.title || props.title;
 
   return (
-    <article className={cardClass}>
-      <Link 
+    <PostCardContainer className={className} isActive={true}>
+      <PostLink 
+        as={Link}
         href={postUrl}
         aria-label={`Lees meer over: ${props.title}`}
-        className={styles.postLink}
       >
         <PostImage
           src={props.articleImage.url}
@@ -117,12 +111,12 @@ export const PostCard: React.FC<PostCardProps> = ({
           priority={priority}
         />
         
-        <PostContent
+        <PostContentComponent
           title={props.title}
           summary={props.summary}
           date={props.date}
         />
-      </Link>
-    </article>
+      </PostLink>
+    </PostCardContainer>
   );
 };

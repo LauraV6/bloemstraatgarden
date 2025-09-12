@@ -5,7 +5,7 @@ import { useShoppingCart } from '@/context/ShoppingCartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
 import CartPopup from './CartPopup';
-import styles from './cartIcon.module.scss';
+import { CartIconButton, CartBadge } from './CartIcon.styled';
 
 export default function CartIcon() {
   const { getTotalItems } = useShoppingCart();
@@ -15,16 +15,15 @@ export default function CartIcon() {
   return (
     <>
       {totalItems > 0 && (
-        <button
-          className={styles.cartIcon}
+        <CartIconButton
           onClick={() => setIsPopupOpen(true)}
           aria-label={`Winkelwagen openen, ${totalItems} items`}
         >
           <FontAwesomeIcon icon={faShoppingCart} />
-          <span className={styles.cartIcon__badge}>
+          <CartBadge>
             {totalItems}
-          </span>
-        </button>
+          </CartBadge>
+        </CartIconButton>
       )}
       <CartPopup 
         isOpen={isPopupOpen} 

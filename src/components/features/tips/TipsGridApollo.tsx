@@ -1,16 +1,16 @@
 'use client';
 
-import { useTips } from '@/hooks/useContentful';
+import { useTipsWithFallback } from '@/hooks/useContentfulWithFallback';
 import { TipCard } from './TipCard';
-import LoadingState from '@/components/ui/LoadingState';
+import TipCardSkeleton from './TipCardSkeleton';
 import ErrorState from '@/components/ui/ErrorState';
-import styles from './tipsGrid.module.scss';
+import { TipsGridContainer } from './TipsGrid.styled';
 
 export default function TipsGridApollo() {
-  const { tips, loading, error } = useTips(5);
+  const { tips, loading, error, source } = useTipsWithFallback(5);
 
   if (loading) {
-    return <LoadingState message="Tips laden..." />;
+    return <TipCardSkeleton amount={5} />;
   }
 
   if (error) {
@@ -26,15 +26,16 @@ export default function TipsGridApollo() {
     return (
       <div className="tips-empty" role="status">
         <p>Geen tips beschikbaar op dit moment.</p>
+        {source && <small style={{ opacity: 0.7 }}>Data source: {source}</small>}
       </div>
     );
   }
 
   return (
-    <div className={styles.tipsGrid}>
+    <TipsGridContainer>
       {tips.map((tip: any) => (
         <TipCard key={tip.sys.id} props={tip} />
       ))}
-    </div>
+    </TipsGridContainer>
   );
 }

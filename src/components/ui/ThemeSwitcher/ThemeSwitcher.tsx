@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faLoader } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import styles from "./themeSwitcher.module.scss";
+import { ThemeSwitch, Skeleton, ThemeIcon, ThemeLabel, SkeletonText } from "./ThemeSwitcher.styled";
 
 // Types
 interface ThemeSwitcherProps {
@@ -70,20 +70,21 @@ const useThemeLogic = () => {
 
 // Loading fallback component
 const ThemeSwitcherSkeleton: React.FC<{ className?: string }> = ({ className }) => (
-  <button 
-    className={`button button--cta ${styles.themeSwitch} ${className || ''}`}
+  <ThemeSwitch 
+    className={`button button--cta ${className || ''}`}
     disabled
     aria-label="Thema schakelaar wordt geladen"
   >
-    <span className={styles.skeleton}>
-      <FontAwesomeIcon 
-        icon={faLoader}
-        aria-hidden="true"
-        className={styles.themeIcon}
-      />      
-      <span className={styles.skeletonText}>Load</span>
-    </span>
-  </button>
+    <Skeleton>
+      <ThemeIcon $isLoading>
+        <FontAwesomeIcon 
+          icon={faLoader}
+          aria-hidden="true"
+        />
+      </ThemeIcon>      
+      <SkeletonText>Load</SkeletonText>
+    </Skeleton>
+  </ThemeSwitch>
 );
 
 const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ 
@@ -93,37 +94,30 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
 }) => {
   const { isMounted, toggleTheme, themeConfig } = useThemeLogic();
 
-  const buttonClass = [
-    'button',
-    'button--cta',
-    styles.themeSwitch,
-    styles[`themeSwitch--${size}`],
-    className
-  ].filter(Boolean).join(' ');
-
   // Show loading skeleton during hydration
   if (!isMounted) {
     return <ThemeSwitcherSkeleton className={className} />;
   }
 
   return (
-    <button
-      className={buttonClass}
+    <ThemeSwitch
+      className={`button button--cta ${className || ''}`}
       onClick={toggleTheme}
       aria-label={themeConfig.ariaLabel}
       title={themeConfig.ariaLabel}
     >
-      <FontAwesomeIcon 
-        icon={themeConfig.icon} 
-        aria-hidden="true"
-        className={styles.themeIcon}
-      />
+      <ThemeIcon>
+        <FontAwesomeIcon 
+          icon={themeConfig.icon} 
+          aria-hidden="true"
+        />
+      </ThemeIcon>
       {showLabel && (
-        <span className={styles.themeLabel}>
+        <ThemeLabel>
           {themeConfig.label}
-        </span>
+        </ThemeLabel>
       )}
-    </button>
+    </ThemeSwitch>
   );
 };
 

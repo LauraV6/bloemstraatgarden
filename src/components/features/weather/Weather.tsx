@@ -1,7 +1,9 @@
+'use client';
+
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faCloudSun, faCloud } from '@fortawesome/free-solid-svg-icons';
-import styles from "./weather.module.scss";
+import { WeatherContainer, WeatherContent } from './Weather.styled';
 
 // Types
 interface WeatherProps {
@@ -29,15 +31,13 @@ const Weather: React.FC<WeatherProps> = ({ weatherType, className }) => {
     }
   };
 
-  const containerClass = [styles.meta, className].filter(Boolean).join(' ');
-
   return (
-    <div className={containerClass}>
-      <div>
+    <WeatherContainer className={className}>
+      <WeatherContent>
         <FontAwesomeIcon icon={getWeatherIcon()} />
         <span>{weatherType}</span>
-      </div>
-    </div>
+      </WeatherContent>
+    </WeatherContainer>
   );
 };
 
