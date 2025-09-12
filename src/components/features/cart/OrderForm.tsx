@@ -201,10 +201,10 @@ export default function OrderForm({ onSubmit, onBack, isSubmitting }: OrderFormP
             {isSubmitting ? (
               <>
                 <FontAwesomeIcon icon={faSpinner} spin />
-                Bestelling verzenden...
+                <span>Bestelling verzenden...</span>
               </>
             ) : (
-              'Bestelling verzenden'
+              <span>Bestelling verzenden</span>
             )}
           </SubmitButton>
         </FormFooter>

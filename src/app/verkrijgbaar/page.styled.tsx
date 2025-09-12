@@ -1,6 +1,11 @@
 import styled from '@emotion/styled';
 
 export const HeroWrapper = styled.div`
+  /* Set primary background color for the hero section */
+  section[role="banner"] {
+    background-color: ${({ theme }) => theme.colors.primaryDark} !important;
+  }
+  
   /* Force ALL h1 elements to be white */
   h1, 
   & h1,
