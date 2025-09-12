@@ -18,7 +18,14 @@ import type { Article, Tip } from '@/types/contentful';
 export function useArticles(limit: number = 10, skip: number = 0) {
   const { data, loading, error, fetchMore } = useQuery<ArticleCollection>(GET_ALL_ARTICLES, {
     variables: { limit, skip },
+    errorPolicy: 'all'
   });
+
+  // Log errors if they occur
+  if (error) {
+    console.error('useArticles error:', error);
+  }
+
 
   return {
     articles: data?.knowledgeArticleCollection?.items || [],
@@ -45,7 +52,14 @@ export function useArticleBySlug(slug: string) {
 export function useTips(limit: number = 10, skip: number = 0) {
   const { data, loading, error, fetchMore } = useQuery<TipCollection>(GET_ALL_TIPS, {
     variables: { limit, skip },
+    errorPolicy: 'all'
   });
+
+  // Log errors if they occur
+  if (error) {
+    console.error('useTips error:', error);
+  }
+
 
   return {
     tips: data?.tipsCollection?.items || [],

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
-import styles from './sidebar.module.scss';
+import { SidebarContainer, SidebarContent, IntroSection, TestSection, SidebarSection } from './Sidebar.styled';
 
 // Types
 interface SidebarProps {
@@ -45,7 +45,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
   description, 
   profileImage 
 }) => (
-  <div className={styles.intro}>
+  <IntroSection>
     <Image 
       src={profileImage}
       alt={`Profielfoto van ${name}`}
@@ -59,13 +59,13 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
       }}
       priority={false}
     />
-    <div>
+    <SidebarSection>
       <div>
         <h4>Hallo, ik ben {name}!</h4>
         <p>{description}</p>
       </div>
-    </div>
-  </div>
+    </SidebarSection>
+  </IntroSection>
 );
 
 // Quiz Section Component
@@ -74,39 +74,45 @@ const QuizSection: React.FC<QuizSectionProps> = ({
   description, 
   buttonText, 
   quizUrl 
-}) => (
-  <FadeIn className={styles.test}>
-    <div>
-      <div>
-        <h4>{title}</h4>
-        <p>{description}</p>
-        <motion.div
-          whileHover={{ scale: [null, 1.1, 1.05] }}
-          transition={{ duration: ANIMATION_DURATION }}
-        >
-          <Link 
-            className="button button--cta" 
-            href={quizUrl}
-            aria-label={`${buttonText} - Test je moestuin kennis`}
-          >
-            {buttonText}
-          </Link>
-        </motion.div>
-      </div>
-    </div>
-  </FadeIn>
-);
-
-export default function Sidebar({ className }: SidebarProps) {
-  const sidebarClass = [styles.aside, className].filter(Boolean).join(' ');
+}) => {
+  const handleQuizStart = () => {
+    // Clear any saved quiz state when starting from the sidebar
+    localStorage.removeItem('quizState');
+  };
 
   return (
-    <aside 
-      className={sidebarClass}
+    <TestSection as={FadeIn}>
+      <SidebarSection>
+        <div>
+          <h4>{title}</h4>
+          <p>{description}</p>
+          <motion.div
+            whileHover={{ scale: [null, 1.1, 1.05] }}
+            transition={{ duration: ANIMATION_DURATION }}
+          >
+            <Link 
+              className="button button--cta" 
+              href={quizUrl}
+              onClick={handleQuizStart}
+              aria-label={`${buttonText} - Test je moestuin kennis`}
+            >
+              <span>{buttonText}</span>
+            </Link>
+          </motion.div>
+        </div>
+      </SidebarSection>
+    </TestSection>
+  );
+};
+
+export default function Sidebar({ className }: SidebarProps) {
+  return (
+    <SidebarContainer 
+      className={className}
       role="complementary"
       aria-label="Zijbalk met profielinformatie en quiz"
     >
-      <div className={styles.aside__content}>
+      <SidebarContent>
         <ProfileSection 
           name={PROFILE_DATA.name}
           description={PROFILE_DATA.description}
@@ -119,7 +125,7 @@ export default function Sidebar({ className }: SidebarProps) {
           buttonText={QUIZ_DATA.buttonText}
           quizUrl={QUIZ_DATA.quizUrl}
         />
-      </div>
-    </aside>
+      </SidebarContent>
+    </SidebarContainer>
   );
 }

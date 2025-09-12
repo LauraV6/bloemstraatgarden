@@ -3,7 +3,18 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner, faArrowLeft, faExclamationCircle } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
-import styles from './orderForm.module.scss';
+import {
+  OrderFormContainer,
+  OrderFormHeader,
+  BackButton,
+  OrderFormElement,
+  FormField,
+  RequiredIndicator,
+  FormInput,
+  ErrorMessage,
+  FormFooter,
+  SubmitButton
+} from './OrderForm.styled';
 
 interface OrderFormProps {
   onSubmit: (customerInfo: { name: string; email: string }) => void;
@@ -122,71 +133,69 @@ export default function OrderForm({ onSubmit, onBack, isSubmitting }: OrderFormP
   };
 
   return (
-    <div className={styles.orderForm}>
-      <div className={styles.orderForm__header}>
-        <button
+    <OrderFormContainer>
+      <OrderFormHeader>
+        <BackButton
           type="button"
           onClick={onBack}
-          className={styles.orderForm__backBtn}
           disabled={isSubmitting}
         >
           <FontAwesomeIcon icon={faArrowLeft} />
           <span>Terug naar winkelwagen</span>
-        </button>
+        </BackButton>
         <h3>Contactgegevens</h3>
-      </div>
+      </OrderFormHeader>
       
-      <form onSubmit={handleSubmit} className={styles.orderForm__form}>
-        <div className={styles.orderForm__field}>
+      <OrderFormElement onSubmit={handleSubmit}>
+        <FormField>
           <label htmlFor="name">
-            Naam <span className={styles.required}>*</span>
+            Naam <RequiredIndicator>*</RequiredIndicator>
           </label>
-          <input
+          <FormInput
             type="text"
             id="name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
             onBlur={() => handleBlur('name')}
-            className={errors.name && touched.name ? styles.error : ''}
+            hasError={errors.name && touched.name ? true : false}
             disabled={isSubmitting}
             placeholder="Voer uw naam in"
             autoComplete="name"
           />
           {errors.name && touched.name && (
-            <span className={styles.orderForm__error}>
+            <ErrorMessage>
               <FontAwesomeIcon icon={faExclamationCircle} />
               {errors.name}
-            </span>
+            </ErrorMessage>
           )}
-        </div>
+        </FormField>
         
-        <div className={styles.orderForm__field}>
+        <FormField>
           <label htmlFor="email">
-            E-mailadres <span className={styles.required}>*</span>
+            E-mailadres <RequiredIndicator>*</RequiredIndicator>
           </label>
-          <input
+          <FormInput
             type="email"
             id="email"
             value={formData.email}
             onChange={(e) => handleInputChange('email', e.target.value)}
             onBlur={() => handleBlur('email')}
-            className={errors.email && touched.email ? styles.error : ''}
+            hasError={errors.email && touched.email ? true : false}
             disabled={isSubmitting}
             placeholder="uw.email@voorbeeld.nl"
             autoComplete="email"
           />
           {errors.email && touched.email && (
-            <span className={styles.orderForm__error}>
-              <FontAwesomeIcon icon={faExclamationCircle} style={{ color: 'var(--color-error)'}}/>
+            <ErrorMessage>
+              <FontAwesomeIcon icon={faExclamationCircle}/>
               {errors.email}
-            </span>
+            </ErrorMessage>
           )}
-        </div>
+        </FormField>
         
-        <div className={styles.orderForm__footer}>
-          <button
+        <FormFooter>
+          <SubmitButton
             type="submit"
-            className={styles.orderForm__submitBtn}
             disabled={isSubmitting}
           >
             {isSubmitting ? (
@@ -197,9 +206,9 @@ export default function OrderForm({ onSubmit, onBack, isSubmitting }: OrderFormP
             ) : (
               'Bestelling verzenden'
             )}
-          </button>
-        </div>
-      </form>
-    </div>
+          </SubmitButton>
+        </FormFooter>
+      </OrderFormElement>
+    </OrderFormContainer>
   );
 }

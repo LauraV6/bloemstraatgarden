@@ -1,9 +1,10 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
-import { metadata } from "@/app/layout";
 import LogoSmall from '@/components/ui/Logo/logoSmall';
 import HeaderLeaveBig from '../../../public/headerLeaveBig.png';
-import styles from "./footer.module.scss";
+import { FooterContainer, FooterContent, Container, LogoLink, IntroSection, FooterLeave, Copyright } from './Footer.styled';
 
 interface FooterProps {
   className?: string;
@@ -12,51 +13,52 @@ interface FooterProps {
 const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer({ className }: FooterProps) {
-  const siteTitle = (metadata.title as string) || "Bloemstraat Garden";
-  const siteCreator = (metadata.creator as string) || "Laura";
+  const siteTitle = "Bloemstraat Garden";
+  const siteCreator = "Laura";
 
   return (
-    <footer 
-      className={`${styles.footer} ${className || ''}`}
+    <FooterContainer 
+      className={className}
       role="contentinfo"
       aria-label="Website footer"
     >
-      <div className={styles.footer__adding}>
-        <div className={styles.container}>
-          <Link 
+      <FooterContent>
+        <Container>
+          <LogoLink 
+            as={Link}
             href="/" 
-            className={styles.logoFooter}
             aria-label={`${siteTitle} - Ga naar homepage`}
           >
             <LogoSmall />
-          </Link>
+          </LogoLink>
           
-          <div className={styles.intro}>
+          <IntroSection>
             <p>
               <strong>{siteTitle}</strong> is gelegen in Steenwijkerland en richt zich op het 
               leren door te zien, ervaren en kennis te delen van moestuinieren.
             </p>
-          </div>
-        </div>
+          </IntroSection>
+        </Container>
         
-        <Image
-        src={HeaderLeaveBig}
-        alt="Decoratief blad"
-        className={styles.footer__leave}
-        priority={false}
-        sizes="(max-width: 768px) 200px, 300px"
-        style={{
-            width: '100%',
-            height: 'auto',
-            maxWidth: 'var(--footer-leave-max-width)',
-            objectFit: 'contain'
-        }}
-        />
-      </div>
+        <FooterLeave>
+          <Image
+            src={HeaderLeaveBig}
+            alt="Decoratief blad"
+            priority={false}
+            sizes="(max-width: 768px) 200px, 300px"
+            style={{
+                width: '100%',
+                height: 'auto',
+                maxWidth: 'var(--footer-leave-max-width)',
+                objectFit: 'contain',
+            }}
+          />
+        </FooterLeave>
+      </FooterContent>
       
-      <div className={styles.footer__copyright}>
+      <Copyright>
         Created by {siteCreator} © {CURRENT_YEAR}
-      </div>
-    </footer>
+      </Copyright>
+    </FooterContainer>
   );
 }
