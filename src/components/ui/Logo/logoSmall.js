@@ -1,6 +1,6 @@
 const Logo = () => {
     return (
-        <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 772.1 230.2">
+        <svg role="img" aria-label="Bloemstraat Garden logo" version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 772.1 230.2">
             <g>
                 <g>
                     <g>

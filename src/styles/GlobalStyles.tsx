@@ -139,6 +139,21 @@ export function GlobalStyles() {
           }
         }
 
+        .skip-link:focus {
+          position: fixed !important;
+          left: 1rem !important;
+          top: 1rem !important;
+          width: auto !important;
+          height: auto !important;
+          padding: 0.75rem 1.5rem !important;
+          background: ${theme.colors.primary} !important;
+          color: white !important;
+          z-index: 10000 !important;
+          text-decoration: none !important;
+          border-radius: 4px !important;
+          font-weight: 600 !important;
+        }
+
         button {
           cursor: pointer;
           font-family: inherit;

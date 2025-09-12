@@ -69,7 +69,7 @@ export default function AvailableCard({ item, index = 0 }: AvailableCardProps) {
         <ImageWrapper>
           <Image 
             src={item.postImage.url} 
-            alt={item.title}
+            alt={`Product afbeelding: ${item.title} - ${item.amount} beschikbaar`}
             width={300}
             height={200}
             priority={index < 4}

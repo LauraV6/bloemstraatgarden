@@ -109,7 +109,6 @@ export default function Header() {
               isScrolled={isScrolled}
             >
               <FontAwesomeIcon icon={icon} aria-hidden="true" />
-              <span>{label.includes('WhatsApp') ? 'Delen' : 'Bezoeken'}</span>
             </ShareIcon>
           ))}
         </SocialLinks>
