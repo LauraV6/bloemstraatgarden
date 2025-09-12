@@ -1,4 +1,6 @@
-import styles from "./titleLine.module.scss";
+'use client';
+
+import { TitleLineHeading } from "./TitleLine.styled";
 
 // Types
 interface TitleLineProps {
@@ -10,11 +12,9 @@ export const TitleLine: React.FC<TitleLineProps> = ({
   title,
   className
 }) => {
-  const titleClass = [styles.titleLine, className].filter(Boolean).join(' ');
-
   return (
-    <h4 className={titleClass}>
+    <TitleLineHeading className={className}>
       <span>{title}</span>
-    </h4>
+    </TitleLineHeading>
   );
 };

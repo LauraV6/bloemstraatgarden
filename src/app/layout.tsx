@@ -3,11 +3,12 @@ import Script from 'next/script';
 import localFont from "next/font/local";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import "./globals.scss";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ThemeProvider from "@/components/providers/ThemeProvider/ThemeProvider";
 import ApolloProvider from "@/components/providers/ApolloProvider";
+import { EmotionProvider } from "@/providers/EmotionProvider";
+import EmotionRegistry from "@/lib/emotion/registry";
 import Analytics from "@/components/Analytics";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 
@@ -107,9 +108,78 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html 
       lang="nl" 
       suppressHydrationWarning
-      className={fontPacaembu.variable}
     >
       <head>
+        {/* Theme initialization script - must run first to prevent flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme') || 'light';
+                  document.documentElement.setAttribute('data-theme', theme);
+                  document.documentElement.style.colorScheme = theme;
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        
+        {/* Critical CSS for dark mode to prevent flash */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              [data-theme="dark"] body {
+                background-color: #1a1d23 !important;
+                color: #e1e1e1 !important;
+              }
+              [data-theme="dark"] header[role="banner"] {
+                background-color: #23252a;
+                border-bottom: 1px solid #23252a;
+              }
+              [data-theme="dark"] footer {
+                background-color: transparent !important;
+              }
+              [data-theme="dark"] footer > div {
+                background-color: hsl(152, 100%, 11%) !important;
+              }
+              [data-theme="dark"] footer p,
+              [data-theme="dark"] footer a,
+              [data-theme="dark"] footer span {
+                color: #e1e1e1 !important;
+              }
+              [data-theme="dark"] h1,
+              [data-theme="dark"] h2,
+              [data-theme="dark"] h3,
+              [data-theme="dark"] h4,
+              [data-theme="dark"] h5,
+              [data-theme="dark"] h6 {
+                color: #e1e1e1 !important;
+              }
+              [data-theme="light"] body {
+                background-color: #fffef9 !important;
+                color: #111827 !important;
+              }
+              [data-theme="light"] footer {
+                background-color: transparent !important;
+              }
+              [data-theme="light"] footer p,
+              [data-theme="light"] footer a,
+              [data-theme="light"] footer span {
+                color: #111827 !important;
+              }
+              [data-theme="light"] h1,
+              [data-theme="light"] h2,
+              [data-theme="light"] h3,
+              [data-theme="light"] h4,
+              [data-theme="light"] h5,
+              [data-theme="light"] h6 {
+                color: #111827 !important;
+              }
+            `,
+          }}
+        />
+        
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -156,18 +226,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </>
         )}
       </head>
-      <body className={fontPacaembu.className}>
-        <ThemeProvider>
-          <ApolloProvider>
-            <div id="__next">
-              <Header />
-              {children}
-              <Footer />
-              <Analytics />
-              <PerformanceMonitor />
-            </div>
-          </ApolloProvider>
-        </ThemeProvider>
+      <body className={fontPacaembu.variable}>
+        <EmotionRegistry>
+          <ThemeProvider>
+            <EmotionProvider>
+              <ApolloProvider>
+                <div id="__next">
+                  <Header />
+                  {children}
+                  <Footer />
+                  <Analytics />
+                  <PerformanceMonitor />
+                </div>
+              </ApolloProvider>
+            </EmotionProvider>
+          </ThemeProvider>
+        </EmotionRegistry>
       </body>
     </html>
   );

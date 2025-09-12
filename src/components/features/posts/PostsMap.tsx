@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PostCard } from "./PostCard";
-import styles from "./postsMap.module.scss";
+import { BlogGrid, EmptyState, BlogButtonSection, LoadMoreButtonStyled, Wave } from "./PostsMap.styled";
 
 // Types
 interface ArticleImage {
@@ -34,7 +34,7 @@ interface PostsMapProps {
 const DEFAULT_CONFIG = {
   initialPostCount: 6,
   loadMoreIncrement: 6,
-  waveAmount: 9,
+  waveAmount: 11,
   buttonText: "Geef water voor meer berichten",
   animationDuration: 0.3
 } as const;
@@ -88,18 +88,15 @@ const LoadMoreButton: React.FC<LoadMoreButtonProps> = ({
   waveAmount, 
   buttonText 
 }) => (
-  <motion.button
+  <LoadMoreButtonStyled
     onClick={onClick}
-    whileHover={{ scale: [null, 1.1, 1.05] }}
-    transition={{ duration: DEFAULT_CONFIG.animationDuration }}
-    className={styles.loadMoreButton}
     aria-label={`${buttonText} - Laad meer artikelen`}
   >
     <span>{buttonText}</span>
     {Array.from({ length: waveAmount }, (_, index) => (
-      <div className={styles.wave} key={`wave-${index}`} aria-hidden="true" />
+      <Wave className="wave" key={`wave-${index}`} aria-hidden="true" />
     ))}
-  </motion.button>
+  </LoadMoreButtonStyled>
 );
 
 interface PostsGridDisplayProps {
@@ -113,12 +110,7 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
   postCount, 
   url 
 }) => (
-  <motion.div 
-    className={styles.blogGrid}
-    initial="initial"
-    animate="animate"
-    variants={containerVariants}
-  >
+  <BlogGrid>
     <AnimatePresence mode="popLayout">
       {articles.slice(0, postCount).map((article, index) => (
         <motion.div 
@@ -141,7 +133,7 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
         </motion.div>
       ))}
     </AnimatePresence>
-  </motion.div>
+  </BlogGrid>
 );
 
 export default function PostsMap({ 
@@ -166,9 +158,9 @@ export default function PostsMap({
   // Handle empty articles array
   if (!articles || articles.length === 0) {
     return (
-      <div className={styles.emptyState} role="status">
+      <EmptyState role="status">
         <p>Geen artikelen beschikbaar.</p>
-      </div>
+      </EmptyState>
     );
   }
 
@@ -183,23 +175,15 @@ export default function PostsMap({
       />
       
       {showMore && (
-        <motion.section 
-          className={styles.blogBtn}
+        <BlogButtonSection
           aria-label="Meer artikelen laden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            delay: 0.5,
-            duration: 0.5,
-            ease: [0.22, 1, 0.36, 1]
-          }}
         >
           <LoadMoreButton
             onClick={loadMore}
             waveAmount={DEFAULT_CONFIG.waveAmount}
             buttonText={DEFAULT_CONFIG.buttonText}
           />
-        </motion.section>
+        </BlogButtonSection>
       )}
     </div>
   );

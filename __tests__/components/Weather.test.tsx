@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { render } from '@/test/test-utils';
 import Weather from '@/components/features/weather/Weather';
 import { faSun, faCloudSun, faCloud } from '@fortawesome/free-solid-svg-icons';
 

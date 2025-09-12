@@ -5,7 +5,83 @@ import { PostCard } from "./PostCard";
 import PostCardSkeleton from "./PostCardSkeleton";
 import FadeIn from "@/components/ui/FadeIn";
 import { shuffle } from "@/utils/Shuffle";
-import styles from "./postsMap.module.scss";
+import styled from '@emotion/styled';
+
+const MorePostsContainer = styled.div`
+  position: relative;
+  width: 100%;
+  margin-top: 1rem;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-top: 3rem;
+  }
+  
+  h3 {
+    font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    color: ${({ theme }) => theme.colors.text};
+    font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
+  }
+`;
+
+const BlogGrid = styled.div`
+  position: relative;
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 1.2rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: flex;
+    overflow: auto hidden;
+
+    > div {
+      flex: 0 0 65vw;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media only screen and (max-width: 1299px) and (min-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+    
+    > div:nth-of-type(3) {
+      display: none;
+    }
+  }
+
+  article {
+    height: calc(100% - 2px);
+  }
+
+  > div {
+    box-shadow: none;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+      flex: 0 0 65vw;
+    }
+
+    div:first-of-type {
+      height: 170px;
+    }
+
+    div:last-of-type {
+      padding: 1rem;
+
+      h2 {
+        font-size: 1.2em;
+      }
+    }
+  }
+`;
 
 // Types
 interface ArticleImage {
@@ -70,9 +146,9 @@ const PostsGrid: React.FC<PostsGridProps> = ({ posts, url }) => (
 );
 
 const PostsGridSkeleton: React.FC<{ count: number }> = ({ count }) => (
-  <div className={styles.blogGrid}>
+  <BlogGrid>
     <PostCardSkeleton amount={count} />
-  </div>
+  </BlogGrid>
 );
 
 export const MorePosts: React.FC<MorePostsProps> = ({ 
@@ -95,17 +171,14 @@ export const MorePosts: React.FC<MorePostsProps> = ({
   }
 
   return (
-    <div 
-      className={styles.morePosts}
-      aria-labelledby="more-posts-heading"
-    >
+    <MorePostsContainer aria-labelledby="more-posts-heading">
       <h3 id="more-posts-heading">{title}</h3>
       
-      <div className={styles.blogGrid}>
+      <BlogGrid>
         <Suspense fallback={<PostsGridSkeleton count={maxPosts} />}>
           <PostsGrid posts={shuffledPosts} url={url} />
         </Suspense>
-      </div>
-    </div>
+      </BlogGrid>
+    </MorePostsContainer>
   );
 };

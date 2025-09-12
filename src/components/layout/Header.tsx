@@ -8,7 +8,7 @@ import { faWhatsapp, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import Logo from "@/components/ui/Logo/logo";
 import LogoSmall from "@/components/ui/Logo/logoSmall";
-import styles from "./header.module.scss";
+import { HeaderContainer, Nav, LogoLink, SocialLinks, ShareIcon } from './Header.styled';
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher/ThemeSwitcher";
 
 // Types
@@ -26,6 +26,7 @@ const ANIMATION_DURATION = 0.1;
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Memoized social links configuration
   const socialLinks: SocialLink[] = useMemo(() => [
@@ -34,21 +35,21 @@ export default function Header() {
       icon: faWhatsapp,
       label: "Delen via WhatsApp",
       className: "whapp",
-      rotation: 10
+      rotation: 15
     },
     {
       href: "https://www.linkedin.com/in/laura-vlasma-0692b0159/",
       icon: faLinkedinIn,
       label: "Bezoek LinkedIn profiel",
       className: "linkedin",
-      rotation: -10
+      rotation: -15
     },
     {
       href: "https://www.instagram.com/lauravlasma/",
       icon: faInstagram,
       label: "Bezoek Instagram profiel",
       className: "insta",
-      rotation: 10
+      rotation: 15
     }
   ], []);
 
@@ -60,8 +61,15 @@ export default function Header() {
     }
   }, [isScrolled]);
 
+  // Set mounted state on client side
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    setMounted(true);
+    // Check initial scroll position after mounting
+    setIsScrolled(window.pageYOffset > SCROLL_THRESHOLD);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
 
     // Throttle scroll events for better performance
     let ticking = false;
@@ -81,46 +89,42 @@ export default function Header() {
     return () => {
       window.removeEventListener("scroll", throttledScroll);
     };
-  }, [handleScroll]);
+  }, [handleScroll, mounted]);
 
   return (
-    <header 
-      className={`${styles.header} ${isScrolled ? styles.headerSmall : ''}`}
+    <HeaderContainer 
+      isScrolled={isScrolled}
       role="banner"
     >
-      <nav className={styles.nav} role="navigation" aria-label="Hoofdnavigatie">
-        <div className={styles.header__socials} role="group" aria-label="Social media links">
+      <Nav isScrolled={isScrolled} role="navigation" aria-label="Hoofdnavigatie">
+        <SocialLinks isScrolled={isScrolled} role="group" aria-label="Social media links">
           {socialLinks.map(({ href, icon, label, className, rotation }) => (
-            <motion.a
+            <ShareIcon
               key={className}
               href={href}
-              className={`${styles.shareIcon} button button--cta ${className}`}
+              className={className}
               target="_blank"
               rel="noreferrer noopener"
               aria-label={label}
-              whileHover={{ 
-                scale: [null, 1.2, 1.1], 
-                rotate: rotation 
-              }}
-              whileTap={{ rotate: 0 }}
-              transition={{ duration: ANIMATION_DURATION }}
+              isScrolled={isScrolled}
             >
               <FontAwesomeIcon icon={icon} aria-hidden="true" />
               <span>{label.includes('WhatsApp') ? 'Delen' : 'Bezoeken'}</span>
-            </motion.a>
+            </ShareIcon>
           ))}
-        </div>
+        </SocialLinks>
 
-        <Link 
+        <LogoLink 
+          as={Link}
           href="/" 
-          className={`${styles.logo} ${isScrolled ? styles.logoSmall : ''}`}
+          isScrolled={isScrolled}
           aria-label="Bloemstraat Garden - Ga naar homepage"
         >
           {isScrolled ? <LogoSmall /> : <Logo />}
-        </Link>
+        </LogoLink>
 
         <ThemeSwitcher />
-      </nav>
-    </header>
+      </Nav>
+    </HeaderContainer>
   );
 }
