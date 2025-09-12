@@ -46,22 +46,22 @@ const LEAF_IMAGES = [
   {
     src: "/headerLeaveBig.png",
     variant: "one" as const,
-    alt: "Decoratief blad - groot"
+    alt: "Decoratief groen blad illustratie"
   },
   {
     src: "/headerLeaveSmall.png",
     variant: "two" as const,
-    alt: "Decoratief blad - klein"
+    alt: "Decoratief klein groen blad illustratie"
   },
   {
     src: "/headerLeaveBig.png",
     variant: "three" as const,
-    alt: "Decoratief blad - groot"
+    alt: "Decoratief groen blad illustratie"
   },
   {
     src: "/headerLeaveSmall.png",
     variant: "four" as const,
-    alt: "Decoratief blad - klein"
+    alt: "Decoratief klein groen blad illustratie"
   }
 ] as const;
 

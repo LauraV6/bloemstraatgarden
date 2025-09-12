@@ -43,7 +43,7 @@ export default function Footer({ className }: FooterProps) {
         <FooterLeave>
           <Image
             src={HeaderLeaveBig}
-            alt="Decoratief blad"
+            alt="Decoratief groen blad illustratie"
             priority={false}
             sizes="(max-width: 768px) 200px, 300px"
             style={{

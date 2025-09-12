@@ -186,7 +186,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                   <CartItemImage>
                     <Image
                       src={item.postImage.url}
-                      alt={item.title}
+                      alt={`Winkelwagen product: ${item.title}`}
                       width={80}
                       height={80}
                       style={{

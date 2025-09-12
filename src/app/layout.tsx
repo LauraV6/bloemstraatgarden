@@ -231,9 +231,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider>
             <EmotionProvider>
               <ApolloProvider>
+                <a 
+                  href="#main-content" 
+                  style={{
+                    position: 'absolute',
+                    left: '-10000px',
+                    top: 'auto',
+                    width: '1px',
+                    height: '1px',
+                    overflow: 'hidden',
+                  }}
+                  className="skip-link"
+                >
+                  Ga naar hoofdinhoud
+                </a>
                 <div id="__next">
                   <Header />
-                  {children}
+                  <main id="main-content" role="main">
+                    {children}
+                  </main>
                   <Footer />
                   <Analytics />
                   <PerformanceMonitor />
