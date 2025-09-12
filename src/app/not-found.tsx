@@ -1,8 +1,57 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import Sidebar from "@/components/layout/Sidebar";
-import heroStyles from "@/components/layout/hero.module.scss";
-import styles from "@/app/[slug]/page.module.scss";
+import styled from '@emotion/styled';
+
+const Hero = styled.section`
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  }
+`;
+
+const PostContent = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: ${({ theme }) => theme.spacing.xxl};
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: ${({ theme }) => theme.spacing.xxl} ${({ theme }) => theme.spacing.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.spacing.xl};
+  }
+  
+  #error-content {
+    h1 {
+      font-size: ${({ theme }) => theme.typography.fontSize['3xl']};
+      font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+      margin-bottom: ${({ theme }) => theme.spacing.lg};
+      color: ${({ theme }) => theme.colors.text};
+      font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
+    }
+    
+    p {
+      font-size: ${({ theme }) => theme.typography.fontSize.lg};
+      line-height: ${({ theme }) => theme.typography.lineHeight.relaxed};
+      color: ${({ theme }) => theme.colors.textSecondary};
+      margin-bottom: ${({ theme }) => theme.spacing.lg};
+    }
+  }
+`;
 
 // Types
 interface NotFoundProps {
@@ -41,7 +90,7 @@ const NotFoundContent: React.FC<NotFoundContentProps> = ({
       href={homeUrl}
       aria-label={`${buttonText} - Ga naar de homepage`}
     >
-      {buttonText}
+      <span>{buttonText}</span>
     </Link>
   </div>
 );
@@ -52,11 +101,7 @@ export default function NotFound({ className }: NotFoundProps) {
   return (
     <main className={mainClass} role="main">
       {/* Hero Section with 404 Image */}
-      <section 
-        className={heroStyles.hero}
-        role="banner"
-        aria-label="404 foutpagina"
-      >        
+      <Hero role="banner" aria-label="404 foutpagina">        
         <Image 
           src="/404.png" 
           alt={ERROR_CONTENT.imageAlt}
@@ -72,14 +117,10 @@ export default function NotFound({ className }: NotFoundProps) {
           }}
           priority={true}
         />
-      </section>
+      </Hero>
 
       {/* Content Section */}
-      <section 
-        className={styles.postcontent}
-        role="main"
-        aria-labelledby="error-title"
-      >
+      <PostContent role="main" aria-labelledby="error-title">
         <div id="error-content">
           <NotFoundContent
             title={ERROR_CONTENT.title}
@@ -90,7 +131,7 @@ export default function NotFound({ className }: NotFoundProps) {
         </div>
         
         <Sidebar />
-      </section>
+      </PostContent>
     </main>
   );
 }

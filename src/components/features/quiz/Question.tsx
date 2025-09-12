@@ -4,7 +4,7 @@ import { useState } from "react";
 import Answers from "./Answers";
 import QuestionTimer from "./Timer";
 import QUESTIONS from "@/lib/quiz";
-import styles from "./question.module.scss"
+import { QuizContainer, QuestionAmount } from "./Question.styled";
 
 interface QuestionProps {
   questionIndex: number;
@@ -72,11 +72,11 @@ export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }
 
   let answerStatus = "";
   if (answer.selectedAnswer && answer.isCorrect !== null) {
-    answerStatus = answer.isCorrect ? styles.correct : styles.wrong;
+    answerStatus = answer.isCorrect ? "correct" : "wrong";
   }
 
   return (
-    <div className={styles.quiz}>
+    <QuizContainer>
       <QuestionTimer 
         key={timer} 
         timeout={timer} 
@@ -84,13 +84,13 @@ export default function Question({ questionIndex, onSelectAnswer, onSkipAnswer }
         mode={answerStatus} 
       />
       <h2>{currentQuestion.text || 'Question text missing'}</h2>
-      <div className={styles.quiz__amount}>{questionIndex + 1} / {QUESTIONS.length}</div>
+      <QuestionAmount>{questionIndex + 1} / {QUESTIONS.length}</QuestionAmount>
       <Answers
         answers={currentQuestion.answers}
         selectedAnswer={answer.selectedAnswer}
         answerState={answerStatus}
         onSelect={handleSelectAnswer}
       />
-    </div>
+    </QuizContainer>
   )
 }

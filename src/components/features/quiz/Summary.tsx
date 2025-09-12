@@ -1,4 +1,6 @@
-import styles from "./summary.module.scss"
+'use client';
+
+import { SummaryContainer, SummaryStates, Score, ScoreNumber, SummaryAnswers, UserAnswer, QuestionAnswer, QuestionTitle } from "./Summary.styled";
 import FadeIn from "@/components/ui/FadeIn";
 import QUESTIONS from "@/lib/quiz";
 
@@ -33,23 +35,29 @@ export default function Summary({userAnswers}: SummaryProps) {
     const wrongAnswersShare = 100 - skippedAnswersShare - correctAnswersShare;
 
     return (
-        <div className={styles.summary}>
+        <SummaryContainer>
             <h2>Quiz voltooid!</h2>
-            <div className={styles.summary__states}>
-                <FadeIn className={styles.score}>
-                    <span className={styles.score__number}>{skippedAnswersShare}%</span>
-                    <span className={styles.score__text}>Overgeslagen</span>     
+            <SummaryStates>
+                <FadeIn>
+                    <Score>
+                        <ScoreNumber>{skippedAnswersShare}%</ScoreNumber>
+                        <span>Overgeslagen</span>     
+                    </Score>
                 </FadeIn>
-                <FadeIn className={styles.score} delay={0.2}>
-                    <span className={styles.score__number}>{correctAnswersShare}%</span>
-                    <span className={styles.score__text}>Correct</span>     
+                <FadeIn delay={0.2}>
+                    <Score>
+                        <ScoreNumber>{correctAnswersShare}%</ScoreNumber>
+                        <span>Correct</span>     
+                    </Score>
                 </FadeIn>
-                <FadeIn className={styles.score} delay={0.4}>
-                    <span className={styles.score__number}>{wrongAnswersShare}%</span>
-                    <span className={styles.score__text}>Fout</span>
+                <FadeIn delay={0.4}>
+                    <Score>
+                        <ScoreNumber>{wrongAnswersShare}%</ScoreNumber>
+                        <span>Fout</span>
+                    </Score>
                 </FadeIn>
-            </div>
-            <ol className={styles.summary__answers}>
+            </SummaryStates>
+            <SummaryAnswers>
                 {userAnswers.map((answer, i) => {
                     // Add bounds checking for QUESTIONS array
                     if (i >= QUESTIONS.length || !QUESTIONS[i]) {
@@ -63,32 +71,32 @@ export default function Summary({userAnswers}: SummaryProps) {
                         return null; // Skip this item
                     }
 
-                    let cssClass = styles.userAnswer;
+                    let status: 'correct' | 'wrong' | 'skipped' | undefined;
                     let showCorrectAnswer = "";
                     const correctAnswer = question.answers[0];
 
                     if (answer === null) {
-                        cssClass = styles.skipped;
+                        status = 'skipped';
                         showCorrectAnswer = correctAnswer;
                     } else if (answer === correctAnswer) {
-                        cssClass = styles.correct;
+                        status = 'correct';
                     } else {
-                        cssClass = styles.wrong;
+                        status = 'wrong';
                         showCorrectAnswer = correctAnswer;
                     }
                     
                     return (
                         <li key={i}>
                             <FadeIn delay={i * 0.2}>
-                                <h3>{i + 1}</h3>
-                                <h4 className={styles.question}>{question.text || 'Question text missing'}</h4>
-                                <p className={`${styles.userAnswer} ${cssClass}`}>{answer ?? 'Skipped'}</p>
-                                {answer !== correctAnswer ? <p className={`${styles.questionAnswer} ${cssClass}`}>Correct antwoord: {showCorrectAnswer}</p> : null}
+                                <span>{i + 1}</span>
+                                <QuestionTitle>{question.text || 'Question text missing'}</QuestionTitle>
+                                <UserAnswer $status={status}>{answer ?? 'Skipped'}</UserAnswer>
+                                {answer !== correctAnswer ? <QuestionAnswer>Correct antwoord: {showCorrectAnswer}</QuestionAnswer> : null}
                             </FadeIn>
                         </li>
                     );
                 })}
-            </ol>
-        </div>
+            </SummaryAnswers>
+        </SummaryContainer>
     );
 }

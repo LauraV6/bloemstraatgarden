@@ -1,3 +1,5 @@
+'use client';
+
 import { Suspense } from "react";
 import { TitleLine } from "@/components/ui/TitleLine/TitleLine";
 import PostsGridClient from "@/components/features/posts/PostsGridClient";
@@ -6,7 +8,8 @@ import States from "@/components/features/states/States";
 import Stock from "@/components/features/stocking/Stock";
 import PostCardSkeleton from "@/components/features/posts/PostCardSkeleton";
 import TipCardSkeleton from "@/components/features/tips/TipCardSkeleton";
-import posts from "@/components/features/posts/postsMap.module.scss";
+import StockSkeleton from "@/components/features/stocking/StockSkeleton";
+import StatesSkeleton from "@/components/features/states/StatesSkeleton";
 import HomePageClient from "@/components/HomePageClient";
 
 interface PageSectionProps {
@@ -38,9 +41,7 @@ const PageSection: React.FC<PageSectionProps> = ({ title, children, className })
 
 // Loading Components
 const PostsLoadingFallback = () => (
-  <div className={posts.blogGrid}>
-    <PostCardSkeleton amount={PAGE_CONTENT.skeletonCounts.posts} />
-  </div>
+  <PostCardSkeleton amount={PAGE_CONTENT.skeletonCounts.posts} />
 );
 
 const TipsLoadingFallback = () => (
@@ -53,29 +54,21 @@ export default function Home() {
   return (
     <main role="main">
       <HomePageClient siteTitle={siteTitle}>
-      {/* Blog Posts Section */}
-      <PageSection title={PAGE_CONTENT.sections.blog}>
-        <Suspense fallback={<PostsLoadingFallback />}>
+        {/* Blog Posts Section */}
+        <PageSection title={PAGE_CONTENT.sections.blog}>
           <PostsGridClient />
-        </Suspense>
-      </PageSection>
+        </PageSection>
 
-      {/* Stock Section */}
-      <Suspense fallback={<div>Laden...</div>}>
+        {/* Stock Section */}
         <Stock />
-      </Suspense>
 
-      {/* Tips Section */}
-      <PageSection title={PAGE_CONTENT.sections.tips}>
-        <Suspense fallback={<TipsLoadingFallback />}>
+        {/* Tips Section */}
+        <PageSection title={PAGE_CONTENT.sections.tips}>
           <TipsGridApollo />
-        </Suspense>
-      </PageSection>
+        </PageSection>
 
-      {/* States Section */}
-      <Suspense fallback={<div>Statistieken laden...</div>}>
+        {/* States Section */}
         <States />
-      </Suspense>
       </HomePageClient>
     </main>
   );

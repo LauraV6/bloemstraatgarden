@@ -1,8 +1,8 @@
 'use client';
 
-import { useArticles } from '@/hooks/useContentful';
+import { useArticlesWithFallback } from '@/hooks/useContentfulWithFallback';
 import PostsMap from './PostsMap';
-import LoadingState from '@/components/ui/LoadingState';
+import PostCardSkeleton from './PostCardSkeleton';
 import ErrorState from '@/components/ui/ErrorState';
 
 interface PostsGridClientProps {
@@ -14,10 +14,10 @@ export default function PostsGridClient({
   className,
   limit = 10
 }: PostsGridClientProps) {
-  const { articles, loading, error } = useArticles(limit);
+  const { articles, loading, error, source } = useArticlesWithFallback(limit);
 
   if (loading) {
-    return <LoadingState message="Blog artikelen laden..." />;
+    return <PostCardSkeleton amount={3} />;
   }
 
   if (error) {
@@ -33,6 +33,7 @@ export default function PostsGridClient({
     return (
       <div className="posts-empty" role="status">
         <p>Geen artikelen beschikbaar op dit moment.</p>
+        {source && <small style={{ opacity: 0.7 }}>Data source: {source}</small>}
       </div>
     );
   }
