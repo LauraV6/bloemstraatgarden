@@ -67,6 +67,7 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
   display: block;
   width: 100%;
   order: 0;
+  min-height: 30px;
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     order: -1;
@@ -95,8 +96,9 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
 
   ${props => props.isScrolled && css`
     display: flex;
-    width: 100px;
-    max-width: 100px;
+    width: 120px;
+    max-width: 120px;
+    min-height: 35px;
 
     @media (min-width: ${props.theme.breakpoints.md}) {
       max-width: 100%;
@@ -111,7 +113,7 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
       }
     }
 
-    &::before, 
+    &::before,
     &::after {
       content: unset;
     }
