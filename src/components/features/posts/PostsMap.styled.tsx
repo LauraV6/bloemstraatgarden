@@ -93,7 +93,7 @@ export const LoadMoreButtonStyled = styled('button', {
     color: ${props => props.theme.colors.background} !important;
     
     span {
-      color: ${props => props.theme.colors.background} !important;
+      color: white !important;
     }
 
     .wave {
