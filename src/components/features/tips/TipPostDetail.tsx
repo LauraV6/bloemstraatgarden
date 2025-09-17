@@ -178,7 +178,7 @@ const PostStory = styled.div`
   color: ${({ theme }) => theme.colors.text};
   
   h2, h3, h4 {
-    margin-top: 0.5rem;
+    margin-top: 1.2rem;
     font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
   }
 
@@ -187,7 +187,7 @@ const PostStory = styled.div`
     border-radius: 5px;
     height: 260px;
     object-fit: cover;
-    margin: 0.5rem 0 1.5rem 0;
+    margin: 1rem 0;
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
       height: 300px;
