@@ -34,6 +34,10 @@ export const lightTheme: Theme = {
       800: '#1f2937',
       900: '#111827',
     },
+    action: {} as any,
+    status: {} as any,
+    interactive: {} as any,
+    brand: {} as any,
   },
   spacing: {
     xs: '0.25rem',
@@ -60,8 +64,8 @@ export const lightTheme: Theme = {
       lg: '1.125rem',
       xl: '1.25rem',
       '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem',
+      '3xl': '1.7rem',
+      '4xl': '2.5rem',
     },
     fontWeight: {
       light: 300,
@@ -87,11 +91,17 @@ export const lightTheme: Theme = {
     md: '0.375rem',
     lg: '0.5rem',
     full: '9999px',
-  },
+    pill: '9999px',
+  } as any,
   transitions: {
     fast: '150ms ease-in-out',
     normal: '300ms ease-in-out',
     slow: '500ms ease-in-out',
+    all: {
+      fast: '150ms ease-in-out',
+      normal: '300ms ease-in-out',
+      slow: '500ms ease-in-out',
+    },
   },
   zIndices: {
     hide: -1,

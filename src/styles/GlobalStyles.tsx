@@ -103,11 +103,11 @@ export function GlobalStyles() {
         }
 
         h2 {
-          font-size: 1.5em;
+          font-size: ${theme.typography.fontSize['3xl']};
         }
 
         h3 {
-          font-size: ${theme.typography.fontSize['3xl']};
+          font-size: ${theme.typography.fontSize['2xl']};
         }
 
         h4 {

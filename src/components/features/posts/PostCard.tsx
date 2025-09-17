@@ -96,27 +96,25 @@ export const PostCard: React.FC<PostCardProps> = ({
   const imageAlt = props.articleImage.title || `Afbeelding bij artikel: ${props.title}`;
 
   return (
-    <article>
-      <PostCardContainer className={className} isActive={true}>
-        <PostLink 
-          as={Link}
-          href={postUrl}
-          aria-label={`Lees meer over: ${props.title}`}
-        >
-          <PostImage
-            src={props.articleImage.url}
-            alt={imageAlt}
-            title={props.articleImage.title}
-            priority={priority}
-          />
-          
-          <PostContentComponent
-            title={props.title}
-            summary={props.summary}
-            date={props.date}
-          />
-        </PostLink>
-      </PostCardContainer>
-    </article>
+    <PostCardContainer className={className} isActive={true}>
+      <PostLink 
+        as={Link}
+        href={postUrl}
+        aria-label={`Lees meer over: ${props.title}`}
+      >
+        <PostImage
+          src={props.articleImage.url}
+          alt={imageAlt}
+          title={props.articleImage.title}
+          priority={priority}
+        />
+        
+        <PostContentComponent
+          title={props.title}
+          summary={props.summary}
+          date={props.date}
+        />
+      </PostLink>
+    </PostCardContainer>
   );
 };
