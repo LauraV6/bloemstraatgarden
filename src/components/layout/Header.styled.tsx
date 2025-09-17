@@ -66,7 +66,6 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
   position: relative;
   display: block;
   width: 100%;
-  height: 80px;
   order: 0;
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
