@@ -106,10 +106,10 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
     }
 
     svg {
-      max-height: 43px;
+      height: 35px;
 
       @media (min-width: ${props.theme.breakpoints.md}) {
-        max-height: 40px;
+        height: 40px;
       }
     }
 
