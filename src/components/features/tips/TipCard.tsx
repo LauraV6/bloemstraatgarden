@@ -11,18 +11,16 @@ interface TipCardProps {
   
 export const TipCard: React.FC<TipCardProps> = ({ props }) => {
     return (
-        <article>
-            <PostItem>
-                <Link href={`/tips/${props.slug}`} aria-label={`Lees tip: ${props.title}`}>
-                    <PostItemImage>
-                        <Image src={props.articleImage.url} alt={`Tip artikel afbeelding: ${props.title}`} fill sizes="(max-width: 768px) 100vw, 33vw" />
-                    </PostItemImage>
-                    <PostItemContent>
-                        <h4 style={{ color: 'white' }}>{props.title}</h4>
-                        <button className="button button--cta"><span style={{ color: 'white' }}>Lees meer</span></button>
-                    </PostItemContent>
-                </Link>
-            </PostItem>
-        </article>
+        <PostItem>
+            <Link href={`/tips/${props.slug}`} aria-label={`Lees tip: ${props.title}`}>
+                <PostItemImage>
+                    <Image src={props.articleImage.url} alt={`Tip artikel afbeelding: ${props.title}`} fill sizes="(max-width: 768px) 100vw, 33vw" />
+                </PostItemImage>
+                <PostItemContent>
+                    <h4 style={{ color: 'white' }}>{props.title}</h4>
+                    <button className="button button--cta"><span style={{ color: 'white' }}>Lees meer</span></button>
+                </PostItemContent>
+            </Link>
+        </PostItem>
     );
 };
