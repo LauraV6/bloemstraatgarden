@@ -23,6 +23,7 @@ const withTransientProps = (Component: any) =>
 export const HeaderContainer = withTransientProps('header')<{ isScrolled: boolean }>`
   position: fixed;
   top: 0;
+  right: 0;
   width: 100%;
   backdrop-filter: blur(15px);
   background-color: ${props => props.isScrolled ? props.theme.colors.menu : props.theme.colors.background};
@@ -36,7 +37,6 @@ export const HeaderContainer = withTransientProps('header')<{ isScrolled: boolea
 `;
 
 export const Nav = withTransientProps('nav')<{ isScrolled: boolean }>`
-  position: relative;
   overflow: hidden;
   max-width: 1200px;
   text-align: center;
@@ -66,8 +66,8 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
   position: relative;
   display: block;
   width: 100%;
-  height: 80px;
   order: 0;
+  height: ${props => props.isScrolled ? '32px' : '80px'};
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
     order: -1;
@@ -83,7 +83,7 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
 
   svg {
     height: 100%;
-    max-height: 80px;
+    max-height: ${props => props.isScrolled ? '32px' : '80px'};
     width: auto;
     transition: 0.5s;
 
