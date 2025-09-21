@@ -39,6 +39,7 @@ export const HeaderContainer = withTransientProps('header')<{ isScrolled: boolea
 export const Nav = withTransientProps('nav')<{ isScrolled: boolean }>`
   overflow: hidden;
   max-width: 1200px;
+  min-height: 64px;
   text-align: center;
   transition: 0.4s;
   padding: 1rem;
@@ -58,7 +59,6 @@ export const Nav = withTransientProps('nav')<{ isScrolled: boolean }>`
     align-items: center;
     gap: 10px;
     text-align: left;
-    padding: 1rem;
   `}
 `;
 
