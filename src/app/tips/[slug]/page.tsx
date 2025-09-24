@@ -1,4 +1,3 @@
-import type { Document } from "@contentful/rich-text-types";
 import type { Metadata } from "next";
 import TipsPageClient from "@/components/TipsPageClient";
 import TipPostDetail from "@/components/features/tips/TipPostDetail";
@@ -11,20 +10,7 @@ interface TipsPageProps {
   params: Promise<TipsPageParams>;
 }
 
-interface ContentfulAsset {
-  sys: { id: string };
-  url: string;
-  title: string;
-  description?: string;
-}
-
-// Since this page now uses TipPostDetail component with its own styled components,
-// we don't need the local styles anymore
-
-// Generate metadata for each tip page
-export async function generateMetadata({ params }: TipsPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Moestuin Tips - Bloemstraat Garden`,
     description: `Lees onze moestuin tips`,
