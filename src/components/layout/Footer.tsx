@@ -6,19 +6,14 @@ import LogoSmall from '@/components/ui/Logo/logoSmall';
 import HeaderLeaveBig from '../../../public/headerLeaveBig.png';
 import { FooterContainer, FooterContent, Container, LogoLink, IntroSection, FooterLeave, Copyright } from './Footer.styled';
 
-interface FooterProps {
-  className?: string;
-}
-
 const CURRENT_YEAR = new Date().getFullYear();
 
-export default function Footer({ className }: FooterProps) {
+export default function Footer() {
   const siteTitle = "Bloemstraat Garden";
   const siteCreator = "Laura";
 
   return (
     <FooterContainer 
-      className={className}
       role="contentinfo"
       aria-label="Website footer"
     >
@@ -33,10 +28,8 @@ export default function Footer({ className }: FooterProps) {
           </LogoLink>
           
           <IntroSection>
-            <p>
               <strong>{siteTitle}</strong> is gelegen in Steenwijkerland en richt zich op het 
               leren door te zien, ervaren en kennis te delen van moestuinieren.
-            </p>
           </IntroSection>
         </Container>
         
