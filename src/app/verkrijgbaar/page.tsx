@@ -10,7 +10,7 @@ import CartIcon from "@/components/features/cart/CartIcon";
 import { Story, StoryContainer, StoryText, StoryAdding } from "@/components/features/stocking/Stock.styled";
 import Image from "next/image";
 import VerkrijgbaarPageClient from "@/components/VerkrijgbaarPageClient";
-import { Breadcrumbs, VerkrijgbaarSection, HeroWrapper } from "./page.styled";
+import { Breadcrumbs, HeroWrapper } from "./page.styled";
 
 export default function Available() {
     return (
@@ -24,7 +24,7 @@ export default function Available() {
                         forceWhiteText={true}
                     />
                 </HeroWrapper>
-                <VerkrijgbaarSection>
+                <article>
                     <Breadcrumbs><Link href='/'>Blog</Link><FontAwesomeIcon icon={faRight} /><span>Verkrijgbaar</span></Breadcrumbs>
                     <Story>
                         <StoryContainer>
@@ -44,12 +44,12 @@ export default function Available() {
                             </StoryAdding>
                         </StoryContainer>
                     </Story>
-                </VerkrijgbaarSection>
-                <VerkrijgbaarSection>
+                </article>
+                <div>
                     <TitleLine title="Beschikbare planten" />
                     <CartIcon />
                     <AvailableApollo />
-                </VerkrijgbaarSection>
+                </div>
             </VerkrijgbaarPageClient>
         </main>
     )
