@@ -6,11 +6,6 @@ import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 import { SidebarContainer, SidebarContent, IntroSection, TestSection, SidebarSection } from './Sidebar.styled';
 
-// Types
-interface SidebarProps {
-  className?: string;
-}
-
 interface ProfileSectionProps {
   name: string;
   description: string;
@@ -24,7 +19,6 @@ interface QuizSectionProps {
   quizUrl: string;
 }
 
-// Constants
 const ANIMATION_DURATION = 0.3;
 const PROFILE_DATA = {
   name: "Laura",
@@ -39,7 +33,6 @@ const QUIZ_DATA = {
   quizUrl: "/quiz"
 } as const;
 
-// Profile Section Component
 const ProfileSection: React.FC<ProfileSectionProps> = ({ 
   name, 
   description, 
@@ -68,7 +61,6 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
   </IntroSection>
 );
 
-// Quiz Section Component
 const QuizSection: React.FC<QuizSectionProps> = ({ 
   title, 
   description, 
@@ -105,10 +97,9 @@ const QuizSection: React.FC<QuizSectionProps> = ({
   );
 };
 
-export default function Sidebar({ className }: SidebarProps) {
+export default function Sidebar() {
   return (
     <SidebarContainer 
-      className={className}
       role="complementary"
       aria-label="Zijbalk met profielinformatie en quiz"
     >
