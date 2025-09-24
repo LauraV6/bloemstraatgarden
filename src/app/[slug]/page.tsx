@@ -7,17 +7,17 @@ interface ArticlePageParams {
 }
 
 interface ArticlePageProps {
-  params: ArticlePageParams;
+  params: Promise<ArticlePageParams>;
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
-  const { slug } = params;
-
+  const { slug } = await params;
+  
   const formattedTitle = slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-
+  
   return {
     title: `${formattedTitle} | Bloemstraat Garden`,
     description: `Lees meer over ${formattedTitle.toLowerCase()} in onze moestuin blog`,
@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 }
 
 export default async function KnowledgeArticlePage({ params }: ArticlePageProps) {
-  const { slug } = params;
-
+  const { slug } = await params;
+  
   return (
     <main role="main">
       <BlogPostClient>
