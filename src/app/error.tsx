@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { ErrorContainer, ErrorContent, ErrorDetails, StackTrace, ErrorActions, RetryButton, HomeLink } from './error.styled';
+import { ErrorContainer, ErrorContent, ErrorDetails, StackTrace, ErrorActions } from './error.styled';
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -11,7 +11,6 @@ interface ErrorProps {
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error('Application error:', error);
   }, [error]);
 
@@ -24,7 +23,7 @@ export default function Error({ error, reset }: ErrorProps) {
         {process.env.NODE_ENV === 'development' && error.message && (
           <ErrorDetails>
             <summary>Fout details (alleen zichtbaar in development)</summary>
-            <pre>{error.message}</pre>
+            <StackTrace>{error.message}</StackTrace>
             {error.stack && (
               <StackTrace>{error.stack}</StackTrace>
             )}
@@ -32,21 +31,21 @@ export default function Error({ error, reset }: ErrorProps) {
         )}
         
         <ErrorActions>
-          <RetryButton
+          <button
             onClick={reset}
             aria-label="Probeer opnieuw"
           >
             Probeer opnieuw
-          </RetryButton>
+          </button>
           
           <Link 
             href="/" 
             passHref
             legacyBehavior
           >
-            <HomeLink aria-label="Ga terug naar de homepage">
+            <button aria-label="Ga terug naar de homepage">
               Terug naar homepage
-            </HomeLink>
+            </button>
           </Link>
         </ErrorActions>
       </ErrorContent>

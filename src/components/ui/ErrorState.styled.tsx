@@ -1,12 +1,27 @@
 import styled from '@emotion/styled';
 
 export const ErrorContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: unset;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 3rem 1rem;
+  padding: 113px 0px 0px;
+  margin: 0px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: 600px;
+    padding: 154px 0px 0px;
+  }
+
+  > * {
+    text-align: center;
+  }
 `;
 
 export const ErrorIcon = styled.div`
@@ -19,7 +34,6 @@ export const ErrorIcon = styled.div`
 `;
 
 export const ErrorMessage = styled.p`
-  color: var(--color-font-light);
   margin-bottom: 1.5rem;
 `;
 
