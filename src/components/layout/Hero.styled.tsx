@@ -1,49 +1,12 @@
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
 
-// Style functions to avoid interpolation warnings
-const darkVariantStyles = (props: any) => css`
-  background-color: hsl(152, 100%, 21%); /* --color-green-1 */
-
-  h1, p {
-    color: hsl(0, 0%, 100%);
-  }
-
-  .leave {
-    filter: invert(51%) sepia(24%) saturate(1122%) hue-rotate(79deg) brightness(96%) contrast(88%);
-  }
-`;
-
-const isVhStyles = (props: any) => css`
-  height: 100%;
-  max-height: 100%;
-  min-height: calc(100vh - 231px);
-
-  @media (min-width: ${props.theme?.breakpoints?.md || '768px'}) {
-    min-height: calc(100vh - 360px);
-  }
-
-  @media (min-width: ${props.theme?.breakpoints?.lg || '1024px'}) {
-    min-height: calc(100vh - 422px);
-  }
-`;
-
-const isVhTextStyles = () => css`
-  position: relative;
-  flex-direction: column;
-
-  p {
-    max-width: unset;
-  }
-`;
-
 const leaveVariantOne = (props: any) => css`
   left: 0px;
   top: -30%;
   rotate: 35deg;
   opacity: 1;
   animation: ${leaveOne} 3s ease-out forwards;
-  animation-fill-mode: forwards;
   will-change: transform, opacity;
 
   @media (min-width: ${props.theme?.breakpoints?.xl || '1280px'}) {
@@ -58,7 +21,6 @@ const leaveVariantTwo = (props: any) => css`
   rotate: 90deg;
   opacity: 1;
   animation: ${leaveTwo} 2s ease-out forwards;
-  animation-fill-mode: forwards;
   animation-delay: 0.2s;
   will-change: transform, opacity;
 
@@ -73,7 +35,6 @@ const leaveVariantThree = (props: any) => css`
   rotate: 260deg;
   opacity: 1;
   animation: ${leaveThree} 3s ease-out forwards;
-  animation-fill-mode: forwards;
   animation-delay: 0.4s;
   will-change: transform, opacity;
 
@@ -93,7 +54,6 @@ const leaveVariantFour = (props: any) => css`
   rotate: 280deg;
   opacity: 1;
   animation: ${leaveFour} 2s ease-out forwards;
-  animation-fill-mode: forwards;
   animation-delay: 0.6s;
   will-change: transform, opacity;
 
@@ -106,7 +66,6 @@ const leaveVariantFour = (props: any) => css`
   }
 `;
 
-// Keyframes
 const textShine = keyframes`
   0% {
     background-position: 0% 50%;
@@ -166,7 +125,7 @@ const leaveFour = keyframes`
   } 
 `;
 
-export const HeroContainer = styled.section<{ $theme?: 'dark' | 'light'; isVh?: boolean; isHomePage?: boolean }>`
+export const HeroContainer = styled.section`
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -184,64 +143,14 @@ export const HeroContainer = styled.section<{ $theme?: 'dark' | 'light'; isVh?: 
     height: 600px;
     max-height: 600px;
   }
-
-  img[alt="404"] {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  ${props => props.$theme === 'dark' && darkVariantStyles(props)}
-
-  ${props => props.isVh && isVhStyles(props)}
-  
-  /* Apply dark overlay for homepage in dark mode using data attribute */
-  ${props => props.isHomePage && css`
-    [data-theme="dark"] & {
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #1a1a1ae6;
-        z-index: 1;
-        pointer-events: none;
-      }
-    }
-  `}
 `;
 
-export const HeroContainer2 = styled.div<{ isHomePage?: boolean; isDarkMode?: boolean }>`
+export const HeroContainer2 = styled.div`
   position: relative;
   height: 100%;
-  
-  /* Apply dark overlay for homepage */
-  ${props => props.isHomePage && css`
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: transparent;
-      z-index: 1;
-      pointer-events: none;
-      transition: background-color 0.3s ease;
-    }
-  `}
-  
-  /* Dark mode overlay */
-  ${props => props.isHomePage && props.isDarkMode && css`
-    &::before {
-      background-color: #1a1a1ae6;
-    }
-  `}
 `;
 
-export const HeroText = styled.header<{ isVh?: boolean; isHomePage?: boolean }>`
+export const HeroText = styled.header`
   position: absolute;
   display: flex;
   align-items: center;
@@ -251,10 +160,6 @@ export const HeroText = styled.header<{ isVh?: boolean; isHomePage?: boolean }>`
   text-align: center;
   padding: 1rem;
   z-index: 10;
-
-  h1 {
-    color: hsl(0, 0%, 100%) !important;
-  }
 
   p {
     font-family: var(--font-pacaembu);
@@ -268,8 +173,6 @@ export const HeroText = styled.header<{ isVh?: boolean; isHomePage?: boolean }>`
       line-height: 1.4;
     }
   }
-
-  ${props => props.isVh && isVhTextStyles()}
 `;
 
 export const HeroImages = styled.div`
@@ -280,7 +183,7 @@ export const HeroImages = styled.div`
 `;
 
 export const HomePageTitle = styled.h1`
-  font-size: 1.5rem !important;
+  font-size: 1.5rem;
   font-weight: 700;
   background: linear-gradient(
     90deg,
@@ -297,11 +200,11 @@ export const HomePageTitle = styled.h1`
   margin-bottom: 1.5rem;
   
   @media (min-width: ${props => props.theme?.breakpoints?.md || '768px'}) {
-    font-size: 3rem !important;
+    font-size: 3rem;
   }
   
   @media (min-width: ${props => props.theme?.breakpoints?.lg || '1024px'}) {
-    font-size: 4rem !important;
+    font-size: 4rem;
   }
 `;
 

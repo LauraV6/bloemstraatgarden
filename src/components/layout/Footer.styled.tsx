@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
 export const FooterContainer = styled.footer`
   position: relative;
@@ -50,9 +49,8 @@ export const LogoLink = styled.a`
   }
 `;
 
-export const IntroSection = styled.div`
+export const IntroSection = styled.p`
   max-width: 380px;
-  color: ${props => props.theme.colors.text};
   margin: 0;
 
   @media (max-width: ${props => props.theme.breakpoints.md}) {
@@ -67,7 +65,7 @@ export const FooterLeave = styled.div`
   bottom: -20px;
   user-select: none;
   pointer-events: none;
-  z-index: 1; /* Behind the copyright bar */
+  z-index: 1;
 
   img {
     display: block !important;
@@ -93,9 +91,9 @@ export const Copyright = styled.div`
   font-size: 0.9em;
   color: ${props => props.theme.colors.white};
   background-color: ${props => props.theme.colors.primaryDark};
-  filter: brightness(0.8);
+  filter: brightness(0.9);
   padding: ${props => props.theme.spacing.md};
-  z-index: 2; /* In front of the leaf */
+  z-index: 2;
 
   @media (min-width: ${props => props.theme.breakpoints.md}) {
     padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};

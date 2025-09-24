@@ -486,21 +486,8 @@ export function GlobalStyles() {
           opacity: 0.8;
         }
         
-        /* Homepage hero dark mode overlay */
-        .homepage-hero {
-          position: relative !important;
-        }
-        
-        [data-theme="dark"] .homepage-hero::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+        [data-theme="dark"] .homepage-hero {
           background-color: #1a1a1ae6;
-          z-index: 1;
-          pointer-events: none;
         }
       `}
     />
