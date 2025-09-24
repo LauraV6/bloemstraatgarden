@@ -1,35 +1,21 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-// Helper to filter out custom props from DOM elements
-const withTransientProps = (Component: any) => 
+const withTransientProps = (Component: any) =>
   styled(Component, {
-    shouldForwardProp: (prop) => 
-      prop !== 'isScrolled' && 
-      prop !== 'whileHover' && 
-      prop !== 'whileTap' && 
-      prop !== 'transition' &&
-      prop !== 'animate' &&
-      prop !== 'initial' &&
-      prop !== 'exit' &&
-      prop !== 'variants' &&
-      prop !== 'style' &&
-      prop !== 'onMouseEnter' &&
-      prop !== 'onMouseLeave' &&
-      prop !== 'onAnimationStart' &&
-      prop !== 'onAnimationComplete'
+    shouldForwardProp: (prop) => prop !== 'isScrolled'
   });
 
 export const HeaderContainer = withTransientProps('header')<{ isScrolled: boolean }>`
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 100;
   width: 100%;
   backdrop-filter: blur(15px);
   background-color: ${props => props.isScrolled ? props.theme.colors.menu : props.theme.colors.background};
   border-bottom: 1px solid ${props => props.theme.colors.border};
   transition: 0.3s;
-  z-index: 100;
 
   ${props => props.isScrolled && css`
     background-color: ${props.theme.colors.menu};
@@ -37,13 +23,13 @@ export const HeaderContainer = withTransientProps('header')<{ isScrolled: boolea
 `;
 
 export const Nav = withTransientProps('nav')<{ isScrolled: boolean }>`
-  overflow: hidden;
   max-width: 1200px;
   min-height: 64px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 1rem;
   text-align: center;
   transition: 0.4s;
-  padding: 1rem;
-  margin: 0 auto;
 
   @media (min-width: ${props => props.theme.breakpoints.md}) {
     display: grid;
@@ -82,9 +68,9 @@ export const LogoLink = withTransientProps('a')<{ isScrolled: boolean }>`
   }
 
   svg {
+    width: auto;
     height: 100%;
     max-height: ${props => props.isScrolled ? '32px' : '80px'};
-    width: auto;
     transition: 0.5s;
 
     @media (min-width: ${props => props.theme.breakpoints.md}) {
@@ -127,16 +113,21 @@ export const SocialLinks = withTransientProps('div')<{ isScrolled: boolean }>`
 
 export const ShareIcon = withTransientProps('a')<{ isScrolled: boolean; className?: string }>`
   position: relative;
-  padding: 0.2rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  background-color: transparent;
+  padding: 0.2rem 0.5rem;
+  height: auto;
+  width: auto;
   border: 1px solid ${props => props.theme.colors.primary};
+  border-radius: 0;
+  flex-shrink: 0;
+  font-size: 1em;
   color: ${props => props.theme.colors.primary};
+  background-color: transparent;
   transform-origin: center;
   will-change: transform;
+  transition: all 0.3s ease;
 
   @media (min-width: ${props => props.theme.breakpoints.md}) {
     height: 40px;
@@ -183,16 +174,14 @@ export const ShareIcon = withTransientProps('a')<{ isScrolled: boolean; classNam
     }
   }
 
-  &.whapp:hover {
-    transform: scale(1.1) rotate(15deg);
+  &.whapp, &.insta {
+    &:hover {
+      transform: scale(1.1) rotate(15deg);
+    }
   }
 
   &.linkedin:hover {
     transform: scale(1.1) rotate(-15deg);
-  }
-
-  &.insta:hover {
-    transform: scale(1.1) rotate(15deg);
   }
 
   &:active {
