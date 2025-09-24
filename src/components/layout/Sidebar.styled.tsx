@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
-export const SidebarContainer = styled.aside``;
+export const SidebarContainer = styled.aside`
+`;
 
 export const SidebarContent = styled.div`
   position: sticky;
-  display: grid;
-  gap: ${props => props.theme.spacing.lg};
   top: calc(82px + ${props => props.theme.spacing.xl});
 `;
 
@@ -14,6 +12,7 @@ export const IntroSection = styled.div`
   border: 1px solid ${props => props.theme.colors.border};
   background-color: ${props => props.theme.colors.menu};
   border-radius: ${props => props.theme.radii.md};
+  margin-bottom: ${props => props.theme.spacing.xl};
 
   img {
     object-fit: cover;
