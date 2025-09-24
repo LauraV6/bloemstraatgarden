@@ -12,9 +12,9 @@ const PostHeader = styled.section`
   max-width: 100vw;
   height: 350px;
   max-height: 350px;
-  background: ${({ theme }) => theme.colors.background === '#23252a' 
-    ? 'linear-gradient(135deg, #374151, #4b5563)' // Dark mode colors
-    : 'linear-gradient(135deg, #e2e8f0, #cbd5e1)'}; // Light mode colors
+  background: ${({ theme }) => theme.colors.background === '#23252a'
+    ? 'linear-gradient(135deg, #374151, #4b5563)'
+    : 'linear-gradient(135deg, #e2e8f0, #cbd5e1)'};
   background-size: cover;
   background-position: center;
   padding: 0;
@@ -60,24 +60,6 @@ const PostHeaderContent = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: calc(100% - 10rem);
-    padding: 0 5rem;
-  }
-  
-  > div {
-    margin: 1rem;
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      margin: 0;
-    }
-
-    h1 {
-      max-width: 850px;
-      margin-bottom: 0.5rem;
-      font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
-      font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-      font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
-      color: white !important;
-    }
   }
 `;
 
@@ -104,15 +86,6 @@ const PostContent = styled.section`
     width: calc(100% - 10rem);
     margin: 5rem auto;
   }
-
-  article {
-    min-width: 0;
-    overflow: hidden;
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      overflow: unset;
-    }
-  }
 `;
 
 const PostStory = styled.div`
@@ -120,11 +93,6 @@ const PostStory = styled.div`
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   line-height: 1.5;
   color: ${({ theme }) => theme.colors.text};
-  
-  p {
-    line-height: 1.5;
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-  }
 `;
 
 const WeatherSkeleton = styled.div`
@@ -145,7 +113,6 @@ const Breadcrumbs = styled.nav`
   font-size: 0.9rem;
 `;
 
-// Types
 interface PageLoaderProps {
   className?: string;
   showWeather?: boolean;
@@ -158,20 +125,18 @@ interface SkeletonSectionProps {
   className?: string;
 }
 
-// Constants
 const SKELETON_CONFIG = {
-  title: { width: 450, height: 48 },
+  title: { width: 200, height: 48 },
   date: { width: 150, height: 20 },
   breadcrumbs: { width: 250, height: 16 },
   defaultContentLines: 8,
   weather: { width: 100, height: 40 }
 } as const;
 
-// Components
-const SkeletonSection: React.FC<SkeletonSectionProps> = ({ 
-  title, 
-  children, 
-  className 
+const SkeletonSection: React.FC<SkeletonSectionProps> = ({
+  title,
+  children,
+  className
 }) => (
   <section className={className} aria-label={`${title} wordt geladen`}>
     {children}
@@ -183,16 +148,16 @@ const PostHeaderSkeleton: React.FC<{ showWeather?: boolean }> = ({ showWeather =
     <PostHeaderContent>
       <div>
         <h1>
-          <Skeleton 
-            width={SKELETON_CONFIG.title.width} 
+          <Skeleton
+            width={SKELETON_CONFIG.title.width}
             height={SKELETON_CONFIG.title.height}
             baseColor="rgba(255, 255, 255, 0.1)"
             highlightColor="rgba(255, 255, 255, 0.2)"
           />
         </h1>
         <div>
-          <Skeleton 
-            width={SKELETON_CONFIG.date.width} 
+          <Skeleton
+            width={SKELETON_CONFIG.date.width}
             height={SKELETON_CONFIG.date.height}
             baseColor="rgba(255, 255, 255, 0.1)"
             highlightColor="rgba(255, 255, 255, 0.2)"
@@ -201,8 +166,8 @@ const PostHeaderSkeleton: React.FC<{ showWeather?: boolean }> = ({ showWeather =
       </div>
       {showWeather && (
         <WeatherSkeleton>
-          <Skeleton 
-            width={SKELETON_CONFIG.weather.width} 
+          <Skeleton
+            width={SKELETON_CONFIG.weather.width}
             height={SKELETON_CONFIG.weather.height}
             baseColor="rgba(255, 255, 255, 0.1)"
             highlightColor="rgba(255, 255, 255, 0.2)"
@@ -216,44 +181,54 @@ const PostHeaderSkeleton: React.FC<{ showWeather?: boolean }> = ({ showWeather =
 const ContentSkeleton: React.FC<{ contentLines: number }> = ({ contentLines }) => (
   <article>
     <Breadcrumbs aria-label="Breadcrumb navigatie wordt geladen">
-      <Skeleton 
-        width={SKELETON_CONFIG.breadcrumbs.width} 
-        height={SKELETON_CONFIG.breadcrumbs.height} 
+      <Skeleton
+        width={SKELETON_CONFIG.breadcrumbs.width}
+        height={SKELETON_CONFIG.breadcrumbs.height}
+        baseColor="rgba(153, 153, 153, 0.1)"
+        highlightColor="rgba(153, 153, 153, 0.2)"
       />
     </Breadcrumbs>
-    
+
     <PostStory aria-label="Artikel inhoud wordt geladen">
-      <Skeleton 
-        count={contentLines} 
+      <Skeleton
+        count={contentLines}
         style={{ marginBottom: '1.5rem' }}
+        baseColor="rgba(153, 153, 153, 0.1)"
+        highlightColor="rgba(153, 153, 153, 0.2)"
       />
-      <Skeleton 
-        width="80%" 
+      <Skeleton
+        width="80%"
         style={{ marginBottom: '1.5rem' }}
+        baseColor="rgba(153, 153, 153, 0.1)"
+        highlightColor="rgba(153, 153, 153, 0.2)"
       />
-      <Skeleton 
-        height={300} 
+      <Skeleton
+        height={300}
         style={{ marginBottom: '1.5rem', borderRadius: '8px' }}
+        baseColor="rgba(153, 153, 153, 0.1)"
+        highlightColor="rgba(153, 153, 153, 0.2)"
       />
-      <Skeleton 
-        count={contentLines - 2} 
+      <Skeleton
+        count={contentLines - 2}
         style={{ marginBottom: '1.5rem' }}
+        baseColor="rgba(153, 153, 153, 0.1)"
+        highlightColor="rgba(153, 153, 153, 0.2)"
       />
     </PostStory>
   </article>
 );
 
-export default function PageLoader({ 
+export default function PageLoader({
   className,
   showWeather = true,
-  contentLines = SKELETON_CONFIG.defaultContentLines 
+  contentLines = SKELETON_CONFIG.defaultContentLines
 }: PageLoaderProps) {
   const mainClass = [className].filter(Boolean).join(' ');
 
   return (
     <main className={mainClass} role="main" aria-label="Pagina wordt geladen">
       <PostHeaderSkeleton showWeather={showWeather} />
-      
+
       <PostContent>
         <ContentSkeleton contentLines={contentLines} />
         <Sidebar />
