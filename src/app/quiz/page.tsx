@@ -8,6 +8,7 @@ import QUESTIONS from "@/lib/quiz";
 import { trackQuizEvent } from "@/lib/analytics/Gtag";
 import styled from '@emotion/styled';
 
+// Styled components
 const Hero = styled.section`
   display: flex;
   flex-direction: column;
@@ -18,14 +19,14 @@ const Hero = styled.section`
   width: 100%;
   background-color: ${({ theme }) => 
     theme.colors.background === '#23252a' 
-      ? theme.colors.menu  // Dark mode: use menu color (darker)
-      : theme.colors.background  // Light mode: keep normal background
+      ? theme.colors.menu
+      : theme.colors.background
   };
   position: relative;
   overflow-x: hidden;
   max-width: 100vw;
   min-height: 100vh;
-  
+
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 154px 0 2rem 0;
   }
@@ -41,7 +42,7 @@ const HeroContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  
+
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 2rem;
   }
@@ -52,12 +53,10 @@ const HeroText = styled.div`
 `;
 
 const QuizHeader = styled.h1`
-  font-size: ${({ theme }) => theme.typography.fontSize['2xl']};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
-  
+
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
     margin-bottom: ${({ theme }) => theme.spacing.xl};
@@ -76,13 +75,13 @@ const QuizContainer = styled(motion.div, {
   transition: max-width 0.3s ease;
   width: 100%;
   box-sizing: border-box;
-  
+
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 2rem 3rem;
     width: calc(100% - 2rem);
     margin: 0 1rem;
   }
-  
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 1rem 0.75rem;
     border-radius: ${({ theme }) => theme.radii.md};
@@ -95,7 +94,7 @@ const QuizError = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.radii.md};
   text-align: center;
-  
+
   h2 {
     margin-bottom: ${({ theme }) => theme.spacing.md};
   }
@@ -107,18 +106,15 @@ interface UserAnswer {
   timestamp: number;
 }
 
-// Constants with validation
 const QUIZ_CONFIG = {
   title: "Moestuin Quiz",
   totalQuestions: QUESTIONS && Array.isArray(QUESTIONS) ? QUESTIONS.length : 0
 } as const;
 
-// Custom hooks
-const useQuizState = () => {
+function useQuizState() {
   const [userAnswers, setUserAnswers] = useState<UserAnswer[]>([]);
   const [isRestoring, setIsRestoring] = useState(true);
-  
-  // Load saved state from localStorage on mount
+
   useEffect(() => {
     const savedState = localStorage.getItem('quizState');
     if (savedState) {
@@ -134,7 +130,6 @@ const useQuizState = () => {
     setIsRestoring(false);
   }, []);
 
-  // Save state to localStorage whenever answers change
   useEffect(() => {
     if (!isRestoring && userAnswers.length > 0) {
       localStorage.setItem('quizState', JSON.stringify({
@@ -143,7 +138,7 @@ const useQuizState = () => {
       }));
     }
   }, [userAnswers, isRestoring]);
-  
+
   const activeQuestionIndex = userAnswers.length;
   const quizIsComplete = activeQuestionIndex === QUIZ_CONFIG.totalQuestions;
   const progress = QUIZ_CONFIG.totalQuestions > 0 
@@ -160,15 +155,10 @@ const useQuizState = () => {
           timestamp: Date.now()
         }
       ];
-      
-      // Track the answer - ADD THIS
       trackQuizEvent('question_answered', activeQuestionIndex, selectedAnswer || 'skipped');
-      
-      // Check if quiz is complete - ADD THIS
       if (newAnswers.length === QUIZ_CONFIG.totalQuestions) {
         trackQuizEvent('quiz_completed');
       }
-      
       return newAnswers;
     });
   }, [activeQuestionIndex]);
@@ -179,8 +169,7 @@ const useQuizState = () => {
 
   const resetQuiz = useCallback(() => {
     setUserAnswers([]);
-    localStorage.removeItem('quizState'); // Clear saved state
-    // Track quiz reset - ADD THIS
+    localStorage.removeItem('quizState');
     trackQuizEvent('quiz_reset');
   }, []);
 
@@ -194,9 +183,8 @@ const useQuizState = () => {
     resetQuiz,
     isRestoring
   };
-};
+}
 
-// Components
 interface QuizContentProps {
   quizIsComplete: boolean;
   userAnswers: UserAnswer[];
@@ -214,10 +202,9 @@ const QuizContent: React.FC<QuizContentProps> = ({
   onSkipAnswer,
   onResetQuiz
 }) => {
-  // Add validation for QUESTIONS array
   if (!QUESTIONS || !Array.isArray(QUESTIONS) || QUESTIONS.length === 0) {
     return (
-      <QuizError>
+      <QuizError role="alert">
         <h2>Quiz data not available</h2>
         <p>Please check that the quiz questions are properly loaded.</p>
       </QuizError>
@@ -225,9 +212,7 @@ const QuizContent: React.FC<QuizContentProps> = ({
   }
 
   if (quizIsComplete) {
-    // Transform UserAnswer[] to the format Summary expects (just the answers)
     const answersForSummary = userAnswers.map(answer => answer.selectedAnswer);
-    
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', width: '100%' }}>
         <Summary userAnswers={answersForSummary} />
@@ -242,11 +227,10 @@ const QuizContent: React.FC<QuizContentProps> = ({
     );
   }
 
-  // Validate current question index
   if (activeQuestionIndex >= QUESTIONS.length) {
     console.error(`Active question index ${activeQuestionIndex} is out of bounds`);
     return (
-      <QuizError>
+      <QuizError role="alert">
         <h2>Quiz error</h2>
         <p>Question index is out of range.</p>
         <button onClick={onResetQuiz} className="button button--cta">
@@ -261,15 +245,14 @@ const QuizContent: React.FC<QuizContentProps> = ({
       key={activeQuestionIndex}
       questionIndex={activeQuestionIndex}
       onSelectAnswer={onSelectAnswer}
-      onSkipAnswer={onSkipAnswer}            
+      onSkipAnswer={onSkipAnswer}
     />
   );
 };
 
 export default function QuizPage() {
-  // Add mounted state to prevent hydration issues
   const [isMounted, setIsMounted] = useState(false);
-  
+
   const {
     userAnswers,
     activeQuestionIndex,
@@ -281,19 +264,16 @@ export default function QuizPage() {
     isRestoring
   } = useQuizState();
 
-  // Only render after hydration is complete
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Track quiz start when component mounts - ADD THIS
   useEffect(() => {
     if (isMounted && !isRestoring && userAnswers.length === 0) {
       trackQuizEvent('quiz_start');
     }
   }, [isMounted, isRestoring, userAnswers.length]);
 
-  // Memoize the quiz status for performance
   const quizStatus = useMemo(() => ({
     isComplete: quizIsComplete,
     currentQuestion: activeQuestionIndex + 1,
@@ -301,10 +281,9 @@ export default function QuizPage() {
     progress
   }), [quizIsComplete, activeQuestionIndex, progress]);
 
-  // Show loading until mounted and restored (prevents hydration mismatch)
   if (!isMounted || isRestoring) {
     return (
-      <main role="main">
+      <main role="main" aria-busy="true">
         <Hero>
           <HeroContainer>
             <HeroText>
@@ -316,10 +295,9 @@ export default function QuizPage() {
     );
   }
 
-  // Add loading state for when QUESTIONS is not available
   if (!QUESTIONS || !Array.isArray(QUESTIONS)) {
     return (
-      <main role="main">
+      <main role="main" aria-busy="true">
         <Hero>
           <HeroContainer>
             <HeroText>
@@ -354,15 +332,13 @@ export default function QuizPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <Hero
-        aria-label="Moestuin quiz sectie"
-      >
+      <Hero aria-label="Moestuin quiz sectie">
         <HeroContainer>
           <HeroText>
             <motion.header
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
+              transition={{
                 duration: 0.6,
                 delay: 0.2,
                 ease: [0.22, 1, 0.36, 1]
@@ -372,14 +348,14 @@ export default function QuizPage() {
                 {QUIZ_CONFIG.title}
               </QuizHeader>
             </motion.header>
-            
+
             <QuizContainer
               $isComplete={quizStatus.isComplete}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.6,
-                delay: 0.3,
+              transition={{
+                duration: 0.3,
+                delay: 0.1,
                 ease: [0.22, 1, 0.36, 1]
               }}
             >
@@ -389,8 +365,8 @@ export default function QuizPage() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  transition={{ 
-                    duration: 0.3,
+                  transition={{
+                    duration: 0.1,
                     ease: [0.22, 1, 0.36, 1]
                   }}
                 >

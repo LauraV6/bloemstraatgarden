@@ -1,34 +1,54 @@
 import styled from '@emotion/styled';
 
 export const ErrorContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: unset;
+  min-height: 380px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
-  min-height: calc(100vh - 200px);
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  background: ${props => props.theme.colors.surface};
+  padding: 113px 0px 0px;
+  margin: 0px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    min-height: 800px;
+    padding: 154px 0px 0px;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
 `;
 
 export const ErrorContent = styled.div`
   text-align: center;
   max-width: 600px;
   width: 100%;
-  padding: 3rem;
+  padding: 1rem;
   background: ${props => props.theme.colors.background};
   border-radius: 12px;
   box-shadow: ${props => props.theme.shadows.lg};
-  
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: ${props => props.theme.colors.error};
+  margin: 1rem;
+  z-index: 2;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 3rem;
+    margin: 2rem;
   }
   
   p {
     font-size: 1.125rem;
-    color: ${props => props.theme.colors.textSecondary};
-    margin-bottom: 2rem;
-    line-height: 1.6;
   }
 `;
 
@@ -43,16 +63,16 @@ export const ErrorDetails = styled.details`
   summary {
     cursor: pointer;
     font-weight: 500;
-    color: ${props => props.theme.colors.error};
+    color: ${props => props.theme.colors.errorBright};
     padding: 0.5rem;
     
     &:hover {
       text-decoration: underline;
     }
   }
-  
-  pre {
-    margin-top: 1rem;
+`;
+
+export const StackTrace = styled.pre`
     padding: 1rem;
     background: ${props => props.theme.colors.surface};
     border-radius: 4px;
@@ -60,15 +80,7 @@ export const ErrorDetails = styled.details`
     font-size: 0.875rem;
     font-family: monospace;
     line-height: 1.5;
-    color: ${props => props.theme.colors.text};
-  }
-`;
-
-export const StackTrace = styled.pre`
-  margin-top: 1rem;
-  max-height: 300px;
-  overflow-y: auto;
-`;
+    color: ${props => props.theme.colors.text};`;
 
 export const ErrorActions = styled.div`
   display: flex;
@@ -76,50 +88,4 @@ export const ErrorActions = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 2rem;
-`;
-
-export const RetryButton = styled.button`
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  background-color: ${props => props.theme.colors.primary};
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${props => props.theme.colors.primary};
-    filter: brightness(0.9);
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
-`;
-
-export const HomeLink = styled.a`
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  background-color: transparent;
-  color: ${props => props.theme.colors.primary};
-  border: 2px solid ${props => props.theme.colors.primary};
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: inline-block;
-  
-  &:hover {
-    background-color: ${props => props.theme.colors.primary};
-    color: white;
-    transform: translateY(-1px);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
 `;

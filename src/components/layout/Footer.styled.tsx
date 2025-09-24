@@ -65,7 +65,7 @@ export const FooterLeave = styled.div`
   bottom: -20px;
   user-select: none;
   pointer-events: none;
-  z-index: 1;
+  z-index: 5;
 
   img {
     display: block !important;
@@ -93,7 +93,7 @@ export const Copyright = styled.div`
   background-color: ${props => props.theme.colors.primaryDark};
   filter: brightness(0.9);
   padding: ${props => props.theme.spacing.md};
-  z-index: 2;
+  z-index: 6;
 
   @media (min-width: ${props => props.theme.breakpoints.md}) {
     padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.xl};

@@ -12,27 +12,29 @@ interface ErrorStateProps {
 }
 
 export default function ErrorState({ error, onRetry, fullPage = false }: ErrorStateProps) {
-  const errorMessage = typeof error === 'string' 
-    ? error 
+  const errorMessage = typeof error === 'string'
+    ? error
     : error?.message || 'Er is een fout opgetreden bij het laden van de gegevens.';
 
   const content = (
     <ErrorContainer>
-      <ErrorIcon>
-        <FontAwesomeIcon icon={faExclamationTriangle} />
-      </ErrorIcon>
-      <h2>Oeps! Er ging iets mis</h2>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
-      {onRetry && (
-        <RetryButton 
-          onClick={onRetry}
-          className="button button--cta"
-          aria-label="Opnieuw proberen"
-        >
-          <FontAwesomeIcon icon={faRefresh} className="retry-icon" />
-          <span>Opnieuw proberen</span>
-        </RetryButton>
-      )}
+      <div>
+        <ErrorIcon>
+          <FontAwesomeIcon icon={faExclamationTriangle} />
+        </ErrorIcon>
+        <h2>Oeps! Er ging iets mis</h2>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+        {onRetry && (
+          <RetryButton
+            onClick={onRetry}
+            className="button button--cta"
+            aria-label="Opnieuw proberen"
+          >
+            <FontAwesomeIcon icon={faRefresh} className="retry-icon" />
+            <span>Opnieuw proberen</span>
+          </RetryButton>
+        )}
+      </div>
     </ErrorContainer>
   );
 

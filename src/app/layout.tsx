@@ -129,52 +129,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              [data-theme="dark"] body {
-                background-color: #1a1d23 !important;
-                color: #e1e1e1 !important;
-              }
               [data-theme="dark"] header[role="banner"] {
                 background-color: #23252a;
                 border-bottom: 1px solid #23252a;
               }
-              [data-theme="dark"] footer {
-                background-color: transparent !important;
-              }
               [data-theme="dark"] footer > div {
                 background-color: hsl(152, 100%, 11%) !important;
-              }
-              [data-theme="dark"] footer p,
-              [data-theme="dark"] footer a,
-              [data-theme="dark"] footer span {
-                color: #e1e1e1 !important;
-              }
-              [data-theme="dark"] h1,
-              [data-theme="dark"] h2,
-              [data-theme="dark"] h3,
-              [data-theme="dark"] h4,
-              [data-theme="dark"] h5,
-              [data-theme="dark"] h6 {
-                color: #e1e1e1 !important;
-              }
-              [data-theme="light"] body {
-                background-color: #fffef9 !important;
-                color: #111827 !important;
-              }
-              [data-theme="light"] footer {
-                background-color: transparent !important;
-              }
-              [data-theme="light"] footer p,
-              [data-theme="light"] footer a,
-              [data-theme="light"] footer span {
-                color: #111827 !important;
-              }
-              [data-theme="light"] h1,
-              [data-theme="light"] h2,
-              [data-theme="light"] h3,
-              [data-theme="light"] h4,
-              [data-theme="light"] h5,
-              [data-theme="light"] h6 {
-                color: #111827 !important;
               }
             `,
           }}
