@@ -11,22 +11,17 @@ import LogoSmall from "@/components/ui/Logo/logoSmall";
 import { HeaderContainer, Nav, LogoLink, SocialLinks, ShareIcon } from './Header.styled';
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher/ThemeSwitcher";
 
-// Types
 interface SocialLink {
   href: string;
   icon: IconDefinition;
   label: string;
   className: string;
-  rotation: number;
 }
 
-// Constants
 const SCROLL_THRESHOLD = 30;
-const ANIMATION_DURATION = 0.1;
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   // Memoized social links configuration
   const socialLinks: SocialLink[] = useMemo(() => [
@@ -35,48 +30,29 @@ export default function Header() {
       icon: faWhatsapp,
       label: "Delen via WhatsApp",
       className: "whapp",
-      rotation: 15
     },
     {
       href: "https://www.linkedin.com/in/laura-vlasma-0692b0159/",
       icon: faLinkedinIn,
       label: "Bezoek LinkedIn profiel",
       className: "linkedin",
-      rotation: -15
     },
     {
       href: "https://www.instagram.com/lauravlasma/",
       icon: faInstagram,
       label: "Bezoek Instagram profiel",
       className: "insta",
-      rotation: 15
     }
   ], []);
 
-  // Optimized scroll handler with throttling
-  const handleScroll = useCallback(() => {
-    const scrolled = window.pageYOffset > SCROLL_THRESHOLD;
-    if (scrolled !== isScrolled) {
-      setIsScrolled(scrolled);
-    }
-  }, [isScrolled]);
-
-  // Set mounted state on client side
   useEffect(() => {
-    setMounted(true);
-    // Check initial scroll position after mounting
-    setIsScrolled(window.pageYOffset > SCROLL_THRESHOLD);
-  }, []);
+    setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
 
-  useEffect(() => {
-    if (!mounted) return;
-
-    // Throttle scroll events for better performance
     let ticking = false;
     const throttledScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          handleScroll();
+          setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
           ticking = false;
         });
         ticking = true;
@@ -84,12 +60,8 @@ export default function Header() {
     };
 
     window.addEventListener("scroll", throttledScroll, { passive: true });
-    
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", throttledScroll);
-    };
-  }, [handleScroll, mounted]);
+    return () => window.removeEventListener("scroll", throttledScroll);
+  }, []);
 
   return (
     <HeaderContainer 
@@ -98,7 +70,7 @@ export default function Header() {
     >
       <Nav isScrolled={isScrolled} role="navigation" aria-label="Hoofdnavigatie">
         <SocialLinks isScrolled={isScrolled} role="group" aria-label="Social media links">
-          {socialLinks.map(({ href, icon, label, className, rotation }) => (
+          {socialLinks.map(({ href, icon, label, className }) => (
             <ShareIcon
               key={className}
               href={href}
