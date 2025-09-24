@@ -25,7 +25,7 @@ export const TitleLineHeading = styled.h4`
     margin-bottom: 3rem;
   }
 
-  span {
+  > span {
     position: relative;
     font-weight: 500;
     animation: ${loadIn} 1s forwards;

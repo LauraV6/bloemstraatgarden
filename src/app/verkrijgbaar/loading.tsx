@@ -8,13 +8,22 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const PostHeader = styled.section`
   position: relative;
-  min-height: 400px;
+  width: 100%;
+  max-width: unset;
+  height: 380px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 113px 0px 0px;
+  margin: 0px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: 600px;
+    padding: 154px 0px 0px;
+  }
   
   &::before {
     content: '';
@@ -29,24 +38,7 @@ const PostHeader = styled.section`
 `;
 
 const PostHeaderContent = styled.div`
-  position: relative;
-  z-index: 2;
   text-align: center;
-  color: white;
-  max-width: 800px;
-  padding: ${({ theme }) => theme.spacing.xl};
-  
-  h1 {
-    font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
-    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    color: white;
-  }
-  
-  label {
-    font-size: ${({ theme }) => theme.typography.fontSize.lg};
-    color: rgba(255, 255, 255, 0.9);
-  }
 `;
 
 const Breadcrumbs = styled.div`
@@ -55,52 +47,59 @@ const Breadcrumbs = styled.div`
 `;
 
 export default function Available() {
+  const skeletonProps = {
+    baseColor: "rgba(153, 153, 153, 0.1)",
+    highlightColor: "rgba(153, 153, 153, 0.2)"
+  };
+
   return (
-    <>
-      <main>
-        <PostHeader>
-          <PostHeaderContent>
-            <div>
-              <h1>
-                <Skeleton width={200} />
-              </h1>
-              <label>
-                <Skeleton width={100} />
-              </label>
-            </div>
-          </PostHeaderContent>
-        </PostHeader>
-        <section>
-          <Breadcrumbs>
-            <Skeleton width={150} />
-          </Breadcrumbs>
-          <Story>
-            <StoryContainer>
-              <StoryText>
-                <h2>
-                  <Skeleton width={250} />
-                </h2>
-                <p>
-                  <Skeleton count={3} />
-                </p>
-              </StoryText>
-              <StoryAdding>
-                <Skeleton width={400} height={270} />
-              </StoryAdding>
-            </StoryContainer>
-          </Story>
-        </section>
-        <section>
-          <TitleLineHeading>
-            <span>
-              <Skeleton width={150} />
-            </span>
-          </TitleLineHeading>
+    <main aria-busy="true" aria-live="polite" aria-label="Loading content">
+      <PostHeader>
+        <PostHeaderContent>
           <div>
-            <Skeleton width={500} />
+            <h1>
+              <Skeleton width={200}
+                baseColor="rgba(255, 255, 255, 0.1)"
+                highlightColor="rgba(255, 255, 255, 0.2)" />
+            </h1>
+            <label>
+              <Skeleton width={100}
+                baseColor="rgba(255, 255, 255, 0.1)"
+                highlightColor="rgba(255, 255, 255, 0.2)" />
+            </label>
           </div>
-        </section>
-      </main>
-    </>
-  )
+        </PostHeaderContent>
+      </PostHeader>
+      <section>
+        <Breadcrumbs>
+          <Skeleton width={150} {...skeletonProps} />
+        </Breadcrumbs>
+        <Story>
+          <StoryContainer>
+            <StoryText>
+              <h2>
+                <Skeleton width={250} {...skeletonProps} />
+              </h2>
+              <p>
+                <Skeleton count={3} {...skeletonProps} />
+              </p>
+            </StoryText>
+            <StoryAdding>
+              <Skeleton width={400} height={270} {...skeletonProps} />
+            </StoryAdding>
+          </StoryContainer>
+        </Story>
+      </section>
+      <section>
+        <TitleLineHeading>
+          <span>
+            <Skeleton width={150} {...skeletonProps} />
+          </span>
+        </TitleLineHeading>
+        <div>
+          <Skeleton width={500} {...skeletonProps} />
+        </div>
+      </section>
+    </main>
+  );
 }
