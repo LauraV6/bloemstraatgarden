@@ -13,7 +13,6 @@ import type {
   TipCollection, 
   AvailableCollection 
 } from '@/lib/api/graphql/types';
-import type { Article, Tip } from '@/types/contentful';
 
 export function useArticles(limit: number = 10, skip: number = 0) {
   const { data, loading, error, fetchMore } = useQuery<ArticleCollection>(GET_ALL_ARTICLES, {

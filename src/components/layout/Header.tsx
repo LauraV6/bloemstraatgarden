@@ -86,7 +86,6 @@ export default function Header() {
         </SocialLinks>
 
         <LogoLink 
-          as={Link}
           href="/" 
           isScrolled={isScrolled}
           aria-label="Bloemstraat Garden - Ga naar homepage"

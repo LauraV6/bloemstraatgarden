@@ -3,7 +3,6 @@
 import { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
-// Types
 interface SlideProps {
   children: React.ReactNode;
   delay?: number;
@@ -13,7 +12,6 @@ interface SlideProps {
   once?: boolean;
 }
 
-// Constants
 const SLIDE_CONFIG = {
   defaultDuration: 0.5,
   defaultDelay: 0,
@@ -22,7 +20,6 @@ const SLIDE_CONFIG = {
   ease: "easeOut"
 } as const;
 
-// Animation variants
 const createVariants = (direction: SlideProps['direction']) => {
   const distance = 50;
   

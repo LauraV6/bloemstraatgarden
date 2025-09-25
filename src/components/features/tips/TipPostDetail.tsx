@@ -175,7 +175,6 @@ const PostStory = styled.div`
   overflow-x: hidden;
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   line-height: 1.5;
-  color: ${({ theme }) => theme.colors.text};
   
   h2, h3, h4 {
     margin-top: 1.2rem;
