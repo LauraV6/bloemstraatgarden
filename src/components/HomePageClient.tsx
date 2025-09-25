@@ -16,30 +16,12 @@ export default function HomePageClient({ children, siteTitle }: HomePageClientPr
   const childrenArray = Array.isArray(children) ? children : [children];
 
   return (
-    <div style={{ width: "100%" }}>
-      <div>
-        <Hero title={siteTitle} paragraph={PAGE_CONTENT.heroSubtitle} isHomePage={true}/>
-      </div>
-      
-      {/* Blog Posts Section */}
-      <div>
+    <>
+        <Hero title={siteTitle} paragraph={PAGE_CONTENT.heroSubtitle} isHomePage={true}/>     
         {childrenArray[0]}
-      </div>
-
-      {/* Stock Section */}
-      <div>
         {childrenArray[1]}
-      </div>
-
-      {/* Tips Section */}
-      <div>
         {childrenArray[2]}
-      </div>
-
-      {/* States Section */}
-      <div>
         {childrenArray[3]}
-      </div>
-    </div>
+    </>
   );
 }

@@ -4,17 +4,8 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faLoader } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
-import "@fortawesome/fontawesome-svg-core/styles.css";
 import { ThemeSwitch, Skeleton, ThemeIcon, ThemeLabel, SkeletonText } from "./ThemeSwitcher.styled";
 
-// Types
-interface ThemeSwitcherProps {
-  className?: string;
-  showLabel?: boolean;
-  size?: 'small' | 'medium' | 'large';
-}
-
-// Constants
 const THEME_CONFIG = {
   themes: {
     dark: {
@@ -38,7 +29,6 @@ const THEME_CONFIG = {
   }
 } as const;
 
-// Custom hook for theme logic
 const useThemeLogic = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { systemTheme, theme, setTheme } = useTheme();
@@ -68,10 +58,9 @@ const useThemeLogic = () => {
   };
 };
 
-// Loading fallback component
-const ThemeSwitcherSkeleton: React.FC<{ className?: string }> = ({ className }) => (
-  <ThemeSwitch 
-    className={`button button--cta ${className || ''}`}
+const ThemeSwitcherSkeleton = () => (
+  <ThemeSwitch
+    className="button button--cta"
     disabled
     aria-label="Thema schakelaar wordt geladen"
   >
@@ -87,21 +76,16 @@ const ThemeSwitcherSkeleton: React.FC<{ className?: string }> = ({ className }) 
   </ThemeSwitch>
 );
 
-const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ 
-  className,
-  showLabel = true,
-  size = 'medium'
-}) => {
+const ThemeSwitcher = () => {
   const { isMounted, toggleTheme, themeConfig } = useThemeLogic();
 
-  // Show loading skeleton during hydration
   if (!isMounted) {
-    return <ThemeSwitcherSkeleton className={className} />;
+    return <ThemeSwitcherSkeleton />;
   }
 
   return (
     <ThemeSwitch
-      className={`button button--cta ${className || ''}`}
+      className={`button button--cta`}
       onClick={toggleTheme}
       aria-label={themeConfig.ariaLabel}
       title={themeConfig.ariaLabel}
@@ -112,11 +96,9 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
           aria-hidden="true"
         />
       </ThemeIcon>
-      {showLabel && (
         <ThemeLabel>
           {themeConfig.label}
         </ThemeLabel>
-      )}
     </ThemeSwitch>
   );
 };

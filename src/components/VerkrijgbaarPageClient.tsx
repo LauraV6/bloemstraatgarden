@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
 
-// Animation variants
 const pageVariants = {
   initial: { opacity: 0 },
   animate: { 
