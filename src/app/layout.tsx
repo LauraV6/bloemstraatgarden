@@ -129,10 +129,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <style
           dangerouslySetInnerHTML={{
             __html: `
-              [data-theme="dark"] header[role="banner"] {
-                background-color: #23252a;
-                border-bottom: 1px solid #23252a;
-              }
               [data-theme="dark"] footer > div {
                 background-color: hsl(152, 100%, 11%) !important;
               }

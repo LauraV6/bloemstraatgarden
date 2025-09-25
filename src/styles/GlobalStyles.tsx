@@ -21,7 +21,6 @@ export function GlobalStyles() {
           font-size: 16px;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          overflow-x: hidden;
           width: 100%;
         }
 
@@ -56,7 +55,6 @@ export function GlobalStyles() {
           transition: background-color ${theme.transitions.normal}, color ${theme.transitions.normal};
           padding: 0;
           margin: 0;
-          overflow-x: hidden;
           width: 100%;
           max-width: 100vw;
         }
