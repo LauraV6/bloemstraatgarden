@@ -116,6 +116,7 @@ const PostContent = styled.section`
   padding: 0 1rem;
   margin: 2rem auto;
   box-sizing: border-box;
+  align-items: start;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 60% 1fr;

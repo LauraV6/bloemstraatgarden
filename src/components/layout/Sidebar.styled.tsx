@@ -1,18 +1,17 @@
 import styled from '@emotion/styled';
 
 export const SidebarContainer = styled.aside`
-`;
-
-export const SidebarContent = styled.div`
   position: sticky;
-  top: calc(82px + ${props => props.theme.spacing.xl});
+  top: calc(1.5rem + 90px);
+  height: fit-content;
+  align-self: start;
 `;
 
 export const IntroSection = styled.div`
   border: 1px solid ${props => props.theme.colors.border};
   background-color: ${props => props.theme.colors.menu};
   border-radius: ${props => props.theme.radii.md};
-  margin-bottom: ${props => props.theme.spacing.xl};
+  margin-bottom: ${props => props.theme.spacing.lg};
 
   img {
     object-fit: cover;
@@ -38,6 +37,11 @@ export const SidebarSection = styled.div`
   display: grid;
   gap: 20px;
   padding: ${props => props.theme.spacing.lg};
+
+  h4 {
+    color: ${props => props.theme.colors.text};
+    margin-bottom: 0.5rem;
+  }
 
   p {
     color: ${props => props.theme.colors.textSecondary};

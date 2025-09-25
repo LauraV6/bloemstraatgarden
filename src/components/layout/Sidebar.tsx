@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
-import { SidebarContainer, SidebarContent, IntroSection, TestSection, SidebarSection } from './Sidebar.styled';
+import { SidebarContainer, IntroSection, TestSection, SidebarSection } from './Sidebar.styled';
 
 interface ProfileSectionProps {
   name: string;
@@ -103,7 +103,7 @@ export default function Sidebar() {
       role="complementary"
       aria-label="Zijbalk met profielinformatie en quiz"
     >
-      <SidebarContent>
+      <div>
         <ProfileSection 
           name={PROFILE_DATA.name}
           description={PROFILE_DATA.description}
@@ -116,7 +116,7 @@ export default function Sidebar() {
           buttonText={QUIZ_DATA.buttonText}
           quizUrl={QUIZ_DATA.quizUrl}
         />
-      </SidebarContent>
+      </div>
     </SidebarContainer>
   );
 }

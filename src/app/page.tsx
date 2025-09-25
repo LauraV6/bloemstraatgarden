@@ -56,7 +56,7 @@ export default function Home() {
       <HomePageClient siteTitle={siteTitle}>
         {/* Blog Posts Section */}
         <PageSection title={PAGE_CONTENT.sections.blog}>
-          <PostsGridClient />
+          <PostsGridClient limit={100} />
         </PageSection>
 
         {/* Stock Section */}
