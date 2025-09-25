@@ -10,6 +10,7 @@ const PostItem = styled.article`
   background: ${({ theme }) => theme.colors.surface};
   border-radius: ${({ theme }) => theme.radii.md};
   overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   box-shadow: ${({ theme }) => theme.shadows.sm};
   transition: transform ${({ theme }) => theme.transitions.normal}, 
               box-shadow ${({ theme }) => theme.transitions.normal};
@@ -41,14 +42,6 @@ const PostItemContent = styled.div`
   }
 `;
 
-const DateSection = styled.div`
-  margin-top: auto;
-  padding-top: ${({ theme }) => theme.spacing.md};
-  border-top: 1px solid ${({ theme }) => theme.colors.border};
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
-`;
-
 const SkeletonGrid = styled.div`
   display: grid;
   gap: 1.3rem;
@@ -65,13 +58,11 @@ const SkeletonGrid = styled.div`
   }
 `;
 
-// Types
 interface PostCardSkeletonProps {
   amount: number;
   className?: string;
 }
 
-// Constants
 const SKELETON_CONFIG = {
   image: { height: 200 },
   title: { width: 200, height: 24 },
@@ -79,7 +70,6 @@ const SKELETON_CONFIG = {
   date: { width: 120, height: 14 }
 } as const;
 
-// Components
 interface SkeletonCardProps {
   index: number;
 }
@@ -108,13 +98,6 @@ const SkeletonCard: React.FC<SkeletonCardProps> = ({ index }) => (
           style={{ marginBottom: '0.5rem' }}
         />
       </div>
-      
-      <DateSection>
-        <Skeleton 
-          width={SKELETON_CONFIG.date.width}
-          height={SKELETON_CONFIG.date.height}
-        />
-      </DateSection>
     </PostItemContent>
   </PostItem>
 );
