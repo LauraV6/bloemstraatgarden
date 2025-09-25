@@ -37,7 +37,7 @@ interface CartPopupProps {
 }
 
 export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
-  const { cartItems, removeFromCart, updateQuantity, clearCart, getTotalItems } = useShoppingCart();
+  const { cartItems, removeFromCart, updateQuantity, clearCart, cartQuantity } = useShoppingCart();
   const popupRef = useRef<HTMLDivElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderStatus, setOrderStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -134,8 +134,8 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
       <CartPopupContainer ref={popupRef}>
         <CartHeader>
           <h2>Winkelwagen
-            {getTotalItems() > 0 && (
-              <CartBadge>{getTotalItems()}</CartBadge>
+            {cartQuantity > 0 && (
+              <CartBadge>{cartQuantity}</CartBadge>
             )}
           </h2>
           <CloseButton

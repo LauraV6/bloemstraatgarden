@@ -8,20 +8,19 @@ import CartPopup from './CartPopup';
 import { CartIconButton, CartBadge } from './CartIcon.styled';
 
 export default function CartIcon() {
-  const { getTotalItems } = useShoppingCart();
+  const { cartQuantity } = useShoppingCart();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const totalItems = getTotalItems();
 
   return (
     <>
-      {totalItems > 0 && (
+      {cartQuantity > 0 && (
         <CartIconButton
           onClick={() => setIsPopupOpen(true)}
-          aria-label={`Winkelwagen openen, ${totalItems} items`}
+          aria-label={`Winkelwagen openen, ${cartQuantity} items`}
         >
           <FontAwesomeIcon icon={faShoppingCart} />
           <CartBadge>
-            {totalItems}
+            {cartQuantity}
           </CartBadge>
         </CartIconButton>
       )}
