@@ -236,22 +236,14 @@ export function GlobalStyles() {
           border-spacing: 0;
           margin: 1rem 0;
           border-radius: 6px;
-          background-color: ${theme.colors.background};
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          background-color: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(0, 0, 0, 0.1);
           overflow: hidden;
         }
 
-        thead {
-          background: ${theme.colors.primary};
-          background: linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%);
-        }
-        
-        thead tr {
-          background: ${theme.colors.primary} !important;
-        }
-
         th {
-          background: ${theme.colors.transparent} !important;
+          background: ${theme.colors.primaryDark};
+          color: hsl(0, 0%, 100%);
           font-weight: 700;
           padding: 14px 18px;
           text-align: left;
@@ -277,8 +269,6 @@ export function GlobalStyles() {
           vertical-align: top;
           border-bottom: 1px solid ${theme.colors.border};
           border-right: 1px solid ${theme.colors.border};
-          background-color: ${theme.colors.surface};
-          color: ${theme.colors.text};
           font-size: 0.9rem;
 
           p {
@@ -290,32 +280,8 @@ export function GlobalStyles() {
           border-right: none;
         }
 
-        tbody tr {
-          background-color: ${theme.colors.surface};
-        }
-
         tbody tr:last-child td {
           border-bottom: none;
-        }
-        
-        tbody tr:nth-child(even) {
-          background-color: ${theme.colors.surface};
-        }
-        
-        tbody tr:nth-child(even) td {
-          background-color: ${theme.colors.surface};
-        }
-
-        /* Responsive tables */
-        @media (max-width: ${theme.breakpoints.md}) {
-          table {
-            font-size: 0.85rem;
-            margin: 1rem 0;
-          }
-          
-          th, td {
-            padding: 10px 14px;
-          }
         }
 
         .sr-only {
@@ -417,38 +383,6 @@ export function GlobalStyles() {
 
             &:active {
               background-image: linear-gradient(rgb(0 0 0 / 40%) 0 0);
-            }
-
-            &.whapp {
-              background-color: #25d366;
-              border-color: #25d366;
-              color: white;
-
-              &:hover {
-                background-color: #1da851;
-                border-color: #1da851;
-              }
-            }
-
-            &.linkedin {
-              background-color: #0077b5;
-              border-color: #0077b5;
-              color: white;
-
-              &:hover {
-                background-color: #005885;
-                border-color: #005885;
-              }
-            }
-
-            &.insta {
-              background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-              border: 1px solid #e6683c;
-              color: white;
-
-              &:hover {
-                background: linear-gradient(45deg, #e6683c 0%, #dc2743 25%, #cc2366 50%, #bc1888 75%, #a8197e 100%);
-              }
             }
           }
 
