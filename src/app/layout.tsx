@@ -125,17 +125,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
         
-        {/* Critical CSS for dark mode to prevent flash */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              [data-theme="dark"] footer > div {
-                background-color: hsl(152, 100%, 11%) !important;
-              }
-            `,
-          }}
-        />
-        
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
