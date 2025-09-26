@@ -40,7 +40,6 @@ export function GlobalStyles() {
         h1, h2, h3, h4, h5, h6 {
           font-family: ${theme.typography.fontFamilyHeading};
           line-height: ${theme.typography.lineHeight.tight};
-          color: ${theme.colors.text};
           margin-bottom: ${theme.spacing.md};
         }
 

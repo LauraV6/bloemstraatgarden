@@ -38,7 +38,6 @@ export const SummaryStates = styled.div`
   flex-wrap: wrap;
   
   @media (max-width: ${props => props.theme.breakpoints.sm}) {
-    display: grid;
     gap: 0.5rem;
     margin: 0;
   }
@@ -66,7 +65,7 @@ export const Score = styled.div`
 `;
 
 export const ScoreNumber = styled.span`
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-family: ${props => props.theme.typography.fontFamilyHeading};
   color: ${props => props.theme.colors.primary};
   font-weight: ${props => props.theme.typography.fontWeight.bold};
