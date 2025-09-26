@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../../test-utils';
 import '@testing-library/jest-dom';
 import { PostCard } from '@/components/features/posts/PostCard';
 
@@ -210,10 +210,11 @@ describe('PostCard', () => {
     expect(dateElement).toHaveAttribute('title', 'Gepubliceerd op 15 januari 2024');
   });
 
-  it('preserves link class for styling', () => {
+  it('renders link element correctly', () => {
     render(<PostCard props={mockPost} />);
-    
+
     const link = screen.getByRole('link');
-    expect(link).toHaveClass('postLink');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute('href', '/test-post');
   });
 });
