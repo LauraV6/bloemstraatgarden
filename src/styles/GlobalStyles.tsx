@@ -3,7 +3,6 @@ import { Global, css, useTheme } from '@emotion/react';
 export function GlobalStyles() {
   const theme = useTheme();
 
-  // Force re-render by using a key based on theme
   return (
     <Global
       key={theme.colors.background}
@@ -24,27 +23,6 @@ export function GlobalStyles() {
           width: 100%;
         }
 
-        :root {
-          --color-1: ${theme.colors.surface};
-          --color-2: ${theme.colors.background};
-          --color-3: ${theme.colors.border};
-          --color-4: ${theme.colors.primary};
-          --color-font: ${theme.colors.text};
-          --color-font-light: ${theme.colors.textSecondary};
-          --color-text-muted: ${theme.colors.textMuted};
-          --color-green-1: ${theme.colors.primaryDark};
-          --color-green-2: ${theme.colors.primary};
-          --color-green-5: ${theme.colors.green5};
-          --color-blue: ${theme.colors.secondary};
-          --color-error: ${theme.colors.error};
-          --color-error-bright: ${theme.colors.errorBright};
-          --color-correct: ${theme.colors.success};
-          --color-transparent: ${theme.colors.transparent};
-          --color-transparent-1: ${theme.colors.transparent1};
-          --color-menu: ${theme.colors.menu};
-          --font-pacaembu: ${theme.typography.fontFamilyHeading};
-        }
-
         body {
           font-family: ${theme.typography.fontFamily};
           font-size: 16px;
@@ -57,35 +35,6 @@ export function GlobalStyles() {
           margin: 0;
           width: 100%;
           max-width: 100vw;
-        }
-        
-        /* Prevent flash of wrong theme */
-        html[data-theme="dark"] body,
-        html.dark body {
-          background-color: #1a1d23;
-          color: #e1e1e1;
-        }
-        
-        html[data-theme="dark"] h1,
-        html[data-theme="dark"] h2,
-        html[data-theme="dark"] h3,
-        html[data-theme="dark"] h5,
-        html[data-theme="dark"] h6 {
-          color: #e1e1e1 !important;
-        }
-        
-        html[data-theme="light"] body,
-        html.light body {
-          background-color: #fffef9;
-          color: #111827;
-        }
-        
-        html[data-theme="light"] h1,
-        html[data-theme="light"] h2,
-        html[data-theme="light"] h3,
-        html[data-theme="light"] h5,
-        html[data-theme="light"] h6 {
-          color: #111827 !important;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -118,10 +67,6 @@ export function GlobalStyles() {
 
         h6 {
           font-size: ${theme.typography.fontSize.base};
-        }
-
-        p {
-          margin-bottom: ${theme.spacing.md};
         }
 
         a {
@@ -179,12 +124,6 @@ export function GlobalStyles() {
           }
         }
 
-        img {
-          max-width: 100%;
-          height: auto;
-          display: block;
-        }
-
         ul, ol {
           margin-bottom: ${theme.spacing.md};
           padding-left: ${theme.spacing.lg};
@@ -223,13 +162,7 @@ export function GlobalStyles() {
           font-style: italic;
           color: ${theme.colors.textSecondary};
         }
-
-        hr {
-          border: none;
-          border-top: 1px solid ${theme.colors.border};
-          margin: ${theme.spacing.xl} 0;
-        }
-
+          
         table {
           width: 100%;
           border-collapse: separate;
@@ -296,10 +229,6 @@ export function GlobalStyles() {
           border-width: 0;
         }
 
-        main {
-          transition: 0.3s;
-        }
-
         section {
           max-width: 1200px;
           padding: 0 1rem;
@@ -317,21 +246,11 @@ export function GlobalStyles() {
           }
         }
 
-        /* Logo text - black in light mode, white in dark mode */
-        .st3 {
-          fill: #000000 !important; /* Default to black */
-        }
-        
-        [data-theme="light"] .st3 {
-          fill: #000000 !important;
-        }
-        
-        [data-theme="dark"] .st3 {
-          fill: #ffffff !important;
-        }
-
-        /* Button styles - Match Dark/Light toggle design */
         button, .button, a.button, a.button--cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
           width: auto;
           border-radius: 40px;
           background-color: transparent;
@@ -367,12 +286,7 @@ export function GlobalStyles() {
             transform: translateY(0);
           }
 
-          /* CTA variant */
           &--cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             flex-shrink: 0;
             z-index: 2;
 
@@ -416,10 +330,6 @@ export function GlobalStyles() {
         button[disabled] {
           pointer-events: none;
           opacity: 0.8;
-        }
-        
-        [data-theme="dark"] .homepage-hero {
-          background-color: #1a1a1ae6;
         }
       `}
     />
