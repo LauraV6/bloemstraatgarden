@@ -109,22 +109,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       lang="nl" 
       suppressHydrationWarning
     >
-      <head>
-        {/* Theme initialization script - must run first to prevent flash */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme') || 'light';
-                  document.documentElement.setAttribute('data-theme', theme);
-                  document.documentElement.style.colorScheme = theme;
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-        
+      <head>     
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
