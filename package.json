@@ -38,6 +38,10 @@
     "web-vitals": "^5.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
     "@netlify/functions": "^4.2.4",
     "@next/bundle-analyzer": "^15.4.6",
     "@testing-library/jest-dom": "^6.6.4",

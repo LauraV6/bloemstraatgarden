@@ -27,6 +27,14 @@ const customJestConfig = {
     // Use babel-jest to transpile tests with the next/babel preset
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        jsx: 'react',
+        esModuleInterop: true,
+      },
+    },
+  },
   transformIgnorePatterns: [
     '/node_modules/(?!(@faker-js/faker)/)',
     '^.+\\.module\\.(css|sass|scss)$',
