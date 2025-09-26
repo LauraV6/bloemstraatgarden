@@ -4,6 +4,8 @@ export const ThemeProvider = ({ children }) => children
 
 export const css = () => {}
 
+export const keyframes = () => 'animation-name'
+
 export const Global = ({ styles, children }) => children
 
 export const useTheme = () => ({
