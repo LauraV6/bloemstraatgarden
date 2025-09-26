@@ -15,20 +15,20 @@ describe('NotFoundPage', () => {
   it('renders 404 message', () => {
     render(<NotFoundPage />);
 
-    expect(screen.getByText('404')).toBeInTheDocument();
     expect(screen.getByText(/Pagina niet gevonden/i)).toBeInTheDocument();
+    expect(screen.getByAltText('Pagina niet gevonden illustratie')).toBeInTheDocument();
   });
 
   it('displays helpful message', () => {
     render(<NotFoundPage />);
 
-    expect(screen.getByText(/De pagina die je zoekt bestaat niet/i)).toBeInTheDocument();
+    expect(screen.getByText(/Er zijn genoeg andere verhalen te lezen/i)).toBeInTheDocument();
   });
 
   it('renders home link', () => {
     render(<NotFoundPage />);
 
-    const homeLink = screen.getByRole('link', { name: /Terug naar home/i });
+    const homeLink = screen.getByRole('link', { name: /Terug naar startpagina/i });
     expect(homeLink).toBeInTheDocument();
     expect(homeLink).toHaveAttribute('href', '/');
   });
