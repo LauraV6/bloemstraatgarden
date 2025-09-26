@@ -131,19 +131,17 @@ interface PostsGridProps {
   url?: string;
 }
 
-const PostsGrid: React.FC<PostsGridProps> = ({ posts, url }) => (
-  <>
-    {posts.map((post, index) => (
-      <FadeIn key={post.sys.id}>
-        <PostCard 
-          props={post} 
-          url={url} 
-          priority={false}
-        />
-      </FadeIn>
-    ))}
-  </>
-);
+const PostsGrid: React.FC<PostsGridProps> = ({ posts, url }) => {
+  return posts.map((post, index) => (
+    <FadeIn key={post.sys.id}>
+      <PostCard
+        props={post}
+        url={url}
+        priority={false}
+      />
+    </FadeIn>
+  ));
+};
 
 const PostsGridSkeleton: React.FC<{ count: number }> = ({ count }) => (
   <BlogGrid>
