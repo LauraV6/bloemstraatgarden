@@ -1,153 +1,311 @@
-## Inhoudsopgave
+# 🌿 Bloemstraat Garden
 
-- [Overzicht](#overzicht)
-- [Belangrijkste features](#belangrijkste-features)
-- [Snel starten](#snel-starten)
-- [Scripts](#scripts)
-- [Tech stack](#tech-stack)
-- [Projectstructuur](#projectstructuur)
-- [Configuratie & Omgevingsvariabelen](#configuratie--omgevingsvariabelen)
+<div align="center">
+  <img src="public/logo.png" alt="Bloemstraat Garden Logo" width="200" />
+
+  **A modern gardening blog**
+</div>
+
+---
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Development](#development)
 - [Testing](#testing)
-- [Quality & Performance](#quality--performance)
-- [Accessibility & SEO](#accessibility--seo)
 - [Deployment](#deployment)
-- [Troubleshooting / FAQ](#troubleshooting--faq)
-- [Contributing](#contributing)
 
-## Overzicht
+---
 
-Bloemstraat Garden is een Next.js-app die content (o.a. blog/tips), een quiz, weergegevens en een eenvoudige winkelervaring (verkrijgbaar + winkelmand) samenbrengt. Doel: bezoekers informeren en converteren met snelle, toegankelijke UI en moderne best practices. Live link: `https://LauraV6.github.io/bloemstraatgarden` (indien geconfigureerd).
+## 🌟 Overview
 
-## Belangrijkste features
+Bloemstraat Garden is a full-featured Next.js application that combines a gardening blog, weather integration, interactive quizzes, and an e-commerce experience. Built with modern web technologies and best practices, it offers a fast, accessible, and SEO-optimized user experience.
 
-- **Contentful-integratie**: Content ophalen en tonen (posts/tips).  
-- **Verkrijgbaar + winkelmand**: Productoverzicht, toevoegen aan cart, order submit via Netlify Function.
-- **Weer-widget**: Huidige weersomstandigheden en tips gerelateerd aan tuinieren.  
-- **Quiz**: Interactieve quiz met scorelogica.  
-- **Dark/Light theme**: Thema wisselen met `next-themes`.  
-- **Performance monitoring**: Web Vitals en optimalisaties (SSR/ISR, code-splitting waar van toepassing).
+### Key Highlights
 
-## Snel starten
+- 🚀 **Performance First**: Optimized with Next.js 15's latest features
+- 🎨 **Modern Design**: Responsive UI with dark/light theme support
+- ♿ **Accessible**: WCAG compliant with semantic HTML and ARIA support
+- 🔍 **SEO Optimized**: Server-side rendering and metadata optimization
+- 📱 **Mobile First**: Responsive design that works on all devices
 
-Vereisten:
-- Node.js 18+ (aanbevolen 20)
-- npm 9+
+---
 
-Installatie en run:
+## ✨ Features
+
+### Content Management
+- **Blog & Tips Section**: Dynamic content powered by Contentful CMS
+- **Rich Media Support**: Images, videos, and interactive elements
+- **Category Filtering**: Organized content by topics and tags
+
+### E-Commerce
+- **Product Catalog**: Browse available plants and gardening supplies
+- **Shopping Cart**: Full cart functionality with local storage persistence
+- **Order Management**: Netlify Functions for secure order processing
+
+### Interactive Elements
+- **Weather Widget**: Real-time weather data with gardening recommendations
+- **Knowledge Quiz**: Test gardening knowledge with interactive quizzes
+- **Theme Toggle**: Seamless dark/light mode switching
+
+### Performance & UX
+- **Optimized Images**: Next.js Image component with lazy loading
+- **Code Splitting**: Automatic route-based splitting
+- **Web Vitals Monitoring**: Built-in performance tracking
+- **Progressive Enhancement**: Works without JavaScript enabled
+
+---
+
+## 🛠️ Tech Stack
+
+### Core
+- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
+- **Language**: [TypeScript 5](https://www.typescriptlang.org/)
+- **UI Library**: [React 19](https://react.dev/)
+
+### Styling & UI
+- **CSS**: Sass/SCSS with CSS Modules
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Theme**: [next-themes](https://github.com/pacocoursey/next-themes)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+
+### Data & State
+- **CMS**: [Contentful](https://www.contentful.com/)
+- **GraphQL**: Apollo Client
+- **State Management**: React Context API
+- **Data Fetching**: SWR for client-side caching
+
+### Testing & Quality
+- **Testing**: Jest + React Testing Library
+- **Linting**: ESLint with Next.js config
+- **Type Checking**: TypeScript strict mode
+- **Bundle Analysis**: @next/bundle-analyzer
+
+### Infrastructure
+- **Hosting**: [Netlify](https://www.netlify.com/)
+- **Functions**: Netlify Functions for serverless APIs
+- **Analytics**: Google Analytics 4
+- **Monitoring**: Web Vitals tracking
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ (20 recommended)
+- npm 9+ or yarn
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/LauraV6/bloemstraatgarden.git
+   cd bloemstraatgarden
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env.local` file in the root directory:
+   ```env
+   # Contentful CMS
+   NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your_space_id
+   NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your_access_token
+
+   # Optional: Analytics
+   NEXT_PUBLIC_GA_ID=your_google_analytics_id
+
+   # Netlify (for deployment)
+   NETLIFY_AUTH_TOKEN=your_netlify_token
+   NETLIFY_SITE_ID=your_site_id
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+5. **Open your browser**
+
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Quick Commands
 
 ```bash
-npm install
-npm run dev
-# Open http://localhost:3000
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm start           # Start production server
+
+# Testing
+npm test            # Run tests
+npm run test:watch  # Run tests in watch mode
+npm run test:coverage # Generate coverage report
+
+# Code Quality
+npm run lint        # Run ESLint
+npm run type-check  # Run TypeScript compiler
+
+# Analysis
+npm run build:analyze # Analyze bundle size
 ```
 
-Build en start productie:
+---
+
+## 📁 Project Structure
+
+```
+bloemstraatgarden/
+├── src/
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── layout.tsx          # Root layout
+│   │   ├── page.tsx            # Homepage
+│   │   ├── tips/               # Tips section
+│   │   ├── quiz/               # Quiz feature
+│   │   ├── verkrijgbaar/       # Products catalog
+│   │   └── [slug]/             # Dynamic blog posts
+│   │
+│   ├── components/             # React components
+│   │   ├── common/            # Reusable UI components
+│   │   ├── features/          # Feature-specific components
+│   │   │   ├── posts/         # Blog post components
+│   │   │   ├── cart/          # Shopping cart
+│   │   │   ├── weather/       # Weather widget
+│   │   │   └── quiz/          # Quiz components
+│   │   └── layout/            # Layout components
+│   │
+│   ├── context/               # React Context providers
+│   ├── hooks/                 # Custom React hooks
+│   ├── lib/                   # Core libraries
+│   │   ├── contentful/        # CMS integration
+│   │   ├── graphql/           # GraphQL queries
+│   │   └── performance/       # Performance utilities
+│   │
+│   ├── services/              # Business logic
+│   ├── types/                 # TypeScript definitions
+│   └── utils/                 # Utility functions
+│
+├── public/                    # Static assets
+├── netlify/                   # Netlify Functions
+├── __tests__/                 # Test files
+└── docs/                      # Documentation
+```
+
+---
+
+## 💻 Development
+
+### Code Style
+
+We follow strict TypeScript and React best practices:
+
+- **TypeScript**: Strict mode enabled
+- **Components**: Functional components with hooks
+- **Imports**: Absolute imports using `@/` alias
+
+### Environment Variables
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_CONTENTFUL_SPACE_ID` | Yes | Contentful space identifier |
+| `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN` | Yes | Contentful delivery API token |
+| `NEXT_PUBLIC_GA_ID` | No | Google Analytics tracking ID |
+| `NETLIFY_AUTH_TOKEN` | No | For CI/CD deployments |
+| `NETLIFY_SITE_ID` | No | Netlify site identifier |
+
+### Development Workflow
+
+1. Create a feature branch
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. Make your changes
+3. Run tests and linting
+   ```bash
+   npm test
+   npm run lint
+   ```
+
+4. Commit with conventional commits
+   ```bash
+   git commit -m "feat: add new feature"
+   ```
+
+5. Push and create a pull request
+
+---
+
+## 🧪 Testing
+
+### Test Stack
+- **Framework**: Jest
+- **React Testing**: React Testing Library
+- **Coverage**: Istanbul
+
+### Running Tests
 
 ```bash
-npm run build
-npm start
-```
-
-Codekwaliteit:
-
-```bash
-npm run lint
-```
-
-## Scripts
-
-Uit `package.json`:
-
-- **dev**: start ontwikkelserver (`next dev`).
-- **build**: bouwt productiebuild (`next build`).
-- **build:analyze**: bouw met bundle analyzer (`ANALYZE=true`).
-- **start**: start productie (`next start`).
-- **lint**: voer ESLint uit.
-- **test**: draai Jest-tests.
-- **test:watch**: tests in watch-modus.
-- **test:coverage**: tests met coverage rapporten.
-
-Voorbeelden:
-
-```bash
-npm run dev
-npm run build:analyze
-npm run test:coverage
-```
-
-## Tech stack
-
-- **Framework**: Next.js ^15, React ^19, TypeScript ^5
-- **Styling**: Sass (SCSS)
-- **State/Providers**: Context API (bijv. ShoppingCartProvider)
-- **CMS**: Contentful SDK
-- **Data**: GraphQL (`@apollo/client`, `graphql`) waar van toepassing
-- **Animaties**: framer-motion
-- **Thema**: next-themes
-- **Testing**: Jest, React Testing Library, jsdom
-- **Deploy**: Netlify (`@netlify/plugin-nextjs`, Netlify Functions)
-
-## Projectstructuur
-
-Compacte mappenboom (hoofdonderdelen):
-
-```
-src/
-  app/               # Next.js app router pagina's (home, tips, quiz, [slug], verkrijgbaar)
-  components/        # UI en feature-componenten (cart, posts, weather, layout)
-  context/           # ShoppingCartContext provider
-  hooks/             # Custom hooks (Contentful, IntersectionObserver)
-  lib/               # API-clients, performance, analytics, quizlogica
-  services/          # orderService (bestellingen)
-  types/             # TypeScript types (contentful, features, api)
-  utils/             # Hulpfuncties (DateFormatter, Shuffle)
-netlify/functions/   # Netlify serverless (submit-order)
-```
-
-## Configuratie & Omgevingsvariabelen
-
-Maak `.env.local` met:
-
-```bash
-NEXT_PUBLIC_CONTENTFUL_SPACE_ID=[TODO: space id]
-NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=[TODO: delivery token]
-NEXT_PUBLIC_GA_ID=[OPTIONEEL: Google Analytics ID]
-
-NETLIFY_AUTH_TOKEN=[voor CI/preview deploys]
-NETLIFY_SITE_ID=[site id]
-```
-
-TypeScript `paths` alias: `@/*` verwijst naar `./src/*` (zie `tsconfig.json`).
-
-## Testing
-
-Test commando's:
-
-```bash
+# Run all tests
 npm test
+
+# Watch mode for development
 npm run test:watch
+
+# Generate coverage report
 npm run test:coverage
+
+# Update snapshots
+npm test -- -u
 ```
 
-Coverage thresholds (uit `jest.config.js` globaal): branches 18%, functions 20%, lines 19%, statements 19%. Specifieke mappen (`src/services`, `src/lib/performance`) hebben 80–85% drempels. Coverage rapporten in `coverage/` (html/lcov/json).
+### Coverage Thresholds
 
-Meer details zie `TESTING.md`.
+| Type | Global | Services | Performance |
+|------|--------|----------|-------------|
+| Branches | 18% | 80% | 85% |
+| Functions | 20% | 80% | 85% |
+| Lines | 19% | 80% | 85% |
+| Statements | 19% | 80% | 85% |
 
-## Quality & Performance
+Coverage reports are generated in `/coverage` directory.
 
-- **ESLint**: `npm run lint` (Next + TypeScript regels).
-- **Performance**: gebruik van Web Vitals; optimalisaties via Next.js (SSR/ISR), kritieke CSS (`critters`), code-splitting.  
-- **Bundles**: analyse via `npm run build:analyze` met `@next/bundle-analyzer`.
+---
 
-## Accessibility & SEO
+## 🚢 Deployment
 
-- Richtlijnen: semantische HTML, toetsenbordtoegankelijkheid, aria-attributen waar nodig.
-- Thema-contrasten via dark/light theme.  
-- SEO: Next.js app router best practices. [TODO] Overweeg `next-seo` of meta-config uitbreiden.
+### Netlify Deployment
 
-## Deployment
+The project is configured for automatic deployment on Netlify:
 
-Netlify-config in `netlify.toml`:
+1. **Connect Repository**: Link your GitHub repository to Netlify
+2. **Configure Build**:
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+3. **Set Environment Variables**: Add all required env variables in Netlify dashboard
+4. **Deploy**: Automatic deploys on push to main branch
+
+### Configuration
+
+The `netlify.toml` file handles:
+- Build settings
+- Function routing
+- Redirect rules
+- Plugin configuration
 
 ```toml
 [build]
@@ -157,27 +315,47 @@ Netlify-config in `netlify.toml`:
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-
-[[redirects]]
-  from = "/api/orders/*"
-  to = "/.netlify/functions/submit-order"
-  status = 200
 ```
 
-Stappen:
+### Preview Deployments
 
-1. Koppel Git-repo aan Netlify.
-2. Stel build commando `npm run build` in; publish directory `.next` (Next on Netlify plugin handelt routing bundling af).
-3. Voeg ENV-variabelen toe (Contentful, GA, Netlify tokens/site id).
-4. Deploy. Voor previews: gebruik Netlify PR deploys.
+Pull requests automatically trigger preview deployments with unique URLs for testing.
 
-## Troubleshooting / FAQ
+---
 
-- **Kan module alias `@/` niet vinden**: cache wissen `npm test -- --clearCache` en controleer `tsconfig.paths` en Jest `moduleNameMapper`.
-- **`fetch is not defined` in tests**: mock `global.fetch` in de test.
-- **Stijl- of asset-import errors in tests**: wordt afgehandeld via `identity-obj-proxy` en `__mocks__/fileMock.js`.
-- **Langzame builds**: draai `build:analyze` om grote bundles te vinden; bekijk `framer-motion`/`fontawesome` imports voor tree-shaking.
+### Quick Start for Contributors
 
-## Contributing
+1. Fork the repository
+2. Create your feature branch
+3. Make your changes
+4. Add tests for new features
+5. Ensure all tests pass
+6. Submit a pull request
 
-Workflow suggestie: feature branches, PR's met beschrijving, groene checks (lint, test, build) vereist. Schrijf duidelijke commit messages en voeg tests toe voor nieuwe functionaliteit.
+### Commit Convention
+
+We use conventional commits:
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation changes
+- `style:` Code style changes
+- `refactor:` Code refactoring
+- `test:` Test additions or changes
+- `chore:` Maintenance tasks
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Content managed with [Contentful](https://www.contentful.com/)
+- Hosted on [Netlify](https://www.netlify.com/)
+- Icons from [React Icons](https://react-icons.github.io/react-icons/)
+
+---
+
+<div align="center">
+  Made with ❤️ by Laura
+
+  [Website](https://bloemstraatgarden.nl) | [GitHub](https://github.com/LauraV6/bloemstraatgarden)
+</div>
