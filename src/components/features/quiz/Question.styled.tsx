@@ -50,7 +50,7 @@ export const QuestionAmount = styled.div`
   font-weight: ${props => props.theme.typography.fontWeight.normal};
   
   @media (max-width: ${props => props.theme.breakpoints.sm}) {
-    top: -35px;
+    top: -27px;
     right: 10px;
     font-size: ${props => props.theme.typography.fontSize.xs};
     padding: 2px 6px;
