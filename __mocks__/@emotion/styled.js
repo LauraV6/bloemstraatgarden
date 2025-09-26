@@ -3,25 +3,21 @@ const React = require('react')
 const styled = (Component, options) => {
   const StyledComponent = (stylesFn) => {
     return React.forwardRef((props, ref) => {
-      let filteredProps = { ...props }
+      const { as: AsComponent = Component, ...restProps } = props
 
-      // Filter out props that shouldn't be forwarded to DOM
-      if (options?.shouldForwardProp) {
-        filteredProps = Object.keys(props).reduce((acc, key) => {
-          if (options.shouldForwardProp(key)) {
-            acc[key] = props[key]
-          }
-          return acc
-        }, {})
-      }
-
-      const { as: AsComponent = Component, ...restProps } = filteredProps
+      // Filter out props that start with $ (transient props)
+      const filteredProps = Object.keys(restProps).reduce((acc, key) => {
+        if (!key.startsWith('$')) {
+          acc[key] = restProps[key]
+        }
+        return acc
+      }, {})
 
       if (typeof AsComponent === 'string') {
-        return React.createElement(AsComponent, { ...restProps, ref })
+        return React.createElement(AsComponent, { ...filteredProps, ref })
       }
 
-      return React.createElement(AsComponent, { ...restProps, ref })
+      return React.createElement(AsComponent, { ...filteredProps, ref })
     })
   }
 

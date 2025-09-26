@@ -1,10 +1,6 @@
 # 🌿 Bloemstraat Garden
 
-<div align="center">
-  <img src="public/logo.png" alt="Bloemstraat Garden Logo" width="200" />
-
-  **A modern gardening blog**
-</div>
+**A modern gardening blog**
 
 ---
 
