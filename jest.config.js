@@ -25,6 +25,7 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   transform: {
     // Use babel-jest to transpile tests with the next/babel preset
+    // This only affects tests, not the build process
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   globals: {
