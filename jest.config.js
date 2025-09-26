@@ -13,9 +13,13 @@ const customJestConfig = {
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
     '^@/(.*)$': '<rootDir>/src/$1',
-    
+
     // Handle image imports
     '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$': '<rootDir>/__mocks__/fileMock.js',
+
+    // Mock @emotion packages to avoid theme issues in tests
+    '@emotion/styled': '<rootDir>/__mocks__/@emotion/styled.js',
+    '@emotion/react': '<rootDir>/__mocks__/@emotion/react.js',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
