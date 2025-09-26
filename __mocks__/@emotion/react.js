@@ -1,8 +1,14 @@
-import React from 'react'
+const React = require('react')
 
 export const ThemeProvider = ({ children }) => children
 
 export const css = () => {}
+
+export const keyframes = () => 'animation-name'
+
+export const jsx = (type, props, key) => React.createElement(type, { ...props, key })
+export const jsxs = jsx
+export const Fragment = React.Fragment
 
 export const Global = ({ styles, children }) => children
 

@@ -1,15 +1,23 @@
-import React from 'react'
+const React = require('react')
 
 const styled = (Component) => {
   const StyledComponent = (stylesFn) => {
     return React.forwardRef((props, ref) => {
       const { as: AsComponent = Component, ...restProps } = props
 
+      // Filter out props that start with $ (transient props)
+      const filteredProps = Object.keys(restProps).reduce((acc, key) => {
+        if (!key.startsWith('$')) {
+          acc[key] = restProps[key]
+        }
+        return acc
+      }, {})
+
       if (typeof AsComponent === 'string') {
-        return React.createElement(AsComponent, { ...restProps, ref })
+        return React.createElement(AsComponent, { ...filteredProps, ref })
       }
 
-      return <AsComponent {...restProps} ref={ref} />
+      return React.createElement(AsComponent, { ...filteredProps, ref })
     })
   }
 
