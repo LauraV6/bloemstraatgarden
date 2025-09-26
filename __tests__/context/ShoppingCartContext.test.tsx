@@ -104,8 +104,8 @@ describe('ShoppingCartContext', () => {
       const { result } = renderHook(() => useShoppingCart(), { wrapper })
 
       act(() => {
-        result.current.addToCart(createMockVerkrijgbaar(), 2)
-        result.current.addToCart(createMockVerkrijgbaar(), 3)
+        result.current.addToCart(createMockVerkrijgbaar({ sys: { id: 'item-1' } }), 2)
+        result.current.addToCart(createMockVerkrijgbaar({ sys: { id: 'item-2' } }), 3)
       })
 
       expect(result.current.cartItems).toHaveLength(2)

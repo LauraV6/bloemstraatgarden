@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '../../../test-utils';
 import '@testing-library/jest-dom';
 import AvailableCard from '@/components/features/available/AvailableCard';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
