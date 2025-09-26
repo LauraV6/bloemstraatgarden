@@ -111,7 +111,7 @@ describe('PostCard', () => {
 
     render(<PostCard props={postWithoutImageTitle} />);
     
-    const image = screen.getByAltText('Test Post Title');
+    const image = screen.getByAltText('Afbeelding bij artikel: Test Post Title');
     expect(image).toBeInTheDocument();
   });
 

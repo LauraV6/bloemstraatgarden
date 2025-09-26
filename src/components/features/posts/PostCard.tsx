@@ -96,7 +96,7 @@ export const PostCard: React.FC<PostCardProps> = ({
   const imageAlt = props.articleImage.title || `Afbeelding bij artikel: ${props.title}`;
 
   return (
-    <PostCardContainer className={className} isActive={true}>
+    <PostCardContainer className={className}>
       <PostLink 
         as={Link}
         href={postUrl}

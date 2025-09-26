@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
-export const PostCardContainer = styled.article<{ isActive?: boolean }>`
+export const PostCardContainer = styled.article`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -23,17 +22,15 @@ export const PostCardContainer = styled.article<{ isActive?: boolean }>`
     text-decoration: none;
   }
 
-  ${props => props.isActive && css`
-    &:hover, &:active {
-      @media (min-width: ${props.theme.breakpoints.md}) {
-        transform: scale(1.05);
-      }
-      
-      h2 {
-        color: ${props.theme.colors.secondary};
-      }
+  &:hover, &:active {
+    @media (min-width: ${props => props.theme.breakpoints.md}) {
+      transform: scale(1.05);
     }
-  `}
+
+    h2 {
+      color: ${props => props.theme.colors.secondary};
+    }
+  }
 `;
 
 export const PostLink = styled.a`

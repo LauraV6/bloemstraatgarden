@@ -1,15 +1,27 @@
-import React from 'react'
+const React = require('react')
 
-const styled = (Component) => {
+const styled = (Component, options) => {
   const StyledComponent = (stylesFn) => {
     return React.forwardRef((props, ref) => {
-      const { as: AsComponent = Component, ...restProps } = props
+      let filteredProps = { ...props }
+
+      // Filter out props that shouldn't be forwarded to DOM
+      if (options?.shouldForwardProp) {
+        filteredProps = Object.keys(props).reduce((acc, key) => {
+          if (options.shouldForwardProp(key)) {
+            acc[key] = props[key]
+          }
+          return acc
+        }, {})
+      }
+
+      const { as: AsComponent = Component, ...restProps } = filteredProps
 
       if (typeof AsComponent === 'string') {
         return React.createElement(AsComponent, { ...restProps, ref })
       }
 
-      return <AsComponent {...restProps} ref={ref} />
+      return React.createElement(AsComponent, { ...restProps, ref })
     })
   }
 
