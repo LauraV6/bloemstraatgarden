@@ -53,13 +53,12 @@ const HeroText = styled.div`
 `;
 
 const QuizHeader = styled.h1`
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
   color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.typography.fontFamilyHeading};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
-    margin-bottom: ${({ theme }) => theme.spacing.xl};
   }
 `;
 

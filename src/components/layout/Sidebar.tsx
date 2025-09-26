@@ -22,7 +22,7 @@ interface QuizSectionProps {
 const ANIMATION_DURATION = 0.3;
 const PROFILE_DATA = {
   name: "Laura",
-  description: "Overdag programmeur en in de avonduren moestuinierder. Wil jij ook een moestuin beginnen? Laat je op dit blog inspireren om de handen uit de mouwen te steken.",
+  description: "Overdag developer en in de avonduren moestuinierder. Wil jij ook een moestuin beginnen? Laat je op dit blog inspireren om de handen uit de mouwen te steken.",
   profileImage: "/profile.png"
 } as const;
 
