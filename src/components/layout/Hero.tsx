@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from "next/image";
+import { useTheme } from 'next-themes';
 import { HeroContainer, HeroContainer2, HeroText, HeroImages, LeaveImage, HomePageTitle } from './Hero.styled';
 
 interface HeroProps {
@@ -60,26 +61,29 @@ const LeafImage: React.FC<LeafImageProps> = ({ src, variant, alt }) => (
   </LeaveImage>
 );
 
-export const Hero: React.FC<HeroProps> = ({ 
-  theme, 
-  title, 
-  paragraph, 
+export const Hero: React.FC<HeroProps> = ({
+  theme,
+  title,
+  paragraph,
   className,
   forceWhiteText = false,
   isHomePage = false
 }) => {
   const [mounted, setMounted] = React.useState(false);
-  
+  const { resolvedTheme } = useTheme();
+  const isDarkMode = mounted ? resolvedTheme === 'dark' : false;
+
   React.useEffect(() => {
     setMounted(true);
   }, []);
-    
+
   return (
     <HeroContainer
       className={`${className || ''} ${isHomePage ? 'homepage-hero' : ''}`}
       style={{ backgroundImage: `url(/headerBgTransparent.png)` }}
       role="banner"
       aria-labelledby="hero-title"
+      isDark={isDarkMode}
     >
       <HeroContainer2>
         <HeroText>
