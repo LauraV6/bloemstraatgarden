@@ -1,5 +1,9 @@
 const React = require('react')
 
+export const jsx = (type, props, key) => React.createElement(type, { ...props, key })
+export const jsxs = jsx
+export const Fragment = React.Fragment
+
 export const ThemeProvider = ({ children }) => children
 
 export const css = () => {}

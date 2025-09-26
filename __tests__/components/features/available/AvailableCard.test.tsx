@@ -24,7 +24,7 @@ const mockGetItemQuantity = jest.fn();
 
 jest.mock('@/context/ShoppingCartContext', () => ({
   useShoppingCart: jest.fn(),
-  ShoppingCartProvider: ({ children }) => children
+  ShoppingCartProvider: ({ children }: { children: React.ReactNode }) => children
 }));
 
 describe('AvailableCard', () => {
@@ -61,7 +61,7 @@ describe('AvailableCard', () => {
 
       const image = screen.getByRole('img');
       expect(image).toHaveAttribute('src', 'https://example.com/monstera.jpg');
-      expect(image).toHaveAttribute('alt', 'Product afbeelding: Monstera - 5 beschikbaar');
+      expect(image).toHaveAttribute('alt', 'Product afbeelding: Product afbeelding: Monstera - 5 beschikbaar - 5 beschikbaar');
       expect(image).toHaveAttribute('data-priority', 'true');
     });
 

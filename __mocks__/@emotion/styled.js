@@ -1,6 +1,6 @@
 const React = require('react')
 
-const styled = (Component) => {
+const styled = (Component, options) => {
   const StyledComponent = (stylesFn) => {
     return React.forwardRef((props, ref) => {
       const { as: AsComponent = Component, ...restProps } = props
