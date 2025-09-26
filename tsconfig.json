@@ -33,8 +33,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
-    ".next/types/**/*.ts",
-    "jest-dom.d.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
