@@ -1,15 +1,10 @@
 'use client';
 
-import { Suspense } from "react";
 import { TitleLine } from "@/components/ui/TitleLine/TitleLine";
 import PostsGridClient from "@/components/features/posts/PostsGridClient";
 import TipsGridApollo from "@/components/features/tips/TipsGridApollo";
 import States from "@/components/features/states/States";
 import Stock from "@/components/features/stocking/Stock";
-import PostCardSkeleton from "@/components/features/posts/PostCardSkeleton";
-import TipCardSkeleton from "@/components/features/tips/TipCardSkeleton";
-import StockSkeleton from "@/components/features/stocking/StockSkeleton";
-import StatesSkeleton from "@/components/features/states/StatesSkeleton";
 import HomePageClient from "@/components/HomePageClient";
 
 interface PageSectionProps {
@@ -37,15 +32,6 @@ const PageSection: React.FC<PageSectionProps> = ({ title, children, className })
     <TitleLine title={title} />
     {children}
   </section>
-);
-
-// Loading Components
-const PostsLoadingFallback = () => (
-  <PostCardSkeleton amount={PAGE_CONTENT.skeletonCounts.posts} />
-);
-
-const TipsLoadingFallback = () => (
-  <TipCardSkeleton amount={PAGE_CONTENT.skeletonCounts.tips} />
 );
 
 export default function Home() {

@@ -7,9 +7,19 @@ export const HeroWrapper = styled.div`
   
   #hero-title {
     color: hsl(0, 0%, 100%) !important;
+    font-size: 1.5rem;
 
     + p {
       color: hsl(0, 0%, 100%) !important;
+    }
+  
+    @media (min-width: ${props => props.theme?.breakpoints?.md || '768px'}) {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+    }
+    
+    @media (min-width: ${props => props.theme?.breakpoints?.lg || '1024px'}) {
+      font-size: 4rem;
     }
   }
 `;

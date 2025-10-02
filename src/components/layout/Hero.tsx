@@ -4,6 +4,7 @@ import React from 'react';
 import Image from "next/image";
 import { useTheme } from 'next-themes';
 import { HeroContainer, HeroContainer2, HeroText, HeroImages, LeaveImage, HomePageTitle } from './Hero.styled';
+import SearchBar from '../features/search/SearchBar';
 
 interface HeroProps {
   theme?: 'dark' | 'light';
@@ -65,7 +66,6 @@ export const Hero: React.FC<HeroProps> = ({
   theme,
   title,
   paragraph,
-  className,
   forceWhiteText = false,
   isHomePage = false
 }) => {
@@ -79,7 +79,6 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <HeroContainer
-      className={`${className || ''} ${isHomePage ? 'homepage-hero' : ''}`}
       style={{ backgroundImage: `url(/headerBgTransparent.png)` }}
       role="banner"
       aria-labelledby="hero-title"
@@ -105,6 +104,9 @@ export const Hero: React.FC<HeroProps> = ({
             >
               {paragraph}
             </p>
+            {isHomePage && (
+              <SearchBar />
+            )}
           </div>
         </HeroText>
         
