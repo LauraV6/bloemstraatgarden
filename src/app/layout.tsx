@@ -177,9 +177,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 </a>
                 <div id="__next">
                   <Header />
-                  <main id="main-content" role="main">
-                    {children}
-                  </main>
+                  {children}
                   <Footer />
                   <Analytics />
                   <PerformanceMonitor />

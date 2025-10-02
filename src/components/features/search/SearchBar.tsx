@@ -4,7 +4,9 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useArticles } from '@/hooks/useContentful'
-import styled from 'styled-components'
+import { useTheme } from 'next-themes'
+import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 const SearchContainer = styled.div`
   position: relative;
@@ -12,7 +14,7 @@ const SearchContainer = styled.div`
   margin-top: 2rem;
 `
 
-const SearchInput = styled.input`
+const SearchInput = styled.input<{ isDarkMode?: boolean }>`
   width: 100%;
   padding: 12px 20px;
   font-size: 16px;
@@ -20,16 +22,19 @@ const SearchInput = styled.input`
   border-radius: 25px;
   outline: none;
   transition: border-color 0.3s;
+  background: ${props => props.isDarkMode ? 'hsla(0, 0%, 0%, .1)' : 'hsla(0, 0%, 100%, .1)'};
+  text-align: center;
+  filter: brightness(0.7);
   max-width: 400px;
-  
+
   &:focus {
     border-color: #4CAF50;
   }
-  
+
   &::placeholder {
     color: #999;
   }
-  
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
@@ -39,7 +44,7 @@ const SearchInput = styled.input`
 
 const SearchResults = styled.div<{ position?: { top: number; left: number; width: number } }>`
   position: fixed;
-  ${props => props.position && `
+  ${props => props.position && css`
     top: ${props.position.top}px;
     left: ${props.position.left}px;
     width: ${props.position.width}px;
@@ -59,11 +64,11 @@ const ResultItem = styled(Link)`
   text-decoration: none;
   transition: background-color 0.2s;
   border-bottom: 1px solid #f0f0f0;
-  
+
   &:hover {
     background-color: #f8f8f8;
   }
-  
+
   &:last-child {
     border-bottom: none;
   }
@@ -103,18 +108,21 @@ const SearchBar = () => {
   const [mounted, setMounted] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  
+
+  const { resolvedTheme } = useTheme()
+  const isDarkMode = resolvedTheme === 'dark'
+
   // Fetch articles with error handling
   const { articles, loading, error } = useArticles(100)
-  
+
   // Check if API is available
   const isDisabled = !!error || (!loading && (!articles || articles.length === 0))
-  
+
   // Set mounted state
   useEffect(() => {
     setMounted(true)
   }, [])
-  
+
   // Update position when showing results
   useEffect(() => {
     if (showResults && inputRef.current) {
@@ -126,7 +134,7 @@ const SearchBar = () => {
       })
     }
   }, [showResults])
-  
+
   // Update position on scroll/resize
   useEffect(() => {
     const updatePosition = () => {
@@ -139,34 +147,34 @@ const SearchBar = () => {
         })
       }
     }
-    
+
     if (showResults) {
       window.addEventListener('scroll', updatePosition)
       window.addEventListener('resize', updatePosition)
-      
+
       return () => {
         window.removeEventListener('scroll', updatePosition)
         window.removeEventListener('resize', updatePosition)
       }
     }
   }, [showResults])
-  
+
   // Filter articles based on search term using useMemo
   const filteredArticles = useMemo(() => {
     if (!searchTerm.trim() || !articles || articles.length === 0) {
       return []
     }
-    
+
     const lowerSearchTerm = searchTerm.toLowerCase()
-    
+
     return articles
-      .filter(article => 
+      .filter(article =>
         article?.title?.toLowerCase().includes(lowerSearchTerm) ||
         article?.summary?.toLowerCase().includes(lowerSearchTerm)
       )
       .slice(0, 8)
   }, [searchTerm, articles])
-  
+
   // Handle clicking outside to close results
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -179,11 +187,11 @@ const SearchBar = () => {
         }
       }
     }
-    
+
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
-  
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
     if (e.target.value.trim()) {
@@ -192,23 +200,23 @@ const SearchBar = () => {
       setShowResults(false)
     }
   }
-  
+
   const handleResultClick = () => {
     setSearchTerm('')
     setShowResults(false)
   }
-  
+
   // Log error for debugging
   if (error) {
     console.error('SearchBar API error:', error)
   }
-  
+
   return (
     <SearchContainer ref={searchRef}>
       <SearchInput
         ref={inputRef}
         type="search"
-        placeholder={isDisabled ? "Zoeken tijdelijk niet beschikbaar" : "Zoek in de kennisbank..."}
+        placeholder={isDisabled ? "Zoeken tijdelijk niet beschikbaar" : "Zoek moestuin artikel..."}
         value={searchTerm}
         onChange={handleInputChange}
         onFocus={() => {
@@ -218,20 +226,21 @@ const SearchBar = () => {
         }}
         disabled={isDisabled}
         title={isDisabled ? "Zoekfunctie is momenteel niet beschikbaar" : undefined}
+        isDarkMode={isDarkMode}
       />
-      
+
       {mounted && showResults && searchTerm.trim() && !isDisabled && inputPosition && createPortal(
         <SearchResults id="search-portal-content" position={inputPosition}>
           {loading && (
             <LoadingMessage>Zoeken...</LoadingMessage>
           )}
-          
+
           {!loading && filteredArticles.length > 0 && (
             <>
               {filteredArticles.map((article) => (
-                <ResultItem 
-                  key={article.sys.id} 
-                  href={`/kennisbank/${article.slug}`}
+                <ResultItem
+                  key={article.sys.id}
+                  href={`/${article.slug}`}
                   onClick={handleResultClick}
                 >
                   <ResultTitle>{article.title}</ResultTitle>
@@ -242,7 +251,7 @@ const SearchBar = () => {
               ))}
             </>
           )}
-          
+
           {!loading && filteredArticles.length === 0 && (
             <NoResults>Geen artikelen gevonden</NoResults>
           )}
