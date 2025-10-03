@@ -13,7 +13,7 @@ export const PostItem = styled.article`
 
   button {
     border: 1px solid ${props => props.theme.colors.white};
-    
+
     span {
       color: ${props => props.theme.colors.white};
     }
@@ -22,12 +22,10 @@ export const PostItem = styled.article`
   &:active,
   &:focus {
     transform: scale(1.05);
-    cursor: pointer;
 
     button {
       background-color: ${props => props.theme.colors.primary};
       border: 1px solid ${props => props.theme.colors.primary};
-      cursor: pointer;
     }
   }
 
@@ -80,5 +78,24 @@ export const PostItemContent = styled.div`
   h3, h4 {
     margin-bottom: 10px;
     color: ${props => props.theme.colors.white};
+  }
+`;
+
+export const StyledLink = styled.a`
+  &:hover,
+  &:active,
+  &:focus {
+    button {
+      background-color: ${props => props.theme.colors.primary};
+      border: 1px solid ${props => props.theme.colors.primary};
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+  }
+
+  &:active {
+    button {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4) 0px, rgba(0, 0, 0, 0.4) 0px);
+    }
   }
 `;
