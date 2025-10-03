@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useArticles } from '@/hooks/useContentful'
-import { useTheme } from 'next-themes'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
@@ -14,31 +13,31 @@ const SearchContainer = styled.div`
   margin-top: 2rem;
 `
 
-const SearchInput = styled.input<{ isDarkMode?: boolean }>`
+const SearchInput = styled.input`
   width: 100%;
   padding: 12px 20px;
   font-size: 16px;
-  border: 2px solid #e0e0e0;
+  border: 1px solid #a8a8a8ff;
   border-radius: 25px;
   outline: none;
   transition: border-color 0.3s;
-  background: ${props => props.isDarkMode ? 'hsla(0, 0%, 0%, .1)' : 'hsla(0, 0%, 100%, .1)'};
+  background: ${props => props.theme.colors.transparent1};
+  color: ${props => props.theme.colors.text};
   text-align: center;
-  filter: brightness(0.7);
   max-width: 400px;
 
   &:focus {
-    border-color: #4CAF50;
+    border-color: ${props => props.theme.colors.primary};
   }
 
   &::placeholder {
-    color: #999;
+    color: ${props => props.theme.colors.textMuted};
   }
 
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
-    background-color: #f5f5f5;
+    background-color: ${props => props.theme.colors.gray[100]};
   }
 `
 
@@ -49,9 +48,10 @@ const SearchResults = styled.div<{ position?: { top: number; left: number; width
     left: ${props.position.left}px;
     width: ${props.position.width}px;
   `}
-  background: white;
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: ${props => props.theme.shadows.lg};
   max-height: 400px;
   overflow-y: auto;
   z-index: 9999;
@@ -60,13 +60,22 @@ const SearchResults = styled.div<{ position?: { top: number; left: number; width
 const ResultItem = styled(Link)`
   display: block;
   padding: 12px 20px;
-  color: #333;
-  text-decoration: none;
+  color: ${props => props.theme.colors.text};
   transition: background-color 0.2s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
+  border-radius: 0;
 
   &:hover {
-    background-color: #f8f8f8;
+    background-color: ${props => props.theme.colors.gray[50]};
+  }
+
+  &:focus {
+    outline: none;
+    background-color: ${props => props.theme.colors.gray[100]};
+  }
+
+  &:hover, &:focus {
+    color: ${props => props.theme.colors.secondary};
   }
 
   &:last-child {
@@ -81,7 +90,7 @@ const ResultTitle = styled.div`
 
 const ResultSummary = styled.div`
   font-size: 14px;
-  color: #666;
+  color: ${props => props.theme.colors.textSecondary};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -92,13 +101,13 @@ const ResultSummary = styled.div`
 const NoResults = styled.div`
   padding: 20px;
   text-align: center;
-  color: #999;
+  color: ${props => props.theme.colors.textMuted};
 `
 
 const LoadingMessage = styled.div`
   padding: 20px;
   text-align: center;
-  color: #666;
+  color: ${props => props.theme.colors.textSecondary};
 `
 
 const SearchBar = () => {
@@ -108,9 +117,6 @@ const SearchBar = () => {
   const [mounted, setMounted] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-
-  const { resolvedTheme } = useTheme()
-  const isDarkMode = resolvedTheme === 'dark'
 
   // Fetch articles with error handling
   const { articles, loading, error } = useArticles(100)
@@ -226,7 +232,6 @@ const SearchBar = () => {
         }}
         disabled={isDisabled}
         title={isDisabled ? "Zoekfunctie is momenteel niet beschikbaar" : undefined}
-        isDarkMode={isDarkMode}
       />
 
       {mounted && showResults && searchTerm.trim() && !isDisabled && inputPosition && createPortal(

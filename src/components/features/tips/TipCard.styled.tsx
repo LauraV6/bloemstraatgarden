@@ -12,8 +12,11 @@ export const PostItem = styled.article`
   }
 
   button {
-    border: 1px solid hsl(0, 0%, 100%);
-  }
+    border: 1px solid ${props => props.theme.colors.white};
+    
+    span {
+      color: ${props => props.theme.colors.white};
+    }
 
   &:hover,
   &:active,
@@ -48,7 +51,7 @@ export const PostItemImage = styled.div`
     text-indent: 10px;
     text-transform: capitalize;
     border-radius: 5px;
-    color: hsl(0, 0%, 100%);
+    color: ${props => props.theme.colors.white};
     filter: brightness(90%);
     margin: 0;
   }
@@ -76,7 +79,6 @@ export const PostItemContent = styled.div`
 
   h3, h4 {
     margin-bottom: 10px;
-    color: white !important;
-    color: hsl(0, 0%, 100%) !important;
+    color: ${props => props.theme.colors.white};
   }
 `;

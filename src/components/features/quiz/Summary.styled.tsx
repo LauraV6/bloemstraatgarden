@@ -151,7 +151,7 @@ export const UserAnswer = styled.p<UserAnswerProps>`
 
   ${props => props.$status === 'correct' && `
     background-color: ${props.theme.colors.success};
-    color: ${props.theme.colors.primaryDark};
+    color: ${props.theme.colors.primary};
   `}
 `;
 

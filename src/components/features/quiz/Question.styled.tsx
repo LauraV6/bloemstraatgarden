@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { color } from 'framer-motion';
 
 export const QuizContainer = styled.div`
   position: relative;
@@ -78,31 +79,31 @@ export const ProgressBar = styled.progress<ProgressBarProps>`
   }
 
   &::-webkit-progress-value {
-    background: var(--color-3);
+    background: ${props => props.theme.colors.secondary};
     border-radius: 20px;
   }
 
   ${props => props.$status === 'answered' && `
-    background: var(--color-3);
+    background: ${props.theme.colors.secondary};
     
     &::-webkit-progress-value {
-      background: var(--color-3);
+      background: ${props.theme.colors.secondary};
     }
   `}
 
   ${props => props.$status === 'correct' && `
-    background: var(--color-correct);
+    background: ${props.theme.colors.success};
     
     &::-webkit-progress-value {
-      background: var(--color-correct);
+      background: ${props.theme.colors.success};
     }
   `}
 
   ${props => props.$status === 'wrong' && `
-    background: var(--color-error);
+    background: ${props.theme.colors.error};
     
     &::-webkit-progress-value {
-      background: var(--color-error);
+      background: ${props.theme.colors.error};
     }
   `}
 `;

@@ -12,7 +12,6 @@ import {
   RequiredIndicator,
   FormInput,
   ErrorMessage,
-  FormFooter,
   SubmitButton
 } from './OrderForm.styled';
 
@@ -199,21 +198,19 @@ export default function OrderForm({ onSubmit, onBack, isSubmitting }: OrderFormP
           )}
         </FormField>
         
-        <FormFooter>
-          <SubmitButton
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <FontAwesomeIcon icon={faSpinner} spin />
-                <span>Bestelling verzenden...</span>
-              </>
-            ) : (
-              <span>Bestelling verzenden</span>
-            )}
-          </SubmitButton>
-        </FormFooter>
+        <SubmitButton
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <FontAwesomeIcon icon={faSpinner} spin />
+              <span>Bestelling verzenden...</span>
+            </>
+          ) : (
+            <span>Bestelling verzenden</span>
+          )}
+        </SubmitButton>
       </OrderFormElement>
     </OrderFormContainer>
   );

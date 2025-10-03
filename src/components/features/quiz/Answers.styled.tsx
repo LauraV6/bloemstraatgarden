@@ -16,8 +16,6 @@ export const AnswersList = styled.ul`
   }
 `;
 
-export const AnswerItem = styled.li``;
-
 export const AnswerButton = styled.button`
   width: 100%;
   padding: 1rem 1.5rem;
@@ -50,24 +48,27 @@ export const AnswerButton = styled.button`
   
   &:disabled {
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.9;
   }
   
   &.selected {
     background-color: ${props => props.theme.colors.primary};
     border-color: ${props => props.theme.colors.primary};
-    color: white !important;
   }
   
   &.correct {
-    background-color: ${props => props.theme.colors.success};
+    background-color: ${props => props.theme.colors.primary};
     border-color: ${props => props.theme.colors.success};
-    color: white !important;
   }
   
   &.wrong {
-    background-color: ${props => props.theme.colors.error};
+    background-color: ${props => props.theme.colors.errorBright};
     border-color: ${props => props.theme.colors.error};
+  }
+
+  &.selected, &.correct, &.wrong {
+    cursor: not-allowed;
     color: white !important;
+    opacity: 0.5;
   }
 `;

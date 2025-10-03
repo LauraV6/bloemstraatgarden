@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnswersList, AnswerItem, AnswerButton } from "./Answers.styled";
+import { AnswersList, AnswerButton } from "./Answers.styled";
 
 interface AnswersProps {
   answers: string[];
@@ -81,7 +81,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
                 }
 
                 return (
-                    <AnswerItem key={`${answer}-${index}`}>
+                    <li key={`${answer}-${index}`}>
                         <AnswerButton 
                             onClick={() => onSelect && onSelect(answer)} 
                             className={`button button--cta ${cssClass}`} 
@@ -89,7 +89,7 @@ export default function Answers({ answers, selectedAnswer, answerState, onSelect
                         >
                             <span>{String(answer)}</span>
                         </AnswerButton>
-                    </AnswerItem>
+                    </li>
                 );
             })}
         </AnswersList>

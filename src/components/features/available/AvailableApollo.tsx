@@ -8,12 +8,12 @@ import styled from '@emotion/styled';
 
 const EmptyState = styled.div`
   text-align: center;
-  padding: ${({ theme }) => theme.spacing.xxl};
-  color: ${({ theme }) => theme.colors.textSecondary};
-  
+  padding: ${props => props.theme.spacing.xxl};
+  color: ${props => props.theme.colors.textSecondary};
+
   p {
-    margin-bottom: ${({ theme }) => theme.spacing.sm};
-    font-size: ${({ theme }) => theme.typography.fontSize.lg};
+    margin-bottom: ${props => props.theme.spacing.sm};
+    font-size: ${props => props.theme.typography.fontSize.lg};
   }
 `;
 
@@ -22,16 +22,16 @@ const AvailableGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
   padding: 2rem;
-  background-color: ${({ theme }) => theme.colors.green5};
+  background-color: ${props => props.theme.colors.green5};
   border-radius: 8px;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+
+  @media (max-width: ${props => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 1.5rem;
   }
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+  @media (min-width: ${props => props.theme.breakpoints.lg}) {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2.5rem;
   }

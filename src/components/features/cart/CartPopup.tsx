@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { useShoppingCart } from '@/context/ShoppingCartContext';
 import { orderService } from '@/services/orderService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faTrash, faPlus, faMinus, faSpinner, faCheck } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
+import { faTimes, faTrash, faSpinner, faCheck } from '@awesome.me/kit-7d648e8e96/icons/duotone/solid';
+import { faPlus, faMinus } from "@awesome.me/kit-7d648e8e96/icons/classic/solid";
 import OrderForm from './OrderForm';
 import {
   CartOverlay,

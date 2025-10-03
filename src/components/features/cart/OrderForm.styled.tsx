@@ -17,18 +17,18 @@ export const BackButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 1px solid hsl(152, 100%, 21%); /* --color-green-1 */
+  border: 1px solid ${props => props.theme.colors.primaryDark};
   background: transparent;
   border-radius: 0.375rem;
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: 0.875rem;
-  
+
   &:hover:not(:disabled) {
-    border-color: hsl(130, 47%, 42%); /* --color-green-2 */
+    border-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -53,49 +53,40 @@ export const FormField = styled.div`
 `;
 
 export const RequiredIndicator = styled.span`
-  color: hsl(0, 72%, 51%);
+  color: ${props => props.theme.colors.errorBright};
 `;
 
 export const FormInput = styled.input<{ hasError?: boolean }>`
   padding: 0.75rem;
-  border: 1px solid hsl(152, 100%, 21%); /* --color-green-1 */
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 0.375rem;
   font-size: 1rem;
-  background: ${props => props.theme.colors.background || 'rgba(255, 255, 255, 0.6)'}; /* --color-transparent-1 */
+  background: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.text};
   transition: all 0.2s ease;
-  
-  /* Dark theme override */
-  [data-theme="dark"] & {
-    background: rgba(255, 255, 255, 0.05); /* --color-transparent-1 dark */
-  }
-  
+
   &::placeholder {
     color: ${props => props.theme.colors.textSecondary};
     opacity: 0.6;
   }
-  
+
   &:focus {
     outline: none;
-    border-color: hsl(130, 47%, 42%); /* --color-green-2 */
+    border-color: ${props => props.theme.colors.primary};
   }
-  
+
   ${props => props.hasError && `
-    border-color: hsl(0, 72%, 51%);
-    
+    border-color: ${props.theme.colors.errorBright};
+
     &:focus {
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+      box-shadow: 0 0 0 3px ${props.theme.colors.error};
     }
   `}
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background: hsl(128, 22%, 85%, .2);
-    
-    [data-theme="dark"] & {
-      background: hsl(132, 4%, 26%);
-    }
+    background: ${props => props.theme.colors.gray[200]};
   }
 `;
 
@@ -104,16 +95,12 @@ export const ErrorMessage = styled.span`
   align-items: center;
   gap: 0.375rem;
   font-size: 0.875rem;
-  color: hsl(0, 72%, 51%);
-  
+  color: ${props => props.theme.colors.errorBright};
+
   svg {
     width: 1rem;
     height: 1rem;
   }
-`;
-
-export const FormFooter = styled.div`
-  /* Container for form footer elements if needed */
 `;
 
 export const SubmitButton = styled.button`
@@ -121,7 +108,7 @@ export const SubmitButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  background-color: hsl(130, 47%, 42%); /* --color-green-2 */
+  background-color: ${props => props.theme.colors.primary};
   width: 100%;
   font-weight: 600;
   border: none;
@@ -132,13 +119,13 @@ export const SubmitButton = styled.button`
   transition: all 0.2s ease;
 
   span {
-    color: hsl(0, 0%, 100%);
+    color: ${props => props.theme.colors.white};
   }
 
   &:hover:not(:disabled) {
-    background-color: hsl(152, 100%, 21%); /* --color-green-1 */
+    background-color: ${props => props.theme.colors.primaryDark};
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: ${props => props.theme.shadows.md};
   }
 
   &:disabled {
