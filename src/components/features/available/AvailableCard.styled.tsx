@@ -103,10 +103,18 @@ export const QuantityButton = styled.button`
   font-size: 0.75rem;
   padding: 0;
 
+  svg {
+    color: ${props => props.theme.colors.primaryDark};
+  }
+
   &:hover:not(:disabled) {
     background-color: ${props => props.theme.colors.primary};
-    color: white;
+    color: ${props => props.theme.colors.white};
     border-color: ${props => props.theme.colors.primary};
+
+    svg {
+      color: ${props => props.theme.colors.white};
+    }
   }
 
   &:disabled {
@@ -114,6 +122,10 @@ export const QuantityButton = styled.button`
     cursor: not-allowed;
     background-color: ${props => props.theme.colors.gray?.[200] || '#e5e7eb'};
     border-color: transparent;
+
+    svg {
+      color: ${props => props.theme.colors.textMuted};
+    }
   }
 `;
 
@@ -125,7 +137,7 @@ export const QuantityInput = styled.input`
   border-radius: 4px;
   font-size: 1rem;
   font-weight: 600;
-  background-color: ${props => props.theme.colors.surface};
+  background-color: ${props => props.theme.colors.background};
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
@@ -151,7 +163,7 @@ export const AddButton = styled.button<{ $justAdded?: boolean; $disabled?: boole
   border: none;
   border-radius: 6px;
   background-color: ${props => props.theme.colors.primary};
-  color: white;
+  color: ${props => props.theme.colors.white};
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -161,8 +173,8 @@ export const AddButton = styled.button<{ $justAdded?: boolean; $disabled?: boole
   gap: 0.5rem;
   transition: all 0.3s ease;
 
-  * {
-    color: white;
+  span, svg {
+    color: ${props => props.theme.colors.white};
   }
 
   &:hover:not(:disabled) {
@@ -191,8 +203,8 @@ export const AddButton = styled.button<{ $justAdded?: boolean; $disabled?: boole
     cursor: not-allowed;
     opacity: 0.7;
 
-    > * {
-      color: ${props.theme.colors.gray?.[600] || '#4b5563'};
+    span, svg {
+      color: ${props.theme.colors.gray?.[600] || '#4b5563'} !important;
     }
 
     &:hover {
@@ -208,7 +220,7 @@ export const AddButton = styled.button<{ $justAdded?: boolean; $disabled?: boole
     cursor: not-allowed;
     opacity: 0.7;
 
-    > * {
+    span, svg {
       color: ${props => props.theme.colors.gray?.[600] || '#4b5563'};
     }
 
@@ -221,21 +233,5 @@ export const AddButton = styled.button<{ $justAdded?: boolean; $disabled?: boole
 
   svg {
     font-size: 1.125rem;
-  }
-`;
-
-// Additional styled components for the available grid (if needed separately)
-export const AvailableGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-  background-color: ${props => props.theme.colors.green5};
-  border-radius: 5px;
-  padding: 1.5rem;
-
-  @media (min-width: ${props => props.theme.breakpoints.md}) {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2.5rem;
-    padding: 2.5rem;
   }
 `;

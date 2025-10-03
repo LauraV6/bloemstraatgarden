@@ -148,7 +148,7 @@ export const buttonStyles = (theme: Theme) => ({
     border: 1px solid transparent;
     
     &:focus {
-      outline: 2px solid ${theme.colors.primary};
+      outline: 1px solid ${theme.colors.primary};
       outline-offset: 2px;
     }
     

@@ -51,7 +51,7 @@ export const TimerProgress = styled.progress<TimerProgressProps>`
 
   &::-webkit-progress-bar {
     background-color: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(110, 110, 110, 0.3);
     border-radius: 20px;
   }
 
@@ -69,7 +69,7 @@ export const TimerProgress = styled.progress<TimerProgressProps>`
 
   ${props => props.$status === 'correct' && `
     &::-webkit-progress-value {
-      background: ${props.theme.colors.success};
+      background: ${props.theme.colors.primary};
     }
   `}
 

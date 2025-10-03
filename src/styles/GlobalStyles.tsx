@@ -116,11 +116,6 @@ export function GlobalStyles() {
         input, textarea, select {
           font-family: inherit;
           font-size: inherit;
-          
-          &:focus {
-            outline: 2px solid ${theme.colors.primary};
-            outline-offset: 2px;
-          }
         }
 
         ul, ol {

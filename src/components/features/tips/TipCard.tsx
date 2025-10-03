@@ -17,8 +17,8 @@ export const TipCard: React.FC<TipCardProps> = ({ props }) => {
                     <Image src={props.articleImage.url} alt={`Tip artikel afbeelding: ${props.title}`} fill sizes="(max-width: 768px) 100vw, 33vw" />
                 </PostItemImage>
                 <PostItemContent>
-                    <h4 style={{ color: 'white' }}>{props.title}</h4>
-                    <button className="button button--cta"><span style={{ color: 'white' }}>Lees meer</span></button>
+                    <h4>{props.title}</h4>
+                    <button className="button button--cta"><span>Lees meer</span></button>
                 </PostItemContent>
             </Link>
         </PostItem>

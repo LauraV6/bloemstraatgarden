@@ -48,20 +48,15 @@ export const CartOverlay = styled.div`
 `;
 
 export const CartPopupContainer = styled.div`
-  background-color: ${props => props.theme.colors.surface || 'hsl(132, 16%, 94%)'}; /* --color-green-5 light */
+  background-color: ${props => props.theme.colors.green5};
   border-radius: 12px;
   width: 100%;
   max-width: 500px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: ${props => props.theme.shadows.xl};
   animation: ${slideUp} 0.3s ease-out;
-
-  /* Dark theme override */
-  [data-theme="dark"] & {
-    background-color: hsl(152, 100%, 11%); /* --color-green-5 dark */
-  }
 `;
 
 export const CartHeader = styled.div`
@@ -76,7 +71,7 @@ export const CartHeader = styled.div`
     align-items: center;
     gap: 0.5rem;
     margin: 0;
-    color: hsl(130, 47%, 42%); /* --color-green-2 */
+    color: ${props => props.theme.colors.primary};
     font-size: 1.25rem;
 
     @media (min-width: ${props => props.theme.breakpoints.md}) {
@@ -86,8 +81,8 @@ export const CartHeader = styled.div`
 `;
 
 export const CartBadge = styled.span`
-  background-color: hsl(130, 47%, 42%);
-  color: white;
+  background-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white};
   border-radius: 20px;
   padding: 0.4rem 0.6rem;
   font-size: 0.875rem;
@@ -112,10 +107,10 @@ export const CloseButton = styled.button`
 
   &:hover {
     transform: scale(1.1);
-    background: hsl(0, 0%, 80%, 0.2);
+    background: ${props => props.theme.colors.gray[200]};
 
     * {
-      color: hsl(0, 76.10%, 41%);
+      color: ${props => props.theme.colors.errorBright};
       opacity: 1;
     }
   }
@@ -152,40 +147,34 @@ export const CartFooter = styled.div`
 
 export const ClearButton = styled.button`
   background-color: transparent !important;
-  color: hsl(130, 47%, 42%) !important; /* --color-green-2 */
-  border: 2px solid hsl(130, 41%, 51%) !important; /* --color-green-3 */
+  color: ${props => props.theme.colors.primary} !important;
+  border: 2px solid ${props => props.theme.colors.primary} !important;
 
   &:hover {
-    background-color: hsl(130, 47%, 42%) !important; /* --color-green-2 */
-    color: white !important;
+    background-color: ${props => props.theme.colors.primary} !important;
+    color: ${props => props.theme.colors.white} !important;
   }
 `;
 
 export const CheckoutButton = styled.button`
-  background-color: hsl(130, 47%, 42%) !important; /* --color-green-2 */
-  color: white !important;
+  background-color: ${props => props.theme.colors.primary} !important;
+  color: ${props => props.theme.colors.white} !important;
 
   &:hover {
-    background-color: hsl(152, 100%, 21%) !important; /* --color-green-1 */
+    background-color: ${props => props.theme.colors.primaryDark} !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: ${props => props.theme.shadows.md};
   }
 `;
 
 export const CartItem = styled.div`
   display: flex;
   gap: 1rem;
-  background-color: ${props => props.theme.colors.background || 'rgba(255, 255, 255, 0.6)'}; /* --color-transparent-1 */
-  border: 1px solid ${props => props.theme.colors.border || 'rgba(255, 255, 255, 0.6)'};
+  background-color: ${props => props.theme.colors.background};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 8px;
   transition: transform 0.2s ease;
   padding: 1rem;
-
-  /* Dark theme override */
-  [data-theme="dark"] & {
-    background-color: rgba(255, 255, 255, 0.05); /* --color-transparent-1 dark */
-    border-color: rgba(255, 255, 255, 0.05);
-  }
 
   &:hover {
     transform: translateX(4px);
@@ -198,7 +187,7 @@ export const CartItemImage = styled.div`
   border-radius: 6px;
   overflow: hidden;
   flex-shrink: 0;
-  background-color: white;
+  background-color: ${props => props.theme.colors.white};
 `;
 
 export const CartItemDetails = styled.div`
@@ -210,7 +199,6 @@ export const CartItemDetails = styled.div`
   h3 {
     margin: 0;
     font-size: 1rem;
-    color: hsl(130, 47%, 42%); /* --color-green-2 */
 
     @media (min-width: ${props => props.theme.breakpoints.md}) {
       font-size: 1.125rem;
@@ -220,7 +208,7 @@ export const CartItemDetails = styled.div`
 
 export const CartItemInfo = styled.p`
   font-size: 0.875rem;
-  color: hsl(130, 41%, 51%); /* --color-green-3 */
+  color: ${props => props.theme.colors.primary};
   margin: 0;
 `;
 
@@ -235,7 +223,7 @@ export const QuantityButton = styled.button`
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1px solid hsl(130, 41%, 51%); /* --color-green-3 */
+  border: 1px solid ${props => props.theme.colors.primary};
   background-color: transparent;
   cursor: pointer;
   display: flex;
@@ -246,16 +234,20 @@ export const QuantityButton = styled.button`
   padding: 0;
 
   &:hover {
-    background-color: hsl(130, 47%, 42%); /* --color-green-2 */
-    color: white;
-    border-color: hsl(130, 47%, 42%); /* --color-green-2 */
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.white};
+    border-color: ${props => props.theme.colors.primary};
   }
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background-color: ${props => props.theme.colors.textSecondary || 'hsla(0, 0%, 80%, 0.5)'};
+    background-color: ${props => props.theme.colors.gray[300]};
     border: transparent;
+
+    svg {
+      color: ${props => props.theme.colors.textMuted};
+    }
   }
 `;
 
@@ -284,7 +276,7 @@ export const RemoveButton = styled.button`
     opacity: 1;
 
     * {
-      color: hsl(0, 72%, 51%);
+      color: ${props => props.theme.colors.errorBright};
     }
   }
 `;
@@ -292,7 +284,7 @@ export const RemoveButton = styled.button`
 export const SuccessMessage = styled.div`
   display: grid;
   justify-items: center;
-  border: 1px solid hsl(130, 47%, 42%); /* --color-green-2 */
+  border: 1px solid ${props => props.theme.colors.primary};
   background: ${props => props.theme.colors.green5};
   padding: 1rem;
   border-radius: 8px;
@@ -302,7 +294,7 @@ export const SuccessMessage = styled.div`
   box-sizing: border-box;
 
   svg * {
-    color: hsl(130, 41%, 51%); /* --color-green-3 */
+    color: ${props => props.theme.colors.primary};
   }
 
   .successIcon {
@@ -329,8 +321,9 @@ export const SuccessMessage = styled.div`
 `;
 
 export const ErrorMessage = styled.div`
-  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-  color: white;
+  background: ${props => props.theme.colors.error};
+  border: 1px solid ${props => props.theme.colors.errorBright};
+  color: ${props => props.theme.colors.text};
   padding: 1rem;
   border-radius: 8px;
   text-align: center;
@@ -352,7 +345,7 @@ export const LoadingMessage = styled.div`
   padding: 2rem;
   background: ${props => props.theme.colors.green5};
   border-radius: 12px;
-  border: 1px solid hsl(130, 47%, 42%); /* --color-green-2 */
+  border: 1px solid ${props => props.theme.colors.primary};
   margin-bottom: 1rem;
   animation: ${pulseOpacity} 2s ease-in-out infinite;
 
@@ -363,7 +356,7 @@ export const LoadingMessage = styled.div`
   }
 
   svg * {
-    color: hsl(152, 100%, 21%); /* --color-green-1 */
+    color: ${props => props.theme.colors.primaryDark};
   }
 
   p {

@@ -22,7 +22,7 @@ export const CartIconButton = styled.button`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: ${props => props.theme.colors.primary || 'hsl(130, 47%, 42%)'}; /* --color-green-2 */
+  background-color: ${props => props.theme.colors.primary || 'hsl(130, 47%, 42%)'};
   color: hsl(0, 0%, 100%);
   border: none;
   cursor: pointer;
@@ -46,7 +46,7 @@ export const CartIconButton = styled.button`
   &:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    background-color: hsl(152, 100%, 21%); /* --color-green-1 */
+    background-color: ${props => props.theme.colors.primaryDark};
   }
 
   &:active {

@@ -4,7 +4,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useShoppingCart } from "@/context/ShoppingCartContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faCheck, faPlus, faMinus } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
+import { faCartPlus } from "@awesome.me/kit-7d648e8e96/icons/duotone/solid";
+import { faPlus, faMinus, faCheck } from "@awesome.me/kit-7d648e8e96/icons/classic/solid";
+
 import {
   AvailableCardContainer,
   ImageWrapper,
