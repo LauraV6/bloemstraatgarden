@@ -66,16 +66,12 @@ const ResultItem = styled(Link)`
   border-radius: 0;
 
   &:hover {
-    background-color: ${props => props.theme.colors.gray[50]};
+    background-color: ${props => props.theme.colors.green5};
   }
 
   &:focus {
     outline: none;
-    background-color: ${props => props.theme.colors.gray[100]};
-  }
-
-  &:hover, &:focus {
-    color: ${props => props.theme.colors.secondary};
+    background-color: ${props => props.theme.colors.transparent};
   }
 
   &:last-child {
