@@ -34,8 +34,6 @@ export const TestSection = styled.div`
 `;
 
 export const SidebarSection = styled.div`
-  display: grid;
-  gap: 20px;
   padding: ${props => props.theme.spacing.lg};
 
   h4 {

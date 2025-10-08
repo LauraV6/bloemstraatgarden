@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 import { SidebarContainer, IntroSection, TestSection, SidebarSection } from './Sidebar.styled';
+import QuestionGenerator from "../features/generator/QuestionGenerator";
 
 interface ProfileSectionProps {
   name: string;
@@ -116,6 +117,8 @@ export default function Sidebar() {
           buttonText={QUIZ_DATA.buttonText}
           quizUrl={QUIZ_DATA.quizUrl}
         />
+
+        <QuestionGenerator />
       </div>
     </SidebarContainer>
   );
