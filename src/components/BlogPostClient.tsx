@@ -3,17 +3,6 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-const pageVariants = {
-  initial: { opacity: 0 },
-  animate: { 
-    opacity: 1,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut"
-    }
-  }
-};
-
 interface BlogPostClientProps {
   children: ReactNode;
 }
@@ -23,9 +12,9 @@ export default function BlogPostClient({ children }: BlogPostClientProps) {
 
   return (
     <motion.div
-      initial="initial"
-      animate="animate"
-      variants={pageVariants}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: [0, 0, 0.2, 1] }}
       style={{ width: "100%" }}
     >
       {/* Post Header Section */}
