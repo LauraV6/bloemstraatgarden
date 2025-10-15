@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { color } from 'framer-motion';
 
 export const QuizContainer = styled.div`
   position: relative;

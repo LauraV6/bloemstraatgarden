@@ -1,7 +1,5 @@
 import { onCLS, onFCP, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
 
-const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
-
 interface VitalsData {
   id: string;
   name: string;

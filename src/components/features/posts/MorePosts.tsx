@@ -132,7 +132,7 @@ interface PostsGridProps {
 }
 
 const PostsGrid: React.FC<PostsGridProps> = ({ posts, url }) => {
-  return posts.map((post, index) => (
+  return posts.map((post) => (
     <FadeIn key={post.sys.id}>
       <PostCard
         props={post}
@@ -149,13 +149,12 @@ const PostsGridSkeleton: React.FC<{ count: number }> = ({ count }) => (
   </BlogGrid>
 );
 
-export const MorePosts: React.FC<MorePostsProps> = ({ 
-  title, 
-  slug, 
-  articles, 
+export const MorePosts: React.FC<MorePostsProps> = ({
+  title,
+  slug,
+  articles,
   url,
-  maxPosts = DEFAULT_CONFIG.maxPosts,
-  className 
+  maxPosts = DEFAULT_CONFIG.maxPosts
 }) => {
   // Memoize the filtered and shuffled posts to prevent unnecessary recalculations
   const shuffledPosts = useMemo(() => {

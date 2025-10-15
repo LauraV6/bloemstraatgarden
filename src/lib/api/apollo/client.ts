@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache, createHttpLink, ApolloLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { onError } from '@apollo/client/link/error';
+import { onError, ErrorLink } from '@apollo/client/link/error';
 import type { GraphQLError } from 'graphql';
 
 
@@ -21,17 +21,17 @@ const authLink = setContext((_, { headers }) => {
 });
 
 // Error handling link
-const errorLink = onError(({ graphQLErrors, networkError, operation }: any) => {
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path }: GraphQLError) => {
+const errorLink = onError(({ error, operation }: ErrorLink.ErrorHandlerOptions) => {
+  // Check if it's a GraphQL error with an errors array
+  if ('errors' in error && Array.isArray(error.errors)) {
+    error.errors.forEach(({ message, locations, path }: GraphQLError) => {
       console.error(
         `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(locations)}, Path: ${JSON.stringify(path)}`,
       );
     });
-  }
-
-  if (networkError) {
-    console.error(`[Network error]: ${networkError}`);
+  } else {
+    // Network error
+    console.error(`[Network error]: ${error}`);
     console.error('Operation:', operation.operationName);
     console.error('Variables:', operation.variables);
   }

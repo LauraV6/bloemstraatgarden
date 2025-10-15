@@ -5,6 +5,7 @@ import LoadingState from '@/components/ui/LoadingState';
 import ErrorState from '@/components/ui/ErrorState';
 import AvailableCard from './AvailableCard';
 import styled from '@emotion/styled';
+import type { AvailableItem } from '@/lib/api/graphql/types';
 
 const EmptyState = styled.div`
   text-align: center;
@@ -64,7 +65,7 @@ export default function AvailableApollo() {
 
   return (
     <AvailableGrid>
-      {items.map((item: any, index: number) => (
+      {items.map((item: AvailableItem, index: number) => (
         <AvailableCard key={item.sys.id} item={item} index={index} />
       ))}
     </AvailableGrid>

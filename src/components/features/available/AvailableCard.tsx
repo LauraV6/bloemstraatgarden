@@ -20,13 +20,11 @@ import {
   AddButton
 } from "./AvailableCard.styled";
 
-const nonAvailableSrc = "/notAvailable.png";
-
 interface AvailableCardProps {
   item: {
     sys: { id: string };
     title: string;
-    amount: string;
+    amount: number;
     date: string;
     postImage: {
       url: string;
@@ -37,7 +35,7 @@ interface AvailableCardProps {
 
 export default function AvailableCard({ item, index = 0 }: AvailableCardProps) {
   const { addToCart, canAddToCart, getItemQuantity } = useShoppingCart();
-  const maxAmount = parseInt(String(item.amount)) || 1;
+  const maxAmount = item.amount || 1;
   const availableToAdd = canAddToCart(item.sys.id, maxAmount);
   const currentInCart = getItemQuantity(item.sys.id);
   const [quantity, setQuantity] = useState(1);

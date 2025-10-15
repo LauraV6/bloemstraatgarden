@@ -34,10 +34,6 @@ export const lightTheme: Theme = {
       800: '#1f2937',
       900: '#111827',
     },
-    action: {} as any,
-    status: {} as any,
-    interactive: {} as any,
-    brand: {} as any,
   },
   spacing: {
     xs: '0.25rem',
@@ -92,7 +88,7 @@ export const lightTheme: Theme = {
     lg: '0.5rem',
     full: '9999px',
     pill: '9999px',
-  } as any,
+  },
   transitions: {
     fast: '150ms ease-in-out',
     normal: '300ms ease-in-out',

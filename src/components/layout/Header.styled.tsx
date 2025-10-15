@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import React from 'react';
 
-const withTransientProps = (Component: any) =>
-  styled(Component, {
+// Using a more flexible type to avoid JSX namespace issues
+const withTransientProps = (Component: React.ComponentType<Record<string, unknown>> | string) =>
+  styled(Component as React.ComponentType<Record<string, unknown>>, {
     shouldForwardProp: (prop) => prop !== 'isScrolled'
   });
 

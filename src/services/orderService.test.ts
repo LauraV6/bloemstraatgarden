@@ -6,7 +6,7 @@ import { Customer } from '@/types/features/order';
 const mockCartItem1 = {
   sys: { id: 'item-1' },
   title: 'Tomaten',
-  amount: '10',
+  amount: 10,
   quantity: 3,
   postImage: { url: 'test.jpg', title: 'Test' },
   date: '2024-01-01',
@@ -15,7 +15,7 @@ const mockCartItem1 = {
 const mockCartItem2 = {
   sys: { id: 'item-2' },
   title: 'Komkommers',
-  amount: '5',
+  amount: 5,
   quantity: 2,
   postImage: { url: 'test2.jpg', title: 'Test2' },
   date: '2024-01-02',
@@ -25,9 +25,6 @@ const mockCustomer: Customer = {
   name: 'John Doe',
   email: 'john@example.com',
   phone: '0612345678',
-  address: '123 Main St',
-  city: 'Amsterdam',
-  zipCode: '1234AB',
 };
 
 describe('OrderService', () => {

@@ -43,7 +43,7 @@ export default function PerformanceMonitor() {
         observer.observe({ entryTypes: ['longtask'] });
         
         return () => observer.disconnect();
-      } catch (e) {
+      } catch {
         // Long task observer not supported
       }
     }

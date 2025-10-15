@@ -3,27 +3,27 @@ import { Theme } from '@emotion/react';
 
 // Media query helpers
 export const media = {
-  xs: (styles: any) => css`
+  xs: (styles: ReturnType<typeof css>) => css`
     @media (min-width: 480px) {
       ${styles}
     }
   `,
-  sm: (styles: any) => css`
+  sm: (styles: ReturnType<typeof css>) => css`
     @media (min-width: 640px) {
       ${styles}
     }
   `,
-  md: (styles: any) => css`
+  md: (styles: ReturnType<typeof css>) => css`
     @media (min-width: 768px) {
       ${styles}
     }
   `,
-  lg: (styles: any) => css`
+  lg: (styles: ReturnType<typeof css>) => css`
     @media (min-width: 1024px) {
       ${styles}
     }
   `,
-  xl: (styles: any) => css`
+  xl: (styles: ReturnType<typeof css>) => css`
     @media (min-width: 1280px) {
       ${styles}
     }

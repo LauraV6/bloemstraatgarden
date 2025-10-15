@@ -8,13 +8,19 @@ import {
 } from '@/lib/api/graphql/queries';
 import { fetchArticles, fetchTips } from '@/lib/api/contentful/client-cdn';
 import { mockArticles, mockTips } from '@/lib/api/contentful/mock-data';
-import type { 
-  ArticleCollection, 
+import type {
+  ArticleCollection,
   TipCollection,
 } from '@/lib/api/graphql/types';
+import type { Article, Tip } from '@/types/contentful';
+
+interface FallbackData<T> {
+  items: T[];
+  total: number;
+}
 
 export function useArticlesWithFallback(limit: number = 10, skip: number = 0) {
-  const [cdnData, setCdnData] = useState<any>(null);
+  const [cdnData, setCdnData] = useState<FallbackData<Article> | null>(null);
   const [cdnLoading, setCdnLoading] = useState(false);
   const [cdnError, setCdnError] = useState<Error | null>(null);
   
@@ -38,7 +44,7 @@ export function useArticlesWithFallback(limit: number = 10, skip: number = 0) {
           setCdnData(data);
           setCdnError(null);
         })
-        .catch((error) => {
+        .catch(() => {
           // CDN API also failed, using mock data for development
           // Use mock data as last resort
           setCdnData({
@@ -69,7 +75,7 @@ export function useArticlesWithFallback(limit: number = 10, skip: number = 0) {
 }
 
 export function useTipsWithFallback(limit: number = 5, skip: number = 0) {
-  const [cdnData, setCdnData] = useState<any>(null);
+  const [cdnData, setCdnData] = useState<FallbackData<Tip> | null>(null);
   const [cdnLoading, setCdnLoading] = useState(false);
   const [cdnError, setCdnError] = useState<Error | null>(null);
   
@@ -93,7 +99,7 @@ export function useTipsWithFallback(limit: number = 5, skip: number = 0) {
           setCdnData(data);
           setCdnError(null);
         })
-        .catch((error) => {
+        .catch(() => {
           // CDN API also failed, using mock data for development
           // Use mock data as last resort
           setCdnData({

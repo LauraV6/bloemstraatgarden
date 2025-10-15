@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 
 // Helper to filter out motion props from DOM elements
 const filterMotionProps = (props: string[]) => (prop: string) => 

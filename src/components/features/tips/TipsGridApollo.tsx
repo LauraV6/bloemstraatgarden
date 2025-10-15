@@ -5,6 +5,7 @@ import { TipCard } from './TipCard';
 import TipCardSkeleton from './TipCardSkeleton';
 import ErrorState from '@/components/ui/ErrorState';
 import { TipsGridContainer } from './TipsGrid.styled';
+import type { Tip } from '@/types/contentful';
 
 export default function TipsGridApollo() {
   const { tips, loading, error, source } = useTipsWithFallback(5);
@@ -33,7 +34,7 @@ export default function TipsGridApollo() {
 
   return (
     <TipsGridContainer>
-      {tips.map((tip: any) => (
+      {tips.map((tip: Tip) => (
         <TipCard key={tip.sys.id} props={tip} />
       ))}
     </TipsGridContainer>

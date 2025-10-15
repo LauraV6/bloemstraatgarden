@@ -116,7 +116,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
         setOrderStatus('error');
         setOrderMessage(response.message);
       }
-    } catch (error) {
+    } catch {
       setOrderStatus('error');
       setOrderMessage('Er ging iets mis. Probeer het later opnieuw.');
     } finally {

@@ -6,12 +6,12 @@ declare module '@emotion/react' {
       primary: string;
       primaryDark: string;
       secondary: string;
-      background: any;
-      surface: any;
-      text: any;
+      background: string;
+      surface: string;
+      text: string;
       textSecondary: string;
       textMuted: string;
-      border: any;
+      border: string;
       error: string;
       errorBright: string;
       success: string;
@@ -35,7 +35,7 @@ declare module '@emotion/react' {
         800: string;
         900: string;
       };
-      action: {
+      action?: {
         primary: string;
         primaryHover: string;
         primaryActive: string;
@@ -49,7 +49,7 @@ declare module '@emotion/react' {
         dangerActive: string;
         dangerDisabled: string;
       };
-      status: {
+      status?: {
         success: string;
         successBackground: string;
         successBorder: string;
@@ -63,14 +63,14 @@ declare module '@emotion/react' {
         infoBackground: string;
         infoBorder: string;
       };
-      interactive: {
+      interactive?: {
         hover: string;
         active: string;
         selected: string;
         disabled: string;
         focusRing: string;
       };
-      brand: {
+      brand?: {
         primary: string;
         primaryLight: string;
         primaryDark: string;
@@ -78,7 +78,14 @@ declare module '@emotion/react' {
         accent: string;
       };
     };
-    spacing: any;
+    spacing: {
+      xs: string;
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
+      xxl: string;
+    };
     breakpoints: {
       xs: string;
       sm: string;
@@ -148,6 +155,6 @@ declare module '@emotion/react' {
       toast: number;
       tooltip: number;
     };
-    layers?: any;
+    layers?: Record<string, unknown>;
   }
 }

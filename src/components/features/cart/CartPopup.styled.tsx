@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { keyframes, ThemeProvider } from '@emotion/react';
+import { keyframes } from '@emotion/react';
 
 const fadeIn = keyframes`
   from {

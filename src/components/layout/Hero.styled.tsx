@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { css, keyframes } from '@emotion/react';
+import { css, keyframes, Theme } from '@emotion/react';
 
-const leaveVariantOne = (props: any) => css`
+const leaveVariantOne = (props: { theme?: Theme }) => css`
   left: 0px;
   top: -30%;
   rotate: 35deg;
@@ -15,7 +15,7 @@ const leaveVariantOne = (props: any) => css`
   }
 `;
 
-const leaveVariantTwo = (props: any) => css`
+const leaveVariantTwo = (props: { theme?: Theme }) => css`
   right: -50px;
   top: -30%;
   rotate: 90deg;
@@ -29,7 +29,7 @@ const leaveVariantTwo = (props: any) => css`
   }
 `;
 
-const leaveVariantThree = (props: any) => css`
+const leaveVariantThree = (props: { theme?: Theme }) => css`
   right: 0;
   bottom: -60%;
   rotate: 260deg;
@@ -48,7 +48,7 @@ const leaveVariantThree = (props: any) => css`
   }
 `;
 
-const leaveVariantFour = (props: any) => css`
+const leaveVariantFour = (props: { theme?: Theme }) => css`
   left: -10px;
   bottom: -50%;
   rotate: 280deg;

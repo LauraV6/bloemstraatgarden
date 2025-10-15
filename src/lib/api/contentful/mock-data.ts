@@ -1,5 +1,8 @@
 // Mock data for development when Contentful API is unreachable
-export const mockArticles = [
+import { BLOCKS } from '@contentful/rich-text-types';
+import type { Article, Tip } from '@/types/contentful';
+
+export const mockArticles: Article[] = [
   {
     sys: { id: 'mock-article-1' },
     title: 'Wintergroenten in de Moestuin',
@@ -13,18 +16,27 @@ export const mockArticles = [
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Wintergroenten zijn perfect voor de koude maanden...'
+                value: 'Wintergroenten zijn perfect voor de koude maanden...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   },
@@ -41,18 +53,27 @@ export const mockArticles = [
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Composteren is een geweldige manier om afval te verminderen...'
+                value: 'Composteren is een geweldige manier om afval te verminderen...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   },
@@ -69,47 +90,66 @@ export const mockArticles = [
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Timing is alles in de moestuin...'
+                value: 'Timing is alles in de moestuin...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   }
 ];
 
-export const mockTips = [
+export const mockTips: Tip[] = [
   {
     sys: { id: 'mock-tip-1' },
     title: 'Water geven in de ochtend',
     slug: 'water-geven-ochtend',
     summary: 'Geef je planten water in de vroege ochtend voor het beste resultaat.',
-    tipImage: {
+    date: '2024-01-15',
+    articleImage: {
       url: '/images/placeholder.svg',
       title: 'Water geven'
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Water geven in de ochtend voorkomt schimmelziekten...'
+                value: 'Water geven in de ochtend voorkomt schimmelziekten...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   },
@@ -118,24 +158,34 @@ export const mockTips = [
     title: 'Mulchen tegen onkruid',
     slug: 'mulchen-tegen-onkruid',
     summary: 'Gebruik mulch om onkruid te onderdrukken en vocht vast te houden.',
-    tipImage: {
+    date: '2024-01-16',
+    articleImage: {
       url: '/images/placeholder.svg',
       title: 'Mulch laag'
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Een goede mulchlaag bespaart je veel werk...'
+                value: 'Een goede mulchlaag bespaart je veel werk...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   },
@@ -144,24 +194,34 @@ export const mockTips = [
     title: 'Wisselteelt toepassen',
     slug: 'wisselteelt-toepassen',
     summary: 'Wissel je gewassen af om de bodem gezond te houden.',
-    tipImage: {
+    date: '2024-01-17',
+    articleImage: {
       url: '/images/placeholder.svg',
       title: 'Wisselteelt schema'
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Wisselteelt voorkomt bodemuitputting...'
+                value: 'Wisselteelt voorkomt bodemuitputting...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   },
@@ -170,24 +230,34 @@ export const mockTips = [
     title: 'Zaailingen afharden',
     slug: 'zaailingen-afharden',
     summary: 'Hard je zaailingen geleidelijk af voordat je ze uitplant.',
-    tipImage: {
+    date: '2024-01-18',
+    articleImage: {
       url: '/images/placeholder.svg',
       title: 'Zaailingen'
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Afharden is essentieel voor sterke planten...'
+                value: 'Afharden is essentieel voor sterke planten...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   },
@@ -196,24 +266,34 @@ export const mockTips = [
     title: 'Natuurlijke bestrijding',
     slug: 'natuurlijke-bestrijding',
     summary: 'Gebruik natuurlijke methoden tegen plagen in je moestuin.',
-    tipImage: {
+    date: '2024-01-19',
+    articleImage: {
       url: '/images/placeholder.svg',
       title: 'Lieveheersbeestje'
     },
     details: {
       json: {
-        nodeType: 'document',
+        nodeType: BLOCKS.DOCUMENT,
+        data: {},
         content: [
           {
-            nodeType: 'paragraph',
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
             content: [
               {
                 nodeType: 'text',
-                value: 'Natuurlijke vijanden zijn je beste vrienden...'
+                value: 'Natuurlijke vijanden zijn je beste vrienden...',
+                marks: [],
+                data: {}
               }
             ]
           }
         ]
+      },
+      links: {
+        assets: {
+          block: []
+        }
       }
     }
   }

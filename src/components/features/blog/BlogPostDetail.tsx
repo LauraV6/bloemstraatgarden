@@ -2,8 +2,9 @@
 
 import { useArticleBySlug, useArticles } from '@/hooks/useContentful';
 import { Article } from '@/types/contentful';
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { AssetBlock } from '@/types/api/contentful';
+import { documentToReactComponents, Options } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, Block, Inline } from "@contentful/rich-text-types";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -252,11 +253,6 @@ const PostStory = styled.div`
   }
 `;
 
-const ContentImage = styled.img`
-  border-radius: ${({ theme }) => theme.radii.lg};
-  box-shadow: ${({ theme }) => theme.shadows.md};
-`;
-
 const Breadcrumbs = styled.nav`
   display: flex;
   align-items: center;
@@ -325,8 +321,8 @@ export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
     });
   };
 
-  const createAssetMap = (assets: any[]) => {
-    const assetMap = new Map();
+  const createAssetMap = (assets: AssetBlock[]) => {
+    const assetMap = new Map<string, AssetBlock>();
     for (const asset of assets) {
       assetMap.set(asset.sys.id, asset);
     }
@@ -334,13 +330,13 @@ export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
   };
 
   const assetMap = createAssetMap(article.details.links.assets.block);
-  
-  const renderOptions = {
+
+  const renderOptions: Options = {
     renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const assetId = node.data.target.sys.id;
         const asset = assetMap.get(assetId);
-        
+
         if (!asset) {
           return null;
         }
@@ -352,8 +348,8 @@ export default function BlogPostApollo({ slug }: BlogPostApolloProps) {
             width={900}
             height={500}
             sizes="(max-width: 768px) 100vw, 900px"
-            style={{ 
-              width: '100%', 
+            style={{
+              width: '100%',
               height: 'auto',
               borderRadius: '8px',
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'

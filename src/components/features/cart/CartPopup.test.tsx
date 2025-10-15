@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@emotion/react';
 import CartPopup from './CartPopup';
@@ -12,8 +12,8 @@ jest.mock('@/services/orderService');
 // Mock Next Image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: any) => {
-    // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => {
+    // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} {...props} />;
   },
 }));
@@ -134,7 +134,7 @@ describe('CartPopup', () => {
 
   describe('cart with items', () => {
     it('should display cart items', () => {
-      const { container } = render(
+      render(
         <ThemeProvider theme={lightTheme}>
           <ShoppingCartProvider>
             <div data-testid="add-product">
@@ -180,10 +180,8 @@ describe('CartPopup', () => {
 
   describe('order form', () => {
     it('should show order form when checkout is clicked', async () => {
-      const user = userEvent.setup();
-
       // Render with a mock item already in cart
-      const { container } = render(
+      render(
         <ThemeProvider theme={lightTheme}>
           <ShoppingCartProvider>
             <CartPopup isOpen={true} onClose={mockOnClose} />

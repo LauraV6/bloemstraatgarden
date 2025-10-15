@@ -6,7 +6,7 @@ import { POST } from './route';
 import { NextRequest } from 'next/server';
 
 // Helper function to create a mock NextRequest
-function createMockRequest(body: any): NextRequest {
+function createMockRequest(body: Record<string, unknown>): NextRequest {
   const request = {
     json: async () => body,
   } as NextRequest;

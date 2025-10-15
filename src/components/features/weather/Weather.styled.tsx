@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 
 export const WeatherContainer = styled.div`
   flex-shrink: 0;

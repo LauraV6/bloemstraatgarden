@@ -8,15 +8,15 @@ import { lightTheme } from '@/styles/theme';
 // Mock Next Image
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: any) => {
-    // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
+  default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => {
+    // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} {...props} />;
   },
 }));
 
 // Mock FontAwesome icons
 jest.mock('@fortawesome/react-fontawesome', () => ({
-  FontAwesomeIcon: ({ icon, ...props }: any) => (
+  FontAwesomeIcon: ({ ...props }: { [key: string]: unknown }) => (
     <span data-testid="font-awesome-icon" {...props} />
   ),
 }));
@@ -24,7 +24,7 @@ jest.mock('@fortawesome/react-fontawesome', () => ({
 const mockItem = {
   sys: { id: 'product-1' },
   title: 'Tomaten',
-  amount: '10',
+  amount: 10,
   date: '2024-01-15',
   postImage: {
     url: '/test-image.jpg',
@@ -144,7 +144,7 @@ describe('AvailableCard', () => {
 
     it('should not increase quantity beyond available amount', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '3' };
+      const limitedItem = { ...mockItem, amount: 3 };
       renderAvailableCard(limitedItem);
 
       const plusButton = screen.getByLabelText('Verhoog hoeveelheid');
@@ -173,7 +173,7 @@ describe('AvailableCard', () => {
 
     it('should reject direct input above available amount', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '5' };
+      const limitedItem = { ...mockItem, amount: 5 };
       renderAvailableCard(limitedItem);
 
       const quantityInput = screen.getByLabelText('Selecteer hoeveelheid') as HTMLInputElement;
@@ -194,7 +194,7 @@ describe('AvailableCard', () => {
 
     it('should disable plus button at maximum quantity', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '2' };
+      const limitedItem = { ...mockItem, amount: 2 };
       renderAvailableCard(limitedItem);
 
       const plusButton = screen.getByLabelText('Verhoog hoeveelheid');
@@ -289,7 +289,7 @@ describe('AvailableCard', () => {
   describe('maximum reached state', () => {
     it('should show "Maximum bereikt" when all items are in cart', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '2' };
+      const limitedItem = { ...mockItem, amount: 2 };
       renderAvailableCard(limitedItem);
 
       const plusButton = screen.getByLabelText('Verhoog hoeveelheid');
@@ -307,7 +307,7 @@ describe('AvailableCard', () => {
 
     it('should disable all controls when maximum is reached', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '1' };
+      const limitedItem = { ...mockItem, amount: 1 };
       renderAvailableCard(limitedItem);
 
       const addButton = screen.getByText('Voeg toe');
@@ -327,7 +327,7 @@ describe('AvailableCard', () => {
 
     it('should show 0 in quantity input when maximum reached', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '1' };
+      const limitedItem = { ...mockItem, amount: 1 };
       renderAvailableCard(limitedItem);
 
       const addButton = screen.getByText('Voeg toe');
@@ -344,7 +344,7 @@ describe('AvailableCard', () => {
   describe('cart integration', () => {
     it('should respect items already in cart', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '5' };
+      const limitedItem = { ...mockItem, amount: 5 };
       renderAvailableCard(limitedItem);
 
       const plusButton = screen.getByLabelText('Verhoog hoeveelheid');
@@ -360,30 +360,23 @@ describe('AvailableCard', () => {
       });
 
       // After adding 3, should only be able to add 2 more
-      await waitFor(() => {
-        const quantityInput = screen.getByLabelText('Selecteer hoeveelheid') as HTMLInputElement;
-        // Try to increase beyond available
-        const maxClicks = 5;
-        for (let i = 0; i < maxClicks; i++) {
-          user.click(plusButton);
-        }
-      });
+      // The component should enforce maximum quantity limits
     });
   });
 
   describe('edge cases', () => {
-    it('should handle item with amount "0"', () => {
-      const emptyItem = { ...mockItem, amount: '0' };
+    it('should handle item with amount 0', () => {
+      const emptyItem = { ...mockItem, amount: 0 };
       renderAvailableCard(emptyItem);
 
-      // Component treats "0" as 1 due to || 1 fallback in parseInt
+      // Component treats 0 as 1 due to || 1 fallback
       // This is a known behavior - minimum amount is always 1
       const quantityInput = screen.getByLabelText('Selecteer hoeveelheid') as HTMLInputElement;
       expect(quantityInput.value).toBe('1');
     });
 
     it('should handle item with invalid amount', () => {
-      const invalidItem = { ...mockItem, amount: 'invalid' };
+      const invalidItem = { ...mockItem, amount: NaN };
       renderAvailableCard(invalidItem);
 
       const quantityInput = screen.getByLabelText('Selecteer hoeveelheid') as HTMLInputElement;
@@ -425,7 +418,7 @@ describe('AvailableCard', () => {
 
     it('should have proper aria label when maximum reached', async () => {
       const user = userEvent.setup();
-      const limitedItem = { ...mockItem, amount: '1' };
+      const limitedItem = { ...mockItem, amount: 1 };
       renderAvailableCard(limitedItem);
 
       const addButton = screen.getByText('Voeg toe');

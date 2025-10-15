@@ -27,7 +27,7 @@ Object.defineProperty(window, 'localStorage', {
 const mockProduct1: Verkrijgbaar = {
   sys: { id: 'product-1' },
   title: 'Tomaten',
-  amount: '10',
+  amount: 10,
   postImage: { url: 'test.jpg', title: 'Test' },
   date: '2024-01-01',
 };
@@ -35,7 +35,7 @@ const mockProduct1: Verkrijgbaar = {
 const mockProduct2: Verkrijgbaar = {
   sys: { id: 'product-2' },
   title: 'Komkommers',
-  amount: '5',
+  amount: 5,
   postImage: { url: 'test2.jpg', title: 'Test2' },
   date: '2024-01-02',
 };

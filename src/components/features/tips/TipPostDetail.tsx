@@ -1,8 +1,9 @@
 'use client';
 
 import { useTipBySlug, useTips } from '@/hooks/useContentful';
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS } from "@contentful/rich-text-types";
+import { AssetBlock } from '@/types/api/contentful';
+import { documentToReactComponents, Options } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, Block, Inline } from "@contentful/rich-text-types";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -223,7 +224,7 @@ interface TipPostApolloProps {
 
 export default function TipPostApollo({ slug }: TipPostApolloProps) {
   const { tip, loading: tipLoading, error: tipError } = useTipBySlug(slug);
-  const { tips: allTips, loading: tipsLoading } = useTips(10);
+  const { tips: allTips } = useTips(10);
 
   if (tipLoading) {
     return <PageLoader showWeather={false} contentLines={6} />;
@@ -256,8 +257,8 @@ export default function TipPostApollo({ slug }: TipPostApolloProps) {
     });
   };
 
-  const createAssetMap = (assets: any[]) => {
-    const assetMap = new Map();
+  const createAssetMap = (assets: AssetBlock[]) => {
+    const assetMap = new Map<string, AssetBlock>();
     for (const asset of assets) {
       assetMap.set(asset.sys.id, asset);
     }
@@ -265,10 +266,10 @@ export default function TipPostApollo({ slug }: TipPostApolloProps) {
   };
 
   const assetMap = createAssetMap(tip.details.links.assets.block);
-  
-  const renderOptions = {
+
+  const renderOptions: Options = {
     renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
         const assetId = node.data.target.sys.id;
         const asset = assetMap.get(assetId);
         

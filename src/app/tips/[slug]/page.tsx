@@ -24,7 +24,7 @@ export async function generateStaticParams(): Promise<TipsPageParams[]> {
 
 export default async function TipsPage({ params }: TipsPageProps) {
   const { slug } = await params;
-  
+
   return (
     <main role="main">
       <TipsPageClient>

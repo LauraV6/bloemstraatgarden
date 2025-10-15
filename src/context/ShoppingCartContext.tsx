@@ -64,12 +64,12 @@ export function ShoppingCartProvider({ children }: { children: ReactNode }) {
       if (existingItem) {
         return prevItems.map(cartItem =>
           cartItem.sys.id === item.sys.id
-            ? { ...cartItem, quantity: Math.min(cartItem.quantity + quantity, parseInt(item.amount) || 99) }
+            ? { ...cartItem, quantity: Math.min(cartItem.quantity + quantity, item.amount || 99) }
             : cartItem
         );
       }
 
-      return [...prevItems, { ...item, quantity: Math.min(quantity, parseInt(item.amount) || 99) }];
+      return [...prevItems, { ...item, quantity: Math.min(quantity, item.amount || 99) }];
     });
   }, []);
 
@@ -86,7 +86,7 @@ export function ShoppingCartProvider({ children }: { children: ReactNode }) {
     setCartItems(prevItems =>
       prevItems.map(item => {
         if (item.sys.id === itemId) {
-          const maxAmount = parseInt(item.amount) || 1;
+          const maxAmount = item.amount || 1;
           const newQuantity = Math.min(quantity, maxAmount);
           return { ...item, quantity: newQuantity };
         }

@@ -40,17 +40,6 @@ const DEFAULT_CONFIG = {
 } as const;
 
 // Animation variants
-const containerVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-};
-
 const itemVariants = {
   initial: { 
     opacity: 0, 
