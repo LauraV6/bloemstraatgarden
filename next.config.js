@@ -7,6 +7,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const nextConfig = {
+  // Skip linting during build - we have a separate lint step in CI
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
+  // Skip TypeScript errors during build (if any)
+  typescript: {
+    ignoreBuildErrors: false, // Keep TypeScript checking enabled
+  },
+
   images: {
     remotePatterns: [
       {
