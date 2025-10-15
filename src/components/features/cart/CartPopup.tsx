@@ -219,7 +219,7 @@ export default function CartPopup({ isOpen, onClose }: CartPopupProps) {
                       <QuantityButton
                         onClick={() => updateQuantity(item.sys.id, item.quantity + 1)}
                         aria-label="Verhoog hoeveelheid"
-                        disabled={item.quantity >= parseInt(item.amount)}
+                        disabled={item.quantity >= item.amount}
                       >
                         <FontAwesomeIcon icon={faPlus} />
                       </QuantityButton>
