@@ -17,11 +17,11 @@ const Hero = styled.section`
   padding: 119px 0 2rem 0;
   margin: 0;
   width: 100%;
-  background-color: ${({ theme }) => 
-    theme.colors.background === '#23252a' 
-      ? theme.colors.menu
-      : theme.colors.background
-  };
+  background-color: ${({ theme }) => theme.colors.background};
+
+  [data-theme="dark"] & {
+    background-color: ${({ theme }) => theme.colors.menu};
+  }
   position: relative;
   overflow-x: hidden;
   max-width: 100vw;

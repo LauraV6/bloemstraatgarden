@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from "next/image";
-import { useTheme } from 'next-themes';
 import { HeroContainer, HeroContainer2, HeroText, HeroImages, LeaveImage, HomePageTitle } from './Hero.styled';
 import SearchBar from '../features/search/SearchBar';
 
@@ -70,8 +69,6 @@ export const Hero: React.FC<HeroProps> = ({
   isHomePage = false
 }) => {
   const [mounted, setMounted] = React.useState(false);
-  const { resolvedTheme } = useTheme();
-  const isDarkMode = mounted ? resolvedTheme === 'dark' : false;
 
   React.useEffect(() => {
     setMounted(true);
@@ -82,7 +79,6 @@ export const Hero: React.FC<HeroProps> = ({
       style={{ backgroundImage: `url(/headerBgTransparent.png)` }}
       role="banner"
       aria-labelledby="hero-title"
-      isDark={isDarkMode}
     >
       <HeroContainer2>
         <HeroText>

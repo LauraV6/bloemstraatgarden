@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from "react";
 import Link from "next/link"
 import { Hero } from "@/components/layout/Hero"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -10,6 +11,7 @@ import CartIcon from "@/components/features/cart/CartIcon";
 import { Story, StoryContainer, StoryText, StoryAdding } from "@/components/features/stocking/Stock.styled";
 import Image from "next/image";
 import VerkrijgbaarPageClient from "@/components/VerkrijgbaarPageClient";
+import LoadingState from "@/components/ui/LoadingState";
 import { Breadcrumbs, HeroWrapper } from "./page.styled";
 
 export default function Available() {
@@ -17,10 +19,10 @@ export default function Available() {
         <main>
             <VerkrijgbaarPageClient>
                 <HeroWrapper>
-                    <Hero 
-                        theme="dark" 
-                        title="Verkrijgbare planten" 
-                        paragraph="Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp." 
+                    <Hero
+                        theme="dark"
+                        title="Verkrijgbare planten"
+                        paragraph="Bekijk hier de planten die verkrijgbaar zijn bij onze moestuin, deze zijn gratis mee te nemen. Interesse? Stuur mij een bericht via Instagram of Whatsapp."
                         forceWhiteText={true}
                     />
                 </HeroWrapper>
@@ -34,13 +36,13 @@ export default function Available() {
                                 <p>Ben je bekend met het zaaischema en zie je daar iets tussen staan wat je graag zou willen hebben? Stuur me dan een persoonlijk berichtje en misschien staat er binnenkort een extra plantje voor jou klaar!</p>
                             </StoryText>
                             <StoryAdding>
-                                <Image 
-                                    src="/zaaitrays.jpg" 
-                                    alt="zaaitrays" 
-                                    width={500} 
+                                <Image
+                                    src="/zaaitrays.jpg"
+                                    alt="zaaitrays"
+                                    width={500}
                                     height={300}
                                     style={{ width: '100%', height: 'auto' }}
-                                />                            
+                                />
                             </StoryAdding>
                         </StoryContainer>
                     </Story>
@@ -48,7 +50,9 @@ export default function Available() {
                 <div>
                     <TitleLine title="Beschikbare planten" />
                     <CartIcon />
-                    <AvailableApollo />
+                    <Suspense fallback={<LoadingState message="Beschikbare planten laden..." />}>
+                        <AvailableApollo />
+                    </Suspense>
                 </div>
             </VerkrijgbaarPageClient>
         </main>

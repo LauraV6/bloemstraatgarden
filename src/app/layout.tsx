@@ -11,6 +11,7 @@ import { EmotionProvider } from "@/providers/EmotionProvider";
 import EmotionRegistry from "@/lib/emotion/registry";
 import Analytics from "@/components/Analytics";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
+import { generateThemeCSS } from "@/styles/theme";
 
 config.autoAddCss = false;
 
@@ -116,6 +117,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Theme CSS variables — resolved before paint via data-theme attribute */}
+        <style dangerouslySetInnerHTML={{ __html: generateThemeCSS() }} />
         
         <meta name="theme-color" content="#00381e" />
         

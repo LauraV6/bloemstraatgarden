@@ -17,7 +17,7 @@ const SearchInput = styled.input`
   width: 100%;
   padding: 12px 20px;
   font-size: 16px;
-  border: 1px solid #a8a8a8ff;
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 25px;
   outline: none;
   transition: border-color 0.3s;

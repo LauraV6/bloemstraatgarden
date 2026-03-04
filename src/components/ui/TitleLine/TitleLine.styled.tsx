@@ -30,17 +30,19 @@ export const TitleLineHeading = styled.h4`
     font-weight: 500;
     animation: ${loadIn} 1s forwards;
 
-    &::before, 
+    &::before,
     &::after {
       content: "";
-      border-top: 1px solid ${props => props.theme.colors.text === 'hsl(220, 38%, 11%)' 
-        ? 'hsl(105, 29%, 84%)' 
-        : props.theme.colors.textMuted};
+      border-top: 1px solid hsl(105, 29%, 84%);
       height: 1px;
       position: absolute;
       right: -620px;
       bottom: 5px;
       width: 600px;
+
+      [data-theme="dark"] & {
+        border-top-color: ${props => props.theme.colors.textMuted};
+      }
     }
 
     &::before {

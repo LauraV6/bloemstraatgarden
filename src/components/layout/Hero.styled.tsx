@@ -125,7 +125,7 @@ const leaveFour = keyframes`
   } 
 `;
 
-export const HeroContainer = styled.section<{ isDark?: boolean }>`
+export const HeroContainer = styled.section`
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -137,7 +137,11 @@ export const HeroContainer = styled.section<{ isDark?: boolean }>`
   overflow: hidden;
   padding: 117px 0 0 0;
   margin: 0;
-  background-color: ${props => props.isDark ? '#1a1a1ae6' : 'transparent'};
+  background-color: transparent;
+
+  [data-theme="dark"] & {
+    background-color: #1a1a1ae6;
+  }
 
   @media (min-width: ${props => props.theme?.breakpoints?.md || '768px'}) {
     padding-top: 154px;

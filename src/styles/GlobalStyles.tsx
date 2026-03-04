@@ -5,7 +5,6 @@ export function GlobalStyles() {
 
   return (
     <Global
-      key={theme.colors.background}
       styles={css`
         *, *::before, *::after {
           box-sizing: border-box;

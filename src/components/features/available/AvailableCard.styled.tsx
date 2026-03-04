@@ -138,6 +138,7 @@ export const QuantityInput = styled.input`
   font-size: 1rem;
   font-weight: 600;
   background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text};
 
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {

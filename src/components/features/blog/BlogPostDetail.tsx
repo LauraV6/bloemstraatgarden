@@ -238,9 +238,7 @@ const PostStory = styled.div`
 
   sup {
     display: block;
-    color: ${({ theme }) => theme.colors.background === '#23252a' 
-      ? 'hsl(128, 22%, 85%)' // Light green text for dark mode
-      : theme.colors.primaryDark}; // Dark green text for light mode
+    color: ${({ theme }) => theme.colors.primaryDark};
     font-family: var(--font-pacaembu);
     background-color: ${({ theme }) => theme.colors.green5};
     border-radius: 5px;
@@ -250,6 +248,10 @@ const PostStory = styled.div`
     font-weight: 600;
     padding: 2.5rem 1.5rem;
     margin: 2rem 0;
+
+    [data-theme="dark"] & {
+      color: hsl(128, 22%, 85%);
+    }
   }
 `;
 
