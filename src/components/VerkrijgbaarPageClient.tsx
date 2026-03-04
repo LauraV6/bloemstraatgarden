@@ -1,19 +1,35 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
+import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
 
-const pageVariants = {
-  initial: { opacity: 0 },
-  animate: { 
-    opacity: 1,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut"
-    }
-  }
-};
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const fadeInDown = keyframes`
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const PageWrapper = styled.div`
+  width: 100%;
+`;
+
+const HeroSection = styled.div`
+  animation: ${fadeInDown} 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+`;
+
+const ContentSection = styled.section`
+  animation: ${fadeIn} 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+`;
+
+const PlantsSection = styled.section`
+  animation: ${fadeIn} 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+`;
 
 interface VerkrijgbaarPageClientProps {
   children: ReactNode;
@@ -24,51 +40,11 @@ export default function VerkrijgbaarPageClient({ children }: VerkrijgbaarPageCli
 
   return (
     <ShoppingCartProvider>
-      <motion.div
-        initial="initial"
-        animate="animate"
-        variants={pageVariants}
-        style={{ width: "100%" }}
-      >
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.6, 
-            ease: [0.22, 1, 0.36, 1]
-          }}
-        >
-          {childrenArray[0]}
-        </motion.div>
-
-        {/* Breadcrumbs and Story Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ 
-            duration: 0.6,
-            ease: [0.22, 1, 0.36, 1]
-          }}
-        >
-          {childrenArray[1]}
-        </motion.section>
-
-        {/* Available Plants Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ 
-            duration: 0.6,
-            delay: 0.1,
-            ease: [0.22, 1, 0.36, 1]
-          }}
-        >
-          {childrenArray[2]}
-        </motion.section>
-      </motion.div>
+      <PageWrapper>
+        <HeroSection>{childrenArray[0]}</HeroSection>
+        <ContentSection>{childrenArray[1]}</ContentSection>
+        <PlantsSection>{childrenArray[2]}</PlantsSection>
+      </PageWrapper>
     </ShoppingCartProvider>
   );
 }

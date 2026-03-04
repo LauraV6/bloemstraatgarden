@@ -1,21 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import styled from "@emotion/styled";
+import { keyframes } from "@emotion/react";
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
+const FadeWrapper = styled.div`
+  width: 100%;
+  animation: ${fadeIn} 0.4s cubic-bezier(0, 0, 0.2, 1) forwards;
+`;
 
 interface BlogPostClientProps {
   children: ReactNode;
 }
 
 export default function BlogPostClient({ children }: BlogPostClientProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, ease: [0, 0, 0.2, 1] }}
-      style={{ width: "100%" }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <FadeWrapper>{children}</FadeWrapper>;
 }
