@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import BlogPostClient from "@/components/BlogPostClient";
 import BlogPostDetail from "@/components/features/blog/BlogPostDetail";
-import PageLoader from "@/app/[slug]/loading";
 
 interface ArticlePageParams {
   slug: string;
@@ -31,11 +29,9 @@ export default async function KnowledgeArticlePage({ params }: ArticlePageProps)
 
   return (
     <main role="main">
-      <Suspense fallback={<PageLoader showWeather={true} contentLines={8} />}>
-        <BlogPostClient>
-          <BlogPostDetail slug={slug} />
-        </BlogPostClient>
-      </Suspense>
+      <BlogPostClient>
+        <BlogPostDetail slug={slug} />
+      </BlogPostClient>
     </main>
   );
 }

@@ -1,6 +1,5 @@
 'use client';
 
-import { Suspense } from "react";
 import Link from "next/link"
 import { Hero } from "@/components/layout/Hero"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,7 +10,6 @@ import CartIcon from "@/components/features/cart/CartIcon";
 import { Story, StoryContainer, StoryText, StoryAdding } from "@/components/features/stocking/Stock.styled";
 import Image from "next/image";
 import VerkrijgbaarPageClient from "@/components/VerkrijgbaarPageClient";
-import LoadingState from "@/components/ui/LoadingState";
 import { Breadcrumbs, HeroWrapper } from "./page.styled";
 
 export default function Available() {
@@ -50,9 +48,7 @@ export default function Available() {
                 <div>
                     <TitleLine title="Beschikbare planten" />
                     <CartIcon />
-                    <Suspense fallback={<LoadingState message="Beschikbare planten laden..." />}>
-                        <AvailableApollo />
-                    </Suspense>
+                    <AvailableApollo />
                 </div>
             </VerkrijgbaarPageClient>
         </main>

@@ -68,12 +68,6 @@ export const Hero: React.FC<HeroProps> = ({
   forceWhiteText = false,
   isHomePage = false
 }) => {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <HeroContainer
       style={{ backgroundImage: `url(/headerBgTransparent.png)` }}
@@ -88,7 +82,7 @@ export const Hero: React.FC<HeroProps> = ({
                 {title}
               </HomePageTitle>
             ) : (
-              <h1 
+              <h1
                 id="hero-title"
                 style={forceWhiteText || theme === 'dark' ? { color: 'white' } : {}}
               >
@@ -105,20 +99,17 @@ export const Hero: React.FC<HeroProps> = ({
             )}
           </div>
         </HeroText>
-        
-        {/* Only render leaves after mounting to avoid hydration mismatch */}
-        {mounted && (
-          <HeroImages>
-            {LEAF_IMAGES.map((leaf, index) => (
-              <LeafImage 
-                key={index}
-                src={leaf.src}
-                variant={leaf.variant}
-                alt={leaf.alt}
-              />
-            ))}
-          </HeroImages>
-        )}
+
+        <HeroImages>
+          {LEAF_IMAGES.map((leaf, index) => (
+            <LeafImage
+              key={index}
+              src={leaf.src}
+              variant={leaf.variant}
+              alt={leaf.alt}
+            />
+          ))}
+        </HeroImages>
       </HeroContainer2>
     </HeroContainer>
   );

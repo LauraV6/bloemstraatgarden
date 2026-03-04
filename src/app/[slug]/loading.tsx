@@ -12,13 +12,13 @@ const PostHeader = styled.section`
   max-width: 100vw;
   height: 350px;
   max-height: 350px;
-  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-
-  [data-theme="dark"] & {
-    background: linear-gradient(135deg, #374151, #4b5563);
-  }
+  background-image: linear-gradient(135deg, #e2e8f0, #cbd5e1);
   background-size: cover;
   background-position: center;
+
+  [data-theme="dark"] & {
+    background-image: linear-gradient(135deg, #374151, #4b5563);
+  }
   padding: 0;
   margin: 0;
   overflow: hidden;

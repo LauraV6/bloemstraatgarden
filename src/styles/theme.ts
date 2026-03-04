@@ -194,7 +194,7 @@ export function generateThemeCSS(): string {
     .map(([key, value]) => `--color-${key}: ${value};`)
     .join('\n    ');
 
-  // Rename shadow-md to shadow-md in the output
+  // Strip --color- prefix from shadow variable (--color-shadow-md -> --shadow-md)
   return `
     :root, [data-theme="light"] {
     ${lightVars.replace(/--color-shadow-md/g, '--shadow-md')}

@@ -210,6 +210,14 @@ export function GlobalStyles() {
           border-bottom: none;
         }
 
+        .st3 {
+          fill: ${theme.colors.black};
+
+          [data-theme="dark"] & {
+            fill: ${theme.colors.white};
+          }
+        }
+
         .sr-only {
           position: absolute;
           width: 1px;
