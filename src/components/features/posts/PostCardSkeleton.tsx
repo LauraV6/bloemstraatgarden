@@ -74,28 +74,36 @@ interface SkeletonCardProps {
   index: number;
 }
 
+const SKELETON_COLORS = {
+  baseColor: 'var(--color-gray-200)',
+  highlightColor: 'var(--color-gray-100)',
+} as const;
+
 const SkeletonCard: React.FC<SkeletonCardProps> = ({ index }) => (
   <PostItem aria-label={`Post kaart ${index + 1} wordt geladen`}>
     <PostItemImg>
-      <Skeleton 
+      <Skeleton
         height={SKELETON_CONFIG.image.height}
         style={{ display: 'block' }}
+        {...SKELETON_COLORS}
       />
     </PostItemImg>
-    
+
     <PostItemContent>
       <h2>
-        <Skeleton 
+        <Skeleton
           width={SKELETON_CONFIG.title.width}
           height={SKELETON_CONFIG.title.height}
+          {...SKELETON_COLORS}
         />
       </h2>
-      
+
       <div>
-        <Skeleton 
+        <Skeleton
           count={SKELETON_CONFIG.summary.count}
           height={SKELETON_CONFIG.summary.height}
           style={{ marginBottom: '0.5rem' }}
+          {...SKELETON_COLORS}
         />
       </div>
     </PostItemContent>

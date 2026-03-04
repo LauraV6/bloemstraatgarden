@@ -41,6 +41,7 @@ export const PostImageContainer = styled.div`
   position: relative;
   flex-shrink: 0;
   height: 200px;
+  background-color: ${props => props.theme.colors.green5};
 
   @media (min-width: ${props => props.theme.breakpoints.lg}) {
     height: 250px;

@@ -56,7 +56,7 @@ export default function TipCardSkeleton({ amount = 5 }: TipCardSkeletonProps) {
         .map((_, index) => (
           <PostItem key={index} className={index === 0 ? 'first-item' : ''}>
             <PostItemImg className="tip-item__img">
-              <Skeleton height="100%" />
+              <Skeleton height="100%" baseColor="var(--color-gray-200)" highlightColor="var(--color-gray-100)" />
             </PostItemImg>
           </PostItem>
         ))}
