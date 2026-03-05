@@ -24,7 +24,7 @@ export default function Header() {
   // Memoized social links configuration
   const socialLinks: SocialLink[] = useMemo(() => [
     {
-      href: "https://api.whatsapp.com/send?text=https://bloemstraatgarden.nl/",
+      href: "https://api.whatsapp.com/send?text=https://bloemstraat-garden.nl/",
       icon: faWhatsapp,
       label: "Delen via WhatsApp",
       className: "whapp",

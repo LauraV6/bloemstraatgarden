@@ -353,5 +353,5 @@ We use conventional commits:
 <div align="center">
   Made with ❤️ by Laura
 
-  [Website](https://bloemstraatgarden.nl) | [GitHub](https://github.com/LauraV6/bloemstraatgarden)
+  [Website](https://bloemstraat-garden.nl) | [GitHub](https://github.com/LauraV6/bloemstraatgarden)
 </div>

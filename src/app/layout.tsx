@@ -45,6 +45,7 @@ const fontPacaembu = localFont({
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bloemstraat-garden.nl'),
   title: 'Bloemstraat Garden',
   description: "Leer moestuinieren door ervaring, tips en kennis te delen. Ontdek hoe je je eigen groenten kunt kweken in Steenwijkerland.",
   keywords: [
@@ -65,24 +66,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Bloemstraat Garden',
     description: "Leer moestuinieren door ervaring, tips en kennis te delen.",
-    url: 'https://bloemstraatgarden.nl',
+    url: 'https://bloemstraat-garden.nl',
     siteName: 'Bloemstraat Garden',
     locale: 'nl_NL',
     type: 'website',
-    images: [
-      {
-        url: 'https://bloemstraatgarden.nl/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Bloemstraat Garden - Moestuinieren leren',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Bloemstraat Garden',
     description: "Leer moestuinieren door ervaring, tips en kennis te delen.",
-    images: ['https://bloemstraatgarden.nl/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -101,7 +93,7 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   alternates: {
-    canonical: 'https://bloemstraatgarden.nl',
+    canonical: 'https://bloemstraat-garden.nl',
   },
   appleWebApp: {
     capable: true,
@@ -116,7 +108,30 @@ export default function RootLayout({ children }: RootLayoutProps) {
       lang="nl" 
       suppressHydrationWarning
     >
-      <head>     
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  name: 'Bloemstraat Garden',
+                  url: 'https://bloemstraat-garden.nl',
+                  description: 'Leer moestuinieren door ervaring, tips en kennis te delen. Ontdek hoe je je eigen groenten kunt kweken in Steenwijkerland.',
+                  inLanguage: 'nl',
+                },
+                {
+                  '@type': 'Organization',
+                  name: 'Bloemstraat Garden',
+                  url: 'https://bloemstraat-garden.nl',
+                },
+              ],
+            }),
+          }}
+        />
+
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
