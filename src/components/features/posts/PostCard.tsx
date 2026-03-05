@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/utils/DateFormatter";
-import { PostCardContainer, PostLink, PostImageContainer, PostContent, DateBadge } from './PostCard.styled';
+import { PostCardContainer, PostLink, PostImageContainer, PostContent, DateBadge, NewBadge } from './PostCard.styled';
 
 // Types
 interface ArticleImage {
@@ -24,6 +24,7 @@ interface PostCardProps {
   url?: string;
   className?: string;
   priority?: boolean;
+  isNew?: boolean;
 }
 
 // Utility functions
@@ -85,11 +86,12 @@ const PostContentComponent: React.FC<PostContentProps> = ({ title, summary, date
   </PostContent>
 );
 
-export const PostCard: React.FC<PostCardProps> = ({ 
-  props, 
-  url, 
+export const PostCard: React.FC<PostCardProps> = ({
+  props,
+  url,
   className,
-  priority = false 
+  priority = false,
+  isNew = false
 }) => {
   const postUrl = generatePostUrl(props.slug, url);
 
@@ -97,7 +99,8 @@ export const PostCard: React.FC<PostCardProps> = ({
 
   return (
     <PostCardContainer className={className}>
-      <PostLink 
+      {isNew && <NewBadge aria-label="Nieuw artikel">Nieuw</NewBadge>}
+      <PostLink
         as={Link}
         href={postUrl}
         aria-label={`Lees meer over: ${props.title}`}

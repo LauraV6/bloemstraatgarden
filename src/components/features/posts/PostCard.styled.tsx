@@ -110,6 +110,20 @@ export const DateBadge = styled.time`
   z-index: 5;
 `;
 
+export const NewBadge = styled.span`
+  position: absolute;
+  top: ${props => props.theme.spacing.md};
+  left: ${props => props.theme.spacing.md};
+  font-size: 0.7em;
+  font-weight: 700;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.green5};
+  backdrop-filter: blur(5px);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  z-index: 5;
+`;
+
 export const PostButton = styled.div`
   width: auto;
   margin-top: auto;

@@ -28,6 +28,7 @@ interface PostsMapProps {
   initialPostCount?: number;
   loadMoreIncrement?: number;
   url?: string;
+  isNew?: (date: string) => boolean;
 }
 
 // Constants
@@ -92,32 +93,35 @@ interface PostsGridDisplayProps {
   articles: Article[];
   postCount: number;
   url?: string;
+  isNew?: (date: string) => boolean;
 }
 
-const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({ 
-  articles, 
-  postCount, 
-  url 
+const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
+  articles,
+  postCount,
+  url,
+  isNew
 }) => (
   <BlogGrid>
     <AnimatePresence mode="popLayout">
       {articles.slice(0, postCount).map((article, index) => (
-        <motion.div 
+        <motion.div
           key={article.sys.id}
           layout
           variants={itemVariants}
           initial="initial"
           animate="animate"
           exit="exit"
-          whileHover={{ 
+          whileHover={{
             scale: 1.03,
             transition: { duration: 0.2 }
           }}
         >
-          <PostCard 
-            props={article} 
-            url={url} 
+          <PostCard
+            props={article}
+            url={url}
             priority={index < 2}
+            isNew={isNew?.(article.date)}
           />
         </motion.div>
       ))}
@@ -125,12 +129,13 @@ const PostsGridDisplay: React.FC<PostsGridDisplayProps> = ({
   </BlogGrid>
 );
 
-export default function PostsMap({ 
+export default function PostsMap({
   articles,
   className,
   initialPostCount = DEFAULT_CONFIG.initialPostCount,
   loadMoreIncrement = DEFAULT_CONFIG.loadMoreIncrement,
-  url
+  url,
+  isNew
 }: PostsMapProps) {
   const [postCount, setPostCount] = useState(initialPostCount);
 
@@ -157,10 +162,11 @@ export default function PostsMap({
 
   return (
     <div className={containerClass}>
-      <PostsGridDisplay 
+      <PostsGridDisplay
         articles={articles}
         postCount={postCount}
         url={url}
+        isNew={isNew}
       />
       
       {showMore && (

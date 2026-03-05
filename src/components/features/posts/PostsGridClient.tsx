@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useArticlesWithFallback } from '@/hooks/useContentfulWithFallback';
+import { useNewContent } from '@/hooks/useNewContent';
 import PostsMap from './PostsMap';
 import PostCardSkeleton from './PostCardSkeleton';
 import ErrorState from '@/components/ui/ErrorState';
@@ -15,6 +17,15 @@ export default function PostsGridClient({
   limit = 10
 }: PostsGridClientProps) {
   const { articles, loading, error, source } = useArticlesWithFallback(limit);
+  const { isNew, reportNewCount } = useNewContent();
+
+  // Report new article count for app badge
+  useEffect(() => {
+    if (articles) {
+      const count = articles.filter(a => isNew(a.date)).length;
+      reportNewCount(count);
+    }
+  }, [articles, isNew, reportNewCount]);
 
   if (loading) {
     return <PostCardSkeleton amount={3} />;
@@ -39,9 +50,10 @@ export default function PostsGridClient({
   }
 
   return (
-    <PostsMap 
-      articles={articles} 
+    <PostsMap
+      articles={articles}
       className={className}
+      isNew={isNew}
     />
   );
 }
