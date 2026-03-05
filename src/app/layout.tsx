@@ -99,8 +99,14 @@ export const metadata: Metadata = {
     // Add Google Search Console verification if needed
     // google: 'your-google-verification-code',
   },
+  manifest: '/manifest.json',
   alternates: {
     canonical: 'https://bloemstraatgarden.nl',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Bloemstraat Garden',
   },
 };
 
@@ -124,7 +130,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="theme-color" content="#00381e" />
         
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
 
         {/* Google Analytics - Only load if GA_TRACKING_ID exists */}
         {GA_TRACKING_ID && (
