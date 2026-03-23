@@ -33,12 +33,11 @@ const generatePostUrl = (slug: string, baseUrl?: string): string => {
 };
 
 const truncateSummary = (summary: string, maxLength: number = 170): string => {
-  if (!summary) return '..';
+  if (!summary) return '...';
   if (summary.length > maxLength) {
     return `${summary.substring(0, maxLength).trim()}...`;
   }
-  // Add dots to shorter summaries for consistency
-  return summary.endsWith('.') ? `${summary}.` : `${summary}..`;
+  return summary.endsWith('.') ? `${summary}..` : `${summary}...`;
 };
 
 // Components

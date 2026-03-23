@@ -17,7 +17,7 @@ const SLIDE_CONFIG = {
   defaultDelay: 0,
   defaultDirection: 'fade' as const,
   defaultOnce: true,
-  ease: "easeOut"
+  ease: "easeOut" as const
 } as const;
 
 const createVariants = (direction: SlideProps['direction']) => {

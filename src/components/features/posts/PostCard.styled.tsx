@@ -116,12 +116,16 @@ export const NewBadge = styled.span`
   left: ${props => props.theme.spacing.md};
   font-size: 0.7em;
   font-weight: 700;
-  color: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors.primaryDark};
   background-color: ${props => props.theme.colors.green5};
   backdrop-filter: blur(5px);
   border-radius: 6px;
   padding: 0.3rem 0.6rem;
   z-index: 5;
+
+  [data-theme="dark"] & {
+    color: ${props => props.theme.colors.white};
+  }
 `;
 
 export const PostButton = styled.div`

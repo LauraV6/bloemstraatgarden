@@ -12,14 +12,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const nextConfig = {
-  // Skip linting during build - we have a separate lint step in CI
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
   // Skip TypeScript errors during build (if any)
   typescript: {
-    ignoreBuildErrors: false, // Keep TypeScript checking enabled
+    ignoreBuildErrors: false,
   },
 
   images: {
@@ -43,7 +38,6 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn']
     } : false,
-    emotion: true,
   },
   
   // Optimize production builds
@@ -61,6 +55,9 @@ const nextConfig = {
     // Number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 5,
   },
+
+  // Next.js 16 defaults to Turbopack
+  turbopack: {},
 }
 
 module.exports = withPWA(withBundleAnalyzer(nextConfig))

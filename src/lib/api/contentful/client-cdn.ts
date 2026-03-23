@@ -33,6 +33,7 @@ const ACCESS_TOKEN = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
 const CDN_BASE_URL = `https://cdn.contentful.com/spaces/${SPACE_ID}`;
 
+// Server-side: next.revalidate enables ISR caching. Client-side: silently ignored.
 export async function fetchArticles(limit: number = 10, skip: number = 0): Promise<FallbackDataResponse<Article>> {
   try {
     const url = `${CDN_BASE_URL}/entries?content_type=knowledgeArticle&limit=${limit}&skip=${skip}&order=-fields.date&include=1`;
@@ -41,12 +42,13 @@ export async function fetchArticles(limit: number = 10, skip: number = 0): Promi
       headers: {
         'Authorization': `Bearer ${ACCESS_TOKEN}`,
       },
+      next: { revalidate: 60 },
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json() as ContentfulResponse;
 
     // Transform the CDN response to match GraphQL structure
@@ -71,7 +73,7 @@ export async function fetchArticles(limit: number = 10, skip: number = 0): Promi
         details: fields.details as Article['details']
       } as Article;
     }) || [];
-    
+
     return {
       items,
       total: data.total || 0
@@ -90,12 +92,13 @@ export async function fetchTips(limit: number = 5, skip: number = 0): Promise<Fa
       headers: {
         'Authorization': `Bearer ${ACCESS_TOKEN}`,
       },
+      next: { revalidate: 60 },
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json() as ContentfulResponse;
 
     // Transform the CDN response to match GraphQL structure
